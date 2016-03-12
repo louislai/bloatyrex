@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+protocol LanguageDelegate {
+    func nextAction(agent: Agent) -> Action
+}

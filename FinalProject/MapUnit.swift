@@ -6,7 +6,7 @@
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
 
 enum MapUnit: Int {
     case EmptySpace = 0
@@ -17,10 +17,20 @@ enum MapUnit: Int {
     var spriteName: String {
         let spriteNames = [
             "",
-            "trex.png",
+            "charizard.gif",
             "wall.png",
             "toilet.png"
         ]
         return spriteNames[rawValue]
+    }
+
+    var spriteClass: SKSpriteNode.Type {
+        let classes: [SKSpriteNode.Type] = [
+            EmptySpaceNode.self,
+            AgentNode.self,
+            WallNode.self,
+            GoalNode.self
+        ]
+        return classes[rawValue]
     }
 }

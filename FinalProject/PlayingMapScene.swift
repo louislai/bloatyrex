@@ -10,9 +10,10 @@ import SpriteKit
 
 class PlayingMapScene: SKScene {
     var map: Map!
+    var running = false
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
-    var agents = [Agent]()
+    var agentNodes = [AgentNode]()
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -73,12 +74,15 @@ class PlayingMapScene: SKScene {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
                     where unit != .EmptySpace {
-                        let sprite = SKSpriteNode(imageNamed: unit.spriteName)
+                        let sprite = unit.spriteClass.init(imageNamed: unit.spriteName)
                         sprite.position = pointFor(row, column: column)
                         sprite.size = blockSize
                         unitsLayer.addChild(sprite)
-                        if unit == .Agent {
-                            agents.append(Agent(sprite: sprite))
+                        if let sprite = sprite as? AgentNode {
+                            sprite.map = map
+                            sprite.row = row
+                            sprite.column = column
+                            agentNodes.append(sprite)
                         }
                 }
             }
