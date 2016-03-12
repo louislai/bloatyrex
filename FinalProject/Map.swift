@@ -26,8 +26,8 @@ class Map {
     }
 
     func setMapUnitAt(unit: MapUnit, row: Int, column: Int) {
-        guard row > 0 && row < numberOfRows
-            && column > 0  && column < numberOfColumns else {
+        guard row >= 0 && row < numberOfRows
+            && column >= 0  && column < numberOfColumns else {
                 return
         }
 
@@ -39,8 +39,8 @@ class Map {
     }
 
     func retrieveMapUnitAt(row: Int, column: Int) -> MapUnit? {
-        guard row > 0 && row < numberOfRows
-            && column > 0  && column < numberOfColumns else {
+        guard row >= 0 && row < numberOfRows
+            && column >= 0  && column < numberOfColumns else {
                 return nil
         }
         return grid[row][column]
