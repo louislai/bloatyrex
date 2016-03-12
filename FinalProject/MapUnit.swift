@@ -8,9 +8,19 @@
 
 import Foundation
 
-enum MapUnit {
-    case EmptySpace
+enum MapUnit: Int {
+    case EmptySpace = 0
     case Agent
     case Wall
     case Goal
+
+    var spriteName: String {
+        let spriteNames = [
+            "",
+            "trex.png",
+            "wall.png",
+            "toilet.png"
+        ]
+        return spriteNames[rawValue]
+    }
 }

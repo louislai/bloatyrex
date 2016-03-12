@@ -1,3 +1,5 @@
+disabled_rules:
+    - force_cast
 line_length:
     110
 function_body_length:

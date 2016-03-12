@@ -8,15 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
-		3DF230A41C8F0617003420C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* ViewController.swift */; };
+		3DF230A41C8F0617003420C0 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
 		3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A81C8F0617003420C0 /* Assets.xcassets */; };
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
 		3DF230B71C8F0617003420C0 /* FinalProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */; };
 		3DF230C21C8F0617003420C0 /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */; };
+		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
 		BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */; };
 		BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F51C9110A000C56DD2 /* Action.swift */; };
+		BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C41C941134007F56F0 /* LanguageDelegate.swift */; };
+		BF5339C71C941155007F56F0 /* Agent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* Agent.swift */; };
+		BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C81C941459007F56F0 /* MapBlock.swift */; };
+		BF5339CB1C942D6B007F56F0 /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339CA1C942D6B007F56F0 /* Block.png */; };
+		BF5339CD1C942F52007F56F0 /* trex.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339CC1C942F52007F56F0 /* trex.png */; };
+		BF5339CF1C942F58007F56F0 /* toilet.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339CE1C942F58007F56F0 /* toilet.png */; };
+		BF5339D11C942F61007F56F0 /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339D01C942F61007F56F0 /* wall.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +47,7 @@
 /* Begin PBXFileReference section */
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3DF230A31C8F0617003420C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3DF230A31C8F0617003420C0 /* PlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
 		3DF230A61C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3DF230A81C8F0617003420C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DF230AB1C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,9 +58,17 @@
 		3DF230BD1C8F0617003420C0 /* FinalProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnit.swift; sourceTree = "<group>"; };
 		BF4C52F51C9110A000C56DD2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		BF5339C41C941134007F56F0 /* LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageDelegate.swift; sourceTree = "<group>"; };
+		BF5339C61C941155007F56F0 /* Agent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Agent.swift; sourceTree = "<group>"; };
+		BF5339C81C941459007F56F0 /* MapBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBlock.swift; sourceTree = "<group>"; };
+		BF5339CA1C942D6B007F56F0 /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
+		BF5339CC1C942F52007F56F0 /* trex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trex.png; sourceTree = "<group>"; };
+		BF5339CE1C942F58007F56F0 /* toilet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toilet.png; sourceTree = "<group>"; };
+		BF5339D01C942F61007F56F0 /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,9 +119,14 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BF5339CA1C942D6B007F56F0 /* Block.png */,
+				BF5339CC1C942F52007F56F0 /* trex.png */,
+				BF5339CE1C942F58007F56F0 /* toilet.png */,
+				BF5339D01C942F61007F56F0 /* wall.png */,
+				BF4C52F71C913E8500C56DD2 /* GameEngine */,
 				BF4C52F01C910CB500C56DD2 /* Models */,
 				3DF230A11C8F0617003420C0 /* AppDelegate.swift */,
-				3DF230A31C8F0617003420C0 /* ViewController.swift */,
+				3DF230A31C8F0617003420C0 /* PlayingViewController.swift */,
 				3DF230A51C8F0617003420C0 /* Main.storyboard */,
 				3DF230A81C8F0617003420C0 /* Assets.xcassets */,
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
@@ -138,8 +159,19 @@
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
 				BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
+				BF5339C61C941155007F56F0 /* Agent.swift */,
+				BF5339C81C941459007F56F0 /* MapBlock.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
+			isa = PBXGroup;
+			children = (
+				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
+				BF5339C41C941134007F56F0 /* LanguageDelegate.swift */,
+			);
+			name = GameEngine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,8 +283,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */,
+				BF5339CD1C942F52007F56F0 /* trex.png in Resources */,
+				BF5339CB1C942D6B007F56F0 /* Block.png in Resources */,
 				3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */,
+				BF5339CF1C942F58007F56F0 /* toilet.png in Resources */,
 				3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */,
+				BF5339D11C942F61007F56F0 /* wall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,7 +329,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DF230A41C8F0617003420C0 /* ViewController.swift in Sources */,
+				BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */,
+				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
+				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
+				3DF230A41C8F0617003420C0 /* PlayingViewController.swift in Sources */,
+				BF5339C71C941155007F56F0 /* Agent.swift in Sources */,
 				BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
