@@ -10,6 +10,7 @@ import SpriteKit
 
 class PlayingMapScene: SKScene {
     var map: Map!
+    let gameLayer = SKNode()
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     var agents = [Agent]()
@@ -19,8 +20,8 @@ class PlayingMapScene: SKScene {
     private var numberOfColumns: Int {
         return map.numberOfColumns
     }
-    let blockWidth = CGFloat(100)
-    let blockHeight = CGFloat(100)
+    let blockWidth = CGFloat(100.0)
+    let blockHeight = CGFloat(100.0)
     var blockSize: CGSize {
         return CGSize(
             width: blockWidth,
@@ -32,15 +33,9 @@ class PlayingMapScene: SKScene {
         super.init(size: size)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
-        // The blocksLayer represent the shape of the map.
-        // Each block is a square
-        blocksLayer.position = position
-        addChild(blocksLayer)
-
-        // This layer holds the MapUnit sprites. The positions of these sprites
-        // are relative to the unitsLayer's bottom-left corner.
-        unitsLayer.position = position
-        addChild(unitsLayer)
+        let background = SKSpriteNode(imageNamed: "Background.png")
+        addChild(background)
+        addChild(gameLayer)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -48,6 +43,20 @@ class PlayingMapScene: SKScene {
     }
 
     func setup() {
+        let layerPosition = CGPoint(
+            x: -blockWidth * CGFloat(numberOfColumns) / 2,
+            y: -blockHeight * CGFloat(numberOfRows) / 2
+        )
+
+        // The blocksLayer represent the shape of the map.
+        // Each block is a square
+        blocksLayer.position = layerPosition
+        gameLayer.addChild(blocksLayer)
+
+        // This layer holds the MapUnit sprites. The positions of these sprites
+        // are relative to the unitsLayer's bottom-left corner.
+        unitsLayer.position = layerPosition
+        gameLayer.addChild(unitsLayer)
         addBlocks()
         setupMapUnits()
     }

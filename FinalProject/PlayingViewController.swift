@@ -25,10 +25,10 @@ class PlayingViewController: UIViewController {
         scene.scaleMode = .AspectFill
 
         // Load the map
-        let map = Map(numberOfRows: 2, numberOfColumns: 7)
+        let map = Map(numberOfRows: 2, numberOfColumns: 8)
         map.setMapUnitAt(.Agent, row: 0, column: 0)
         map.setMapUnitAt(.Wall, row: 0, column: 1)
-        map.setMapUnitAt(.Goal, row: 0, column: 6)
+        map.setMapUnitAt(.Goal, row: 0, column: 7)
         scene.map = map
         scene.setup()
 

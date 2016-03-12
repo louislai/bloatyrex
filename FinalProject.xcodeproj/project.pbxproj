@@ -25,6 +25,7 @@
 		BF5339CD1C942F52007F56F0 /* trex.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339CC1C942F52007F56F0 /* trex.png */; };
 		BF5339CF1C942F58007F56F0 /* toilet.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339CE1C942F58007F56F0 /* toilet.png */; };
 		BF5339D11C942F61007F56F0 /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339D01C942F61007F56F0 /* wall.png */; };
+		BF5339D31C946589007F56F0 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339D21C946589007F56F0 /* Background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		BF5339CC1C942F52007F56F0 /* trex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trex.png; sourceTree = "<group>"; };
 		BF5339CE1C942F58007F56F0 /* toilet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toilet.png; sourceTree = "<group>"; };
 		BF5339D01C942F61007F56F0 /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
+		BF5339D21C946589007F56F0 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BF5339D21C946589007F56F0 /* Background.png */,
 				BF5339CA1C942D6B007F56F0 /* Block.png */,
 				BF5339CC1C942F52007F56F0 /* trex.png */,
 				BF5339CE1C942F58007F56F0 /* toilet.png */,
@@ -288,6 +291,7 @@
 				3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */,
 				BF5339CF1C942F58007F56F0 /* toilet.png in Resources */,
 				3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */,
+				BF5339D31C946589007F56F0 /* Background.png in Resources */,
 				BF5339D11C942F61007F56F0 /* wall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
