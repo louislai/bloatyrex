@@ -10,7 +10,6 @@ import SpriteKit
 
 class PlayingMapScene: SKScene {
     var map: Map!
-    let gameLayer = SKNode()
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     var agents = [Agent]()
@@ -32,10 +31,7 @@ class PlayingMapScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
-
-        let background = SKSpriteNode(imageNamed: "Background.png")
-        addChild(background)
-        addChild(gameLayer)
+        backgroundColor = UIColor.whiteColor()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -51,12 +47,12 @@ class PlayingMapScene: SKScene {
         // The blocksLayer represent the shape of the map.
         // Each block is a square
         blocksLayer.position = layerPosition
-        gameLayer.addChild(blocksLayer)
+        addChild(blocksLayer)
 
         // This layer holds the MapUnit sprites. The positions of these sprites
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
-        gameLayer.addChild(unitsLayer)
+        addChild(unitsLayer)
         addBlocks()
         setupMapUnits()
     }
