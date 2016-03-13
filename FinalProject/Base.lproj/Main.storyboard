@@ -16,53 +16,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrc-pR-B8V">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Run"/>
-                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="261" y="690" width="30" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="runButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eAT-Kl-1aT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W51-hk-QFK">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Pause"/>
-                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="386" y="690" width="42" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="pauseButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QKA-77-XZ5"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hy7-VV-fXS">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Reset"/>
-                                <variation key="heightClass=compact-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="505" y="690" width="39" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="resetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u2y-ze-Jsn"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="jrc-pR-B8V"/>
-                                <exclude reference="W51-hk-QFK"/>
-                                <exclude reference="hy7-VV-fXS"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=compact-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="jrc-pR-B8V"/>
-                                <include reference="W51-hk-QFK"/>
-                                <include reference="hy7-VV-fXS"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>

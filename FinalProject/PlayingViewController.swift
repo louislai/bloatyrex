@@ -10,9 +10,6 @@ import UIKit
 import SpriteKit
 
 class PlayingViewController: UIViewController {
-
-    var scene: PlayingMapScene!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,10 +17,18 @@ class PlayingViewController: UIViewController {
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
         skView.showsFPS = true
+        skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
 
+        // Present the scene.
+        skView.presentScene(newScene())
+    }
+
+    func newScene() -> PlayingMapScene {
+        let skView = view as! SKView
+
         // Create and configure the scene.
-        scene = PlayingMapScene(size: skView.bounds.size)
+        let scene = PlayingMapScene(size: skView.bounds.size)
         scene.scaleMode = .AspectFill
 
         // Load the map
@@ -37,22 +42,19 @@ class PlayingViewController: UIViewController {
         for i in 0..<3 {
             map.setMapUnitAt(.Wall, row: i, column: 8)
         }
-        scene.originalMap = map
+        scene.map = map
+        scene.resetDelegate = self
         scene.setup()
 
-        // Present the scene.
-        skView.presentScene(scene)
+        return scene
     }
+}
 
-    @IBAction func runButtonTapped(sender: UIButton) {
-        scene.run()
-    }
+extension PlayingViewController: ResetDelegate {
+    func reset() {
+        let skView = view as! SKView
 
-    @IBAction func pauseButtonTapped(sender: UIButton) {
-        scene.pause()
-    }
-
-    @IBAction func resetButtonTapped(sender: UIButton) {
-        scene.reset()
+        let transition = SKTransition.crossFadeWithDuration(0.5)
+        skView.presentScene(newScene(), transition: transition)
     }
 }

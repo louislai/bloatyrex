@@ -19,7 +19,7 @@ class AgentNode: SKSpriteNode {
 
     // Return true if nextAction causes the agent to reach the goal
     func runNextAction() -> Bool {
-        if let nextAction = delegate.nextAction(gameScene.inPlayMap, agent: self) {
+        if let nextAction = delegate.nextAction(gameScene.map, agent: self) {
             print(nextAction)
             switch nextAction {
             case .NoAction:
@@ -54,7 +54,7 @@ class AgentNode: SKSpriteNode {
     // Return true if moveForward causes the agent to reach the goal
     func moveForward() -> Bool {
         if let (nextRow, nextColumn, nextUnit) = nextPosition() {
-            gameScene.inPlayMap.clearMapUnitAt(row, column: column)
+            gameScene.map.clearMapUnitAt(row, column: column)
 
 
             row = nextRow
@@ -68,7 +68,7 @@ class AgentNode: SKSpriteNode {
             if nextUnit == .Goal {
                 return true
             }
-            gameScene.inPlayMap.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
+            gameScene.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
         }
         return false
     }
@@ -78,12 +78,12 @@ class AgentNode: SKSpriteNode {
         var nextColumn: Int = column
         switch orientation {
         case .Up:
-            guard row < gameScene.inPlayMap.numberOfRows-1 else {
+            guard row < gameScene.map.numberOfRows-1 else {
                 return nil
             }
             nextRow += 1
         case .Right:
-            guard column < gameScene.inPlayMap.numberOfColumns-1 else {
+            guard column < gameScene.map.numberOfColumns-1 else {
                 return nil
             }
             nextColumn += 1
@@ -99,7 +99,7 @@ class AgentNode: SKSpriteNode {
             nextColumn -= 1
 
         }
-        let unit = gameScene.inPlayMap.retrieveMapUnitAt(nextRow, column: nextColumn)
+        let unit = gameScene.map.retrieveMapUnitAt(nextRow, column: nextColumn)
         guard let nextUnit = unit else {
             return nil
         }

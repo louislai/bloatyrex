@@ -14,22 +14,27 @@ struct PlayingMapSceneConstants {
     struct NodeNames {
         static let movesLeftLabel = "movesLeft"
     }
+    struct LabelText {
+        static let play = "Play"
+        static let pause = "Pause"
+        static let reset = "Reset"
+    }
 }
 
 class PlayingMapScene: SKScene {
-    var originalMap: Map!
-    var inPlayMap: Map!
+    var map: Map!
     var running = false
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
     var originalMovesLeft = 11
     var movesLeft = 0
+    var resetDelegate: ResetDelegate!
     private var numberOfRows: Int {
-        return originalMap.numberOfRows
+        return map.numberOfRows
     }
     private var numberOfColumns: Int {
-        return originalMap.numberOfColumns
+        return map.numberOfColumns
     }
     let blockWidth = CGFloat(100.0)
     let blockHeight = CGFloat(100.0)
@@ -71,7 +76,6 @@ class PlayingMapScene: SKScene {
     }
 
     func setup() {
-        inPlayMap = originalMap.copy() as! Map
         let layerPosition = CGPoint(
             x: -blockWidth * CGFloat(numberOfColumns) / 2,
             y: -blockHeight * CGFloat(numberOfRows) / 2
@@ -89,6 +93,7 @@ class PlayingMapScene: SKScene {
         addBlocks()
         setupMapUnits()
         setupHud()
+        setupButtons()
     }
 
     func run() {
@@ -100,12 +105,7 @@ class PlayingMapScene: SKScene {
     }
 
     func reset() {
-        running = false
-        for child in children {
-            child.removeFromParent()
-        }
-        activeAgentNodes.removeAll()
-        setup()
+        resetDelegate.reset()
     }
 
     func addBlocks() {
@@ -129,7 +129,6 @@ class PlayingMapScene: SKScene {
             x: -movesLeftLabel.frame.size.width/2,
             y: 300.0
         )
-
         // 2
         movesLeftLabel.fontColor = SKColor.greenColor()
         movesLeftLabel.text = String(format: "Moves Left: %d", originalMovesLeft)
@@ -141,10 +140,57 @@ class PlayingMapScene: SKScene {
         movesLeft = originalMovesLeft
     }
 
+    func setupButtons() {
+        // Setup Play button
+        let playLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.play)
+        playLabel.fontSize = 65
+        playLabel.fontColor = SKColor.greenColor()
+        playLabel.fontName = "Courier"
+        let playButton = SKButton(defaultButton: playLabel)
+        playButton.action = {
+            self.run()
+        }
+        playButton.position = CGPoint(
+            x: -300.0,
+            y: -300.0
+        )
+        addChild(playButton)
+
+        // Setup Pause button
+        let pauseLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.pause)
+        pauseLabel.fontSize = 65
+        pauseLabel.fontColor = SKColor.greenColor()
+        pauseLabel.fontName = "Courier"
+        let pauseButton = SKButton(defaultButton: pauseLabel)
+        pauseButton.action = {
+            self.pause()
+        }
+        pauseButton.position = CGPoint(
+            x: 0.0,
+            y: -300.0
+        )
+        addChild(pauseButton)
+
+        // Setup Reset button
+        let resetLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.reset)
+        resetLabel.fontSize = 65
+        resetLabel.fontColor = SKColor.greenColor()
+        resetLabel.fontName = "Courier"
+        let resetButton = SKButton(defaultButton: resetLabel)
+        resetButton.action = {
+            self.reset()
+        }
+        resetButton.position = CGPoint(
+            x: 300.0,
+            y: -300.0
+        )
+        addChild(resetButton)
+    }
+
     func setupMapUnits() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
-                if let unit = inPlayMap.retrieveMapUnitAt(row, column: column)
+                if let unit = map.retrieveMapUnitAt(row, column: column)
                     where unit != .EmptySpace {
                         var texture: SKTexture
                         if unit == .Agent {
