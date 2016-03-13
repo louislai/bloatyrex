@@ -9,65 +9,102 @@
 import Foundation
 
 class Interpreter {
-    var program: Program?
-    var map: Map
-    var agent: AgentProtocol
+    var instructions = [Instructions]()
+    var programCounter = 0
     
     init(program: Program, map: Map, agent: AgentProtocol) {
-        self.program = program
-        self.map = map
-        self.agent = agent
+        self.instructions = compileProgram(program)
+        self.instructions.append(.Done)
     }
     
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
-        if let p = program {
+        switch instructions[programCounter] {
+        case .Done:
+            return nil
+        case .ActionInstruction(let action):
+            programCounter += 1
+            return action
+        case .Jump(let displacement):
+            programCounter += displacement
+            return nextAction(map, agent: agent)
+        case .JumpOnFalse(let predicate, let displacement):
+            if evaluatePredicate(predicate, map: map, agent: agent) {
+                programCounter += 1
+                return nextAction(map, agent: agent)
+            } else {
+                programCounter += displacement
+                return nextAction(map, agent: agent)
+            }
+        }
+    }
+    
+    private func compileProgram(program: Program?) -> [Instructions] {
+        var sourceProgram = program
+        var compiledProgram = [Instructions]()
+        while let p = sourceProgram {
             switch p {
             case .SingleStatement(let statement):
-                self.program = nil
-                return evaluateStatement(statement)
+                sourceProgram = nil
+                compiledProgram.appendContentsOf(compileStatement(statement))
             case .MultipleStatement(let statement, let nextProgram):
-                self.program = nextProgram
-                return evaluateStatement(statement)
+                sourceProgram = nextProgram
+                compiledProgram.appendContentsOf(compileStatement(statement))
             }
-        } else {
-            return nil
         }
+        return compiledProgram
     }
     
-    private func evaluateStatement(statement: Statement) -> Action {
+    private func compileStatement(statement: Statement) -> [Instructions] {
+        var compiledProgram = [Instructions]()
         switch statement {
         case .ActionStatement(let action):
-            return action
+            compiledProgram.append(.ActionInstruction(action))
         case .ConditionalStatement(let conditionalExpression):
-            return evaluateConditional(conditionalExpression)
+            compiledProgram.appendContentsOf(compileConditional(conditionalExpression))
+        case .LoopStatement(let loopExpression):
+            compiledProgram.appendContentsOf(compileLoop(loopExpression))
         }
+        return compiledProgram
     }
     
-    private func evaluateConditional(conditional: ConditionalExpression) -> Action {
+    private func compileConditional(conditional: ConditionalExpression) -> [Instructions] {
+        var compiledProgram = [Instructions]()
         switch conditional {
         case .IfThenElseExpression(let predicate, let thenAction, let elseAction):
-            if evaluatePredicate(predicate) {
-                return thenAction
-            } else {
-                return elseAction
-            }
+            compiledProgram.append(.JumpOnFalse(predicate, 3))
+            compiledProgram.append(.ActionInstruction(thenAction))
+            compiledProgram.append(.Jump(2))
+            compiledProgram.append(.ActionInstruction(elseAction))
         }
+        return compiledProgram
     }
     
-    private func evaluatePredicate(predicate: Predicate) -> Bool {
+    private func compileLoop(loop: LoopExpression) -> [Instructions] {
+        var compiledProgram = [Instructions]()
+        switch loop {
+        case .While(let predicate, let program):
+            let loopBody = compileProgram(program)
+            compiledProgram.append(.JumpOnFalse(predicate, loopBody.count + 2))
+            compiledProgram.appendContentsOf(loopBody)
+            compiledProgram.append(.Jump(-(loopBody.count + 1)))
+        }
+        return compiledProgram
+    }
+    
+    private func evaluatePredicate(predicate: Predicate, map: Map, agent: AgentProtocol) -> Bool {
         switch predicate {
         case .Conjunction(let left, let right):
-            return evaluatePredicate(left) && evaluatePredicate(right)
+            return evaluatePredicate(left, map: map, agent: agent) && evaluatePredicate(right, map: map, agent: agent)
         case .Disjunction(let left, let right):
-            return evaluatePredicate(left) || evaluatePredicate(right)
+            return evaluatePredicate(left, map: map, agent: agent) || evaluatePredicate(right, map: map, agent: agent)
         case .Negation(let p):
-            return !evaluatePredicate(p)
+            return !evaluatePredicate(p, map: map, agent: agent)
         case .CompareObservation(let observation, let object):
-            return observedObject(observation) == object
+            return observedObject(observation, map: map, agent: agent) == object
         }
     }
     
-    private func observedObject(observation: Observation) -> MapUnit? {
+    private func observedObject(observation: Observation, map: Map, agent: AgentProtocol) -> MapUnit? {
         switch observation {
         case .LookForward:
             switch agent.direction {
