@@ -37,17 +37,22 @@ class PlayingViewController: UIViewController {
         for i in 0..<3 {
             map.setMapUnitAt(.Wall, row: i, column: 8)
         }
-        scene.map = map
+        scene.originalMap = map
         scene.setup()
 
         // Present the scene.
         skView.presentScene(scene)
-
-        // Let's start the game!
-        beginGame()
     }
 
-    func beginGame() {
-        scene.begin()
+    @IBAction func runButtonTapped(sender: UIButton) {
+        scene.run()
+    }
+
+    @IBAction func pauseButtonTapped(sender: UIButton) {
+        scene.pause()
+    }
+
+    @IBAction func resetButtonTapped(sender: UIButton) {
+        scene.reset()
     }
 }

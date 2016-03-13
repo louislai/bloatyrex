@@ -17,7 +17,8 @@ struct PlayingMapSceneConstants {
 }
 
 class PlayingMapScene: SKScene {
-    var map: Map!
+    var originalMap: Map!
+    var inPlayMap: Map!
     var running = false
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
@@ -25,10 +26,10 @@ class PlayingMapScene: SKScene {
     var originalMovesLeft = 11
     var movesLeft = 0
     private var numberOfRows: Int {
-        return map.numberOfRows
+        return originalMap.numberOfRows
     }
     private var numberOfColumns: Int {
-        return map.numberOfColumns
+        return originalMap.numberOfColumns
     }
     let blockWidth = CGFloat(100.0)
     let blockHeight = CGFloat(100.0)
@@ -70,6 +71,7 @@ class PlayingMapScene: SKScene {
     }
 
     func setup() {
+        inPlayMap = originalMap.copy() as! Map
         let layerPosition = CGPoint(
             x: -blockWidth * CGFloat(numberOfColumns) / 2,
             y: -blockHeight * CGFloat(numberOfRows) / 2
@@ -89,12 +91,21 @@ class PlayingMapScene: SKScene {
         setupHud()
     }
 
-    func begin() {
+    func run() {
         running = true
     }
 
     func pause() {
         running = false
+    }
+
+    func reset() {
+        running = false
+        for child in children {
+            child.removeFromParent()
+        }
+        activeAgentNodes.removeAll()
+        setup()
     }
 
     func addBlocks() {
@@ -133,7 +144,7 @@ class PlayingMapScene: SKScene {
     func setupMapUnits() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
-                if let unit = map.retrieveMapUnitAt(row, column: column)
+                if let unit = inPlayMap.retrieveMapUnitAt(row, column: column)
                     where unit != .EmptySpace {
                         var texture: SKTexture
                         if unit == .Agent {
