@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+struct PlayingMapSceneConstants {
+    static let zPositionFront: CGFloat = 2
+    static let zPositionBack: CGFloat = 1
+}
+
 class PlayingMapScene: SKScene {
     var map: Map!
     var running = false
@@ -76,6 +81,10 @@ class PlayingMapScene: SKScene {
         running = true
     }
 
+    func pause() {
+        running = false
+    }
+
     func addBlocks() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
@@ -101,15 +110,17 @@ class PlayingMapScene: SKScene {
                         let sprite = unit.spriteClass.init(texture: texture)
                         sprite.position = pointFor(row, column: column)
                         sprite.size = blockSize
-                        unitsLayer.addChild(sprite)
+                        sprite.zPosition = PlayingMapSceneConstants.zPositionBack
                         if let sprite = sprite as? AgentNode {
+                            sprite.zPosition = PlayingMapSceneConstants.zPositionFront
                             sprite.gameScene = self
                             sprite.row = row
                             sprite.column = column
-                            sprite.originalProgram = Sample.sampleProgram2
-                            sprite.delegate = Interpreter(program: Sample.sampleProgram2)
+                            sprite.originalProgram = Sample.sampleProgram
+                            sprite.delegate = Interpreter(program: Sample.sampleProgram)
                             activeAgentNodes.append(sprite)
                         }
+                        unitsLayer.addChild(sprite)
                 }
             }
         }
