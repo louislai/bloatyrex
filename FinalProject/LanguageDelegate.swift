@@ -9,5 +9,5 @@
 import Foundation
 
 protocol LanguageDelegate {
-    func nextAction(agent: Agent) -> Action
+    func nextAction(agent: AgentNode) -> Action
 }

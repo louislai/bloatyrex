@@ -34,6 +34,7 @@
 		BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B21C948C9A00DAE175 /* WallNode.swift */; };
 		BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */; };
 		BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B61C948CB500DAE175 /* GoalNode.swift */; };
+		BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B81C952E6300DAE175 /* Observation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		BF8FA5B21C948C9A00DAE175 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySpaceNode.swift; sourceTree = "<group>"; };
 		BF8FA5B61C948CB500DAE175 /* GoalNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalNode.swift; sourceTree = "<group>"; };
+		BF8FA5B81C952E6300DAE175 /* Observation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
 				1DB4B0841C951E250010F727 /* AgentProtocol.swift */,
 				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
+				BF8FA5B81C952E6300DAE175 /* Observation.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -376,10 +379,10 @@
 				3DF230A41C8F0617003420C0 /* PlayingViewController.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
-				3DF230A41C8F0617003420C0 /* ViewController.swift in Sources */,
 				BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
+				BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */,
 				3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */,
 				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,

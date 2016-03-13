@@ -12,13 +12,13 @@ class Interpreter {
     var program: Program?
     var map: Map
     var agent: AgentProtocol
-    
+
     init(program: Program, map: Map, agent: AgentProtocol) {
         self.program = program
         self.map = map
         self.agent = agent
     }
-    
+
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
         if let p = program {
             switch p {
@@ -33,7 +33,7 @@ class Interpreter {
             return nil
         }
     }
-    
+
     private func evaluateStatement(statement: Statement) -> Action {
         switch statement {
         case .ActionStatement(let action):
@@ -42,7 +42,7 @@ class Interpreter {
             return evaluateConditional(conditionalExpression)
         }
     }
-    
+
     private func evaluateConditional(conditional: ConditionalExpression) -> Action {
         switch conditional {
         case .IfThenElseExpression(let predicate, let thenAction, let elseAction):
@@ -53,7 +53,7 @@ class Interpreter {
             }
         }
     }
-    
+
     private func evaluatePredicate(predicate: Predicate) -> Bool {
         switch predicate {
         case .Conjunction(let left, let right):
@@ -66,7 +66,7 @@ class Interpreter {
             return observedObject(observation) == object
         }
     }
-    
+
     private func observedObject(observation: Observation) -> MapUnit? {
         switch observation {
         case .LookForward:

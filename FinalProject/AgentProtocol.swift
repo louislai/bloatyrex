@@ -8,17 +8,6 @@
 
 import Foundation
 
-enum Direction {
-    case Up
-    case Down
-    case Left
-    case Right
-}
-
-enum Observation {
-    case LookForward
-}
-
 protocol AgentProtocol {
     var x: Int { get set }
     var y: Int { get set }

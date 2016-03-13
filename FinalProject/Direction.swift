@@ -9,8 +9,8 @@
 import Foundation
 
 enum Direction: Int {
-    case North = 0
-    case East
-    case South
-    case West
+    case Up = 0
+    case Down
+    case Left
+    case Right
 }
