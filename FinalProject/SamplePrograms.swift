@@ -8,8 +8,6 @@
 
 import Foundation
 
-protocol CommandTree {}
-
 struct Sample {
     static let sampleProgram = Program.MultipleStatement(
         Statement.ActionStatement(Action.Forward),
@@ -75,4 +73,28 @@ struct Sample {
                 )
             )
         )
+
+    static let sampleProgram3 = Program.MultipleStatement(
+        .LoopStatement(
+            .While(
+                .Negation(.CompareObservation(.LookForward, MapUnit.Goal)),
+                Program.MultipleStatement(
+                    .LoopStatement(
+                        .While(
+                            .Negation(.CompareObservation(.LookForward, MapUnit.Wall)),
+                            Program.SingleStatement(
+                                .ActionStatement(.Forward)
+                            )
+                        )
+                    ),
+                    Program.SingleStatement(
+                        Statement.ActionStatement(Action.RotateRight)
+                    )
+                )
+            )
+        ),
+        Program.SingleStatement(
+            Statement.ActionStatement(Action.Forward)
+        )
+    )
 }
