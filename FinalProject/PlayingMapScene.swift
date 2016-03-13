@@ -11,6 +11,9 @@ import SpriteKit
 struct PlayingMapSceneConstants {
     static let zPositionFront: CGFloat = 2
     static let zPositionBack: CGFloat = 1
+    struct NodeNames {
+        static let movesLeftLabel = "movesLeft"
+    }
 }
 
 class PlayingMapScene: SKScene {
@@ -19,6 +22,8 @@ class PlayingMapScene: SKScene {
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
+    var originalMovesLeft = 11
+    var movesLeft = 0
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -48,13 +53,19 @@ class PlayingMapScene: SKScene {
     }
 
     override func update(currentTime: CFTimeInterval) {
-        if !running {
-            return
-        }
         if currentTime - timeOfLastMove < timePerMove {
             return
         }
+        if movesLeft == 0 {
+            running = false
+            return
+        }
+        if !running {
+            return
+        }
+
         moveActiveAgents()
+        decrementMovesLeft()
         timeOfLastMove = currentTime
     }
 
@@ -75,6 +86,7 @@ class PlayingMapScene: SKScene {
         addChild(unitsLayer)
         addBlocks()
         setupMapUnits()
+        setupHud()
     }
 
     func begin() {
@@ -94,6 +106,28 @@ class PlayingMapScene: SKScene {
                 blocksLayer.addChild(blockNode)
             }
         }
+    }
+
+    func setupHud() {
+        // 1
+        let movesLeftLabel = SKLabelNode(fontNamed: "Courier")
+        movesLeftLabel.fontSize = 65
+        movesLeftLabel.name = PlayingMapSceneConstants.NodeNames.movesLeftLabel
+
+        let layerPosition = CGPoint(
+            x: -movesLeftLabel.frame.size.width/2,
+            y: 300.0
+        )
+
+        // 2
+        movesLeftLabel.fontColor = SKColor.greenColor()
+        movesLeftLabel.text = String(format: "Moves Left: %d", originalMovesLeft)
+
+        // 3
+        movesLeftLabel.position = layerPosition
+        addChild(movesLeftLabel)
+
+        movesLeft = originalMovesLeft
     }
 
     func setupMapUnits() {
@@ -116,8 +150,8 @@ class PlayingMapScene: SKScene {
                             sprite.gameScene = self
                             sprite.row = row
                             sprite.column = column
-                            sprite.originalProgram = Sample.sampleProgram3
-                            sprite.delegate = Interpreter(program: Sample.sampleProgram3)
+                            sprite.originalProgram = Sample.sampleProgram
+                            sprite.delegate = Interpreter(program: Sample.sampleProgram)
                             activeAgentNodes.append(sprite)
                         }
                         unitsLayer.addChild(sprite)
@@ -135,6 +169,14 @@ class PlayingMapScene: SKScene {
             }
         }
         activeAgentNodes = nextActiveAgentNodes
+    }
+
+    private func decrementMovesLeft() {
+        movesLeft -= 1
+        if let node = childNodeWithName(PlayingMapSceneConstants.NodeNames.movesLeftLabel)
+            as? SKLabelNode {
+                node.text = String(format: "Moves Left: %d", movesLeft)
+        }
     }
 
     // Convert a row, column pair into a CGPoint relative
