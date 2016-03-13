@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1DB4B0811C9516610010F727 /* Syntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0801C9516610010F727 /* Syntax.swift */; };
+		1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0821C951D1F0010F727 /* Interpreter.swift */; };
+		1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0841C951E250010F727 /* AgentProtocol.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		3DF230A41C8F0617003420C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* ViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
@@ -39,6 +41,8 @@
 
 /* Begin PBXFileReference section */
 		1DB4B0801C9516610010F727 /* Syntax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
+		1DB4B0821C951D1F0010F727 /* Interpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interpreter.swift; sourceTree = "<group>"; };
+		1DB4B0841C951E250010F727 /* AgentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentProtocol.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF230A31C8F0617003420C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
 				BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
+				1DB4B0841C951E250010F727 /* AgentProtocol.swift */,
+				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -310,6 +316,8 @@
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
 				3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */,
+				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,
+				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
