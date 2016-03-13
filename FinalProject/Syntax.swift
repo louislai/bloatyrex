@@ -23,7 +23,7 @@ indirect enum Statement {
 
 enum ConditionalExpression {
     //If Predicate Then Action Else Action
-    case IfThenElseExpression(Predicate, Action, Action)
+    case IfThenElseExpression(Predicate, Program, Program)
 }
 
 enum LoopExpression {

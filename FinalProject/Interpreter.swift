@@ -12,7 +12,7 @@ class Interpreter {
     var instructions = [Instructions]()
     var programCounter = 0
     
-    init(program: Program, map: Map, agent: AgentProtocol) {
+    init(program: Program) {
         self.instructions = compileProgram(program)
         self.instructions.append(.Done)
     }
@@ -70,11 +70,13 @@ class Interpreter {
     private func compileConditional(conditional: ConditionalExpression) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch conditional {
-        case .IfThenElseExpression(let predicate, let thenAction, let elseAction):
-            compiledProgram.append(.JumpOnFalse(predicate, 3))
-            compiledProgram.append(.ActionInstruction(thenAction))
-            compiledProgram.append(.Jump(2))
-            compiledProgram.append(.ActionInstruction(elseAction))
+        case .IfThenElseExpression(let predicate, let thenProg, let elseProg):
+            let thenBody = compileProgram(thenProg)
+            let elseBody = compileProgram(elseProg)
+            compiledProgram.append(.JumpOnFalse(predicate, thenBody.count + 2))
+            compiledProgram.appendContentsOf(thenBody)
+            compiledProgram.append(.Jump(elseBody.count + 1))
+            compiledProgram.appendContentsOf(elseBody)
         }
         return compiledProgram
     }
