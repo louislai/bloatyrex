@@ -33,39 +33,6 @@ class PlayingViewController: UIViewController {
         map.setMapUnitAt(.Goal, row: 0, column: 7)
         scene.map = map
         scene.setup()
-        let program = Program.MultipleStatement(
-            Statement.ActionStatement(Action.Forward),
-            Program.MultipleStatement(
-                Statement.ActionStatement(Action.RotateRight),
-                Program.MultipleStatement(
-                    Statement.ActionStatement(Action.Forward),
-                    Program.MultipleStatement(
-                        Statement.ActionStatement(Action.Forward),
-                        Program.MultipleStatement(
-                            Statement.ActionStatement(Action.Forward),
-                            Program.MultipleStatement(
-                                Statement.ActionStatement(Action.Forward),
-                                Program.MultipleStatement(
-                                    Statement.ActionStatement(Action.Forward),
-                                    Program.MultipleStatement(
-                                        Statement.ActionStatement(Action.Forward),
-                                        Program.MultipleStatement(
-                                            Statement.ActionStatement(Action.Forward),
-                                            Program.MultipleStatement(
-                                                Statement.ActionStatement(Action.RotateRight),
-                                                Program.SingleStatement(
-                                                    Statement.ActionStatement(Action.Forward)
-                                                )
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        )
 
         // Present the scene.
         skView.presentScene(scene)

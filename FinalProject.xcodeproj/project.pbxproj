@@ -24,17 +24,14 @@
 		BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C41C941134007F56F0 /* LanguageDelegate.swift */; };
 		BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* AgentNode.swift */; };
 		BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C81C941459007F56F0 /* MapBlock.swift */; };
-		BF5339CB1C942D6B007F56F0 /* Block.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339CA1C942D6B007F56F0 /* Block.png */; };
-		BF5339CF1C942F58007F56F0 /* toilet.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339CE1C942F58007F56F0 /* toilet.png */; };
-		BF5339D11C942F61007F56F0 /* wall.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339D01C942F61007F56F0 /* wall.png */; };
-		BF5339D31C946589007F56F0 /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = BF5339D21C946589007F56F0 /* Background.png */; };
 		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
-		BF8FA5AF1C94821200DAE175 /* charizard.gif in Resources */ = {isa = PBXBuildFile; fileRef = BF8FA5AE1C94821200DAE175 /* charizard.gif */; };
 		BF8FA5B11C94863800DAE175 /* CommandTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B01C94863800DAE175 /* CommandTree.swift */; };
 		BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B21C948C9A00DAE175 /* WallNode.swift */; };
 		BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */; };
 		BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B61C948CB500DAE175 /* GoalNode.swift */; };
 		BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B81C952E6300DAE175 /* Observation.swift */; };
+		BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */; };
+		BF8FA5BF1C954A4900DAE175 /* agent.png in Resources */ = {isa = PBXBuildFile; fileRef = BF8FA5BE1C954A4900DAE175 /* agent.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,17 +75,14 @@
 		BF5339C41C941134007F56F0 /* LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageDelegate.swift; sourceTree = "<group>"; };
 		BF5339C61C941155007F56F0 /* AgentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNode.swift; sourceTree = "<group>"; };
 		BF5339C81C941459007F56F0 /* MapBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBlock.swift; sourceTree = "<group>"; };
-		BF5339CA1C942D6B007F56F0 /* Block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Block.png; sourceTree = "<group>"; };
-		BF5339CE1C942F58007F56F0 /* toilet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toilet.png; sourceTree = "<group>"; };
-		BF5339D01C942F61007F56F0 /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
-		BF5339D21C946589007F56F0 /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		BF8FA5AE1C94821200DAE175 /* charizard.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = charizard.gif; sourceTree = "<group>"; };
 		BF8FA5B01C94863800DAE175 /* CommandTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandTree.swift; sourceTree = "<group>"; };
 		BF8FA5B21C948C9A00DAE175 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySpaceNode.swift; sourceTree = "<group>"; };
 		BF8FA5B61C948CB500DAE175 /* GoalNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalNode.swift; sourceTree = "<group>"; };
 		BF8FA5B81C952E6300DAE175 /* Observation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
+		BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureManager.swift; sourceTree = "<group>"; };
+		BF8FA5BE1C954A4900DAE175 /* agent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = agent.png; path = ../Downloads/agent.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +121,7 @@
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
+				BF8FA5BE1C954A4900DAE175 /* agent.png */,
 				3DF230A01C8F0617003420C0 /* FinalProject */,
 				3DF230B51C8F0617003420C0 /* FinalProjectTests */,
 				3DF230C01C8F0617003420C0 /* FinalProjectUITests */,
@@ -147,11 +142,6 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				BF8FA5AE1C94821200DAE175 /* charizard.gif */,
-				BF5339D21C946589007F56F0 /* Background.png */,
-				BF5339CA1C942D6B007F56F0 /* Block.png */,
-				BF5339CE1C942F58007F56F0 /* toilet.png */,
-				BF5339D01C942F61007F56F0 /* wall.png */,
 				BF4C52F71C913E8500C56DD2 /* GameEngine */,
 				1DB4B07D1C95142C0010F727 /* Language */,
 				BF4C52F01C910CB500C56DD2 /* Models */,
@@ -189,11 +179,7 @@
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
 				BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
-				BF5339C61C941155007F56F0 /* AgentNode.swift */,
 				BF5339C81C941459007F56F0 /* MapBlock.swift */,
-				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
-				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
-				BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */,
 				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
 				1DB4B0841C951E250010F727 /* AgentProtocol.swift */,
 				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
@@ -208,6 +194,11 @@
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BF5339C41C941134007F56F0 /* LanguageDelegate.swift */,
 				BF8FA5B01C94863800DAE175 /* CommandTree.swift */,
+				BF5339C61C941155007F56F0 /* AgentNode.swift */,
+				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
+				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
+				BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */,
+				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
 			);
 			name = GameEngine;
 			sourceTree = "<group>";
@@ -320,14 +311,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF8FA5BF1C954A4900DAE175 /* agent.png in Resources */,
 				3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */,
-				BF5339CB1C942D6B007F56F0 /* Block.png in Resources */,
 				3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */,
-				BF5339CF1C942F58007F56F0 /* toilet.png in Resources */,
 				3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */,
-				BF8FA5AF1C94821200DAE175 /* charizard.gif in Resources */,
-				BF5339D31C946589007F56F0 /* Background.png in Resources */,
-				BF5339D11C942F61007F56F0 /* wall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */,
+				BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,

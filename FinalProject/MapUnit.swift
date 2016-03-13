@@ -17,9 +17,9 @@ enum MapUnit: Int {
     var spriteName: String {
         let spriteNames = [
             "",
-            "charizard.gif",
-            "wall.png",
-            "toilet.png"
+            "agent",
+            "wall",
+            "toilet"
         ]
         return spriteNames[rawValue]
     }

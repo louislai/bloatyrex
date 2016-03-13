@@ -9,34 +9,51 @@
 import SpriteKit
 
 class AgentNode: SKSpriteNode {
+    weak var gameScene: PlayingMapScene!
     var orientation = Direction.Up
-    var map: Map!
     var row: Int!
     var column: Int!
     var delegate: LanguageDelegate!
 
     func setOrientationTo(direction: Direction) {
         orientation = direction
-    }
-
-    func moveForward() {
-        if let (nextRow, nextColumn) = nextPosition() {
-            row = nextRow
-            column = nextColumn
+        switch orientation {
+        case .Up:
+            texture = TextureManager.agentUpTexture
+        case .Right:
+            texture = TextureManager.agentRightTexture
+        case .Down:
+            texture = TextureManager.agentRightTexture
+        case .Left:
+            texture = TextureManager.agentLeftTexture
         }
     }
 
-    private func nextPosition() -> (row: Int, column: Int)? {
+    // Return true if moveForward cause the agent to reach the goal
+    func moveForward() -> Bool {
+        if let (nextRow, nextColumn, nextUnit) = nextPosition() {
+            gameScene.map.clearMapUnitAt(row, column: column)
+            if nextUnit == .Goal {
+                return true
+            }
+            row = nextRow
+            column = nextColumn
+            gameScene.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
+        }
+        return false
+    }
+
+    private func nextPosition() -> (row: Int, column: Int, unit: MapUnit)? {
         var nextRow: Int = row
         var nextColumn: Int = column
         switch orientation {
         case .Up:
-            guard row < map.numberOfRows-1 else {
+            guard row < gameScene.map.numberOfRows-1 else {
                 return nil
             }
             nextRow += 1
         case .Right:
-            guard column < map.numberOfColumns-1 else {
+            guard column < gameScene.map.numberOfColumns-1 else {
                 return nil
             }
             nextColumn += 1
@@ -52,10 +69,13 @@ class AgentNode: SKSpriteNode {
             nextColumn -= 1
 
         }
-        let nextUnit = map.retrieveMapUnitAt(nextRow, column: nextColumn)
+        let unit = gameScene.map.retrieveMapUnitAt(nextRow, column: nextColumn)
+        guard let nextUnit = unit else {
+            return nil
+        }
         guard nextUnit != .Agent && nextUnit != .Wall else {
             return nil
         }
-        return (row: nextRow, column: nextColumn)
+        return (row: nextRow, column: nextColumn, unit: nextUnit)
     }
 }

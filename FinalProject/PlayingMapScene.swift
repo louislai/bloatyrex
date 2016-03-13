@@ -13,7 +13,7 @@ class PlayingMapScene: SKScene {
     var running = false
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
-    var agentNodes = [AgentNode]()
+    var activeAgentNodes = [AgentNode]()
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -61,7 +61,7 @@ class PlayingMapScene: SKScene {
     func addBlocks() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
-                let blockNode = SKSpriteNode(imageNamed: "Block.png")
+                let blockNode = SKSpriteNode(texture: TextureManager.retrieveTexture("Block"))
                 blockNode.size = blockSize
                 blockNode.position = pointFor(row, column: column)
                 blocksLayer.addChild(blockNode)
@@ -74,15 +74,21 @@ class PlayingMapScene: SKScene {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
                     where unit != .EmptySpace {
-                        let sprite = unit.spriteClass.init(imageNamed: unit.spriteName)
+                        var texture: SKTexture
+                        if unit == .Agent {
+                            texture = TextureManager.agentUpTexture
+                        } else {
+                            texture = TextureManager.retrieveTexture(unit.spriteName)
+                        }
+                        let sprite = unit.spriteClass.init(texture: texture)
                         sprite.position = pointFor(row, column: column)
                         sprite.size = blockSize
                         unitsLayer.addChild(sprite)
                         if let sprite = sprite as? AgentNode {
-                            sprite.map = map
+                            sprite.gameScene = self
                             sprite.row = row
                             sprite.column = column
-                            agentNodes.append(sprite)
+                            activeAgentNodes.append(sprite)
                         }
                 }
             }

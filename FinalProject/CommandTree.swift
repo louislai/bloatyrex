@@ -9,3 +9,39 @@
 import Foundation
 
 protocol CommandTree {}
+
+struct Sample {
+    static let sampleProgram = Program.MultipleStatement(
+        Statement.ActionStatement(Action.Forward),
+        Program.MultipleStatement(
+            Statement.ActionStatement(Action.RotateRight),
+            Program.MultipleStatement(
+                Statement.ActionStatement(Action.Forward),
+                Program.MultipleStatement(
+                    Statement.ActionStatement(Action.Forward),
+                    Program.MultipleStatement(
+                        Statement.ActionStatement(Action.Forward),
+                        Program.MultipleStatement(
+                            Statement.ActionStatement(Action.Forward),
+                            Program.MultipleStatement(
+                                Statement.ActionStatement(Action.Forward),
+                                Program.MultipleStatement(
+                                    Statement.ActionStatement(Action.Forward),
+                                    Program.MultipleStatement(
+                                        Statement.ActionStatement(Action.Forward),
+                                        Program.MultipleStatement(
+                                            Statement.ActionStatement(Action.RotateRight),
+                                            Program.SingleStatement(
+                                                Statement.ActionStatement(Action.Forward)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+}
