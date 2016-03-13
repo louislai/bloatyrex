@@ -10,7 +10,7 @@ import Foundation
 
 enum Direction: Int {
     case Up = 0
+    case Right
     case Down
     case Left
-    case Right
 }

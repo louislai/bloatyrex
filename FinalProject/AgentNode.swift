@@ -14,6 +14,28 @@ class AgentNode: SKSpriteNode {
     var row: Int!
     var column: Int!
     var delegate: LanguageDelegate!
+    let timePerMoveMovement: NSTimeInterval = 0.5
+    var originalProgram: Program!
+
+    // Return true if nextAction causes the agent to reach the goal
+    func runNextAction() -> Bool {
+        if let nextAction = delegate.nextAction(gameScene.map, agent: self) {
+            print(nextAction)
+            switch nextAction {
+            case .NoAction:
+                return false
+            case .RotateLeft:
+                setOrientationTo(Direction(rawValue: orientation.rawValue-1 % 4)!)
+                return false
+            case .RotateRight:
+                setOrientationTo(Direction(rawValue: orientation.rawValue+1 % 4)!)
+                return false
+            case .Forward:
+                return moveForward()
+            }
+        }
+        return false
+    }
 
     func setOrientationTo(direction: Direction) {
         orientation = direction
@@ -23,21 +45,29 @@ class AgentNode: SKSpriteNode {
         case .Right:
             texture = TextureManager.agentRightTexture
         case .Down:
-            texture = TextureManager.agentRightTexture
+            texture = TextureManager.agentDownTexture
         case .Left:
             texture = TextureManager.agentLeftTexture
         }
     }
 
-    // Return true if moveForward cause the agent to reach the goal
+    // Return true if moveForward causes the agent to reach the goal
     func moveForward() -> Bool {
         if let (nextRow, nextColumn, nextUnit) = nextPosition() {
             gameScene.map.clearMapUnitAt(row, column: column)
+
+
+            row = nextRow
+            column = nextColumn
+
+            // Move sprite
+            let targetPoint = gameScene.pointFor(row, column: column)
+            let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
+            runAction(moveAction)
+
             if nextUnit == .Goal {
                 return true
             }
-            row = nextRow
-            column = nextColumn
             gameScene.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
         }
         return false
@@ -77,5 +107,17 @@ class AgentNode: SKSpriteNode {
             return nil
         }
         return (row: nextRow, column: nextColumn, unit: nextUnit)
+    }
+}
+
+extension AgentNode: AgentProtocol {
+    var x: Int {
+        return row
+    }
+    var y: Int {
+        return column
+    }
+    var direction: Direction {
+        return orientation
     }
 }

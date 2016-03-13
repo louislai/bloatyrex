@@ -29,6 +29,9 @@ class PlayingMapScene: SKScene {
             )
     }
 
+    var timeOfLastMove: CFTimeInterval = 0.0
+    let timePerMove: CFTimeInterval = 1.0
+
     override init(size: CGSize) {
         super.init(size: size)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -37,6 +40,17 @@ class PlayingMapScene: SKScene {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) not used")
+    }
+
+    override func update(currentTime: CFTimeInterval) {
+        if !running {
+            return
+        }
+        if currentTime - timeOfLastMove < timePerMove {
+            return
+        }
+        moveActiveAgents()
+        timeOfLastMove = currentTime
     }
 
     func setup() {
@@ -56,6 +70,10 @@ class PlayingMapScene: SKScene {
         addChild(unitsLayer)
         addBlocks()
         setupMapUnits()
+    }
+
+    func begin() {
+        running = true
     }
 
     func addBlocks() {
@@ -88,6 +106,8 @@ class PlayingMapScene: SKScene {
                             sprite.gameScene = self
                             sprite.row = row
                             sprite.column = column
+                            sprite.originalProgram = Sample.sampleProgram2
+                            sprite.delegate = Interpreter(program: Sample.sampleProgram2)
                             activeAgentNodes.append(sprite)
                         }
                 }
@@ -95,9 +115,20 @@ class PlayingMapScene: SKScene {
         }
     }
 
+    private func moveActiveAgents() {
+        var nextActiveAgentNodes = [AgentNode]()
+        for agentNode in activeAgentNodes {
+            // If agent hasnt reached toilet, add it to the next list
+            if !agentNode.runNextAction() {
+                nextActiveAgentNodes.append(agentNode)
+            }
+        }
+        activeAgentNodes = nextActiveAgentNodes
+    }
+
     // Convert a row, column pair into a CGPoint relative
     // to unitsLayer
-    private func pointFor(row: Int, column: Int) -> CGPoint {
+    func pointFor(row: Int, column: Int) -> CGPoint {
         return CGPoint(
             x: CGFloat(column)*blockWidth,
             y: CGFloat(row)*blockHeight

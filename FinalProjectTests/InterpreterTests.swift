@@ -10,7 +10,7 @@ import XCTest
 @testable import FinalProject
 
 class InterpreterTests: XCTestCase {
-    
+
     func testSingleActionProgram() {
         let program = Program.SingleStatement(Statement.ActionStatement(Action.Forward))
         let interpreter = Interpreter(program: program)
@@ -23,7 +23,7 @@ class InterpreterTests: XCTestCase {
         }
         XCTAssertEqual(outputActions, [Action.Forward], "Interpreted actions are not equal!")
     }
-    
+
     func testMultipleActionProgram() {
         let program = Program.MultipleStatement(Statement.ActionStatement(Action.Forward),
             Program.MultipleStatement(Statement.ActionStatement(Action.RotateLeft),
@@ -39,7 +39,7 @@ class InterpreterTests: XCTestCase {
         }
         XCTAssertEqual(outputActions, [Action.Forward, Action.RotateLeft, Action.Forward, Action.NoAction, Action.RotateRight], "Interpreted actions are not equal!")
     }
-    
+
     func testSimpleConditional() {
         let program = Program.MultipleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.Wall), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))), Program.SingleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.EmptySpace), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward))))))
         let interpreter = Interpreter(program: program)
@@ -52,7 +52,7 @@ class InterpreterTests: XCTestCase {
         }
         XCTAssertEqual(outputActions, [Action.RotateRight, Action.Forward], "Interpreted actions are not equal!")
     }
-    
+
     func testSimpleWhile() {
         let program = Program.MultipleStatement(Statement.LoopStatement(LoopExpression.While(Predicate.CompareObservation(Observation.LookForward, MapUnit.Wall), Program.MultipleStatement(Statement.ActionStatement(Action.RotateLeft), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight))))), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))
         let interpreter = Interpreter(program: program)
@@ -66,9 +66,9 @@ class InterpreterTests: XCTestCase {
         }
         outputActions.append(interpreter.nextAction(map2, agent: agent)!)
         XCTAssertEqual(outputActions, [Action.RotateLeft, Action.RotateRight, Action.RotateLeft, Action.RotateRight, Action.Forward], "Interpreted actions are not equal!")
-        
+
     }
-    
+
     class DummyAgent: AgentProtocol {
         var x = 0
         var y = 0

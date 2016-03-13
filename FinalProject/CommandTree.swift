@@ -44,4 +44,35 @@ struct Sample {
             )
         )
     )
+
+    static let sampleProgram2 = Program.MultipleStatement(
+            Statement.ActionStatement(Action.RotateRight),
+            Program.MultipleStatement(
+                Statement.ActionStatement(Action.Forward),
+                Program.MultipleStatement(
+                    Statement.ActionStatement(Action.Forward),
+                    Program.MultipleStatement(
+                        Statement.ActionStatement(Action.Forward),
+                        Program.MultipleStatement(
+                            Statement.ActionStatement(Action.Forward),
+                            Program.MultipleStatement(
+                                Statement.ActionStatement(Action.Forward),
+                                Program.MultipleStatement(
+                                    Statement.ActionStatement(Action.Forward),
+                                    Program.MultipleStatement(
+                                        Statement.ActionStatement(Action.Forward),
+                                        Program.MultipleStatement(
+                                            Statement.ActionStatement(Action.RotateRight),
+                                            Program.SingleStatement(
+                                                Statement.ActionStatement(Action.Forward)
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
 }

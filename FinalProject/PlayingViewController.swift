@@ -42,6 +42,6 @@ class PlayingViewController: UIViewController {
     }
 
     func beginGame() {
-//        scene.begin()
+        scene.begin()
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 class Interpreter {
     var instructions = [Instructions]()
     var programCounter = 0
-    
+
     init(program: Program) {
         self.instructions = compileProgram(program)
         self.instructions.append(.Done)
@@ -37,7 +37,7 @@ class Interpreter {
             }
         }
     }
-    
+
     private func compileProgram(program: Program?) -> [Instructions] {
         var sourceProgram = program
         var compiledProgram = [Instructions]()
@@ -53,7 +53,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func compileStatement(statement: Statement) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch statement {
@@ -66,7 +66,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func compileConditional(conditional: ConditionalExpression) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch conditional {
@@ -80,7 +80,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func compileLoop(loop: LoopExpression) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch loop {
@@ -92,7 +92,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func evaluatePredicate(predicate: Predicate, map: Map, agent: AgentProtocol) -> Bool {
         switch predicate {
         case .Conjunction(let left, let right):
@@ -105,7 +105,7 @@ class Interpreter {
             return observedObject(observation, map: map, agent: agent) == object
         }
     }
-    
+
     private func observedObject(observation: Observation, map: Map, agent: AgentProtocol) -> MapUnit? {
         switch observation {
         case .LookForward:

@@ -28,7 +28,7 @@ class TextureManager {
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
-    static let agentDownTexture = SKTexture(
+    static let agentRightTexture = SKTexture(
         rect: CGRect(
             x: 0.333,
             y: 0.25,
@@ -46,7 +46,7 @@ class TextureManager {
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
-    static let agentRightTexture = SKTexture(
+    static let agentDownTexture = SKTexture(
         rect: CGRect(
             x: 0.333,
             y: 0.75,
