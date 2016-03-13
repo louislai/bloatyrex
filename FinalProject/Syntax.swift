@@ -13,16 +13,21 @@ indirect enum Program {
     case MultipleStatement(Statement, Program)
 }
 
-enum Statement {
+indirect enum Statement {
     //Simple action statement
     case ActionStatement(Action)
     //Conditional branching
     case ConditionalStatement(ConditionalExpression)
+    case LoopStatement(LoopExpression)
 }
 
 enum ConditionalExpression {
     //If Predicate Then Action Else Action
-    case IfThenElseExpression(Predicate, Action, Action)
+    case IfThenElseExpression(Predicate, Program, Program)
+}
+
+enum LoopExpression {
+    case While(Predicate, Program)
 }
 
 indirect enum Predicate {
@@ -30,4 +35,11 @@ indirect enum Predicate {
     case Conjunction(Predicate, Predicate)
     case Disjunction(Predicate, Predicate)
     case CompareObservation(Observation, MapUnit)
+}
+
+enum Instructions {
+    case ActionInstruction(Action)
+    case JumpOnFalse(Predicate, Int)
+    case Jump(Int)
+    case Done
 }
