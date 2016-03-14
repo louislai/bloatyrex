@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AgentProtocol {
-    var x: Int { get }
-    var y: Int { get }
+    var xPosition: Int { get }
+    var yPosition: Int { get }
     var direction: Direction { get }
 }

@@ -111,10 +111,10 @@ class AgentNode: SKSpriteNode {
 }
 
 extension AgentNode: AgentProtocol {
-    var x: Int {
+    var xPosition: Int {
         return column
     }
-    var y: Int {
+    var yPosition: Int {
         return row
     }
     var direction: Direction {

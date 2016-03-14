@@ -18,6 +18,7 @@ class Interpreter {
     }
 
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
+        print("x: \(agent.xPosition) y: \(agent.yPosition)")
         switch instructions[programCounter] {
         case .Done:
             return nil
@@ -102,7 +103,9 @@ class Interpreter {
         case .Negation(let p):
             return !evaluatePredicate(p, map: map, agent: agent)
         case .CompareObservation(let observation, let object):
-            return observedObject(observation, map: map, agent: agent) == object
+            let obj = observedObject(observation, map: map, agent: agent)
+            print(obj)
+            return obj == object
         }
     }
 
@@ -110,14 +113,14 @@ class Interpreter {
         switch observation {
         case .LookForward:
             switch agent.direction {
-            case .Up:
-                return map.retrieveMapUnitAt(agent.x, column: agent.y - 1)
-            case .Down:
-                return map.retrieveMapUnitAt(agent.x, column: agent.y + 1)
-            case .Left:
-                return map.retrieveMapUnitAt(agent.x - 1, column: agent.y)
             case .Right:
-                return map.retrieveMapUnitAt(agent.x + 1, column: agent.y)
+                return map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition + 1)
+            case .Left:
+                return map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition - 1)
+            case .Down:
+                return map.retrieveMapUnitAt(agent.yPosition - 1, column: agent.xPosition)
+            case .Up:
+                return map.retrieveMapUnitAt(agent.yPosition + 1, column: agent.xPosition)
             }
         }
     }
