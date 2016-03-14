@@ -44,7 +44,7 @@ class InterpreterTests: XCTestCase {
         let program = Program.MultipleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.Wall), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))), Program.SingleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.EmptySpace), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward))))))
         let interpreter = Interpreter(program: program)
         let map = Map(numberOfRows: 2, numberOfColumns: 2)
-        map.setMapUnitAt(MapUnit.Wall, row: 0, column: 1)
+        map.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         while let action = interpreter.nextAction(map, agent: agent) {
@@ -58,7 +58,7 @@ class InterpreterTests: XCTestCase {
         let interpreter = Interpreter(program: program)
         let map1 = Map(numberOfRows: 2, numberOfColumns: 2)
         let map2 = Map(numberOfRows: 2, numberOfColumns: 2)
-        map1.setMapUnitAt(MapUnit.Wall, row: 0, column: 1)
+        map1.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         for _ in 0..<4 {
@@ -97,9 +97,9 @@ class InterpreterTests: XCTestCase {
         let interpreter = Interpreter(program: program)
         let map1 = Map(numberOfRows: 2, numberOfColumns: 2)
         let map2 = Map(numberOfRows: 2, numberOfColumns: 2)
-        map2.setMapUnitAt(MapUnit.Wall, row: 0, column: 1)
+        map2.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
         let map3 = Map(numberOfRows: 2, numberOfColumns: 2)
-        map3.setMapUnitAt(MapUnit.Goal, row: 0, column: 1)
+        map3.setMapUnitAt(MapUnit.Goal, row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         for _ in 0..<4 {
@@ -116,8 +116,8 @@ class InterpreterTests: XCTestCase {
     }
     
     class DummyAgent: AgentProtocol {
-        var x = 0
-        var y = 0
-        var direction = Direction.Down
+        var xPosition = 0
+        var yPosition = 0
+        var direction = Direction.Up
     }
 }
