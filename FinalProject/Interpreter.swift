@@ -11,13 +11,14 @@ import Foundation
 class Interpreter {
     var instructions = [Instructions]()
     var programCounter = 0
-    
+
     init(program: Program) {
         self.instructions = compileProgram(program)
         self.instructions.append(.Done)
     }
-    
+
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
+        print("x: \(agent.xPosition) y: \(agent.yPosition)")
         switch instructions[programCounter] {
         case .Done:
             return nil
@@ -37,7 +38,7 @@ class Interpreter {
             }
         }
     }
-    
+
     private func compileProgram(program: Program?) -> [Instructions] {
         var sourceProgram = program
         var compiledProgram = [Instructions]()
@@ -53,7 +54,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func compileStatement(statement: Statement) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch statement {
@@ -66,7 +67,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func compileConditional(conditional: ConditionalExpression) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch conditional {
@@ -80,7 +81,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func compileLoop(loop: LoopExpression) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch loop {
@@ -92,7 +93,7 @@ class Interpreter {
         }
         return compiledProgram
     }
-    
+
     private func evaluatePredicate(predicate: Predicate, map: Map, agent: AgentProtocol) -> Bool {
         switch predicate {
         case .Conjunction(let left, let right):
@@ -102,22 +103,24 @@ class Interpreter {
         case .Negation(let p):
             return !evaluatePredicate(p, map: map, agent: agent)
         case .CompareObservation(let observation, let object):
-            return observedObject(observation, map: map, agent: agent) == object
+            let obj = observedObject(observation, map: map, agent: agent)
+            print(obj)
+            return obj == object
         }
     }
-    
+
     private func observedObject(observation: Observation, map: Map, agent: AgentProtocol) -> MapUnit? {
         switch observation {
         case .LookForward:
             switch agent.direction {
-            case .Up:
-                return map.retrieveMapUnitAt(agent.x, column: agent.y - 1)
-            case .Down:
-                return map.retrieveMapUnitAt(agent.x, column: agent.y + 1)
-            case .Left:
-                return map.retrieveMapUnitAt(agent.x - 1, column: agent.y)
             case .Right:
-                return map.retrieveMapUnitAt(agent.x + 1, column: agent.y)
+                return map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition + 1)
+            case .Left:
+                return map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition - 1)
+            case .Down:
+                return map.retrieveMapUnitAt(agent.yPosition - 1, column: agent.xPosition)
+            case .Up:
+                return map.retrieveMapUnitAt(agent.yPosition + 1, column: agent.xPosition)
             }
         }
     }

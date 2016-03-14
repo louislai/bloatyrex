@@ -1,4 +1,10 @@
+excluded:
+    - FinalProjectTests
+disabled_rules:
+    - force_cast
+    - type_name
+    - variable_name
 line_length:
-    110
+    120
 function_body_length:
     60

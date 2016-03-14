@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Map {
+class Map: NSObject {
     private var grid: [[MapUnit]]
     let numberOfRows: Int
     let numberOfColumns: Int
@@ -44,5 +44,13 @@ class Map {
                 return nil
         }
         return grid[row][column]
+    }
+}
+
+extension Map: NSCopying {
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = Map(numberOfRows: numberOfRows, numberOfColumns: numberOfColumns)
+        copy.grid = grid
+        return copy
     }
 }

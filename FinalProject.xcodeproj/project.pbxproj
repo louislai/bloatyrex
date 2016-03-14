@@ -12,15 +12,29 @@
 		1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0841C951E250010F727 /* AgentProtocol.swift */; };
 		1DB4B0871C95527D0010F727 /* InterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0861C95527D0010F727 /* InterpreterTests.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
-		3DF230A41C8F0617003420C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* ViewController.swift */; };
+		3DF230A41C8F0617003420C0 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
 		3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A81C8F0617003420C0 /* Assets.xcassets */; };
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
 		3DF230B71C8F0617003420C0 /* FinalProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */; };
 		3DF230C21C8F0617003420C0 /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */; };
+		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
 		BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */; };
 		BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F51C9110A000C56DD2 /* Action.swift */; };
+		BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C41C941134007F56F0 /* LanguageDelegate.swift */; };
+		BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* AgentNode.swift */; };
+		BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C81C941459007F56F0 /* MapBlock.swift */; };
+		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
+		BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */; };
+		BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B21C948C9A00DAE175 /* WallNode.swift */; };
+		BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */; };
+		BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B61C948CB500DAE175 /* GoalNode.swift */; };
+		BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B81C952E6300DAE175 /* Observation.swift */; };
+		BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */; };
+		BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */; };
+		BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */; };
+		BFA80FB31C95D10600F1BC15 /* ResetDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB21C95D10600F1BC15 /* ResetDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +61,7 @@
 		1DB4B0861C95527D0010F727 /* InterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterpreterTests.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3DF230A31C8F0617003420C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3DF230A31C8F0617003420C0 /* PlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
 		3DF230A61C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3DF230A81C8F0617003420C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DF230AB1C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,9 +72,23 @@
 		3DF230BD1C8F0617003420C0 /* FinalProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnit.swift; sourceTree = "<group>"; };
 		BF4C52F51C9110A000C56DD2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		BF5339C41C941134007F56F0 /* LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageDelegate.swift; sourceTree = "<group>"; };
+		BF5339C61C941155007F56F0 /* AgentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNode.swift; sourceTree = "<group>"; };
+		BF5339C81C941459007F56F0 /* MapBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBlock.swift; sourceTree = "<group>"; };
+		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SamplePrograms.swift; path = FinalProject/SamplePrograms.swift; sourceTree = "<group>"; };
+		BF8FA5B21C948C9A00DAE175 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
+		BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySpaceNode.swift; sourceTree = "<group>"; };
+		BF8FA5B61C948CB500DAE175 /* GoalNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalNode.swift; sourceTree = "<group>"; };
+		BF8FA5B81C952E6300DAE175 /* Observation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
+		BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureManager.swift; sourceTree = "<group>"; };
+		BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Interpreter+LanguageDelegate.swift"; sourceTree = "<group>"; };
+		BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
+		BFA80FB21C95D10600F1BC15 /* ResetDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				1DB4B0801C9516610010F727 /* Syntax.swift */,
+				BF8FA5B81C952E6300DAE175 /* Observation.swift */,
 			);
 			name = Language;
 			sourceTree = "<group>";
@@ -99,6 +128,8 @@
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
+				BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */,
+				BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */,
 				3DF230A01C8F0617003420C0 /* FinalProject */,
 				3DF230B51C8F0617003420C0 /* FinalProjectTests */,
 				3DF230C01C8F0617003420C0 /* FinalProjectUITests */,
@@ -119,10 +150,11 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BF4C52F71C913E8500C56DD2 /* GameEngine */,
 				1DB4B07D1C95142C0010F727 /* Language */,
 				BF4C52F01C910CB500C56DD2 /* Models */,
 				3DF230A11C8F0617003420C0 /* AppDelegate.swift */,
-				3DF230A31C8F0617003420C0 /* ViewController.swift */,
+				3DF230A31C8F0617003420C0 /* PlayingViewController.swift */,
 				3DF230A51C8F0617003420C0 /* Main.storyboard */,
 				3DF230A81C8F0617003420C0 /* Assets.xcassets */,
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
@@ -156,10 +188,28 @@
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
 				BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
+				BF5339C81C941459007F56F0 /* MapBlock.swift */,
+				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
 				1DB4B0841C951E250010F727 /* AgentProtocol.swift */,
 				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
+				BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
+			isa = PBXGroup;
+			children = (
+				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
+				BF5339C41C941134007F56F0 /* LanguageDelegate.swift */,
+				BF5339C61C941155007F56F0 /* AgentNode.swift */,
+				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
+				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
+				BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */,
+				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
+				BFA80FB21C95D10600F1BC15 /* ResetDelegate.swift */,
+			);
+			name = GameEngine;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,11 +363,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */,
+				BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */,
+				BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */,
+				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
+				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
+				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
+				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
+				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
+				BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */,
+				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
+				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
+				3DF230A41C8F0617003420C0 /* PlayingViewController.swift in Sources */,
+				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
-				3DF230A41C8F0617003420C0 /* ViewController.swift in Sources */,
 				BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
+				BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */,
+				BFA80FB31C95D10600F1BC15 /* ResetDelegate.swift in Sources */,
 				3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */,
 				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
