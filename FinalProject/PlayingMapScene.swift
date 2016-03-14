@@ -207,8 +207,8 @@ class PlayingMapScene: SKScene {
                             sprite.gameScene = self
                             sprite.row = row
                             sprite.column = column
-                            sprite.originalProgram = Sample.sampleProgram
-                            sprite.delegate = Interpreter(program: Sample.sampleProgram)
+                            sprite.originalProgram = Sample.sampleProgram3
+                            sprite.delegate = Interpreter(program: Sample.sampleProgram3)
                             activeAgentNodes.append(sprite)
                         }
                         unitsLayer.addChild(sprite)
