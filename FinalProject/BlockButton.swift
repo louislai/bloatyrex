@@ -8,16 +8,23 @@
 
 import SpriteKit
 
+enum BlockType {
+    case Main
+    case Forward
+    case TurnLeft
+    case TurnRight
+}
 class BlockButton: SKNode {
     let button: SKSpriteNode
     let block: SKSpriteNode
+    let blockType: BlockType
     var selected = false
     
-    
-    init(imageNamed: String) {
+    init(imageNamed: String, blockType: BlockType) {
         button = SKSpriteNode(imageNamed: imageNamed)
         block = SKSpriteNode(imageNamed: imageNamed)
         block.hidden = true
+        self.blockType = blockType
         super.init()
         self.addChild(button)
         self.addChild(block)
