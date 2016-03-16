@@ -12,6 +12,9 @@
 		1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0841C951E250010F727 /* AgentProtocol.swift */; };
 		1DB4B0871C95527D0010F727 /* InterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0861C95527D0010F727 /* InterpreterTests.swift */; };
 		3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21216A1C9A55F000E6564B /* PannableScene.swift */; };
+		1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */; };
+		1DB4B08B1C97FD940010F727 /* CodeBlocksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */; };
+		1DB4B08D1C99073F0010F727 /* DropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B08C1C99073F0010F727 /* DropZone.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
@@ -68,6 +71,9 @@
 		1DB4B0841C951E250010F727 /* AgentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentProtocol.swift; sourceTree = "<group>"; };
 		1DB4B0861C95527D0010F727 /* InterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterpreterTests.swift; sourceTree = "<group>"; };
 		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableScene.swift; sourceTree = "<group>"; };
+		1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeBlocksViewController.swift; sourceTree = "<group>"; };
+		1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeBlocksScene.swift; sourceTree = "<group>"; };
+		1DB4B08C1C99073F0010F727 /* DropZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropZone.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingMapViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +185,9 @@
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
 				3DF230AD1C8F0617003420C0 /* Info.plist */,
 				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
+				1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */,
+				1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */,
+				1DB4B08C1C99073F0010F727 /* DropZone.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -426,6 +435,7 @@
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
 				B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */,
 				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
+				1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
 				B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */,
@@ -439,6 +449,7 @@
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
+				1DB4B08D1C99073F0010F727 /* DropZone.swift in Sources */,
 				BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */,
 				B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
@@ -449,6 +460,7 @@
 				B01BF8D41CA1B31100D02FCA /* LevelSelectorViewController.swift in Sources */,
 				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
+				1DB4B08B1C97FD940010F727 /* CodeBlocksScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
