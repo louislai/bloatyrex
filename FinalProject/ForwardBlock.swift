@@ -12,7 +12,7 @@ class ForwardBlock: CodeBlock {
     let blockBody: SKShapeNode
     
     override init() {
-        blockBody = SKShapeNode(rect: CGRectMake(0, 30, 150, 30), cornerRadius: 0)
+        blockBody = SKShapeNode(rect: CGRectMake(0, CodeBlock.dropZoneSize, 150, 30), cornerRadius: 0)
         blockBody.fillColor = UIColor.greenColor()
         super.init()
         self.addChild(blockBody)

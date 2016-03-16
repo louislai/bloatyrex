@@ -12,7 +12,7 @@ class MainBlock: CodeBlock {
     let blockBody: SKShapeNode
     
     override init() {
-        blockBody = SKShapeNode(rect: CGRectMake(0, 30, 150, 30), cornerRadius: 0)
+        blockBody = SKShapeNode(rect: CGRectMake(0, CodeBlock.dropZoneSize, 150, 30), cornerRadius: 0)
         blockBody.fillColor = UIColor.blueColor()
         super.init()
         self.addChild(blockBody)

@@ -13,7 +13,7 @@ class DropZone: SKNode {
     let hover: SKShapeNode
     let normal: SKShapeNode
     
-    let cornerRadius: CGFloat = 10
+    let cornerRadius: CGFloat = 2
     
     init(size: CGSize) {
         normal = SKShapeNode(rect: CGRectMake(0, 0, size.width, size.height), cornerRadius: cornerRadius)
