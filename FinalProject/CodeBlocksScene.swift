@@ -10,17 +10,21 @@ import SpriteKit
 
 class CodeBlocksScene: SKScene {
     
-    let blockButton = BlockButton(imageNamed: "toilet")
-    
-    let dropZone = DropZone(size: CGSizeMake(100, 50))
+    let blockButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Forward)
+    let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.TurnLeft)
+    let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
+    
+    let insertionPosition = InsertionPosition()
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
         blockButton.position = CGPointMake(size.width * 0.1, size.height * 0.5)
-        dropZone.position = CGPointMake(size.width * 0.9, size.height * 0.5)
-        addChild(dropZone)
+        wallButton.position = CGPointMake(size.width * 0.1, size.height * 0.3)
+        programBlocks.position = CGPointMake(size.width * 0.4, size.height * 0.9)
+        addChild(wallButton)
         addChild(blockButton)
+        addChild(programBlocks)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -30,6 +34,9 @@ class CodeBlocksScene: SKScene {
         if blockButton.containsPoint(location) {
             heldBlock = blockButton
             blockButton.pickBlock(true)
+        } else if wallButton.containsPoint(location) {
+            heldBlock = wallButton
+            wallButton.pickBlock(true)
         }
     }
     
@@ -42,17 +49,28 @@ class CodeBlocksScene: SKScene {
         
         if let block = heldBlock {
             block.moveBlock(CGPointMake(xMovement, yMovement))
-            if dropZone.containsPoint(touchLocation) {
-                dropZone.displayHover()
+            if programBlocks.containsPoint(touchLocation) {
+                programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
             } else {
-                dropZone.displayNormal()
+                programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
             }
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        dropZone.displayNormal()
-        blockButton.pickBlock(false)
+        if let block = heldBlock {
+            block.pickBlock(false)
+            programBlocks.endHover()
+            switch block.blockType {
+            case .Forward:
+                programBlocks.insertBlock(ForwardBlock(), insertionHandler: insertionPosition)
+            case .TurnLeft:
+                programBlocks.insertBlock(TurnLeftBlock(), insertionHandler: insertionPosition)
+            default:
+                break
+            }
+            insertionPosition.position = nil
+        }
         heldBlock = nil
     }
 }
