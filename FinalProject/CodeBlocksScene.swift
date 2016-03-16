@@ -77,12 +77,16 @@ class CodeBlocksScene: SKScene {
             }
         case .MovingBlock:
             if let block = movedBlock {
-                block.position.x += xMovement
-                block.position.y += yMovement
-                if programBlocks.containsPoint(touchLocation) {
-                    programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
+                if let _ = block as? MainBlock {
+                    programBlocks.shift(CGPointMake(xMovement, yMovement))
                 } else {
-                    programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
+                    block.position.x += xMovement
+                    block.position.y += yMovement
+                    if programBlocks.containsPoint(touchLocation) {
+                        programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
+                    } else {
+                        programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
+                    }
                 }
             }
         case .Idle:
