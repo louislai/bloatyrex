@@ -9,13 +9,27 @@
 import SpriteKit
 
 class CodeBlock: SKNode {
+    static let dropZoneSize: CGFloat = 10
+    
     let dropZone: DropZone
     var blockPosition = 0
+    var dropZoneActivated = true
+    var dropZoneCenter: CGPoint {
+        get {
+            if dropZoneActivated {
+                let frame = dropZone.calculateAccumulatedFrame()
+                return CGPointMake(frame.midX, frame.midY)
+            } else {
+                return CGPointMake(CGFloat.max, CGFloat.max)
+            }
+        }
+    }
     
     override init() {
-        dropZone = DropZone(size: CGSizeMake(150, 30))
+        dropZone = DropZone(size: CGSizeMake(150, CodeBlock.dropZoneSize))
         super.init()
         self.addChild(dropZone)
+        dropZone.zPosition = 5
     }
     
     func hover(location: CGPoint, insertionHandler: InsertionPosition) {
@@ -30,8 +44,27 @@ class CodeBlock: SKNode {
         }
     }
     
+    func focus(insertionHandler: InsertionPosition) {
+        dropZone.displayHover()
+        insertionHandler.position = blockPosition + 1
+    }
+    
+    func unfocus() {
+        dropZone.displayNormal()
+    }
+    
     func endHover() {
         dropZone.displayNormal()
+    }
+    
+    func deactivateDropZone() {
+        dropZoneActivated = false
+        dropZone.hidden = true
+    }
+    
+    func activateDropZone() {
+        dropZoneActivated = true
+        dropZone.hidden = false
     }
     
     required init?(coder aDecoder: NSCoder) {
