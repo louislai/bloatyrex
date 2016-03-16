@@ -52,6 +52,12 @@ class ProgramBlocks: SKNode {
         return nil
     }
     
+    func shift(displacement: CGPoint) {
+        blocks[0].position.x += displacement.x
+        blocks[0].position.y += displacement.y
+        flushBlocks()
+    }
+    
     func selectClosestDropZone(location: CGPoint, insertionHandler: InsertionPosition) {
         var closestDistance = CGFloat.max
         var closestBlock = blocks[0]
@@ -65,7 +71,6 @@ class ProgramBlocks: SKNode {
                 closestDistance = distance
                 closestBlock = block
             }
-            print("\(block.blockPosition): \(zone) distance: \(distance)")
         }
         closestBlock.focus(insertionHandler)
     }
@@ -82,7 +87,7 @@ class ProgramBlocks: SKNode {
     }
     
     private func flushBlocks() {
-        var yPos: CGFloat = 0
+        var yPos: CGFloat = blocks[0].position.y
         let xPos = blocks[0].position.x
         for (i, block) in blocks.enumerate() {
             block.blockPosition = i
