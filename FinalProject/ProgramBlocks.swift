@@ -10,10 +10,13 @@ import SpriteKit
 
 class ProgramBlocks: SKNode {
     private var blocks = [CodeBlock]()
+    private let trash = TrashZone()
     
     override init() {
         super.init()
         blocks.append(MainBlock())
+        trash.position = CGPointMake(300, -400)
+        self.addChild(trash)
         self.addChild(blocks[0])
     }
     
@@ -31,6 +34,7 @@ class ProgramBlocks: SKNode {
         for block in blocks {
             block.endHover()
         }
+        trash.unfocus()
     }
     
     func insertBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
@@ -61,6 +65,7 @@ class ProgramBlocks: SKNode {
     func selectClosestDropZone(location: CGPoint, insertionHandler: InsertionPosition) {
         var closestDistance = CGFloat.max
         var closestBlock = blocks[0]
+        trash.unfocus()
         for block in blocks {
             block.unfocus()
             var zone = block.dropZoneCenter
@@ -72,18 +77,33 @@ class ProgramBlocks: SKNode {
                 closestBlock = block
             }
         }
-        closestBlock.focus(insertionHandler)
+        let zone = trash.dropZoneCenter
+        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) + pow((Float)(zone.y - location.y), 2)))
+        insertionHandler.trash = false
+        if trashDistance < closestDistance {
+            trash.focus(insertionHandler)
+        } else {
+            closestBlock.focus(insertionHandler)
+        }
     }
     
     func reorderBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
+        if insertionHandler.trash {
+            if let _ = block as? MainBlock {
+                return
+            } else {
+                blocks.removeAtIndex(block.blockPosition)
+                block.removeFromParent()
+            }
+        }
         if var position = insertionHandler.position {
             blocks.removeAtIndex(block.blockPosition)
             if block.blockPosition < position {
                 position--
             }
             blocks.insert(block, atIndex: position)
-            flushBlocks()
         }
+        flushBlocks()
     }
     
     private func flushBlocks() {
