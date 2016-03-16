@@ -13,17 +13,23 @@ class DropZone: SKNode {
     let hover: SKShapeNode
     let normal: SKShapeNode
     
+    let cornerRadius: CGFloat = 10
+    
     init(size: CGSize) {
-        normal = SKShapeNode(rect: CGRectMake(0, 0, size.width, size.height), cornerRadius: 20)
+        normal = SKShapeNode(rect: CGRectMake(0, 0, size.width, size.height), cornerRadius: cornerRadius)
         normal.strokeColor = UIColor.redColor()
         normal.lineWidth = 2
-        hover = SKShapeNode(rect: CGRectMake(0, 0, size.width, size.height), cornerRadius: 20)
+        hover = SKShapeNode(rect: CGRectMake(0, 0, size.width, size.height), cornerRadius: cornerRadius)
         hover.strokeColor = UIColor.redColor()
         hover.lineWidth = 5
         hover.hidden = true
         super.init()
         self.addChild(normal)
         self.addChild(hover)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func displayHover() {
@@ -34,9 +40,5 @@ class DropZone: SKNode {
     func displayNormal() {
         hover.hidden = true
         normal.hidden = false
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
