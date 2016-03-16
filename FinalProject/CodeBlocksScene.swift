@@ -53,8 +53,10 @@ class CodeBlocksScene: SKScene {
         
         if programBlocks.containsPoint(location) {
             movedBlock = programBlocks.getBlock(location)
-            movedBlock!.deactivateDropZone()
-            pressState = .MovingBlock
+            if let block = movedBlock {
+                block.deactivateDropZone()
+                pressState = .MovingBlock
+            }
         }
     }
     
