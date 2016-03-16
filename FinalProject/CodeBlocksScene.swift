@@ -10,11 +10,10 @@ import SpriteKit
 
 class CodeBlocksScene: SKScene {
     
-    let testObject = SKSpriteNode(imageNamed: "toilet")
-    let blockButton = SKSpriteNode(imageNamed: "toilet")
+    let blockButton = BlockButton(imageNamed: "toilet")
     
     let dropZone = DropZone(size: CGSizeMake(100, 50))
-    var holdingItem = false
+    var heldBlock: BlockButton?
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
@@ -29,9 +28,8 @@ class CodeBlocksScene: SKScene {
         let location = touch.locationInNode(self)
         
         if blockButton.containsPoint(location) {
-            testObject.position = CGPointMake(size.width * 0.1, size.height * 0.5)
-            addChild(testObject)
-            holdingItem = true
+            heldBlock = blockButton
+            blockButton.pickBlock(true)
         }
     }
     
@@ -39,22 +37,22 @@ class CodeBlocksScene: SKScene {
         let touch = touches.first! as UITouch
         let touchLocation = touch.locationInNode(self)
         let previousLocation = touch.previousLocationInNode(self)
+        let xMovement = touchLocation.x - previousLocation.x
+        let yMovement = touchLocation.y - previousLocation.y
         
-        let newX = testObject.position.x + touchLocation.x - previousLocation.x
-        let newY = testObject.position.y + touchLocation.y - previousLocation.y
-        
-        testObject.position = CGPointMake(newX, newY)
-        
-        if holdingItem && dropZone.containsPoint(touchLocation) {
-            dropZone.displayHover()
-        } else {
-            dropZone.displayNormal()
+        if let block = heldBlock {
+            block.moveBlock(CGPointMake(xMovement, yMovement))
+            if dropZone.containsPoint(touchLocation) {
+                dropZone.displayHover()
+            } else {
+                dropZone.displayNormal()
+            }
         }
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        testObject.removeFromParent()
-        holdingItem = false
         dropZone.displayNormal()
+        blockButton.pickBlock(false)
+        heldBlock = nil
     }
 }
