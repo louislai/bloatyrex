@@ -10,5 +10,16 @@ import Foundation
 import SpriteKit
 
 class PannableScene: SKScene {
+    var content: SKNode?
+    var viewpoint: SKNode?
 
+    override func didMoveToView(view: SKView) {
+        // set up the viewpoint
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.content = SKNode()
+        self.viewpoint = SKNode()
+        self.content?.name = "content"
+        self.viewpoint?.name = "viewpoint"
+        self.content?.addChild(viewpoint!)
+    }
 }
