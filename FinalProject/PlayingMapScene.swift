@@ -48,8 +48,8 @@ class PlayingMapScene: PannableScene {
     var timeOfLastMove: CFTimeInterval = 0.0
     let timePerMove: CFTimeInterval = 1.0
 
-    override init(size: CGSize) {
-        super.init(size: size)
+    override init(size: CGSize, scale: CGFloat) {
+        super.init(size: size, scale: scale)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         backgroundColor = UIColor.whiteColor()
     }

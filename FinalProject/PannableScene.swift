@@ -14,14 +14,14 @@ class PannableScene: SKScene {
     private var overlay = SKNode()
     var viewpoint: SKCameraNode = SKCameraNode()
 
-    override init(size: CGSize) {
+    init(size: CGSize, scale: CGFloat) {
         super.init(size: size)
+        viewpoint.xScale = scale
+        viewpoint.yScale = scale
     }
 
     override func didMoveToView(view: SKView) {
         // set up the viewpoint
-        viewpoint.xScale = 1
-        viewpoint.yScale = 1
         self.viewpoint.addChild(content)
         viewpoint.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
         addChild(self.viewpoint)
