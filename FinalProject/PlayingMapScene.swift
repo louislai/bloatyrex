@@ -21,7 +21,7 @@ struct PlayingMapSceneConstants {
     }
 }
 
-class PlayingMapScene: SKScene {
+class PlayingMapScene: PannableScene {
     var map: Map!
     var running = false
     let blocksLayer = SKNode()
@@ -84,12 +84,12 @@ class PlayingMapScene: SKScene {
         // The blocksLayer represent the shape of the map.
         // Each block is a square
         blocksLayer.position = layerPosition
-        addChild(blocksLayer)
+        addNodeToContent(blocksLayer)
 
         // This layer holds the MapUnit sprites. The positions of these sprites
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
-        addChild(unitsLayer)
+        addNodeToContent(unitsLayer)
         addBlocks()
         setupMapUnits()
         setupHud()

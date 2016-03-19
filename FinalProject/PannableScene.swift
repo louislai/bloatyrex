@@ -10,17 +10,38 @@ import Foundation
 import SpriteKit
 
 class PannableScene: SKScene {
-    private var content: SKNode?
-    private var viewpoint: SKNode?
+    private var content = SKNode()
+    private var viewpoint = SKNode()
 
-    override func didMoveToView(view: SKView) {
+    override init(size: CGSize) {
+        super.init(size: size)
         // set up the viewpoint
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.content = SKNode()
-        self.viewpoint = SKNode()
-        self.content?.name = "content"
-        self.viewpoint?.name = "viewpoint"
-        self.content?.addChild(viewpoint!)
+        addChild(self.content)
+        self.content.name = "content"
+        self.viewpoint.name = "viewpoint"
+        self.content.addChild(viewpoint)
+        self.content.zPosition = 0.9
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            moveViewpointToPoint(touch.locationInNode(content))
+        }
+    }
+
+    override func didSimulatePhysics() {
+        self.centerOnNode(self.viewpoint)
+    }
+
+    func centerOnNode(node: SKNode) {
+        let cameraPositionInScene = self.convertPoint(node.position, fromNode: content)
+        print(cameraPositionInScene)
+        content.position = CGPoint(x: content.position.x - cameraPositionInScene.x, y: content.position.y - cameraPositionInScene.y)
     }
 
     /// Adds a node to be part of the content that is pannable.
@@ -30,6 +51,6 @@ class PannableScene: SKScene {
 
     /// Moves the viewpoint over the scene to the given point.
     func moveViewpointToPoint(point: CGPoint) {
-        self.viewpoint?.position = point
+        self.viewpoint.position = point
     }
 }

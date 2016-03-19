@@ -24,10 +24,12 @@ class PlayingMapViewController: UIViewController {
         skView.presentScene(newScene())
     }
 
-    func newScene() -> PlayingMapScene {
+    func newScene() -> SKScene {
         let skView = view as! SKView
 
         // Create and configure the scene.
+        let doubleSize = CGSizeMake(skView.bounds.size.width * 2, skView.bounds.size.height * 2)
+        let wrapperScene = PannableScene(size: skView.bounds.size)
         let scene = PlayingMapScene(size: skView.bounds.size)
         scene.scaleMode = .AspectFill
 
@@ -45,6 +47,8 @@ class PlayingMapViewController: UIViewController {
         scene.map = map
         scene.resetDelegate = self
         scene.setup()
+
+        wrapperScene.addChild(scene)
 
         return scene
     }
