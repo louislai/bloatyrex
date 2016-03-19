@@ -10,18 +10,27 @@ import Foundation
 import SpriteKit
 
 class PannableScene: SKScene {
-    private var content = SKNode()
-    private var viewpoint = SKNode()
+    private var content: SKNode!
+    private var overlay: SKNode!
+    private var viewpoint: SKCameraNode!
 
     override init(size: CGSize) {
         super.init(size: size)
+        content = SKNode()
+        overlay = SKNode()
+        viewpoint = SKCameraNode()
         // set up the viewpoint
+        viewpoint.xScale = 0.25
+        viewpoint.yScale = 0.25
+        self.camera = viewpoint
+    }
+
+    override func didMoveToView(view: SKView) {
+        viewpoint.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         addChild(self.content)
         self.content.name = "content"
-        self.viewpoint.name = "viewpoint"
-        self.content.addChild(viewpoint)
-        self.content.zPosition = 0.9
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -30,23 +39,18 @@ class PannableScene: SKScene {
 
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
-            moveViewpointToPoint(touch.locationInNode(content))
+            moveViewpointToPoint(touch.locationInNode(self))
         }
-    }
-
-    override func didSimulatePhysics() {
-        self.centerOnNode(self.viewpoint)
-    }
-
-    func centerOnNode(node: SKNode) {
-        let cameraPositionInScene = self.convertPoint(node.position, fromNode: content)
-        print(cameraPositionInScene)
-        content.position = CGPoint(x: content.position.x - cameraPositionInScene.x, y: content.position.y - cameraPositionInScene.y)
     }
 
     /// Adds a node to be part of the content that is pannable.
     func addNodeToContent(node: SKNode) {
         content.addChild(node)
+    }
+
+    /// Adds a node to the overlay
+    func addNodeToOverlay(node: SKNode) {
+        overlay.addChild(node)
     }
 
     /// Moves the viewpoint over the scene to the given point.
