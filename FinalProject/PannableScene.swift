@@ -10,26 +10,23 @@ import Foundation
 import SpriteKit
 
 class PannableScene: SKScene {
-    private var content: SKNode!
-    private var overlay: SKNode!
-    private var viewpoint: SKCameraNode!
+    private var content = SKNode()
+    private var overlay = SKNode()
+    var viewpoint: SKCameraNode = SKCameraNode()
 
     override init(size: CGSize) {
         super.init(size: size)
-        content = SKNode()
-        overlay = SKNode()
-        viewpoint = SKCameraNode()
-        // set up the viewpoint
-        viewpoint.xScale = 0.25
-        viewpoint.yScale = 0.25
-        self.camera = viewpoint
     }
 
     override func didMoveToView(view: SKView) {
+        // set up the viewpoint
+        viewpoint.xScale = 1
+        viewpoint.yScale = 1
+        self.viewpoint.addChild(content)
         viewpoint.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
+        addChild(self.viewpoint)
+        addChild(self.overlay)
 
-        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        addChild(self.content)
         self.content.name = "content"
     }
 

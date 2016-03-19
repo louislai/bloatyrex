@@ -135,7 +135,7 @@ class PlayingMapScene: PannableScene {
 
         // 3
         movesLeftLabel.position = layerPosition
-        addChild(movesLeftLabel)
+        addNodeToOverlay(movesLeftLabel)
 
         movesLeft = originalMovesLeft
     }
@@ -154,7 +154,7 @@ class PlayingMapScene: PannableScene {
             x: -300.0,
             y: -300.0
         )
-        addChild(playButton)
+        addNodeToOverlay(playButton)
 
         // Setup Pause button
         let pauseLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.pause)
@@ -169,7 +169,7 @@ class PlayingMapScene: PannableScene {
             x: 0.0,
             y: -300.0
         )
-        addChild(pauseButton)
+        addNodeToOverlay(pauseButton)
 
         // Setup Reset button
         let resetLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.reset)
@@ -184,7 +184,7 @@ class PlayingMapScene: PannableScene {
             x: 300.0,
             y: -300.0
         )
-        addChild(resetButton)
+        addNodeToOverlay(resetButton)
     }
 
     func setupMapUnits() {
