@@ -53,6 +53,6 @@ class PannableScene: SKScene {
 
     /// Moves the viewpoint over the scene to the given point.
     func moveViewpointToPoint(point: CGPoint) {
-        self.viewpoint.position = point
+        self.viewpoint.runAction(SKAction.moveTo(point, duration: 0.1))
     }
 }
