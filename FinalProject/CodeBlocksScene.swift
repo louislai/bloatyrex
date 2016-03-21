@@ -18,6 +18,7 @@ class CodeBlocksScene: SKScene {
     
     let blockButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Forward)
     let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.TurnLeft)
+    let blankButton = BlockButton(imageNamed: "Block", blockType: BlockType.TurnRight)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -27,6 +28,7 @@ class CodeBlocksScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
+        blankButton.position = CGPointMake(size.width * 0.1, size.height * 0.7)
         blockButton.position = CGPointMake(size.width * 0.1, size.height * 0.5)
         wallButton.position = CGPointMake(size.width * 0.1, size.height * 0.3)
         programBlocks.position = CGPointMake(size.width * 0.4, size.height * 0.9)
@@ -35,6 +37,7 @@ class CodeBlocksScene: SKScene {
         addChild(wallButton)
         addChild(blockButton)
         addChild(programBlocks)
+        addChild(blankButton)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -48,6 +51,10 @@ class CodeBlocksScene: SKScene {
         } else if wallButton.containsPoint(location) {
             heldBlock = wallButton
             wallButton.pickBlock(true)
+            pressState = .AddingBlock
+        } else if blankButton.containsPoint(location) {
+            heldBlock = blankButton
+            blankButton.pickBlock(true)
             pressState = .AddingBlock
         }
         
@@ -107,6 +114,8 @@ class CodeBlocksScene: SKScene {
                     programBlocks.insertBlock(ForwardBlock(), insertionHandler: insertionPosition)
                 case .TurnLeft:
                     programBlocks.insertBlock(TurnLeftBlock(), insertionHandler: insertionPosition)
+                case .TurnRight:
+                    programBlocks.insertBlock(TurnRightBlock(), insertionHandler: insertionPosition)
                 default:
                     break
                 }
@@ -115,14 +124,19 @@ class CodeBlocksScene: SKScene {
             heldBlock = nil
         case .MovingBlock:
             if let block = movedBlock {
-                block.activateDropZone()
-                programBlocks.endHover()
-                programBlocks.reorderBlock(block, insertionHandler: insertionPosition)
+                if let _ = block as? MainBlock {
+                    
+                } else {
+                    block.activateDropZone()
+                    programBlocks.endHover()
+                    programBlocks.reorderBlock(block, insertionHandler: insertionPosition)
+                }
             }
             movedBlock = nil
         case .Idle:
             break
         }
+        print(programBlocks.getCode())
         pressState = .Idle
     }
 }

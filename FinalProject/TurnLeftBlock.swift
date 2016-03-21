@@ -18,6 +18,10 @@ class TurnLeftBlock: CodeBlock {
         self.addChild(blockBody)
     }
     
+    override func getBlockConstruct() -> Construct {
+        return Construct.ActionConstruct(Action.RotateLeft)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

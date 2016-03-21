@@ -18,6 +18,10 @@ class MainBlock: CodeBlock {
         self.addChild(blockBody)
     }
     
+    override func getBlockConstruct() -> Construct {
+        return Construct.Main
+    }
+    
     override func deactivateDropZone() {
     }
     

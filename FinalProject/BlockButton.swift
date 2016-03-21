@@ -14,6 +14,7 @@ enum BlockType {
     case TurnLeft
     case TurnRight
 }
+
 class BlockButton: SKNode {
     let button: SKSpriteNode
     let block: SKSpriteNode

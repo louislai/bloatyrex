@@ -32,6 +32,10 @@ class CodeBlock: SKNode {
         dropZone.zPosition = 5
     }
     
+    func getBlockConstruct() -> Construct {
+        return Construct.None
+    }
+    
     func hover(location: CGPoint, insertionHandler: InsertionPosition) {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
