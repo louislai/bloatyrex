@@ -14,6 +14,8 @@ class PannableScene: SKScene {
     private var overlay = SKNode()
     var viewpoint: SKCameraNode = SKCameraNode()
 
+    /// Initialise the scene with a given size, and optional scale and overlay z position.
+    /// The scale is the zoom level of the camera, e.g. 1 is no zoom and 2 is 2x zoom.
     init(size: CGSize, scale: CGFloat = 1, overlayZPosition: CGFloat = 10) {
         super.init(size: size)
         viewpoint.xScale = scale
@@ -35,6 +37,7 @@ class PannableScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Handle the panning movement of the scene.
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
             moveViewpointToPoint(touch.locationInNode(self))
@@ -52,7 +55,7 @@ class PannableScene: SKScene {
     }
 
     /// Moves the viewpoint over the scene to the given point.
-    func moveViewpointToPoint(point: CGPoint) {
+    private func moveViewpointToPoint(point: CGPoint) {
         self.viewpoint.runAction(SKAction.moveTo(point, duration: 0.1))
     }
 }
