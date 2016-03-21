@@ -40,7 +40,11 @@ class PannableScene: SKScene {
     /// Handle the panning movement of the scene.
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
-            moveViewpointToPoint(touch.locationInNode(self))
+            // calculate the distance panned
+            let newPoint = touch.locationInNode(self)
+            let previousPoint = touch.previousLocationInNode(self)
+            moveViewPointBy(newPoint.x - previousPoint.x,
+                verticalDisplacement: newPoint.y - previousPoint.y)
         }
     }
 
@@ -54,8 +58,9 @@ class PannableScene: SKScene {
         overlay.addChild(node)
     }
 
-    /// Moves the viewpoint over the scene to the given point.
-    private func moveViewpointToPoint(point: CGPoint) {
-        self.viewpoint.runAction(SKAction.moveTo(point, duration: 0.1))
+    /// Moves the viewpoint by a given X and Y value.
+    private func moveViewPointBy(horizontalDisplacement: CGFloat, verticalDisplacement: CGFloat) {
+        self.viewpoint.runAction(SKAction.moveByX(horizontalDisplacement,
+            y: verticalDisplacement, duration: 0.1))
     }
 }
