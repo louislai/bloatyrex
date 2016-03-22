@@ -36,8 +36,8 @@ class PlayingMapScene: SKScene {
     private var numberOfColumns: Int {
         return map.numberOfColumns
     }
-    let blockWidth = CGFloat(100.0)
-    let blockHeight = CGFloat(100.0)
+    let blockWidth = CGFloat(40.0)
+    let blockHeight = CGFloat(40.0)
     var blockSize: CGSize {
         return CGSize(
             width: blockWidth,

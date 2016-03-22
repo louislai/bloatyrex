@@ -24,7 +24,7 @@
 		1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */; };
 		1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
-		3DF230A41C8F0617003420C0 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingViewController.swift */; };
+		3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
 		3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A81C8F0617003420C0 /* Assets.xcassets */; };
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
@@ -37,6 +37,8 @@
 		BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C41C941134007F56F0 /* LanguageDelegate.swift */; };
 		BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* AgentNode.swift */; };
 		BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C81C941459007F56F0 /* MapBlock.swift */; };
+		BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */; };
+		BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */; };
 		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
 		BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */; };
 		BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B21C948C9A00DAE175 /* WallNode.swift */; };
@@ -85,7 +87,7 @@
 		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnLeftBlock.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3DF230A31C8F0617003420C0 /* PlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
+		3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingMapViewController.swift; sourceTree = "<group>"; };
 		3DF230A61C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3DF230A81C8F0617003420C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DF230AB1C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,6 +105,8 @@
 		BF5339C41C941134007F56F0 /* LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageDelegate.swift; sourceTree = "<group>"; };
 		BF5339C61C941155007F56F0 /* AgentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNode.swift; sourceTree = "<group>"; };
 		BF5339C81C941459007F56F0 /* MapBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBlock.swift; sourceTree = "<group>"; };
+		BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
+		BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SamplePrograms.swift; path = FinalProject/SamplePrograms.swift; sourceTree = "<group>"; };
 		BF8FA5B21C948C9A00DAE175 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
@@ -174,11 +178,12 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BF8E12AA1C99ADD800B210C3 /* PlayingScene */,
+				BF8E12A71C99AA8400B210C3 /* TitleScene */,
 				BF4C52F71C913E8500C56DD2 /* GameEngine */,
 				1DB4B07D1C95142C0010F727 /* Language */,
 				BF4C52F01C910CB500C56DD2 /* Models */,
 				3DF230A11C8F0617003420C0 /* AppDelegate.swift */,
-				3DF230A31C8F0617003420C0 /* PlayingViewController.swift */,
 				3DF230A51C8F0617003420C0 /* Main.storyboard */,
 				3DF230A81C8F0617003420C0 /* Assets.xcassets */,
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
@@ -246,6 +251,23 @@
 				BFA80FB21C95D10600F1BC15 /* ResetDelegate.swift */,
 			);
 			name = GameEngine;
+			sourceTree = "<group>";
+		};
+		BF8E12A71C99AA8400B210C3 /* TitleScene */ = {
+			isa = PBXGroup;
+			children = (
+				BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */,
+			);
+			name = TitleScene;
+			sourceTree = "<group>";
+		};
+		BF8E12AA1C99ADD800B210C3 /* PlayingScene */ = {
+			isa = PBXGroup;
+			children = (
+				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
+				BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */,
+			);
+			name = PlayingScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,7 +412,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\nswiftlint autocorrect\nswiftlint\nelse\necho 'Download swiftlint'\nfi";
+			shellScript = "if which swiftlint > /dev/null; then\nswiftlint\nelse\necho 'Download swiftlint'\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -411,6 +433,7 @@
 				1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
+				BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */,
 				BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */,
 				1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */,
 				1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */,
@@ -418,7 +441,8 @@
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
 				1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
-				3DF230A41C8F0617003420C0 /* PlayingViewController.swift in Sources */,
+				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
+				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
 				1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */,
