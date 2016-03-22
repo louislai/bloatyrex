@@ -15,22 +15,21 @@ class PannableScene: SKScene {
     var viewpoint: SKCameraNode = SKCameraNode()
 
     /// Initialise the scene with a given size, and optional scale and overlay z position.
-    /// The scale is the zoom level of the camera, e.g. 1 is no zoom and 2 is 2x zoom.
-    init(size: CGSize, scale: CGFloat = 1, overlayZPosition: CGFloat = 10) {
+    /// Zoom level is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
+    init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10) {
         super.init(size: size)
-        viewpoint.xScale = scale
-        viewpoint.yScale = scale
+        viewpoint.xScale = 1.0 / zoomLevel
+        viewpoint.yScale = 1.0 / zoomLevel
         overlay.zPosition = overlayZPosition
     }
 
     override func didMoveToView(view: SKView) {
         // set up the viewpoint
-        self.viewpoint.addChild(content)
+        self.addChild(content)
         viewpoint.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-        addChild(self.viewpoint)
-        addChild(self.overlay)
-
-        self.content.name = "content"
+        self.addChild(viewpoint)
+        self.camera = viewpoint
+        viewpoint.addChild(overlay)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -43,8 +42,8 @@ class PannableScene: SKScene {
             // calculate the distance panned
             let newPoint = touch.locationInNode(self)
             let previousPoint = touch.previousLocationInNode(self)
-            moveViewPointBy(newPoint.x - previousPoint.x,
-                verticalDisplacement: newPoint.y - previousPoint.y)
+            moveViewPointBy(previousPoint.x - newPoint.x,
+                verticalDisplacement: previousPoint.y - newPoint.y)
         }
     }
 
