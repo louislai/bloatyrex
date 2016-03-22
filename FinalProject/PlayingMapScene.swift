@@ -147,9 +147,7 @@ class PlayingMapScene: SKScene {
         playLabel.fontColor = SKColor.greenColor()
         playLabel.fontName = "Courier"
         let playButton = SKButton(defaultButton: playLabel)
-        playButton.action = {
-            self.run()
-        }
+        playButton.addTarget(self, selector: Selector("run:"))
         playButton.position = CGPoint(
             x: -300.0,
             y: -300.0
@@ -162,9 +160,7 @@ class PlayingMapScene: SKScene {
         pauseLabel.fontColor = SKColor.greenColor()
         pauseLabel.fontName = "Courier"
         let pauseButton = SKButton(defaultButton: pauseLabel)
-        pauseButton.action = {
-            self.pause()
-        }
+        pauseButton.addTarget(self, selector: Selector("pause"))
         pauseButton.position = CGPoint(
             x: 0.0,
             y: -300.0
@@ -177,9 +173,7 @@ class PlayingMapScene: SKScene {
         resetLabel.fontColor = SKColor.greenColor()
         resetLabel.fontName = "Courier"
         let resetButton = SKButton(defaultButton: resetLabel)
-        resetButton.action = {
-            self.reset()
-        }
+        resetButton.addTarget(self, selector: Selector("reset"))
         resetButton.position = CGPoint(
             x: 300.0,
             y: -300.0
