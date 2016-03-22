@@ -10,10 +10,11 @@ import UIKit
 import SpriteKit
 
 class PlayingMapViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Configure the view.
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        print(view.bounds.size)
+        // Configure the view
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
         skView.showsFPS = true
@@ -27,7 +28,7 @@ class PlayingMapViewController: UIViewController {
     func newScene() -> PlayingMapScene {
         let skView = view as! SKView
 
-        // Create and configure the scene.
+        // Create and configure the scene
         let scene = PlayingMapScene(size: skView.bounds.size)
         scene.scaleMode = .AspectFill
 
