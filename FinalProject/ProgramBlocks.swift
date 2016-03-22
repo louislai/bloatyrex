@@ -142,10 +142,12 @@ class ProgramBlocks: SKNode {
         var yPos: CGFloat = blocks[0].position.y
         let xPos = blocks[0].position.x
         for (i, block) in blocks.enumerate() {
-            block.blockPosition = i
-            block.position.y = yPos
-            block.position.x = xPos
-            yPos -= block.calculateAccumulatedFrame().height
+            if i != 0 {
+                block.blockPosition = i
+                block.position.x = xPos
+                yPos -= block.calculateAccumulatedFrame().height
+                block.position.y = yPos
+            }
         }
     }
 

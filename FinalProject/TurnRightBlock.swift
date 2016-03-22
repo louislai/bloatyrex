@@ -9,13 +9,15 @@
 import SpriteKit
 
 class TurnRightBlock: CodeBlock {
-    let blockBody: SKShapeNode
+    let blockBody: SKSpriteNode
     
     override init() {
-        blockBody = SKShapeNode(rect: CGRectMake(0, CodeBlock.dropZoneSize, 150, 30), cornerRadius: 0)
-        blockBody.fillColor = UIColor.redColor()
+        blockBody = SKSpriteNode(imageNamed: "turn-right-block")
+        blockBody.position = CGPoint(x: blockBody.size.width / 2,
+            y: blockBody.size.height / 2 + CodeBlock.dropZoneSize)
         super.init()
         self.addChild(blockBody)
+        self.resizeDropZone()
     }
     
     override func getBlockConstruct() -> Construct {

@@ -16,9 +16,9 @@ class CodeBlocksScene: SKScene {
         case Idle
     }
     
-    let blockButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Forward)
-    let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.TurnLeft)
-    let blankButton = BlockButton(imageNamed: "Block", blockType: BlockType.TurnRight)
+    let blockButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward)
+    let wallButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft)
+    let blankButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
