@@ -9,14 +9,14 @@
 import SpriteKit
 
 class TrashZone: DropZone {
-    
+
     var dropZoneCenter: CGPoint {
         get {
             let frame = self.calculateAccumulatedFrame()
             return CGPointMake(frame.midX, frame.midY)
         }
     }
-    
+
     init() {
         let trash = SKSpriteNode(imageNamed: "toilet")
         let size = trash.calculateAccumulatedFrame()
@@ -25,12 +25,12 @@ class TrashZone: DropZone {
         trash.position.x = size.width/2
         trash.position.y = size.height/2
     }
-    
+
     func focus(insertionHandler: InsertionPosition) {
         insertionHandler.trash = true
         self.displayHover()
     }
-    
+
     func unfocus() {
         self.displayNormal()
     }

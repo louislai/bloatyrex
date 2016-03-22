@@ -9,12 +9,12 @@
 import SpriteKit
 
 class DropZone: SKNode {
-    
+
     let hover: SKShapeNode
     let normal: SKShapeNode
-    
+
     let cornerRadius: CGFloat = 2
-    
+
     init(size: CGSize) {
         normal = SKShapeNode(rect: CGRectMake(0, 0, size.width, size.height), cornerRadius: cornerRadius)
         normal.strokeColor = UIColor.redColor()
@@ -31,12 +31,12 @@ class DropZone: SKNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func displayHover() {
         hover.hidden = false
         normal.hidden = true
     }
-    
+
     func displayNormal() {
         hover.hidden = true
         normal.hidden = false

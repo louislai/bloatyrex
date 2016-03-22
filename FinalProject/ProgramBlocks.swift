@@ -11,32 +11,32 @@ import SpriteKit
 class ProgramBlocks: SKNode {
     private var blocks = [CodeBlock]()
     private let trash = TrashZone()
-    
+
     override init() {
         super.init()
         blocks.append(MainBlock())
-        trash.position = CGPointMake(300, -400)
+        trash.position = CGPoint(x: 300, y: -400)
         self.addChild(trash)
         self.addChild(blocks[0])
     }
-    
+
     func hover(location: CGPoint, insertionHandler: InsertionPosition) {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
         let point = CGPointMake(x, y)
-        
+
         insertionHandler.position = nil
-        
+
         selectClosestDropZone(point, insertionHandler: insertionHandler)
     }
-    
+
     func endHover() {
         for block in blocks {
             block.endHover()
         }
         trash.unfocus()
     }
-    
+
     func insertBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
         if let position = insertionHandler.position {
             blocks.insert(block, atIndex: position)
@@ -44,7 +44,7 @@ class ProgramBlocks: SKNode {
             flushBlocks()
         }
     }
-    
+
     func getBlock(location: CGPoint) -> CodeBlock? {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
@@ -55,13 +55,13 @@ class ProgramBlocks: SKNode {
         }
         return nil
     }
-    
+
     func shift(displacement: CGPoint) {
         blocks[0].position.x += displacement.x
         blocks[0].position.y += displacement.y
         flushBlocks()
     }
-    
+
     func selectClosestDropZone(location: CGPoint, insertionHandler: InsertionPosition) {
         var closestDistance = CGFloat.max
         var closestBlock = blocks[0]
@@ -86,7 +86,7 @@ class ProgramBlocks: SKNode {
             closestBlock.focus(insertionHandler)
         }
     }
-    
+
     func reorderBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
         if insertionHandler.trash {
             if let _ = block as? MainBlock {
@@ -105,7 +105,7 @@ class ProgramBlocks: SKNode {
         }
         flushBlocks()
     }
-    
+
     private func flushBlocks() {
         var yPos: CGFloat = blocks[0].position.y
         let xPos = blocks[0].position.x
