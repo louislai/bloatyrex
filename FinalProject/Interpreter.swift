@@ -18,7 +18,6 @@ class Interpreter {
     }
 
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
-        print("x: \(agent.xPosition) y: \(agent.yPosition)")
         switch instructions[programCounter] {
         case .Done:
             return nil
@@ -103,9 +102,7 @@ class Interpreter {
         case .Negation(let p):
             return !evaluatePredicate(p, map: map, agent: agent)
         case .CompareObservation(let observation, let object):
-            let obj = observedObject(observation, map: map, agent: agent)
-            print(obj)
-            return obj == object
+            return observedObject(observation, map: map, agent: agent) == object
         }
     }
 

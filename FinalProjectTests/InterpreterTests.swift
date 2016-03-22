@@ -44,7 +44,7 @@ class InterpreterTests: XCTestCase {
         let program = Program.MultipleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.Wall), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))), Program.SingleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.EmptySpace), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward))))))
         let interpreter = Interpreter(program: program)
         let map = Map(numberOfRows: 2, numberOfColumns: 2)
-        map.setMapUnitAt(MapUnit.Wall, row: 0, column: 1)
+        map.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         while let action = interpreter.nextAction(map, agent: agent) {
@@ -58,7 +58,7 @@ class InterpreterTests: XCTestCase {
         let interpreter = Interpreter(program: program)
         let map1 = Map(numberOfRows: 2, numberOfColumns: 2)
         let map2 = Map(numberOfRows: 2, numberOfColumns: 2)
-        map1.setMapUnitAt(MapUnit.Wall, row: 0, column: 1)
+        map1.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         for _ in 0..<4 {
@@ -68,10 +68,56 @@ class InterpreterTests: XCTestCase {
         XCTAssertEqual(outputActions, [Action.RotateLeft, Action.RotateRight, Action.RotateLeft, Action.RotateRight, Action.Forward], "Interpreted actions are not equal!")
 
     }
-
+    
+    func testNestedWhile() {
+        let program = Program.MultipleStatement(
+            .LoopStatement(
+                .While(
+                    .Negation(.CompareObservation(.LookForward, MapUnit.Goal)),
+                    Program.MultipleStatement(
+                        .LoopStatement(
+                            .While(
+                                .Negation(.CompareObservation(.LookForward, MapUnit.Wall)),
+                                Program.SingleStatement(
+                                    .ActionStatement(.Forward)
+                                )
+                            )
+                        ),
+                        Program.SingleStatement(
+                            Statement.ActionStatement(Action.RotateRight)
+                        )
+                    )
+                )
+            ),
+            Program.SingleStatement(
+                Statement.ActionStatement(Action.Forward)
+            )
+        )
+        
+        let interpreter = Interpreter(program: program)
+        let map1 = Map(numberOfRows: 2, numberOfColumns: 2)
+        let map2 = Map(numberOfRows: 2, numberOfColumns: 2)
+        map2.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
+        let map3 = Map(numberOfRows: 2, numberOfColumns: 2)
+        map3.setMapUnitAt(MapUnit.Goal, row: 1, column: 0)
+        let agent = DummyAgent()
+        var outputActions = [Action]()
+        for _ in 0..<4 {
+            outputActions.append(interpreter.nextAction(map1, agent: agent)!)
+        }
+        
+        for _ in 0..<2 {
+            outputActions.append(interpreter.nextAction(map2, agent: agent)!)
+        }
+        
+        outputActions.append(interpreter.nextAction(map3, agent: agent)!)
+        
+        XCTAssertEqual(outputActions, [Action.Forward, Action.Forward, Action.Forward, Action.Forward, Action.RotateRight, Action.RotateRight, Action.Forward], "Interpreted actions are not equal!")
+    }
+    
     class DummyAgent: AgentProtocol {
-        var x = 0
-        var y = 0
-        var direction = Direction.Down
+        var xPosition = 0
+        var yPosition = 0
+        var direction = Direction.Up
     }
 }

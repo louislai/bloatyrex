@@ -128,5 +128,24 @@
             </objects>
             <point key="canvasLocation" x="-336" y="-1189"/>
         </scene>
+        <!--Code Blocks View Controller-->
+        <scene sceneID="LZ7-kb-J9p">
+            <objects>
+                <viewController id="DoE-e0-Afa" customClass="CodeBlocksViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bPq-Go-zmj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jpg-mR-fnA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8pg-Ex-xAT" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDp-BH-rfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="145" y="1360"/>
+        </scene>
     </scenes>
 </document>
