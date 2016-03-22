@@ -19,7 +19,7 @@ class BlockButton: SKNode {
     let block: SKSpriteNode
     let blockType: BlockType
     var selected = false
-    
+
     init(imageNamed: String, blockType: BlockType) {
         button = SKSpriteNode(imageNamed: imageNamed)
         block = SKSpriteNode(imageNamed: imageNamed)
@@ -29,17 +29,17 @@ class BlockButton: SKNode {
         self.addChild(button)
         self.addChild(block)
     }
-    
+
     func pickBlock(selected: Bool) {
         self.selected = selected
         if selected {
             block.hidden = false
         } else {
             block.hidden = true
-            block.position = CGPointMake(0, 0)
+            block.position = CGPoint(x: 0, y: 0)
         }
     }
-    
+
     func moveBlock(displacement: CGPoint) {
         block.position.x += displacement.x
         block.position.y += displacement.y
