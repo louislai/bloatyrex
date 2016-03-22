@@ -18,6 +18,9 @@
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
 		3DF230B71C8F0617003420C0 /* FinalProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */; };
 		3DF230C21C8F0617003420C0 /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */; };
+		B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */; };
+		B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */; };
+		B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
 		BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */; };
@@ -74,6 +77,9 @@
 		3DF230BD1C8F0617003420C0 /* FinalProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; };
+		B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningViewController.swift; sourceTree = "<group>"; };
+		B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesArchive.swift; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnit.swift; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				B01BF8D01CA12D7D00D02FCA /* LevelDesignerScene */,
 				BF8E12AA1C99ADD800B210C3 /* PlayingScene */,
 				BF8E12A71C99AA8400B210C3 /* TitleScene */,
 				BF4C52F71C913E8500C56DD2 /* GameEngine */,
@@ -187,9 +194,19 @@
 			path = FinalProjectUITests;
 			sourceTree = "<group>";
 		};
+		B01BF8D01CA12D7D00D02FCA /* LevelDesignerScene */ = {
+			isa = PBXGroup;
+			children = (
+				B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */,
+				B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */,
+			);
+			name = LevelDesignerScene;
+			sourceTree = "<group>";
+		};
 		BF4C52F01C910CB500C56DD2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */,
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
 				BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
@@ -393,15 +410,18 @@
 				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
+				B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */,
 				BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */,
 				BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */,
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
+				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
 				BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */,
+				B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
 				BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */,
