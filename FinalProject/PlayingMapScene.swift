@@ -19,6 +19,11 @@ struct PlayingMapSceneConstants {
         static let pause = "Pause"
         static let reset = "Reset"
     }
+    struct ButtonSpriteName {
+        static let play = "play"
+        static let pause = "pause"
+        static let reset = "stop"
+    }
 }
 
 class PlayingMapScene: PannableScene {
@@ -121,8 +126,7 @@ class PlayingMapScene: PannableScene {
 
     func setupHud() {
         // 1
-        let movesLeftLabel = SKLabelNode(fontNamed: "Courier")
-        movesLeftLabel.fontSize = 65
+        let movesLeftLabel = SKLabelNode(text: "Moves Left: ")
         movesLeftLabel.name = PlayingMapSceneConstants.NodeNames.movesLeftLabel
 
         let layerPosition = CGPoint(
@@ -142,23 +146,19 @@ class PlayingMapScene: PannableScene {
 
     func setupButtons() {
         // Setup Play button
-        let playLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.play)
-        playLabel.fontSize = 65
-        playLabel.fontColor = SKColor.greenColor()
-        playLabel.fontName = "Courier"
+        let playLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.play)
+        playLabel.size = blockSize
         let playButton = SKButton(defaultButton: playLabel)
-        playButton.addTarget(self, selector: Selector("run:"))
+        playButton.addTarget(self, selector: Selector("run"))
         playButton.position = CGPoint(
-            x: -300.0,
+            x: -80.0,
             y: -300.0
         )
         addNodeToOverlay(playButton)
 
         // Setup Pause button
-        let pauseLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.pause)
-        pauseLabel.fontSize = 65
-        pauseLabel.fontColor = SKColor.greenColor()
-        pauseLabel.fontName = "Courier"
+        let pauseLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.pause)
+        pauseLabel.size = blockSize
         let pauseButton = SKButton(defaultButton: pauseLabel)
         pauseButton.addTarget(self, selector: Selector("pause"))
         pauseButton.position = CGPoint(
@@ -168,14 +168,12 @@ class PlayingMapScene: PannableScene {
         addNodeToOverlay(pauseButton)
 
         // Setup Reset button
-        let resetLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.reset)
-        resetLabel.fontSize = 65
-        resetLabel.fontColor = SKColor.greenColor()
-        resetLabel.fontName = "Courier"
+        let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)
+        resetLabel.size = blockSize
         let resetButton = SKButton(defaultButton: resetLabel)
         resetButton.addTarget(self, selector: Selector("reset"))
         resetButton.position = CGPoint(
-            x: 300.0,
+            x: 80.0,
             y: -300.0
         )
         addNodeToOverlay(resetButton)
