@@ -545,5 +545,6 @@ extension LevelDesigningMapScene {
         setLayerPositions()
         setGrid()
         addBlocks()
+        updateArrows()
     }
 }
