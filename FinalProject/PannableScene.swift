@@ -30,6 +30,7 @@ class PannableScene: SKScene {
         self.addChild(viewpoint)
         self.camera = viewpoint
         viewpoint.addChild(overlay)
+        print("initial viewpoint position: \(viewpoint.position)")
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -42,8 +43,32 @@ class PannableScene: SKScene {
             // calculate the distance panned
             let newPoint = touch.locationInNode(self)
             let previousPoint = touch.previousLocationInNode(self)
-            moveViewPointBy(previousPoint.x - newPoint.x,
-                verticalDisplacement: previousPoint.y - newPoint.y)
+            var horizontalDisplacement = newPoint.x - previousPoint.x
+            var verticalDisplacement = newPoint.y - previousPoint.y
+
+            // bound the area within which the viewpoint can pan
+            if horizontalDisplacement > 0 {
+                let distanceToLeftBoundary = self.size.width / 2 + viewpoint.position.x
+                print("distance to left boundary: \(distanceToLeftBoundary)")
+                horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
+
+            } else if horizontalDisplacement < 0 {
+                let distanceToRightBoundary = self.size.width / 2 - viewpoint.position.x
+                print("distance to right boundary: \(distanceToRightBoundary)")
+                horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
+            }
+            if verticalDisplacement > 0 {
+                let distanceToBottomBoundary = self.size.height - viewpoint.position.y
+                verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
+            } else if verticalDisplacement < 0 {
+                let distanceToTopBoundary = viewpoint.position.y - 0
+                verticalDisplacement = max(distanceToTopBoundary, verticalDisplacement)
+            }
+
+            // viewpoint moves in opposite direction from pan to simulate movement
+            moveViewPointBy(-horizontalDisplacement, verticalDisplacement: -verticalDisplacement)
+            print("scene size: \(self.size)")
+            print("viewpoint position: \(viewpoint.position)")
         }
     }
 
