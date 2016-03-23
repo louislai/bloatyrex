@@ -11,8 +11,8 @@ import SpriteKit
 
 class CodeBlocksViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
         let scene = CodeBlocksScene(size: view.bounds.size)
         let skView = view as! SKView
         skView.showsFPS = true

@@ -20,6 +20,7 @@ class PlayingMapViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
+        scene.scaleMode = .ResizeFill
 
         // Present the scene.
         skView.presentScene(newScene())
