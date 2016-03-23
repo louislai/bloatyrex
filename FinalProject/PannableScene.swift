@@ -58,11 +58,11 @@ class PannableScene: SKScene {
                 horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
             }
             if verticalDisplacement > 0 {
-                let distanceToBottomBoundary = self.size.height - viewpoint.position.y
+                let distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
                 verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
             } else if verticalDisplacement < 0 {
-                let distanceToTopBoundary = viewpoint.position.y - 0
-                verticalDisplacement = max(distanceToTopBoundary, verticalDisplacement)
+                let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
+                verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
             }
 
             // viewpoint moves in opposite direction from pan to simulate movement
