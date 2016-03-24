@@ -14,17 +14,15 @@ class PannableScene: SKScene {
     private var overlay = SKNode()
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
-    private var maximumScale: CGFloat
     private var minimumScale: CGFloat
 
     /// Initialise the scene with a given size, and optional scale and overlay z position.
     /// zoomLevel is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
     /// zoomRangeFactor denotes how much the zoom level can be adjusted. The default value of 2.0
-    /// allows the zoom to be a max/min of 2.0 times larger/smaller than the original zoom level.
+    /// allows the zoom to be a max 2.0 times larger than the original zoom level.
     init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
         zoomRangeFactor: CGFloat = 2.0) {
             initialScale = 1.0 / zoomLevel
-            maximumScale = initialScale * zoomRangeFactor
             minimumScale = initialScale / zoomRangeFactor
             super.init(size: size)
             viewpoint.setScale(initialScale)
@@ -92,8 +90,8 @@ class PannableScene: SKScene {
                 var newScale = viewpoint.xScale * (1.0 / sender.scale)
                 if newScale < minimumScale {
                     newScale = minimumScale
-                } else if newScale > maximumScale {
-                    newScale = maximumScale
+                } else if newScale > initialScale {
+                    newScale = initialScale
                 }
                 viewpoint.setScale(newScale)
                 sender.scale = 1.0
