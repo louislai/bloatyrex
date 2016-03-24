@@ -18,14 +18,17 @@ class PannableScene: SKScene {
     private var minimumScale: CGFloat
 
     /// Initialise the scene with a given size, and optional scale and overlay z position.
-    /// Zoom level is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
-    init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10) {
-        initialScale = 1.0 / zoomLevel
-        maximumScale = initialScale * 2
-        minimumScale = initialScale / 2
-        super.init(size: size)
-        viewpoint.setScale(initialScale)
-        overlay.zPosition = overlayZPosition
+    /// zoomLevel is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
+    /// zoomRangeFactor denotes how much the zoom level can be adjusted. The default value of 2.0
+    /// allows the zoom to be a max/min of 2.0 times larger/smaller than the original zoom level.
+    init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
+        zoomRangeFactor: CGFloat = 2.0) {
+            initialScale = 1.0 / zoomLevel
+            maximumScale = initialScale * zoomRangeFactor
+            minimumScale = initialScale / zoomRangeFactor
+            super.init(size: size)
+            viewpoint.setScale(initialScale)
+            overlay.zPosition = overlayZPosition
     }
 
     override func didMoveToView(view: SKView) {
