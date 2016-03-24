@@ -13,13 +13,18 @@ class PannableScene: SKScene {
     private var content = SKNode()
     private var overlay = SKNode()
     private var viewpoint: SKCameraNode = SKCameraNode()
+    private var initialScale: CGFloat
+    private var maximumScale: CGFloat
+    private var minimumScale: CGFloat
 
     /// Initialise the scene with a given size, and optional scale and overlay z position.
     /// Zoom level is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
     init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10) {
+        initialScale = 1.0 / zoomLevel
+        maximumScale = initialScale * 2
+        minimumScale = initialScale / 2
         super.init(size: size)
-        viewpoint.xScale = 1.0 / zoomLevel
-        viewpoint.yScale = 1.0 / zoomLevel
+        viewpoint.setScale(initialScale)
         overlay.zPosition = overlayZPosition
     }
 
@@ -73,9 +78,19 @@ class PannableScene: SKScene {
 
     func handlePinch(sender: UIPinchGestureRecognizer) {
         if sender.numberOfTouches() == 2 {
-
+            let locationInView = sender.locationInView(sender.view)
+            let zoomLocation = self.convertPointFromView(locationInView)
             if sender.state == .Changed {
-
+                // The scale applied to the contents is the inverse of the camera node’s scale
+                var newScale = viewpoint.xScale * (1.0 / sender.scale)
+                if newScale < minimumScale {
+                    newScale = minimumScale
+                } else if newScale > maximumScale {
+                    newScale = maximumScale
+                }
+                viewpoint.setScale(newScale)
+                let locationAfterScale = zoomLocation
+                sender.scale = 1.0
             }
         }
     }
