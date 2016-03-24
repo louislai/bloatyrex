@@ -103,7 +103,21 @@ class PannableScene: SKScene {
         // zoom in on tapped location
         let tapLocation = sender.locationInView(sender.view)
         let zoomLocation = self.convertPointFromView(tapLocation)
-        viewpoint.position = zoomLocation
+        var horizontalZoomLocation = zoomLocation.x
+        var verticalZoomLocation = zoomLocation.y
+        // restrict the tap location to within the scene
+        if horizontalZoomLocation < 0 {
+            horizontalZoomLocation = max(horizontalZoomLocation, -self.size.width / 2)
+        } else {
+            horizontalZoomLocation = min(horizontalZoomLocation, self.size.width / 2)
+        }
+        if verticalZoomLocation < 0 {
+            verticalZoomLocation = max(verticalZoomLocation, -self.size.height / 2)
+        } else {
+            verticalZoomLocation = min(verticalZoomLocation, self.size.height / 2)
+        }
+        let boundedZoomLocation = CGPoint(x: horizontalZoomLocation, y: verticalZoomLocation)
+        viewpoint.position = boundedZoomLocation
         var newScale = viewpoint.xScale * 0.5
 
         // restrict the maximum zoom
