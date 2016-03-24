@@ -38,9 +38,15 @@ class PannableScene: SKScene {
         self.addChild(viewpoint)
         self.camera = viewpoint
         viewpoint.addChild(overlay)
+
+        // set up gestures
         let pinchRecognizer = UIPinchGestureRecognizer(target: self,
             action: Selector("handlePinch:"))
         self.view!.addGestureRecognizer(pinchRecognizer)
+        let doubleTapRecognizer = UITapGestureRecognizer(target: self,
+            action: Selector("handleDoubleTap:"))
+        doubleTapRecognizer.numberOfTapsRequired = 2
+        self.view!.addGestureRecognizer(doubleTapRecognizer)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -81,8 +87,6 @@ class PannableScene: SKScene {
 
     func handlePinch(sender: UIPinchGestureRecognizer) {
         if sender.numberOfTouches() == 2 {
-            let locationInView = sender.locationInView(sender.view)
-            let zoomLocation = self.convertPointFromView(locationInView)
             if sender.state == .Changed {
                 // The scale applied to the contents is the inverse of the camera node’s scale
                 var newScale = viewpoint.xScale * (1.0 / sender.scale)
@@ -92,10 +96,16 @@ class PannableScene: SKScene {
                     newScale = maximumScale
                 }
                 viewpoint.setScale(newScale)
-                let locationAfterScale = zoomLocation
                 sender.scale = 1.0
             }
         }
+    }
+
+    func handleDoubleTap(sender: UITapGestureRecognizer) {
+        // zoom in on tapped location
+        let tapLocation = sender.locationInView(sender.view)
+        let zoomLocation = self.convertPointFromView(tapLocation)
+        viewpoint.position = zoomLocation
     }
 
     /// Adds a node to be part of the content that is pannable.
