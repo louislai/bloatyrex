@@ -49,16 +49,15 @@ class PannableScene: SKScene {
             // bound the area within which the viewpoint can pan
             if horizontalDisplacement > 0 {
                 let distanceToLeftBoundary = self.size.width / 2 + viewpoint.position.x
-                print("distance to left boundary: \(distanceToLeftBoundary)")
                 horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
 
             } else if horizontalDisplacement < 0 {
                 let distanceToRightBoundary = self.size.width / 2 - viewpoint.position.x
-                print("distance to right boundary: \(distanceToRightBoundary)")
                 horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
             }
             if verticalDisplacement > 0 {
-                let distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
+                var distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
+                distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
                 verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
             } else if verticalDisplacement < 0 {
                 let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
@@ -67,8 +66,6 @@ class PannableScene: SKScene {
 
             // viewpoint moves in opposite direction from pan to simulate movement
             moveViewPointBy(-horizontalDisplacement, verticalDisplacement: -verticalDisplacement)
-            print("scene size: \(self.size)")
-            print("viewpoint position: \(viewpoint.position)")
         }
     }
 
@@ -84,7 +81,7 @@ class PannableScene: SKScene {
 
     /// Moves the viewpoint by a given X and Y value.
     private func moveViewPointBy(horizontalDisplacement: CGFloat, verticalDisplacement: CGFloat) {
-        self.viewpoint.runAction(SKAction.moveByX(horizontalDisplacement,
-            y: verticalDisplacement, duration: 0.1))
+        self.viewpoint.position = CGPoint(x: self.viewpoint.position.x + horizontalDisplacement,
+            y: self.viewpoint.position.y + verticalDisplacement)
     }
 }
