@@ -106,6 +106,11 @@ class PannableScene: SKScene {
         let tapLocation = sender.locationInView(sender.view)
         let zoomLocation = self.convertPointFromView(tapLocation)
         viewpoint.position = zoomLocation
+        var newScale = viewpoint.xScale * 0.5
+
+        // restrict the maximum zoom
+        newScale = max(newScale, minimumScale)
+        viewpoint.setScale(newScale)
     }
 
     /// Adds a node to be part of the content that is pannable.
