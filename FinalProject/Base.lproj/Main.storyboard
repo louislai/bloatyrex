@@ -24,6 +24,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
+        <!--Level Selector Page View Controller-->
+        <scene sceneID="rSA-Fq-nEy">
+            <objects>
+                <viewController id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ekL-E4-vG9"/>
+                        <viewControllerLayoutGuide type="bottom" id="3h9-r7-dLW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IpK-SR-KoK">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CCG-de-GbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2754" y="1654"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="cdl-ir-dbv">
+            <objects>
+                <pageViewController storyboardIdentifier="LevelSelectorPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="IXo-bX-TRX" sceneMemberID="viewController">
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6da-S5-kex" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3850" y="1654"/>
+        </scene>
+        <!--Level Selector View Controller-->
+        <scene sceneID="z1t-zm-ueA">
+            <objects>
+                <viewController storyboardIdentifier="LevelSelectorViewController" id="684-If-7hZ" customClass="LevelSelectorViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hWk-Jh-vJW"/>
+                        <viewControllerLayoutGuide type="bottom" id="HyE-ZU-Rax"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LOq-tD-zT9">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8GD-O0-MZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4936" y="1654"/>
+        </scene>
         <!--Title View Controller-->
         <scene sceneID="uQN-19-PCy">
             <objects>
@@ -78,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rm1-3G-58z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="835" y="2212"/>
+            <point key="canvasLocation" x="1575" y="1654"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QMP-Cc-dYg">
