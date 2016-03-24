@@ -12,7 +12,7 @@ import SpriteKit
 class PannableScene: SKScene {
     private var content = SKNode()
     private var overlay = SKNode()
-    var viewpoint: SKCameraNode = SKCameraNode()
+    private var viewpoint: SKCameraNode = SKCameraNode()
 
     /// Initialise the scene with a given size, and optional scale and overlay z position.
     /// Zoom level is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
@@ -30,7 +30,9 @@ class PannableScene: SKScene {
         self.addChild(viewpoint)
         self.camera = viewpoint
         viewpoint.addChild(overlay)
-        print("initial viewpoint position: \(viewpoint.position)")
+        let pinchRecognizer = UIPinchGestureRecognizer(target: self,
+            action: Selector("handlePinch:"))
+        self.view!.addGestureRecognizer(pinchRecognizer)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -66,6 +68,15 @@ class PannableScene: SKScene {
 
             // viewpoint moves in opposite direction from pan to simulate movement
             moveViewPointBy(-horizontalDisplacement, verticalDisplacement: -verticalDisplacement)
+        }
+    }
+
+    func handlePinch(sender: UIPinchGestureRecognizer) {
+        if sender.numberOfTouches() == 2 {
+
+            if sender.state == .Changed {
+
+            }
         }
     }
 
