@@ -82,6 +82,7 @@ class LevelCell: UICollectionViewCell {
     private var filesArchive = FilesArchive()
     private var levelSelectorViewController: LevelSelectorViewController!
     private var levelSelectorPageViewController: LevelSelectorPageViewController!
+    private var currentNavigationBar: UINavigationBar? = nil
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -109,17 +110,92 @@ class LevelCell: UICollectionViewCell {
         let tappedContentView = sender.view as UIView!
         let label = tappedContentView.subviews.first! as! UILabel
         let fileName = label.text!
-        deleteFile(fileName)
+        let navigationBar = makeNavigationBar(fileName)
+        currentNavigationBar = navigationBar
+        levelSelectorViewController.view.addSubview(navigationBar)
     }
     
     /// Delete a file from FilesArchive given its fileName.
-    func deleteFile(fileName: String) {
+    func deleteFile() {
+        let navigationItem = currentNavigationBar!.items!.first!
+        let fileName = navigationItem.title!
         let deleteAlert = UIAlertController(title: "Delete", message: "'\(fileName)' will be deleted. This action cannot be undone.", preferredStyle: UIAlertControllerStyle.Alert)
         deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
             self.filesArchive.removePropertyList(fileName)
+            let successAlert = UIAlertController(title: "Deleted!", message: "You have successfully deleted \(fileName)!",
+                preferredStyle: UIAlertControllerStyle.Alert)
+            successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+                self.resetNavigationBar()
+                self.levelSelectorPageViewController.viewDidLoad()
+            }))
+            self.levelSelectorPageViewController.presentViewController(successAlert, animated: true, completion: nil)
+        }))
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            self.resetNavigationBar()
             self.levelSelectorPageViewController.viewDidLoad()
         }))
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         levelSelectorViewController.presentViewController(deleteAlert, animated: true, completion: nil)
+    }
+    
+    func renameFile() {
+        let navigationItem = currentNavigationBar!.items!.first!
+        let originalFileName = navigationItem.title!
+        var newName: UITextField?
+        var renamedSuccessfully = false
+        let renameAlert = UIAlertController(title: "Rename", message: "Rename '\(originalFileName)' as?",
+            preferredStyle: UIAlertControllerStyle.Alert)
+        renameAlert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            newName = textField
+            newName?.placeholder = "Enter new name here"
+        }
+        renameAlert.addAction(UIAlertAction(title: "Confirm", style: .Default, handler: { (action: UIAlertAction!) in
+            if newName!.text!.characters.count <= 30 {
+                renamedSuccessfully = self.filesArchive.renamePropertyList(originalFileName, newFileName: newName!.text!)
+            }
+            if renamedSuccessfully {
+                let successAlert = UIAlertController(title: "Renamed!", message: "You have successfully renamed this level!",
+                    preferredStyle: UIAlertControllerStyle.Alert)
+                successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+                    self.resetNavigationBar()
+                    self.levelSelectorPageViewController.viewDidLoad()
+                }))
+                self.levelSelectorPageViewController.presentViewController(successAlert, animated: true, completion: nil)
+            } else {
+                let failureAlert = UIAlertController(title: "Failed", message: "Failed to save this level.",
+                    preferredStyle: UIAlertControllerStyle.Alert)
+                failureAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+                    self.resetNavigationBar()
+                    self.levelSelectorPageViewController.viewDidLoad()
+                }))
+                self.levelSelectorPageViewController.presentViewController(failureAlert, animated: true, completion: nil)
+            }
+        }))
+        renameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+            self.resetNavigationBar()
+            self.levelSelectorPageViewController.viewDidLoad()
+        }))
+        levelSelectorPageViewController.presentViewController(renameAlert, animated: true, completion: nil)
+    }
+    
+    func makeNavigationBar(fileName: String) -> UINavigationBar {
+        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, 1024, 60))
+        navigationBar.backgroundColor = UIColor.whiteColor()
+        
+        let navigationItem = UINavigationItem()
+        navigationItem.title = fileName
+        
+        let renameButton = UIBarButtonItem(title: "Rename", style: .Plain, target: self, action: "renameFile")
+        let trashBinImage = UIImage(named: "trash")
+        let deleteButton = UIBarButtonItem(image: trashBinImage, style: .Plain, target: self, action: "deleteFile")
+        
+        navigationItem.leftBarButtonItem = renameButton
+        navigationItem.rightBarButtonItem = deleteButton
+        navigationBar.items = [navigationItem]
+        return navigationBar
+    }
+    
+    func resetNavigationBar() {
+        currentNavigationBar?.removeFromSuperview()
+        currentNavigationBar = nil
     }
 }

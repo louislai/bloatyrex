@@ -10,9 +10,7 @@ import SpriteKit
 import Darwin
 
 class LevelDesigningMapScene: SKScene {
-    var levelDesigningViewController: LevelDesigningViewController {
-        return view?.window?.rootViewController as! LevelDesigningViewController
-    }
+    var levelDesigningViewController: LevelDesigningViewController?
     var map: Map!
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
@@ -496,7 +494,7 @@ extension LevelDesigningMapScene {
                         title: "OK",
                         style: .Default,
                         handler: nil))
-                    self.levelDesigningViewController.presentViewController(successAlert,
+                    self.levelDesigningViewController!.presentViewController(successAlert,
                         animated: true,
                         completion: nil)
                 } else {
@@ -508,7 +506,7 @@ extension LevelDesigningMapScene {
                         title: "OK",
                         style: .Default,
                         handler: nil))
-                    self.levelDesigningViewController.presentViewController(failureAlert,
+                    self.levelDesigningViewController!.presentViewController(failureAlert,
                         animated: true,
                         completion: nil)
                 }
@@ -517,7 +515,7 @@ extension LevelDesigningMapScene {
             title: "Cancel",
             style: .Cancel,
             handler: nil))
-        levelDesigningViewController.presentViewController(
+        levelDesigningViewController!.presentViewController(
             saveAlert,
             animated: true,
             completion: nil)
@@ -525,9 +523,13 @@ extension LevelDesigningMapScene {
     
     func loadAction() {
         let levelSelectorPageViewController = LevelSelectorPageViewController()
-        levelSelectorPageViewController.currentStoryboard = levelDesigningViewController.storyboard
+        levelSelectorPageViewController.currentStoryboard = levelDesigningViewController!.storyboard
         levelSelectorPageViewController.previousViewController = levelDesigningViewController
-        levelDesigningViewController.presentViewController(
+        levelSelectorPageViewController.numberOfItemsPerPage = 15
+        levelSelectorPageViewController.totalNumberOfPages = Int(ceil(Double(
+            levelSelectorPageViewController.totalNumberOfItems) /
+            Double(levelSelectorPageViewController.numberOfItemsPerPage!)))
+        levelDesigningViewController!.presentViewController(
             levelSelectorPageViewController,
             animated: true,
             completion: nil)
@@ -549,7 +551,7 @@ extension LevelDesigningMapScene {
             title: "Cancel",
             style: .Cancel,
             handler: nil))
-        levelDesigningViewController.presentViewController(
+        levelDesigningViewController!.presentViewController(
             resetAlert,
             animated: true,
             completion: nil)

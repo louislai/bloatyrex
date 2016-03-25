@@ -13,13 +13,11 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     UIPageViewControllerDelegate {
     
     private let filesArchive = FilesArchive()
-    let numberOfItemsPerPage = 15
+    var numberOfItemsPerPage: Int?
     var totalNumberOfItems: Int {
         return filesArchive.getFileNames().count
     }
-    var totalNumberOfPages: Int {
-        return Int(ceil(Double(totalNumberOfItems) / Double(numberOfItemsPerPage)))
-    }
+    var totalNumberOfPages: Int?
     private var pageViewController: UIPageViewController?
     var currentStoryboard: UIStoryboard?
     var previousViewController: UIViewController?
@@ -92,17 +90,17 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
             let pageItemController = self.currentStoryboard!.instantiateViewControllerWithIdentifier(
                 "LevelSelectorViewController") as! LevelSelectorViewController
             pageItemController.pageIndex = itemIndex
-            let remainder = totalNumberOfItems % numberOfItemsPerPage
+            let remainder = totalNumberOfItems % numberOfItemsPerPage!
             var numberOfFileNamesInPage: Int {
-                if itemIndex == totalNumberOfPages - 1 && remainder != 0 {
+                if itemIndex == totalNumberOfPages! - 1 && remainder != 0 {
                     return remainder
                 } else {
-                    return numberOfItemsPerPage
+                    return numberOfItemsPerPage!
                 }
             }
             var fileNames: [String] = []
             for fileNumberInPage in 0..<numberOfFileNamesInPage {
-                let index = itemIndex * numberOfItemsPerPage + fileNumberInPage
+                let index = itemIndex * numberOfItemsPerPage! + fileNumberInPage
                 if index < totalNumberOfItems {
                     fileNames.append(filesArchive.getFileNames()[index])
                 }
@@ -119,7 +117,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     // MARK: - Page Indicator
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return totalNumberOfPages
+        return totalNumberOfPages!
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {

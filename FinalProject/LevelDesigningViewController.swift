@@ -29,6 +29,7 @@ class LevelDesigningViewController: UIViewController {
         
         // Load the map
         scene.map = map
+        scene.levelDesigningViewController = self
         scene.setup()
         
         // Present the scene.
