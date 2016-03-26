@@ -13,7 +13,7 @@ class TrashZone: DropZone {
     var dropZoneCenter: CGPoint {
         get {
             let frame = self.calculateAccumulatedFrame()
-            return CGPointMake(frame.midX, frame.midY)
+            return CGPoint(x: frame.midX, y: frame.midY)
         }
     }
 

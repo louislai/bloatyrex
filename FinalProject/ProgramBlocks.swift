@@ -23,7 +23,7 @@ class ProgramBlocks: SKNode {
     func hover(location: CGPoint, insertionHandler: InsertionPosition) {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
-        let point = CGPointMake(x, y)
+        let point = CGPoint(x: x, y: y)
 
         insertionHandler.position = nil
 
@@ -49,7 +49,7 @@ class ProgramBlocks: SKNode {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
         for block in blocks {
-            if block.containsPoint(CGPointMake(x, y)) {
+            if block.containsPoint(CGPoint(x: x, y: y)) {
                 return block
             }
         }

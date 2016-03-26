@@ -27,9 +27,9 @@ class CodeBlocksScene: SKScene {
 
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
-        blockButton.position = CGPointMake(size.width * 0.1, size.height * 0.5)
-        wallButton.position = CGPointMake(size.width * 0.1, size.height * 0.3)
-        programBlocks.position = CGPointMake(size.width * 0.4, size.height * 0.9)
+        blockButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
+        wallButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.3)
+        programBlocks.position = CGPoint(x: size.width * 0.4, y: size.height * 0.9)
         wallButton.zPosition = 10
         blockButton.zPosition = 10
         addChild(wallButton)
@@ -70,7 +70,7 @@ class CodeBlocksScene: SKScene {
         switch pressState {
         case .AddingBlock:
             if let block = heldBlock {
-                block.moveBlock(CGPointMake(xMovement, yMovement))
+                block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
                     programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
                 } else {
@@ -80,7 +80,7 @@ class CodeBlocksScene: SKScene {
         case .MovingBlock:
             if let block = movedBlock {
                 if let _ = block as? MainBlock {
-                    programBlocks.shift(CGPointMake(xMovement, yMovement))
+                    programBlocks.shift(CGPoint(x: xMovement, y: yMovement))
                 } else {
                     block.position.x += xMovement
                     block.position.y += yMovement
