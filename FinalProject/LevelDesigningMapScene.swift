@@ -224,7 +224,7 @@ extension LevelDesigningMapScene {
             case "Load":
                 loadAction()
             case "Test Level":
-                break
+                testLevel()
             case "Reset":
                 resetAction()
             case "Agent":
@@ -466,6 +466,10 @@ extension LevelDesigningMapScene {
         label.position = position
         label.name = labelName
         return label
+    }
+
+    func testLevel() {
+        levelDesigningViewController?.performSegueWithIdentifier(GlobalConstants.SegueIdentifier.designToPlaying, sender: nil)
     }
 
     func saveAction() {
