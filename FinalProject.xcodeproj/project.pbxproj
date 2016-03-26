@@ -22,6 +22,8 @@
 		B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */; };
 		B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */; };
 		B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */; };
+		B01BF8D41CA1B31100D02FCA /* LevelSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */; };
+		B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
 		BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */; };
@@ -82,6 +84,8 @@
 		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; };
 		B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningViewController.swift; sourceTree = "<group>"; };
 		B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesArchive.swift; sourceTree = "<group>"; };
+		B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewController.swift; sourceTree = "<group>"; };
+		B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorPageViewController.swift; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnit.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				BF8E12A71C99AA8400B210C3 /* TitleScene */,
 				BF4C52F71C913E8500C56DD2 /* GameEngine */,
 				1DB4B07D1C95142C0010F727 /* Language */,
+				B079C5B41CA38C0600F8B891 /* LevelSelector */,
 				BF4C52F01C910CB500C56DD2 /* Models */,
 				3DF230A11C8F0617003420C0 /* AppDelegate.swift */,
 				3DF230A51C8F0617003420C0 /* Main.storyboard */,
@@ -204,6 +209,15 @@
 				B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */,
 			);
 			name = LevelDesignerScene;
+			sourceTree = "<group>";
+		};
+		B079C5B41CA38C0600F8B891 /* LevelSelector */ = {
+			isa = PBXGroup;
+			children = (
+				B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */,
+				B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */,
+			);
+			name = LevelSelector;
 			sourceTree = "<group>";
 		};
 		BF4C52F01C910CB500C56DD2 /* Models */ = {
@@ -410,6 +424,7 @@
 				BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
+				B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */,
 				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
@@ -431,6 +446,7 @@
 				BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */,
 				BFA80FB31C95D10600F1BC15 /* ResetDelegate.swift in Sources */,
 				3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */,
+				B01BF8D41CA1B31100D02FCA /* LevelSelectorViewController.swift in Sources */,
 				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
 			);

@@ -10,6 +10,7 @@ import SpriteKit
 import Darwin
 
 class LevelDesigningMapScene: SKScene {
+    var levelDesigningViewController: LevelDesigningViewController?
     var map: Map!
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
@@ -189,13 +190,16 @@ class LevelDesigningMapScene: SKScene {
 // This portion handles user interaction through gestures.
 extension LevelDesigningMapScene {
     override func didMoveToView(view: SKView) {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self,
+            action: Selector("handleTap:"))
         view.addGestureRecognizer(tapGestureRecognizer)
         
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: Selector("handlePan:"))
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self,
+            action: Selector("handlePan:"))
         view.addGestureRecognizer(panGestureRecognizer)
         
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
+            action: Selector("handleLongPress:"))
         view.addGestureRecognizer(longPressGestureRecognizer)
     }
     
@@ -330,9 +334,11 @@ extension LevelDesigningMapScene {
         
         var rowIterators = Array(0..<rows)
         var columnIterators = Array(0..<columns)
-        if (updateDirection[1] == "Top" || updateDirection[1] == "Bottom") && updateDirection[0] == "Add" {
+        if (updateDirection[1] == "Top" || updateDirection[1] == "Bottom")
+            && updateDirection[0] == "Add" {
             rowIterators.removeLast()
-        } else if (updateDirection[1] == "Left" || updateDirection[1] == "Right") && updateDirection[0] == "Add" {
+        } else if (updateDirection[1] == "Left" || updateDirection[1] == "Right")
+            && updateDirection[0] == "Add" {
             columnIterators.removeLast()
         }
         
@@ -356,8 +362,10 @@ extension LevelDesigningMapScene {
         
         for row in rowIterators {
             for column in columnIterators {
-                let mapUnit = mapCopy.retrieveMapUnitAt(row + retrieveRowShift, column: column + retrieveColumnShift)!
-                map.setMapUnitAt(mapUnit, row: row + setRowShift, column: column + setColumnShift)
+                let mapUnit = mapCopy.retrieveMapUnitAt(row + retrieveRowShift,
+                    column: column + retrieveColumnShift)!
+                map.setMapUnitAt(mapUnit, row: row + setRowShift,
+                    column: column + setColumnShift)
             }
         }
         addBlocks()
@@ -474,7 +482,9 @@ extension LevelDesigningMapScene {
             title: "OK",
             style: .Default,
             handler: { (action: UIAlertAction!) in
-                savedSuccessfully = self.filesArchive.saveToPropertyList(self.map, name: name!.text!)
+                if name!.text!.characters.count <= 30 {
+                    savedSuccessfully = self.filesArchive.saveToPropertyList(self.map, name: name!.text!)
+                }
                 if savedSuccessfully {
                     let successAlert = UIAlertController(
                         title: "Saved!",
@@ -484,7 +494,7 @@ extension LevelDesigningMapScene {
                         title: "OK",
                         style: .Default,
                         handler: nil))
-                    self.view?.window?.rootViewController?.presentViewController(successAlert,
+                    self.levelDesigningViewController!.presentViewController(successAlert,
                         animated: true,
                         completion: nil)
                 } else {
@@ -496,7 +506,7 @@ extension LevelDesigningMapScene {
                         title: "OK",
                         style: .Default,
                         handler: nil))
-                    self.view?.window?.rootViewController?.presentViewController(failureAlert,
+                    self.levelDesigningViewController!.presentViewController(failureAlert,
                         animated: true,
                         completion: nil)
                 }
@@ -505,16 +515,24 @@ extension LevelDesigningMapScene {
             title: "Cancel",
             style: .Cancel,
             handler: nil))
-        view?.window?.rootViewController?.presentViewController(
+        levelDesigningViewController!.presentViewController(
             saveAlert,
             animated: true,
             completion: nil)
     }
     
     func loadAction() {
-        if let tryMap = filesArchive.loadFromPropertyList("Users/melvin/Desktop/lol.plist") {
-            resetMap(tryMap)
-        }
+        let levelSelectorPageViewController = LevelSelectorPageViewController()
+        levelSelectorPageViewController.currentStoryboard = levelDesigningViewController!.storyboard
+        levelSelectorPageViewController.previousViewController = levelDesigningViewController
+        levelSelectorPageViewController.numberOfItemsPerPage = 15
+        levelSelectorPageViewController.totalNumberOfPages = Int(ceil(Double(
+            levelSelectorPageViewController.totalNumberOfItems) /
+            Double(levelSelectorPageViewController.numberOfItemsPerPage!)))
+        levelDesigningViewController!.presentViewController(
+            levelSelectorPageViewController,
+            animated: true,
+            completion: nil)
     }
     
     func resetAction() {
@@ -533,7 +551,7 @@ extension LevelDesigningMapScene {
             title: "Cancel",
             style: .Cancel,
             handler: nil))
-        view?.window?.rootViewController?.presentViewController(
+        levelDesigningViewController!.presentViewController(
             resetAlert,
             animated: true,
             completion: nil)
@@ -545,5 +563,6 @@ extension LevelDesigningMapScene {
         setLayerPositions()
         setGrid()
         addBlocks()
+        updateArrows()
     }
 }
