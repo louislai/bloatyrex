@@ -9,5 +9,11 @@
 import UIKit
 
 class PlayingViewController: UIViewController {
+    var map: Map!
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? PlayingMapViewController {
+            destination.map = map
+        }
+    }
 }

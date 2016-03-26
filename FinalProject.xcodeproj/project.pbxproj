@@ -36,6 +36,7 @@
 		B01BF8D41CA1B31100D02FCA /* LevelSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */; };
 		B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
+		BF49FA511CA61ACF00546F43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* Constants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
 		BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */; };
 		BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F51C9110A000C56DD2 /* Action.swift */; };
@@ -110,6 +111,7 @@
 		B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewController.swift; sourceTree = "<group>"; };
 		B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorPageViewController.swift; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
+		BF49FA501CA61ACF00546F43 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnit.swift; sourceTree = "<group>"; };
 		BF4C52F51C9110A000C56DD2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
+				BF49FA501CA61ACF00546F43 /* Constants.swift */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,
 				BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */,
 				BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */,
@@ -474,6 +477,7 @@
 				1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */,
 				1DB4B0931C991FC30010F727 /* CodeBlock.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
+				BF49FA511CA61ACF00546F43 /* Constants.swift in Sources */,
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
 				BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */,
 				B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */,

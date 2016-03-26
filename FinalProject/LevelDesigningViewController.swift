@@ -35,4 +35,10 @@ class LevelDesigningViewController: UIViewController {
         // Present the scene.
         skView.presentScene(scene)
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? PlayingViewController {
+            destination.map = scene.map
+        }
+    }
 }

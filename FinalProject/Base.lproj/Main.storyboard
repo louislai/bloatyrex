@@ -128,6 +128,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <segue destination="Wpj-nb-g8C" kind="show" identifier="DesignToPlayingSegue" id="JCV-Rq-O91"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rm1-3G-58z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -204,7 +207,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDp-BH-rfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145" y="1360"/>
+            <point key="canvasLocation" x="-822" y="1194"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="JCV-Rq-O91"/>
+    </inferredMetricsTieBreakers>
 </document>
