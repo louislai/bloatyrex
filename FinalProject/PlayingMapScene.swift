@@ -26,7 +26,7 @@ struct PlayingMapSceneConstants {
     }
 }
 
-class PlayingMapScene: SKScene {
+class PlayingMapScene: PannableScene {
     var map: Map!
     var running = false
     let blocksLayer = SKNode()
@@ -53,8 +53,8 @@ class PlayingMapScene: SKScene {
     var timeOfLastMove: CFTimeInterval = 0.0
     let timePerMove: CFTimeInterval = 1.0
 
-    override init(size: CGSize) {
-        super.init(size: size)
+    init(size: CGSize, zoomLevel: CGFloat) {
+        super.init(size: size, zoomLevel: zoomLevel)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         backgroundColor = UIColor.whiteColor()
     }
@@ -89,12 +89,12 @@ class PlayingMapScene: SKScene {
         // The blocksLayer represent the shape of the map.
         // Each block is a square
         blocksLayer.position = layerPosition
-        addChild(blocksLayer)
+        addNodeToContent(blocksLayer)
 
         // This layer holds the MapUnit sprites. The positions of these sprites
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
-        addChild(unitsLayer)
+        addNodeToContent(unitsLayer)
         addBlocks()
         setupMapUnits()
         setupHud()
@@ -139,7 +139,7 @@ class PlayingMapScene: SKScene {
 
         // 3
         movesLeftLabel.position = layerPosition
-        addChild(movesLeftLabel)
+        addNodeToOverlay(movesLeftLabel)
 
         movesLeft = originalMovesLeft
     }
@@ -154,7 +154,7 @@ class PlayingMapScene: SKScene {
             x: -80.0,
             y: -300.0
         )
-        addChild(playButton)
+        addNodeToOverlay(playButton)
 
         // Setup Pause button
         let pauseLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.pause)
@@ -165,7 +165,7 @@ class PlayingMapScene: SKScene {
             x: 0.0,
             y: -300.0
         )
-        addChild(pauseButton)
+        addNodeToOverlay(pauseButton)
 
         // Setup Reset button
         let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)
@@ -176,7 +176,7 @@ class PlayingMapScene: SKScene {
             x: 80.0,
             y: -300.0
         )
-        addChild(resetButton)
+        addNodeToOverlay(resetButton)
     }
 
     func setupMapUnits() {

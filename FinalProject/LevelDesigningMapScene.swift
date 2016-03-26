@@ -57,13 +57,13 @@ class LevelDesigningMapScene: SKScene {
         addChild(blocksLayer)
         addChild(unitsLayer)
 
-        let palettePosition = CGPointMake(0, -768/2 + 20 + 45)
+        let palettePosition = CGPoint(x: 0, y: -768/2 + 20 + 45)
         paletteLayer.position = palettePosition
         addChild(paletteLayer)
 
         // actionsLayer shows the actions that user can do, such as
         // Save, Load, Play, Reset.
-        let actionsPosition = CGPointMake(0, -768/2 + 20)
+        let actionsPosition = CGPoint(x: 0, y: -768/2 + 20)
         actionsLayer.position = actionsPosition
         addChild(actionsLayer)
 
@@ -265,18 +265,18 @@ extension LevelDesigningMapScene {
         let verticalOffset = blockHeight * CGFloat(numberOfRows) / 2
         let upOffset = verticalOffset + arrowOffsetY
         let downOffset = -upOffset - blockHeight
-        addArrow("up-arrow", name: "Add Top", position: CGPointMake(-blockWidth, upOffset))
-        addArrow("down-arrow", name: "Remove Top", position: CGPointMake(0, upOffset))
-        addArrow("down-arrow", name: "Add Bottom", position: CGPointMake(-blockWidth, downOffset))
-        addArrow("up-arrow", name: "Remove Bottom", position: CGPointMake(0, downOffset))
+        addArrow("up-arrow", name: "Add Top", position: CGPoint(x: -blockWidth, y: upOffset))
+        addArrow("down-arrow", name: "Remove Top", position: CGPoint(x: 0, y: upOffset))
+        addArrow("down-arrow", name: "Add Bottom", position: CGPoint(x: -blockWidth, y: downOffset))
+        addArrow("up-arrow", name: "Remove Bottom", position: CGPoint(x: 0, y: downOffset))
 
         let horizontalOffset = blockWidth * CGFloat(numberOfColumns) / 2
         let rightOffset = horizontalOffset + arrowOffsetX
         let leftOffset = -rightOffset - blockWidth
-        addArrow("left-arrow", name: "Add Left", position: CGPointMake(leftOffset, -blockHeight))
-        addArrow("right-arrow", name: "Remove Left", position: CGPointMake(leftOffset, 0))
-        addArrow("right-arrow", name: "Add Right", position: CGPointMake(rightOffset, -blockHeight))
-        addArrow("left-arrow", name: "Remove Right", position: CGPointMake(rightOffset, 0))
+        addArrow("left-arrow", name: "Add Left", position: CGPoint(x: leftOffset, y: -blockHeight))
+        addArrow("right-arrow", name: "Remove Left", position: CGPoint(x: leftOffset, y: 0))
+        addArrow("right-arrow", name: "Add Right", position: CGPoint(x: rightOffset, y: -blockHeight))
+        addArrow("left-arrow", name: "Remove Right", position: CGPoint(x: rightOffset, y: 0))
 
         updateArrows()
     }
@@ -418,7 +418,7 @@ extension LevelDesigningMapScene {
         for position in 0..<textures.count {
             let spriteNode = SKSpriteNode(texture: textures[position])
             spriteNode.size = blockSize
-            spriteNode.position = CGPointMake(-1024/2 + 25 + 50 * CGFloat(position), 0)
+            spriteNode.position = CGPoint(x: -1024/2 + 25 + 50 * CGFloat(position), y: 0)
             spriteNode.name = textureNames[position]
             paletteNode.addChild(spriteNode)
         }
@@ -444,16 +444,16 @@ extension LevelDesigningMapScene {
         let actionsNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 1024, height: 40))
         actionsLayer.addChild(actionsNode)
 
-        let saveLabel = makeLabel("Save", position: CGPointMake(-1024/2 + 30, 0))
+        let saveLabel = makeLabel("Save", position: CGPoint(x: -1024/2 + 30, y: 0))
         actionsNode.addChild(saveLabel)
 
-        let loadLabel = makeLabel("Load", position: CGPointMake(-1024/2 + 80, 0))
+        let loadLabel = makeLabel("Load", position: CGPoint(x: -1024/2 + 80, y: 0))
         actionsNode.addChild(loadLabel)
 
         let testLevelLabel = makeLabel("Test Level", position: CGPoint(x: 0, y: 0))
         actionsNode.addChild(testLevelLabel)
 
-        let resetLabel = makeLabel("Reset", position: CGPointMake(1024/2 - 30, 0))
+        let resetLabel = makeLabel("Reset", position: CGPoint(x: 1024/2 - 30, y: 0))
         actionsNode.addChild(resetLabel)
     }
 

@@ -22,6 +22,7 @@
 		1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0961C9927170010F727 /* InsertionPosition.swift */; };
 		1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */; };
 		1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */; };
+		3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21216A1C9A55F000E6564B /* PannableScene.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
@@ -90,6 +91,7 @@
 		1DB4B0961C9927170010F727 /* InsertionPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertionPosition.swift; sourceTree = "<group>"; };
 		1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardBlock.swift; sourceTree = "<group>"; };
 		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnLeftBlock.swift; sourceTree = "<group>"; };
+		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableScene.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingMapViewController.swift; sourceTree = "<group>"; };
@@ -103,7 +105,7 @@
 		3DF230BD1C8F0617003420C0 /* FinalProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; };
+		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningViewController.swift; sourceTree = "<group>"; };
 		B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesArchive.swift; sourceTree = "<group>"; };
 		B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
 				1DB4B0941C9920480010F727 /* MainBlock.swift */,
 				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
+				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
 				1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
+				3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */,
 				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,

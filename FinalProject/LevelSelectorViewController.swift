@@ -31,13 +31,13 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         self.view.addSubview(collectionView)
     }
 
-    /// Make this number of cell
+    // Make this number of cell
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
         return fileNames!.count
     }
 
-    /// Make cell and return cell
+    // Make cell and return cell
     func collectionView(collectionView: UICollectionView,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier,
@@ -51,7 +51,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         return cell
     }
 
-    /// When the user tapped a cell, it loads the file with the corresponding file name.
+    // When the user tapped a cell, it loads the file with the corresponding file name.
     func collectionView(collectionView: UICollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! LevelCell
@@ -105,7 +105,7 @@ class LevelCell: UICollectionViewCell {
         contentView.userInteractionEnabled = true
     }
 
-    /// When the user long-pressed a cell, the user can choose to delete the file with the corresponding file name.
+    // When the user long-pressed a cell, the user can choose to delete the file with the corresponding file name.
     func handleLongPressedCell(sender: UILongPressGestureRecognizer) {
         let tappedContentView = sender.view as UIView!
         let label = tappedContentView.subviews.first! as! UILabel
@@ -115,7 +115,7 @@ class LevelCell: UICollectionViewCell {
         levelSelectorViewController.view.addSubview(navigationBar)
     }
 
-    /// Delete a file from FilesArchive given its fileName.
+    // Delete a file from FilesArchive given its fileName.
     func deleteFile() {
         let navigationItem = currentNavigationBar!.items!.first!
         let fileName = navigationItem.title!
