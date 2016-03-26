@@ -9,15 +9,15 @@
 import Foundation
 
 class FilesArchive {
-    
+
     init() {}
-    
+
     private var documentDirectory: String {
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
             NSSearchPathDomainMask.UserDomainMask, true)
         return paths.first!
     }
-    
+
     /// Returns: All the files' name in the document directory.
     func getFileNames() -> [String] {
         var filesInDirectory = [NSString]()
@@ -30,7 +30,7 @@ class FilesArchive {
         let propertyListFileNames = propertyListFiles.map { ($0 as NSString).stringByDeletingPathExtension }
         return propertyListFileNames
     }
-    
+
     /// Save Map into a .plist file with given name.
     /// Returns: true if save is successful, false otherwise.
     func saveToPropertyList(map: Map, name: String) -> Bool {
@@ -38,7 +38,7 @@ class FilesArchive {
             return false
         } else {
             let filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(name + ".plist")
-            
+
             let dictionary = NSMutableDictionary()
             dictionary.setObject(map.numberOfRows, forKey: "Number Of Rows")
             dictionary.setObject(map.numberOfColumns, forKey: "Number Of Columns")
@@ -52,7 +52,7 @@ class FilesArchive {
             return isSaved
         }
     }
-    
+
     /// Reconstruct Map for a given filePath
     /// Returns: Map if filePath exist, nil otherwise
     func loadFromPropertyList(fileName: String) -> Map? {
@@ -90,7 +90,7 @@ class FilesArchive {
         }
         return map
     }
-    
+
     /// Remove the plist file from the directory
     func removePropertyList(fileName: String) {
         let filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(fileName + ".plist")
@@ -100,7 +100,7 @@ class FilesArchive {
             print(error.localizedDescription)
         }
     }
-    
+
     /// Rename the original plist filename from the directory with the new plist filename
     func renamePropertyList(originalFileName: String, newFileName: String) -> Bool {
         if newFileName.isEmpty {

@@ -17,26 +17,26 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     var loadedMap: Map! = nil
     private let reuseIdentifier = "LevelCellIdentifier"
     private let sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
         collectionView.registerClass(LevelCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.whiteColor()
-        
+
         self.view.addSubview(collectionView)
     }
-    
+
     /// Make this number of cell
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
         return fileNames!.count
     }
-    
+
     /// Make cell and return cell
     func collectionView(collectionView: UICollectionView,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -50,7 +50,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         cell.backgroundColor = UIColor.darkGrayColor()
         return cell
     }
-    
+
     /// When the user tapped a cell, it loads the file with the corresponding file name.
     func collectionView(collectionView: UICollectionView,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -63,13 +63,13 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         }
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
+
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSize(width: 325, height: 100)
     }
-    
+
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -83,28 +83,28 @@ class LevelCell: UICollectionViewCell {
     private var levelSelectorViewController: LevelSelectorViewController!
     private var levelSelectorPageViewController: LevelSelectorPageViewController!
     private var currentNavigationBar: UINavigationBar? = nil
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         let labelHeight = frame.size.height/3
         textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width, height: labelHeight))
         textLabel.textAlignment = .Center
         contentView.addSubview(textLabel)
-        
+
         addGesturesToContentView()
     }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
-    
+
     func addGesturesToContentView() {
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPressedCell:"))
         contentView.addGestureRecognizer(longPressGestureRecognizer)
         contentView.userInteractionEnabled = true
     }
-    
+
     /// When the user long-pressed a cell, the user can choose to delete the file with the corresponding file name.
     func handleLongPressedCell(sender: UILongPressGestureRecognizer) {
         let tappedContentView = sender.view as UIView!
@@ -114,7 +114,7 @@ class LevelCell: UICollectionViewCell {
         currentNavigationBar = navigationBar
         levelSelectorViewController.view.addSubview(navigationBar)
     }
-    
+
     /// Delete a file from FilesArchive given its fileName.
     func deleteFile() {
         let navigationItem = currentNavigationBar!.items!.first!
@@ -136,7 +136,7 @@ class LevelCell: UICollectionViewCell {
         }))
         levelSelectorViewController.presentViewController(deleteAlert, animated: true, completion: nil)
     }
-    
+
     func renameFile() {
         let navigationItem = currentNavigationBar!.items!.first!
         let originalFileName = navigationItem.title!
@@ -176,24 +176,24 @@ class LevelCell: UICollectionViewCell {
         }))
         levelSelectorPageViewController.presentViewController(renameAlert, animated: true, completion: nil)
     }
-    
+
     func makeNavigationBar(fileName: String) -> UINavigationBar {
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, 1024, 60))
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 1024, height: 60))
         navigationBar.backgroundColor = UIColor.whiteColor()
-        
+
         let navigationItem = UINavigationItem()
         navigationItem.title = fileName
-        
+
         let renameButton = UIBarButtonItem(title: "Rename", style: .Plain, target: self, action: "renameFile")
         let trashBinImage = UIImage(named: "trash")
         let deleteButton = UIBarButtonItem(image: trashBinImage, style: .Plain, target: self, action: "deleteFile")
-        
+
         navigationItem.leftBarButtonItem = renameButton
         navigationItem.rightBarButtonItem = deleteButton
         navigationBar.items = [navigationItem]
         return navigationBar
     }
-    
+
     func resetNavigationBar() {
         currentNavigationBar?.removeFromSuperview()
         currentNavigationBar = nil
