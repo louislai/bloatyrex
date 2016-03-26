@@ -16,10 +16,10 @@ class PannableScene: SKScene {
     private var initialScale: CGFloat
     private var minimumScale: CGFloat
 
-    /// Initialise the scene with a given size, and optional scale and overlay z position.
-    /// zoomLevel is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
-    /// zoomRangeFactor denotes how much the zoom level can be adjusted. The default value of 2.0
-    /// allows the zoom to be a max 2.0 times larger than the original zoom level.
+    // Initialise the scene with a given size, and optional scale and overlay z position.
+    // zoomLevel is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
+    // zoomRangeFactor denotes how much the zoom level can be adjusted. The default value of 2.0
+    // allows the zoom to be a max 2.0 times larger than the original zoom level.
     init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
         zoomRangeFactor: CGFloat = 2.0) {
             initialScale = 1.0 / zoomLevel
@@ -51,7 +51,7 @@ class PannableScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
 
-    /// Handle the panning movement of the scene.
+    // Handle the panning movement of the scene.
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first {
             // calculate the distance panned
@@ -125,17 +125,17 @@ class PannableScene: SKScene {
         viewpoint.setScale(newScale)
     }
 
-    /// Adds a node to be part of the content that is pannable.
+    // Adds a node to be part of the content that is pannable.
     func addNodeToContent(node: SKNode) {
         content.addChild(node)
     }
 
-    /// Adds a node to the overlay
+    // Adds a node to the overlay
     func addNodeToOverlay(node: SKNode) {
         overlay.addChild(node)
     }
 
-    /// Moves the viewpoint by a given X and Y value.
+    // Moves the viewpoint by a given X and Y value.
     private func moveViewPointBy(horizontalDisplacement: CGFloat, verticalDisplacement: CGFloat) {
         self.viewpoint.position = CGPoint(x: self.viewpoint.position.x + horizontalDisplacement,
             y: self.viewpoint.position.y + verticalDisplacement)

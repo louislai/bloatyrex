@@ -18,7 +18,7 @@ class FilesArchive {
         return paths.first!
     }
 
-    /// Returns: All the files' name in the document directory.
+    // Returns: All the files' name in the document directory.
     func getFileNames() -> [String] {
         var filesInDirectory = [NSString]()
         do {
@@ -31,8 +31,8 @@ class FilesArchive {
         return propertyListFileNames
     }
 
-    /// Save Map into a .plist file with given name.
-    /// Returns: true if save is successful, false otherwise.
+    // Save Map into a .plist file with given name.
+    // Returns: true if save is successful, false otherwise.
     func saveToPropertyList(map: Map, name: String) -> Bool {
         if name.isEmpty {
             return false
@@ -53,8 +53,8 @@ class FilesArchive {
         }
     }
 
-    /// Reconstruct Map for a given filePath
-    /// Returns: Map if filePath exist, nil otherwise
+    // Reconstruct Map for a given filePath
+    // Returns: Map if filePath exist, nil otherwise
     func loadFromPropertyList(fileName: String) -> Map? {
         var filePath: String
         let plistExtension = ".plist"
@@ -91,7 +91,7 @@ class FilesArchive {
         return map
     }
 
-    /// Remove the plist file from the directory
+    // Remove the plist file from the directory
     func removePropertyList(fileName: String) {
         let filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(fileName + ".plist")
         do {
@@ -101,7 +101,7 @@ class FilesArchive {
         }
     }
 
-    /// Rename the original plist filename from the directory with the new plist filename
+    // Rename the original plist filename from the directory with the new plist filename
     func renamePropertyList(originalFileName: String, newFileName: String) -> Bool {
         if newFileName.isEmpty {
             return false
