@@ -18,15 +18,15 @@ class CodeBlock: SKNode {
         get {
             if dropZoneActivated {
                 let frame = dropZone.calculateAccumulatedFrame()
-                return CGPointMake(frame.midX, frame.midY)
+                return CGPoint(x: frame.midX, y: frame.midY)
             } else {
-                return CGPointMake(CGFloat.max, CGFloat.max)
+                return CGPoint(x: CGFloat.max, y: CGFloat.max)
             }
         }
     }
 
     override init() {
-        dropZone = DropZone(size: CGSizeMake(150, CodeBlock.dropZoneSize))
+        dropZone = DropZone(size: CGSize(width: 150, height: CodeBlock.dropZoneSize))
         super.init()
         self.addChild(dropZone)
         dropZone.zPosition = 5
@@ -35,7 +35,7 @@ class CodeBlock: SKNode {
     func hover(location: CGPoint, insertionHandler: InsertionPosition) {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
-        if dropZone.containsPoint(CGPointMake(x, y)) {
+        if dropZone.containsPoint(CGPoint(x: x, y: y)) {
             dropZone.displayHover()
             insertionHandler.position = blockPosition + 1
         } else {

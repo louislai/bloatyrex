@@ -8,7 +8,8 @@
 
 import UIKit
 
-class LevelSelectorViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
+    UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     var pageIndex: Int?
     var fileNames: [String]?
     var previousViewController: UIViewController?

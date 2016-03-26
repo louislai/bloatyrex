@@ -28,7 +28,7 @@ class PlayingMapViewController: UIViewController {
         skView.presentScene(newScene())
     }
 
-    func newScene() -> SKScene {
+    func newScene() -> PlayingMapScene {
         let skView = view as! SKView
 
         // Create and configure the scene.
