@@ -13,6 +13,7 @@ class PlayingMapViewController: UIViewController {
 
     var map: Map!
     var scene: PlayingMapScene!
+    var programSupplier: ProgramSupplier!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -38,6 +39,7 @@ class PlayingMapViewController: UIViewController {
         // Load the map
         scene.map = map.copy() as! Map
         scene.playingMapController = self
+        scene.programSupplier = self
         scene.setup()
 
         return scene
@@ -55,5 +57,11 @@ extension PlayingMapViewController {
 
     func goBack() {
         navigationController?.popViewControllerAnimated(true)
+    }
+}
+
+extension PlayingMapViewController: ProgramSupplier {
+    func retrieveProgram() -> Program? {
+        return programSupplier.retrieveProgram()
     }
 }

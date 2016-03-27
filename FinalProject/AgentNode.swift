@@ -13,12 +13,14 @@ class AgentNode: SKSpriteNode {
     var orientation = Direction.Up
     var row: Int!
     var column: Int!
-    var delegate: LanguageDelegate!
+    var delegate: LanguageDelegate?
     let timePerMoveMovement: NSTimeInterval = 0.5
-    var originalProgram: Program!
 
     // Return true if nextAction causes the agent to reach the goal
     func runNextAction() -> Bool {
+        guard let delegate = delegate else {
+            return false
+        }
         if let nextAction = delegate.nextAction(gameScene.map, agent: self) {
             print(nextAction)
             switch nextAction {

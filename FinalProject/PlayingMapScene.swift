@@ -36,7 +36,9 @@ class PlayingMapScene: PannableScene {
     var activeAgentNodes = [AgentNode]()
     var originalMovesLeft = 11
     var movesLeft = 0
-    var playingMapController: PlayingMapViewController!
+    weak var playingMapController: PlayingMapViewController!
+    var programSupplier: ProgramSupplier!
+    var programRetrieved = false
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -105,6 +107,14 @@ class PlayingMapScene: PannableScene {
     }
 
     func run() {
+        if !programRetrieved {
+            for agent in activeAgentNodes {
+                if let program = programSupplier.retrieveProgram() {
+                    agent.delegate = Interpreter(program: program)
+                }
+            }
+            programRetrieved = true
+        }
         running = true
     }
 
@@ -135,14 +145,13 @@ class PlayingMapScene: PannableScene {
         // 1
         let movesLeftLabel = SKLabelNode(text: "Moves Left: ")
         movesLeftLabel.name = PlayingMapSceneConstants.NodeNames.movesLeftLabel
-        movesLeftLabel.fontColor = UIColor.blueColor()
 
         let layerPosition = CGPoint(
             x: -movesLeftLabel.frame.size.width/2,
             y: 300.0
         )
         // 2
-        movesLeftLabel.fontColor = SKColor.greenColor()
+        movesLeftLabel.fontColor = SKColor.blueColor()
         movesLeftLabel.text = String(format: "Moves Left: %d", originalMovesLeft)
 
         // 3
@@ -219,8 +228,6 @@ class PlayingMapScene: PannableScene {
                             sprite.gameScene = self
                             sprite.row = row
                             sprite.column = column
-                            sprite.originalProgram = Sample.sampleProgram3
-                            sprite.delegate = Interpreter(program: Sample.sampleProgram3)
                             activeAgentNodes.append(sprite)
                         }
                         unitsLayer.addChild(sprite)
