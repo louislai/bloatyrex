@@ -32,6 +32,7 @@ class PlayingMapScene: PannableScene {
     var running = false
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
+    let hudLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
     var originalMovesLeft = 11
     var movesLeft = 0
@@ -96,6 +97,7 @@ class PlayingMapScene: PannableScene {
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
         addNodeToContent(unitsLayer)
+        addNodeToOverlay(hudLayer)
         addBlocks()
         setupMapUnits()
         setupHud()
@@ -145,7 +147,7 @@ class PlayingMapScene: PannableScene {
 
         // 3
         movesLeftLabel.position = layerPosition
-        addNodeToOverlay(movesLeftLabel)
+        hudLayer.addChild(movesLeftLabel)
 
         movesLeft = originalMovesLeft
     }
@@ -240,7 +242,7 @@ class PlayingMapScene: PannableScene {
 
     private func decrementMovesLeft() {
         movesLeft -= 1
-        if let node = childNodeWithName(PlayingMapSceneConstants.NodeNames.movesLeftLabel)
+        if let node = hudLayer.childNodeWithName(PlayingMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
                 node.text = String(format: "Moves Left: %d", movesLeft)
         }

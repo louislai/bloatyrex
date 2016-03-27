@@ -267,6 +267,7 @@
 		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BF5339C61C941155007F56F0 /* AgentNode.swift */,
 				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
@@ -307,7 +308,6 @@
 		BF8E12AA1C99ADD800B210C3 /* PlayingScene */ = {
 			isa = PBXGroup;
 			children = (
-				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */,
 			);
 			name = PlayingScene;
