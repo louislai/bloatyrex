@@ -5,6 +5,10 @@
 //  Created by Tham Zheng Yi on 17/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+//  This scene can be subclassed instead of subclassing SKScene to have a pannable scene. Add the
+//  nodes that are intended to be pannable to the content and add nodes that should be fixed in
+//  position regardless of panning to the overlay.
+//
 
 import Foundation
 import SpriteKit
