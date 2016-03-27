@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class CodeBlocksScene: SKScene {
+class CodeBlocksScene: SKScene, ProgramSupplier {
 
     enum PressState {
         case AddingBlock
@@ -25,7 +25,10 @@ class CodeBlocksScene: SKScene {
     var pressState = PressState.Idle
 
     let insertionPosition = InsertionPosition()
-
+    
+    func retrieveProgram() -> Program? {
+        return programBlocks.getCode()
+    }
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
         blankButton.position = CGPointMake(size.width * 0.1, size.height * 0.7)

@@ -9,11 +9,11 @@
 import Foundation
 
 protocol ProgramSupplier {
-    func retrieveProgram() -> Program
+    func retrieveProgram() -> Program?
 }
 
 struct sample: ProgramSupplier {
-    func retrieveProgram() -> Program {
+    func retrieveProgram() -> Program? {
         return Sample.sampleProgram
     }
 }
