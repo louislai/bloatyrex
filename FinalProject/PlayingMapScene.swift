@@ -71,7 +71,7 @@ class PlayingMapScene: PannableScene {
         if currentTime - timeOfLastMove < timePerMove {
             return
         }
-        if movesLeft == 0 {
+        if movesLeft == 0 || activeAgentNodes.isEmpty {
             running = false
             return
         }

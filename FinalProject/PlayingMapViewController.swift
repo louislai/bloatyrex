@@ -56,6 +56,8 @@ extension PlayingMapViewController {
     }
 
     func goBack() {
+        scene.removeAllActions()
+        scene.removeFromParent()
         navigationController?.popViewControllerAnimated(true)
     }
 }
