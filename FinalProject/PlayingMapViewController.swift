@@ -31,8 +31,8 @@ class PlayingMapViewController: UIViewController {
     func newScene() -> PlayingMapScene {
         let skView = view as! SKView
 
-        // Create and configure the scene.
-        let scene = PlayingMapScene(size: skView.bounds.size, zoomLevel: 1)
+        // Create and configure the scene
+        scene = PlayingMapScene(size: skView.bounds.size, zoomLevel: 1)
         scene.scaleMode = .AspectFill
 
         // Load the map

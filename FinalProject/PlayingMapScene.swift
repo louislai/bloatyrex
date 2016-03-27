@@ -149,7 +149,7 @@ class PlayingMapScene: PannableScene {
         let playLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.play)
         playLabel.size = blockSize
         let playButton = SKButton(defaultButton: playLabel)
-        playButton.addTarget(self, selector: Selector("run"))
+        playButton.addTarget(self, selector: #selector(PlayingMapScene.run))
         playButton.position = CGPoint(
             x: -80.0,
             y: -300.0
@@ -160,7 +160,7 @@ class PlayingMapScene: PannableScene {
         let pauseLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.pause)
         pauseLabel.size = blockSize
         let pauseButton = SKButton(defaultButton: pauseLabel)
-        pauseButton.addTarget(self, selector: Selector("pause"))
+        pauseButton.addTarget(self, selector: #selector(PlayingMapScene.pause))
         pauseButton.position = CGPoint(
             x: 0.0,
             y: -300.0
@@ -171,7 +171,7 @@ class PlayingMapScene: PannableScene {
         let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)
         resetLabel.size = blockSize
         let resetButton = SKButton(defaultButton: resetLabel)
-        resetButton.addTarget(self, selector: Selector("reset"))
+        resetButton.addTarget(self, selector: #selector(PlayingMapScene.reset))
         resetButton.position = CGPoint(
             x: 80.0,
             y: -300.0
