@@ -136,7 +136,6 @@ class CodeBlocksScene: SKScene {
         case .Idle:
             break
         }
-        print(programBlocks.getCode())
         pressState = .Idle
     }
 }
