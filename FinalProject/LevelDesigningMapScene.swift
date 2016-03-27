@@ -22,7 +22,7 @@ struct DesigningMapConstants {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
         static let shiftLeft = CGFloat(-200)
         static let shiftUp = CGFloat(100)
-        
+
         static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
         static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
                                         y: actionButtonY)
@@ -483,7 +483,7 @@ extension LevelDesigningMapScene {
         addActionButton("reset", name: "Reset",
                         position: DesigningMapConstants.Position.resetButton)
     }
-    
+
     func addActionButton(imageNamed: String, name: String, position: CGPoint) {
         let action = SKSpriteNode(texture: TextureManager.retrieveTexture(imageNamed))
         action.name = name
@@ -491,7 +491,7 @@ extension LevelDesigningMapScene {
         action.position = position
         addChild(action)
     }
-    
+
     func backAction() {
         levelDesigningViewController?.goBack()
     }
@@ -563,9 +563,6 @@ extension LevelDesigningMapScene {
         levelSelectorPageViewController.currentStoryboard = levelDesigningViewController!.storyboard
         levelSelectorPageViewController.previousViewController = levelDesigningViewController
         levelSelectorPageViewController.numberOfItemsPerPage = 15
-        levelSelectorPageViewController.totalNumberOfPages = Int(ceil(Double(
-            levelSelectorPageViewController.totalNumberOfItems) /
-            Double(levelSelectorPageViewController.numberOfItemsPerPage!)))
         levelDesigningViewController!.presentViewController(
             levelSelectorPageViewController,
             animated: true,
@@ -612,18 +609,18 @@ extension LevelDesigningMapScene {
         addBorder("Left")
         addBorder("Right")
     }
-    
+
     func addBorder(edgeName: String) {
         let dottedLine = SKSpriteNode(texture: TextureManager.retrieveTexture("dotted-line"))
         dottedLine.zPosition = GlobalConstants.zPosition.back
         dottedLine.size = CGSize(width: CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
             * GlobalConstants.Dimension.blockWidth, height: dottedLine.size.height)
-        
+
         if edgeName == "Left" || edgeName == "Right" {
             let rotate = SKAction.rotateByAngle(CGFloat(M_PI_2), duration: NSTimeInterval(0))
             dottedLine.runAction(rotate)
         }
-        
+
         var positionX = -GlobalConstants.Dimension.blockWidth/2 + DesigningMapConstants.Position.shiftLeft
         var positionY = -GlobalConstants.Dimension.blockHeight/2 + DesigningMapConstants.Position.shiftUp
         let offsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
@@ -643,7 +640,7 @@ extension LevelDesigningMapScene {
             break
         }
         dottedLine.position = CGPointMake(positionX, positionY)
-        
+
         addChild(dottedLine)
     }
 }
