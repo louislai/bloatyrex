@@ -191,15 +191,15 @@ class LevelDesigningMapScene: SKScene {
 extension LevelDesigningMapScene {
     override func didMoveToView(view: SKView) {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self,
-            action: Selector("handleTap:"))
+            action: #selector(LevelDesigningMapScene.handleTap(_:)))
         view.addGestureRecognizer(tapGestureRecognizer)
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self,
-            action: Selector("handlePan:"))
+            action: #selector(LevelDesigningMapScene.handlePan(_:)))
         view.addGestureRecognizer(panGestureRecognizer)
 
         let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
-            action: Selector("handleLongPress:"))
+            action: #selector(LevelDesigningMapScene.handleLongPress(_:)))
         view.addGestureRecognizer(longPressGestureRecognizer)
     }
 

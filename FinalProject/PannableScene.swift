@@ -43,10 +43,10 @@ class PannableScene: SKScene {
 
         // set up gestures
         let pinchRecognizer = UIPinchGestureRecognizer(target: self,
-            action: Selector("handlePinch:"))
+            action: #selector(PannableScene.handlePinch(_:)))
         self.view!.addGestureRecognizer(pinchRecognizer)
         let doubleTapRecognizer = UITapGestureRecognizer(target: self,
-            action: Selector("handleDoubleTap:"))
+            action: #selector(PannableScene.handleDoubleTap(_:)))
         doubleTapRecognizer.numberOfTapsRequired = 2
         self.view!.addGestureRecognizer(doubleTapRecognizer)
     }

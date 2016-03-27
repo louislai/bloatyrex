@@ -101,7 +101,7 @@ class LevelCell: UICollectionViewCell {
     }
 
     func addGesturesToContentView() {
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPressedCell:"))
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(LevelCell.handleLongPressedCell(_:)))
         contentView.addGestureRecognizer(longPressGestureRecognizer)
         contentView.userInteractionEnabled = true
     }
@@ -185,9 +185,9 @@ class LevelCell: UICollectionViewCell {
         let navigationItem = UINavigationItem()
         navigationItem.title = fileName
 
-        let renameButton = UIBarButtonItem(title: "Rename", style: .Plain, target: self, action: "renameFile")
+        let renameButton = UIBarButtonItem(title: "Rename", style: .Plain, target: self, action: #selector(LevelCell.renameFile))
         let trashBinImage = UIImage(named: "trash")
-        let deleteButton = UIBarButtonItem(image: trashBinImage, style: .Plain, target: self, action: "deleteFile")
+        let deleteButton = UIBarButtonItem(image: trashBinImage, style: .Plain, target: self, action: #selector(LevelCell.deleteFile))
 
         navigationItem.leftBarButtonItem = renameButton
         navigationItem.rightBarButtonItem = deleteButton

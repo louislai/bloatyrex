@@ -99,7 +99,7 @@ class ProgramBlocks: SKNode {
         if var position = insertionHandler.position {
             blocks.removeAtIndex(block.blockPosition)
             if block.blockPosition < position {
-                position--
+                position -= 1
             }
             blocks.insert(block, atIndex: position)
         }
