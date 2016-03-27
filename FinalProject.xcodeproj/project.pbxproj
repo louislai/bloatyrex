@@ -194,6 +194,7 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BF640D771CA7BFF000FC454F /* CodeBlocks */,
 				B01BF8D01CA12D7D00D02FCA /* LevelDesignerScene */,
 				BF8E12AA1C99ADD800B210C3 /* PlayingScene */,
 				BF8E12A71C99AA8400B210C3 /* TitleScene */,
@@ -206,19 +207,7 @@
 				3DF230A81C8F0617003420C0 /* Assets.xcassets */,
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
 				3DF230AD1C8F0617003420C0 /* Info.plist */,
-				1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */,
 				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
-				1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */,
-				1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */,
-				1DB4B08C1C99073F0010F727 /* DropZone.swift */,
-				1D7E23D61C9984F6003E7B75 /* TrashZone.swift */,
-				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
-				1DB4B0901C991F260010F727 /* ProgramBlocks.swift */,
-				1DB4B0921C991FC30010F727 /* CodeBlock.swift */,
-				1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */,
-				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
-				1DB4B0941C9920480010F727 /* MainBlock.swift */,
-				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -286,6 +275,25 @@
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
 			);
 			name = GameEngine;
+			sourceTree = "<group>";
+		};
+		BF640D771CA7BFF000FC454F /* CodeBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */,
+				1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */,
+				1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */,
+				1DB4B08C1C99073F0010F727 /* DropZone.swift */,
+				1D7E23D61C9984F6003E7B75 /* TrashZone.swift */,
+				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
+				1DB4B0901C991F260010F727 /* ProgramBlocks.swift */,
+				1DB4B0921C991FC30010F727 /* CodeBlock.swift */,
+				1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */,
+				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
+				1DB4B0941C9920480010F727 /* MainBlock.swift */,
+				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
+			);
+			name = CodeBlocks;
 			sourceTree = "<group>";
 		};
 		BF8E12A71C99AA8400B210C3 /* TitleScene */ = {
