@@ -92,7 +92,7 @@
 		1DB4B0961C9927170010F727 /* InsertionPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertionPosition.swift; sourceTree = "<group>"; };
 		1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ForwardBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TurnLeftBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableScene.swift; sourceTree = "<group>"; };
+		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PannableScene.swift; path = FinalProject/PannableScene.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingMapViewController.swift; sourceTree = "<group>"; };
@@ -170,9 +170,9 @@
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
+				BF640D781CA815E800FC454F /* ReusableComponents */,
 				BF49FA501CA61ACF00546F43 /* Constants.swift */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,
-				BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */,
 				BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */,
 				3DF230A01C8F0617003420C0 /* FinalProject */,
 				3DF230B51C8F0617003420C0 /* FinalProjectTests */,
@@ -207,7 +207,6 @@
 				3DF230A81C8F0617003420C0 /* Assets.xcassets */,
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
 				3DF230AD1C8F0617003420C0 /* Info.plist */,
-				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -295,6 +294,15 @@
 				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
 			);
 			name = CodeBlocks;
+			sourceTree = "<group>";
+		};
+		BF640D781CA815E800FC454F /* ReusableComponents */ = {
+			isa = PBXGroup;
+			children = (
+				BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */,
+				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
+			);
+			name = ReusableComponents;
 			sourceTree = "<group>";
 		};
 		BF8E12A71C99AA8400B210C3 /* TitleScene */ = {

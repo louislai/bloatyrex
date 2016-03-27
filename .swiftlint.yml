@@ -4,6 +4,7 @@ disabled_rules:
     - force_cast
     - type_name
     - variable_name
+    - valid_docs
 line_length:
     150
 function_body_length:

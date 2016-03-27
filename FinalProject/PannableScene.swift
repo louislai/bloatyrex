@@ -5,21 +5,26 @@
 //  Created by Tham Zheng Yi on 17/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
-//  This scene can be subclassed instead of subclassing SKScene to have a pannable scene. Add the
-//  nodes that are intended to be pannable to the content and add nodes that should be fixed in
-//  position regardless of panning to the overlay.
-//
-//  The node hierarchy is as follows:
-//          PannableScene
-//          /           \
-//      content       viewpoint
-//                       |
-//                    overlay
 //
 
 import Foundation
 import SpriteKit
 
+///  This scene can be subclassed instead of subclassing SKScene to have a pannable scene. Add the
+///  nodes that are intended to be pannable to the content and add nodes that should be fixed in
+///  position regardless of panning to the overlay.
+///
+///  The node hierarchy is as follows:
+///
+///          PannableScene
+///
+///          /           \
+///
+///      content       viewpoint
+///
+///                       |
+///
+///                    overlay
 class PannableScene: SKScene {
     private var content = SKNode()
     private var overlay = SKNode()
@@ -27,10 +32,14 @@ class PannableScene: SKScene {
     private var initialScale: CGFloat
     private var minimumScale: CGFloat
 
-    // Initialise the scene with a given size, and optional scale and overlay z position.
-    // zoomLevel is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
-    // zoomRangeFactor denotes how much the zoom level can be adjusted. The default value of 2.0
-    // allows the zoom to be a max 2.0 times larger than the original zoom level.
+    /**
+    Initialise the scene with a given size, and optional scale and overlay z position.
+
+    - parameter zoomLevel: is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
+
+    - parameter zoomRangeFactor: denotes how much the zoom level can be adjusted. The default value of 2.0
+    allows the zoom to be a max 2.0 times larger than the original zoom level.
+    */
     init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
         zoomRangeFactor: CGFloat = 2.0) {
             initialScale = 1.0 / zoomLevel
@@ -94,7 +103,9 @@ class PannableScene: SKScene {
         }
     }
 
-    // Handles the zooming in and out using the pinch gesture.
+    /**
+    Handles the zooming in and out using the pinch gesture.
+    */
     func handlePinch(sender: UIPinchGestureRecognizer) {
         if sender.numberOfTouches() == 2 {
             if sender.state == .Changed {
@@ -111,7 +122,9 @@ class PannableScene: SKScene {
         }
     }
 
-    // Handles zooming in on the desired location using a tap.
+    /**
+    Handles zooming in on the desired location using a tap.
+    */
     func handleDoubleTap(sender: UITapGestureRecognizer) {
         // zoom in on tapped location
         let tapLocation = sender.locationInView(sender.view)
@@ -138,14 +151,18 @@ class PannableScene: SKScene {
         viewpoint.setScale(newScale)
     }
 
-    // Adds a node to be part of the content that is pannable. Added nodes will be children of the
-    // content node, which is itself a child of the pannable scene (self).
+    /**
+    Adds a node to be part of the content that is pannable. Added nodes will be children of the
+    content node, which is itself a child of the pannable scene (self).
+    */
     func addNodeToContent(node: SKNode) {
         content.addChild(node)
     }
 
-    // Adds a node to the overlay. Added nodes will be children of the overlay node. The hierarchy
-    // is as follows: pannable scene (self) -> viewpoint node -> overlay node -> added node.
+    /**
+        Adds a node to the overlay. Added nodes will be children of the overlay node. The hierarchy
+        is as follows: pannable scene (self) -> viewpoint node -> overlay node -> added node.
+    */
     func addNodeToOverlay(node: SKNode) {
         overlay.addChild(node)
     }

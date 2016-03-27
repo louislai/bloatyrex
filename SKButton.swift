@@ -8,12 +8,19 @@
 
 import SpriteKit
 
+/** SKButton can be used to simulate the behaviour of UIKit UIButton on a SKNode */
 class SKButton: SKNode {
     private var defaultButton: SKNode
     private var activeButton: SKNode?
     private var targetObject: NSObject?
     private var targetSelector: Selector?
 
+    /**
+     Initialize a new SKButton
+
+     - parameter defaultButton: The required default label for the button. If activeButton is set, defaultButton will hide when button is active
+     - parameter activeButton: The optional active label. This will appear when button is active if set
+    */
     init(defaultButton: SKNode, activeButton: SKNode? = nil) {
             self.defaultButton = defaultButton
             super.init()
@@ -30,11 +37,21 @@ class SKButton: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /**
+    Add handler for when the button is tapped
+
+    - parameter target: The object with the selector method
+
+    - parameter selector: The selector method
+    */
     func addTarget(target: NSObject, selector: Selector) {
         targetObject = target
         targetSelector = selector
     }
 
+    /**
+        Remove handler for the button
+    */
     func removeTarget() {
         targetObject = nil
         targetSelector = nil
