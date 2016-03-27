@@ -13,6 +13,7 @@ class PlayingMapViewController: UIViewController {
 
     var map: Map!
     var scene: PlayingMapScene!
+    var programSupplier: ProgramSupplier!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -36,20 +37,33 @@ class PlayingMapViewController: UIViewController {
         scene.scaleMode = .AspectFill
 
         // Load the map
-        scene.map = map
-        scene.resetDelegate = self
+        scene.map = map.copy() as! Map
+        scene.playingMapController = self
+        scene.programSupplier = self
         scene.setup()
 
         return scene
     }
 }
 
-extension PlayingMapViewController: ResetDelegate {
+extension PlayingMapViewController {
     func reset() {
         let skView = view as! SKView
 
         let transition = SKTransition.crossFadeWithDuration(0.0)
         scene = newScene()
         skView.presentScene(scene, transition: transition)
+    }
+
+    func goBack() {
+        scene.removeAllActions()
+        scene.removeFromParent()
+        navigationController?.popViewControllerAnimated(true)
+    }
+}
+
+extension PlayingMapViewController: ProgramSupplier {
+    func retrieveProgram() -> Program? {
+        return programSupplier.retrieveProgram()
     }
 }

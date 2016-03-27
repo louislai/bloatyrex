@@ -23,6 +23,7 @@ struct PlayingMapSceneConstants {
         static let play = "play"
         static let pause = "pause"
         static let reset = "stop"
+        static let back = "back"
     }
 }
 
@@ -31,10 +32,13 @@ class PlayingMapScene: PannableScene {
     var running = false
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
+    let hudLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
     var originalMovesLeft = 11
     var movesLeft = 0
-    var resetDelegate: ResetDelegate!
+    weak var playingMapController: PlayingMapViewController!
+    var programSupplier: ProgramSupplier!
+    var programRetrieved = false
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -67,7 +71,7 @@ class PlayingMapScene: PannableScene {
         if currentTime - timeOfLastMove < timePerMove {
             return
         }
-        if movesLeft == 0 {
+        if movesLeft == 0 || activeAgentNodes.isEmpty {
             running = false
             return
         }
@@ -95,6 +99,7 @@ class PlayingMapScene: PannableScene {
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
         addNodeToContent(unitsLayer)
+        addNodeToOverlay(hudLayer)
         addBlocks()
         setupMapUnits()
         setupHud()
@@ -102,6 +107,14 @@ class PlayingMapScene: PannableScene {
     }
 
     func run() {
+        if !programRetrieved {
+            for agent in activeAgentNodes {
+                if let program = programSupplier.retrieveProgram() {
+                    agent.delegate = Interpreter(program: program)
+                }
+            }
+            programRetrieved = true
+        }
         running = true
     }
 
@@ -110,7 +123,11 @@ class PlayingMapScene: PannableScene {
     }
 
     func reset() {
-        resetDelegate.reset()
+        playingMapController.reset()
+    }
+
+    func goBack() {
+        playingMapController.goBack()
     }
 
     func addBlocks() {
@@ -134,12 +151,12 @@ class PlayingMapScene: PannableScene {
             y: 300.0
         )
         // 2
-        movesLeftLabel.fontColor = SKColor.greenColor()
+        movesLeftLabel.fontColor = SKColor.blueColor()
         movesLeftLabel.text = String(format: "Moves Left: %d", originalMovesLeft)
 
         // 3
         movesLeftLabel.position = layerPosition
-        addNodeToOverlay(movesLeftLabel)
+        hudLayer.addChild(movesLeftLabel)
 
         movesLeft = originalMovesLeft
     }
@@ -177,6 +194,18 @@ class PlayingMapScene: PannableScene {
             y: -300.0
         )
         addNodeToOverlay(resetButton)
+
+
+        // Setup Back Button
+        let backLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.back)
+        backLabel.size = blockSize
+        let backButton = SKButton(defaultButton: backLabel)
+        backButton.addTarget(self, selector: #selector(PlayingMapScene.goBack))
+        backButton.position = CGPoint(
+            x: -200.0,
+            y: -300.0
+        )
+        addNodeToOverlay(backButton)
     }
 
     func setupMapUnits() {
@@ -199,8 +228,6 @@ class PlayingMapScene: PannableScene {
                             sprite.gameScene = self
                             sprite.row = row
                             sprite.column = column
-                            sprite.originalProgram = Sample.sampleProgram3
-                            sprite.delegate = Interpreter(program: Sample.sampleProgram3)
                             activeAgentNodes.append(sprite)
                         }
                         unitsLayer.addChild(sprite)
@@ -222,7 +249,7 @@ class PlayingMapScene: PannableScene {
 
     private func decrementMovesLeft() {
         movesLeft -= 1
-        if let node = childNodeWithName(PlayingMapSceneConstants.NodeNames.movesLeftLabel)
+        if let node = hudLayer.childNodeWithName(PlayingMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
                 node.text = String(format: "Moves Left: %d", movesLeft)
         }

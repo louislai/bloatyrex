@@ -106,14 +106,48 @@ class ProgramBlocks: SKNode {
         flushBlocks()
     }
 
+    func getCode() -> Program? {
+        return parseBlock(1)
+    }
+
+    private func parseBlock(programCounter: Int) -> Program? {
+        guard blocks.count > programCounter else {
+            return nil
+        }
+
+        let block: Statement?
+        switch blocks[programCounter].getBlockConstruct() {
+        case .ActionConstruct(let action):
+            block = Statement.ActionStatement(action)
+        default:
+            block = nil
+        }
+
+        if let statement = block {
+            if blocks.count > programCounter + 1 {
+                if let nextBlock = parseBlock(programCounter + 1) {
+                    return Program.MultipleStatement(statement, nextBlock)
+                } else {
+                    return nil
+                }
+            } else {
+                return Program.SingleStatement(statement)
+            }
+        } else {
+            return nil
+        }
+    }
+
     private func flushBlocks() {
         var yPos: CGFloat = blocks[0].position.y
         let xPos = blocks[0].position.x
         for (i, block) in blocks.enumerate() {
-            block.blockPosition = i
-            block.position.y = yPos
-            block.position.x = xPos
-            yPos -= block.calculateAccumulatedFrame().height
+            if i != 0 {
+                block.blockPosition = i
+                block.position.x = xPos
+                yPos -= block.calculateAccumulatedFrame().height
+                block.position.y = yPos
+            }
         }
     }
 

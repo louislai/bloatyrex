@@ -11,9 +11,11 @@ import SpriteKit
 
 class CodeBlocksViewController: UIViewController {
 
+    var scene: CodeBlocksScene!
+
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
-        let scene = CodeBlocksScene(size: view.bounds.size)
+        scene = CodeBlocksScene(size: view.bounds.size)
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
@@ -27,4 +29,10 @@ class CodeBlocksViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+extension CodeBlocksViewController: ProgramSupplier {
+    func retrieveProgram() -> Program? {
+        return scene.retrieveProgram()
+    }
 }

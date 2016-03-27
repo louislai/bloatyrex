@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class CodeBlocksScene: SKScene {
+class CodeBlocksScene: SKScene, ProgramSupplier {
 
     enum PressState {
         case AddingBlock
@@ -16,8 +16,9 @@ class CodeBlocksScene: SKScene {
         case Idle
     }
 
-    let blockButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Forward)
-    let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.TurnLeft)
+    let blockButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward)
+    let wallButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft)
+    let blankButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -25,8 +26,12 @@ class CodeBlocksScene: SKScene {
 
     let insertionPosition = InsertionPosition()
 
+    func retrieveProgram() -> Program? {
+        return programBlocks.getCode()
+    }
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
+        blankButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.7)
         blockButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
         wallButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.3)
         programBlocks.position = CGPoint(x: size.width * 0.4, y: size.height * 0.9)
@@ -35,6 +40,7 @@ class CodeBlocksScene: SKScene {
         addChild(wallButton)
         addChild(blockButton)
         addChild(programBlocks)
+        addChild(blankButton)
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -48,6 +54,10 @@ class CodeBlocksScene: SKScene {
         } else if wallButton.containsPoint(location) {
             heldBlock = wallButton
             wallButton.pickBlock(true)
+            pressState = .AddingBlock
+        } else if blankButton.containsPoint(location) {
+            heldBlock = blankButton
+            blankButton.pickBlock(true)
             pressState = .AddingBlock
         }
 
@@ -107,6 +117,8 @@ class CodeBlocksScene: SKScene {
                     programBlocks.insertBlock(ForwardBlock(), insertionHandler: insertionPosition)
                 case .TurnLeft:
                     programBlocks.insertBlock(TurnLeftBlock(), insertionHandler: insertionPosition)
+                case .TurnRight:
+                    programBlocks.insertBlock(TurnRightBlock(), insertionHandler: insertionPosition)
                 default:
                     break
                 }
@@ -115,9 +127,13 @@ class CodeBlocksScene: SKScene {
             heldBlock = nil
         case .MovingBlock:
             if let block = movedBlock {
-                block.activateDropZone()
-                programBlocks.endHover()
-                programBlocks.reorderBlock(block, insertionHandler: insertionPosition)
+                if let _ = block as? MainBlock {
+
+                } else {
+                    block.activateDropZone()
+                    programBlocks.endHover()
+                    programBlocks.reorderBlock(block, insertionHandler: insertionPosition)
+                }
             }
             movedBlock = nil
         case .Idle:

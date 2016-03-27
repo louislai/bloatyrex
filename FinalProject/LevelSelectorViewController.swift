@@ -120,7 +120,12 @@ class LevelCell: UICollectionViewCell {
     func deleteFile() {
         let navigationItem = currentNavigationBar!.items!.first!
         let fileName = navigationItem.title!
-        let deleteAlert = UIAlertController(title: "Delete", message: "'\(fileName)' will be deleted. This action cannot be undone.", preferredStyle: UIAlertControllerStyle.Alert)
+        let deleteAlert =
+            UIAlertController(
+                title: "Delete",
+                message: "'\(fileName)' will be deleted. This action cannot be undone.",
+                preferredStyle: UIAlertControllerStyle.Alert
+        )
         deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
             self.filesArchive.removePropertyList(fileName)
             let successAlert = UIAlertController(title: "Deleted!", message: "You have successfully deleted \(fileName)!",

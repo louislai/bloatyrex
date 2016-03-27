@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D61C9984F6003E7B75 /* TrashZone.swift */; };
+		1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */; };
 		1DB4B0811C9516610010F727 /* Syntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0801C9516610010F727 /* Syntax.swift */; };
 		1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0821C951D1F0010F727 /* Interpreter.swift */; };
 		1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0841C951E250010F727 /* AgentProtocol.swift */; };
 		1DB4B0871C95527D0010F727 /* InterpreterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0861C95527D0010F727 /* InterpreterTests.swift */; };
-		3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21216A1C9A55F000E6564B /* PannableScene.swift */; };
 		1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */; };
 		1DB4B08B1C97FD940010F727 /* CodeBlocksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */; };
 		1DB4B08D1C99073F0010F727 /* DropZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B08C1C99073F0010F727 /* DropZone.swift */; };
@@ -23,6 +23,7 @@
 		1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0961C9927170010F727 /* InsertionPosition.swift */; };
 		1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */; };
 		1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */; };
+		3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21216A1C9A55F000E6564B /* PannableScene.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
@@ -54,7 +55,6 @@
 		BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */; };
 		BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */; };
 		BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */; };
-		BFA80FB31C95D10600F1BC15 /* ResetDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB21C95D10600F1BC15 /* ResetDelegate.swift */; };
 		BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,11 +77,11 @@
 
 /* Begin PBXFileReference section */
 		1D7E23D61C9984F6003E7B75 /* TrashZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TrashZone.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnRightBlock.swift; sourceTree = "<group>"; };
 		1DB4B0801C9516610010F727 /* Syntax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
 		1DB4B0821C951D1F0010F727 /* Interpreter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interpreter.swift; sourceTree = "<group>"; };
 		1DB4B0841C951E250010F727 /* AgentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AgentProtocol.swift; path = FinalProject/AgentProtocol.swift; sourceTree = "<group>"; };
 		1DB4B0861C95527D0010F727 /* InterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterpreterTests.swift; sourceTree = "<group>"; };
-		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableScene.swift; sourceTree = "<group>"; };
 		1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeBlocksViewController.swift; sourceTree = "<group>"; };
 		1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CodeBlocksScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B08C1C99073F0010F727 /* DropZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DropZone.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -90,8 +90,6 @@
 		1DB4B0921C991FC30010F727 /* CodeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CodeBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B0941C9920480010F727 /* MainBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B0961C9927170010F727 /* InsertionPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertionPosition.swift; sourceTree = "<group>"; };
-		1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardBlock.swift; sourceTree = "<group>"; };
-		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnLeftBlock.swift; sourceTree = "<group>"; };
 		1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ForwardBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TurnLeftBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PannableScene.swift; sourceTree = "<group>"; };
@@ -132,7 +130,6 @@
 		BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureManager.swift; sourceTree = "<group>"; };
 		BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Interpreter+LanguageDelegate.swift"; sourceTree = "<group>"; };
 		BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
-		BFA80FB21C95D10600F1BC15 /* ResetDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetDelegate.swift; sourceTree = "<group>"; };
 		BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramSupplier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +194,7 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BF640D771CA7BFF000FC454F /* CodeBlocks */,
 				B01BF8D01CA12D7D00D02FCA /* LevelDesignerScene */,
 				BF8E12AA1C99ADD800B210C3 /* PlayingScene */,
 				BF8E12A71C99AA8400B210C3 /* TitleScene */,
@@ -210,17 +208,6 @@
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
 				3DF230AD1C8F0617003420C0 /* Info.plist */,
 				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
-				1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */,
-				1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */,
-				1DB4B08C1C99073F0010F727 /* DropZone.swift */,
-				1D7E23D61C9984F6003E7B75 /* TrashZone.swift */,
-				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
-				1DB4B0901C991F260010F727 /* ProgramBlocks.swift */,
-				1DB4B0921C991FC30010F727 /* CodeBlock.swift */,
-				1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */,
-				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
-				1DB4B0941C9920480010F727 /* MainBlock.swift */,
-				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -280,15 +267,34 @@
 		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BF5339C61C941155007F56F0 /* AgentNode.swift */,
 				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
 				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
 				BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
-				BFA80FB21C95D10600F1BC15 /* ResetDelegate.swift */,
 			);
 			name = GameEngine;
+			sourceTree = "<group>";
+		};
+		BF640D771CA7BFF000FC454F /* CodeBlocks */ = {
+			isa = PBXGroup;
+			children = (
+				1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */,
+				1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */,
+				1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */,
+				1DB4B08C1C99073F0010F727 /* DropZone.swift */,
+				1D7E23D61C9984F6003E7B75 /* TrashZone.swift */,
+				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
+				1DB4B0901C991F260010F727 /* ProgramBlocks.swift */,
+				1DB4B0921C991FC30010F727 /* CodeBlock.swift */,
+				1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */,
+				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
+				1DB4B0941C9920480010F727 /* MainBlock.swift */,
+				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
+			);
+			name = CodeBlocks;
 			sourceTree = "<group>";
 		};
 		BF8E12A71C99AA8400B210C3 /* TitleScene */ = {
@@ -302,7 +308,6 @@
 		BF8E12AA1C99ADD800B210C3 /* PlayingScene */ = {
 			isa = PBXGroup;
 			children = (
-				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */,
 			);
 			name = PlayingScene;
@@ -479,6 +484,7 @@
 				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
 				1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */,
 				1DB4B0931C991FC30010F727 /* CodeBlock.swift in Sources */,
+				1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
 				BF49FA511CA61ACF00546F43 /* Constants.swift in Sources */,
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
@@ -506,7 +512,6 @@
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
 				1DB4B0911C991F260010F727 /* ProgramBlocks.swift in Sources */,
 				BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */,
-				BFA80FB31C95D10600F1BC15 /* ResetDelegate.swift in Sources */,
 				3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */,
 				B01BF8D41CA1B31100D02FCA /* LevelSelectorViewController.swift in Sources */,
 				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,

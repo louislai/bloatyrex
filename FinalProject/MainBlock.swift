@@ -16,6 +16,11 @@ class MainBlock: CodeBlock {
         blockBody.fillColor = UIColor.blueColor()
         super.init()
         self.addChild(blockBody)
+        self.resizeDropZone()
+    }
+
+    override func getBlockConstruct() -> Construct {
+        return Construct.Main
     }
 
     override func deactivateDropZone() {

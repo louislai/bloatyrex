@@ -9,13 +9,19 @@
 import SpriteKit
 
 class ForwardBlock: CodeBlock {
-    let blockBody: SKShapeNode
+    let blockBody: SKSpriteNode
 
     override init() {
-        blockBody = SKShapeNode(rect: CGRect(x: 0, y: CodeBlock.dropZoneSize, width: 150, height: 30), cornerRadius: 0)
-        blockBody.fillColor = UIColor.greenColor()
+        blockBody = SKSpriteNode(imageNamed: "up-block")
+        blockBody.position = CGPoint(x: blockBody.size.width / 2,
+            y: blockBody.size.height / 2 + CodeBlock.dropZoneSize)
         super.init()
         self.addChild(blockBody)
+        self.resizeDropZone()
+    }
+
+    override func getBlockConstruct() -> Construct {
+        return Construct.ActionConstruct(Action.Forward)
     }
 
     required init?(coder aDecoder: NSCoder) {
