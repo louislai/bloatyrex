@@ -31,10 +31,10 @@ class CodeBlocksScene: SKScene, ProgramSupplier {
     }
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
-        blankButton.position = CGPointMake(size.width * 0.1, size.height * 0.7)
-        blockButton.position = CGPointMake(size.width * 0.1, size.height * 0.5)
-        wallButton.position = CGPointMake(size.width * 0.1, size.height * 0.3)
-        programBlocks.position = CGPointMake(size.width * 0.4, size.height * 0.9)
+        blankButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.7)
+        blockButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
+        wallButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.3)
+        programBlocks.position = CGPoint(x: size.width * 0.4, y: size.height * 0.9)
         wallButton.zPosition = 10
         blockButton.zPosition = 10
         addChild(wallButton)

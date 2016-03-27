@@ -74,7 +74,7 @@ class CodeBlock: SKNode {
     func resizeDropZone() {
         dropZone.removeFromParent()
         let selfFrame = self.calculateAccumulatedFrame()
-        dropZone = DropZone(size: CGSizeMake(selfFrame.width, CodeBlock.dropZoneSize))
+        dropZone = DropZone(size: CGSize(width: selfFrame.width, height: CodeBlock.dropZoneSize))
         self.addChild(dropZone)
     }
 
