@@ -43,3 +43,12 @@ enum Instructions {
     case Jump(Int)
     case Done
 }
+
+enum Construct {
+    case None
+    case Main
+    case ActionConstruct(Action)
+    case ConditionalExpressionConstruct(ConditionalExpression)
+    case LoopExpressionConstruct(LoopExpression)
+    case PredicateConstruct(Predicate)
+}
