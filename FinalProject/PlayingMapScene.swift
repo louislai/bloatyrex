@@ -19,9 +19,14 @@ struct PlayingMapSceneConstants {
         static let pause = "Pause"
         static let reset = "Reset"
     }
+    struct ButtonSpriteName {
+        static let play = "play"
+        static let pause = "pause"
+        static let reset = "stop"
+    }
 }
 
-class PlayingMapScene: SKScene {
+class PlayingMapScene: PannableScene {
     var map: Map!
     var running = false
     let blocksLayer = SKNode()
@@ -48,8 +53,8 @@ class PlayingMapScene: SKScene {
     var timeOfLastMove: CFTimeInterval = 0.0
     let timePerMove: CFTimeInterval = 1.0
 
-    override init(size: CGSize) {
-        super.init(size: size)
+    init(size: CGSize, zoomLevel: CGFloat) {
+        super.init(size: size, zoomLevel: zoomLevel)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         backgroundColor = UIColor.whiteColor()
     }
@@ -84,12 +89,12 @@ class PlayingMapScene: SKScene {
         // The blocksLayer represent the shape of the map.
         // Each block is a square
         blocksLayer.position = layerPosition
-        addChild(blocksLayer)
+        addNodeToContent(blocksLayer)
 
         // This layer holds the MapUnit sprites. The positions of these sprites
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
-        addChild(unitsLayer)
+        addNodeToContent(unitsLayer)
         addBlocks()
         setupMapUnits()
         setupHud()
@@ -121,8 +126,7 @@ class PlayingMapScene: SKScene {
 
     func setupHud() {
         // 1
-        let movesLeftLabel = SKLabelNode(fontNamed: "Courier")
-        movesLeftLabel.fontSize = 65
+        let movesLeftLabel = SKLabelNode(text: "Moves Left: ")
         movesLeftLabel.name = PlayingMapSceneConstants.NodeNames.movesLeftLabel
 
         let layerPosition = CGPoint(
@@ -135,56 +139,44 @@ class PlayingMapScene: SKScene {
 
         // 3
         movesLeftLabel.position = layerPosition
-        addChild(movesLeftLabel)
+        addNodeToOverlay(movesLeftLabel)
 
         movesLeft = originalMovesLeft
     }
 
     func setupButtons() {
         // Setup Play button
-        let playLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.play)
-        playLabel.fontSize = 65
-        playLabel.fontColor = SKColor.greenColor()
-        playLabel.fontName = "Courier"
+        let playLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.play)
+        playLabel.size = blockSize
         let playButton = SKButton(defaultButton: playLabel)
-        playButton.action = {
-            self.run()
-        }
+        playButton.addTarget(self, selector: Selector("run"))
         playButton.position = CGPoint(
-            x: -300.0,
+            x: -80.0,
             y: -300.0
         )
-        addChild(playButton)
+        addNodeToOverlay(playButton)
 
         // Setup Pause button
-        let pauseLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.pause)
-        pauseLabel.fontSize = 65
-        pauseLabel.fontColor = SKColor.greenColor()
-        pauseLabel.fontName = "Courier"
+        let pauseLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.pause)
+        pauseLabel.size = blockSize
         let pauseButton = SKButton(defaultButton: pauseLabel)
-        pauseButton.action = {
-            self.pause()
-        }
+        pauseButton.addTarget(self, selector: Selector("pause"))
         pauseButton.position = CGPoint(
             x: 0.0,
             y: -300.0
         )
-        addChild(pauseButton)
+        addNodeToOverlay(pauseButton)
 
         // Setup Reset button
-        let resetLabel = SKLabelNode(text: PlayingMapSceneConstants.LabelText.reset)
-        resetLabel.fontSize = 65
-        resetLabel.fontColor = SKColor.greenColor()
-        resetLabel.fontName = "Courier"
+        let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)
+        resetLabel.size = blockSize
         let resetButton = SKButton(defaultButton: resetLabel)
-        resetButton.action = {
-            self.reset()
-        }
+        resetButton.addTarget(self, selector: Selector("reset"))
         resetButton.position = CGPoint(
-            x: 300.0,
+            x: 80.0,
             y: -300.0
         )
-        addChild(resetButton)
+        addNodeToOverlay(resetButton)
     }
 
     func setupMapUnits() {

@@ -9,7 +9,7 @@
 import SpriteKit
 
 class CodeBlocksScene: SKScene {
-    
+
     enum PressState {
         case AddingBlock
         case MovingBlock
@@ -23,9 +23,9 @@ class CodeBlocksScene: SKScene {
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
     var pressState = PressState.Idle
-    
+
     let insertionPosition = InsertionPosition()
-    
+
     override func didMoveToView(view: SKView) {
         backgroundColor = SKColor.whiteColor()
         blankButton.position = CGPointMake(size.width * 0.1, size.height * 0.7)
@@ -39,11 +39,11 @@ class CodeBlocksScene: SKScene {
         addChild(programBlocks)
         addChild(blankButton)
     }
-    
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first! as UITouch
         let location = touch.locationInNode(self)
-        
+
         if blockButton.containsPoint(location) {
             heldBlock = blockButton
             blockButton.pickBlock(true)
@@ -57,7 +57,7 @@ class CodeBlocksScene: SKScene {
             blankButton.pickBlock(true)
             pressState = .AddingBlock
         }
-        
+
         if programBlocks.containsPoint(location) {
             movedBlock = programBlocks.getBlock(location)
             if let block = movedBlock {
@@ -66,18 +66,18 @@ class CodeBlocksScene: SKScene {
             }
         }
     }
-    
+
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first! as UITouch
         let touchLocation = touch.locationInNode(self)
         let previousLocation = touch.previousLocationInNode(self)
         let xMovement = touchLocation.x - previousLocation.x
         let yMovement = touchLocation.y - previousLocation.y
-        
+
         switch pressState {
         case .AddingBlock:
             if let block = heldBlock {
-                block.moveBlock(CGPointMake(xMovement, yMovement))
+                block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
                     programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
                 } else {
@@ -87,7 +87,7 @@ class CodeBlocksScene: SKScene {
         case .MovingBlock:
             if let block = movedBlock {
                 if let _ = block as? MainBlock {
-                    programBlocks.shift(CGPointMake(xMovement, yMovement))
+                    programBlocks.shift(CGPoint(x: xMovement, y: yMovement))
                 } else {
                     block.position.x += xMovement
                     block.position.y += yMovement
@@ -102,7 +102,7 @@ class CodeBlocksScene: SKScene {
             break
         }
     }
-    
+
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         switch pressState {
         case .AddingBlock:

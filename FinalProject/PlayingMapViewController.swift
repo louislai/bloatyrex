@@ -10,10 +10,14 @@ import UIKit
 import SpriteKit
 
 class PlayingMapViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        // Configure the view.
+    var map: Map!
+    var scene: PlayingMapScene!
+
+    override func didMoveToParentViewController(parent: UIViewController?) {
+        super.didMoveToParentViewController(parent)
+        print(view.bounds.size)
+        // Configure the view
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
         skView.showsFPS = true
@@ -28,20 +32,10 @@ class PlayingMapViewController: UIViewController {
         let skView = view as! SKView
 
         // Create and configure the scene.
-        let scene = PlayingMapScene(size: skView.bounds.size)
+        let scene = PlayingMapScene(size: skView.bounds.size, zoomLevel: 1)
         scene.scaleMode = .AspectFill
 
         // Load the map
-        let map = Map(numberOfRows: 3, numberOfColumns: 9)
-        map.setMapUnitAt(.Agent, row: 0, column: 0)
-        map.setMapUnitAt(.Wall, row: 0, column: 1)
-        map.setMapUnitAt(.Goal, row: 0, column: 7)
-        for i in 0..<9 {
-            map.setMapUnitAt(.Wall, row: 2, column: i)
-        }
-        for i in 0..<3 {
-            map.setMapUnitAt(.Wall, row: i, column: 8)
-        }
         scene.map = map
         scene.resetDelegate = self
         scene.setup()
@@ -54,7 +48,8 @@ extension PlayingMapViewController: ResetDelegate {
     func reset() {
         let skView = view as! SKView
 
-        let transition = SKTransition.crossFadeWithDuration(0.5)
-        skView.presentScene(newScene(), transition: transition)
+        let transition = SKTransition.crossFadeWithDuration(0.0)
+        scene = newScene()
+        skView.presentScene(scene, transition: transition)
     }
 }

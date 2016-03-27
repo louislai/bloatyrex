@@ -9,9 +9,10 @@
 import SpriteKit
 
 class SKButton: SKNode {
-    var defaultButton: SKNode
-    var activeButton: SKNode?
-    var action: (() -> Void)?
+    private var defaultButton: SKNode
+    private var activeButton: SKNode?
+    private var targetObject: NSObject?
+    private var targetSelector: Selector?
 
     init(defaultButton: SKNode, activeButton: SKNode? = nil) {
             self.defaultButton = defaultButton
@@ -27,6 +28,16 @@ class SKButton: SKNode {
 
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func addTarget(target: NSObject, selector: Selector) {
+        targetObject = target
+        targetSelector = selector
+    }
+
+    func removeTarget() {
+        targetObject = nil
+        targetSelector = nil
     }
 
     override func touchesBegan(touches: Set<UITouch>,
@@ -60,9 +71,10 @@ class SKButton: SKNode {
             let location: CGPoint = touch.locationInNode(self)
 
             if defaultButton.containsPoint(location) {
-                if let action = action {
-                    action()
-                }
+                if let object = targetObject,
+                    selector = targetSelector where object.respondsToSelector(selector) {
+                        object.performSelector(selector, withObject: touches, withObject: event)
+                    }
             }
 
             activeButton?.hidden = true

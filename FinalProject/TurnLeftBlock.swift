@@ -23,7 +23,7 @@ class TurnLeftBlock: CodeBlock {
     override func getBlockConstruct() -> Construct {
         return Construct.ActionConstruct(Action.RotateLeft)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

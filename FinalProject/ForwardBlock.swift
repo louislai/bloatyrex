@@ -23,7 +23,7 @@ class ForwardBlock: CodeBlock {
     override func getBlockConstruct() -> Construct {
         return Construct.ActionConstruct(Action.Forward)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
