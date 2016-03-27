@@ -23,6 +23,7 @@ struct PlayingMapSceneConstants {
         static let play = "play"
         static let pause = "pause"
         static let reset = "stop"
+        static let back = "back"
     }
 }
 
@@ -34,7 +35,7 @@ class PlayingMapScene: PannableScene {
     var activeAgentNodes = [AgentNode]()
     var originalMovesLeft = 11
     var movesLeft = 0
-    var resetDelegate: ResetDelegate!
+    var playingMapController: PlayingMapViewController!
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -110,7 +111,11 @@ class PlayingMapScene: PannableScene {
     }
 
     func reset() {
-        resetDelegate.reset()
+        playingMapController.reset()
+    }
+
+    func goBack() {
+        playingMapController.goBack()
     }
 
     func addBlocks() {
@@ -128,6 +133,7 @@ class PlayingMapScene: PannableScene {
         // 1
         let movesLeftLabel = SKLabelNode(text: "Moves Left: ")
         movesLeftLabel.name = PlayingMapSceneConstants.NodeNames.movesLeftLabel
+        movesLeftLabel.fontColor = UIColor.blueColor()
 
         let layerPosition = CGPoint(
             x: -movesLeftLabel.frame.size.width/2,
@@ -177,6 +183,18 @@ class PlayingMapScene: PannableScene {
             y: -300.0
         )
         addNodeToOverlay(resetButton)
+
+
+        // Setup Back Button
+        let backLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.back)
+        backLabel.size = blockSize
+        let backButton = SKButton(defaultButton: backLabel)
+        backButton.addTarget(self, selector: #selector(PlayingMapScene.goBack))
+        backButton.position = CGPoint(
+            x: -200.0,
+            y: -300.0
+        )
+        addNodeToOverlay(backButton)
     }
 
     func setupMapUnits() {

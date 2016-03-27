@@ -36,20 +36,24 @@ class PlayingMapViewController: UIViewController {
         scene.scaleMode = .AspectFill
 
         // Load the map
-        scene.map = map
-        scene.resetDelegate = self
+        scene.map = map.copy() as! Map
+        scene.playingMapController = self
         scene.setup()
 
         return scene
     }
 }
 
-extension PlayingMapViewController: ResetDelegate {
+extension PlayingMapViewController {
     func reset() {
         let skView = view as! SKView
 
         let transition = SKTransition.crossFadeWithDuration(0.0)
         scene = newScene()
         skView.presentScene(scene, transition: transition)
+    }
+
+    func goBack() {
+        navigationController?.popViewControllerAnimated(true)
     }
 }
