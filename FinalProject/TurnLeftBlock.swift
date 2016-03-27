@@ -10,7 +10,7 @@ import SpriteKit
 
 class TurnLeftBlock: CodeBlock {
     let blockBody: SKSpriteNode
-    
+
     override init() {
         blockBody = SKSpriteNode(imageNamed: "turn-left-block")
         blockBody.position = CGPoint(x: blockBody.size.width / 2,
@@ -19,7 +19,7 @@ class TurnLeftBlock: CodeBlock {
         self.addChild(blockBody)
         self.resizeDropZone()
     }
-    
+
     override func getBlockConstruct() -> Construct {
         return Construct.ActionConstruct(Action.RotateLeft)
     }

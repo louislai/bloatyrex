@@ -10,7 +10,7 @@ import SpriteKit
 
 class ForwardBlock: CodeBlock {
     let blockBody: SKSpriteNode
-    
+
     override init() {
         blockBody = SKSpriteNode(imageNamed: "up-block")
         blockBody.position = CGPoint(x: blockBody.size.width / 2,
@@ -19,7 +19,7 @@ class ForwardBlock: CodeBlock {
         self.addChild(blockBody)
         self.resizeDropZone()
     }
-    
+
     override func getBlockConstruct() -> Construct {
         return Construct.ActionConstruct(Action.Forward)
     }

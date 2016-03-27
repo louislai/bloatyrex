@@ -18,7 +18,7 @@ class MainBlock: CodeBlock {
         self.addChild(blockBody)
         self.resizeDropZone()
     }
-    
+
     override func getBlockConstruct() -> Construct {
         return Construct.Main
     }

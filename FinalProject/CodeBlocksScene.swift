@@ -15,7 +15,7 @@ class CodeBlocksScene: SKScene, ProgramSupplier {
         case MovingBlock
         case Idle
     }
-    
+
     let blockButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward)
     let wallButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft)
     let blankButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight)
@@ -25,7 +25,7 @@ class CodeBlocksScene: SKScene, ProgramSupplier {
     var pressState = PressState.Idle
 
     let insertionPosition = InsertionPosition()
-    
+
     func retrieveProgram() -> Program? {
         return programBlocks.getCode()
     }
@@ -128,7 +128,7 @@ class CodeBlocksScene: SKScene, ProgramSupplier {
         case .MovingBlock:
             if let block = movedBlock {
                 if let _ = block as? MainBlock {
-                    
+
                 } else {
                     block.activateDropZone()
                     programBlocks.endHover()

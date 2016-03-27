@@ -10,7 +10,7 @@ import SpriteKit
 
 class CodeBlock: SKNode {
     static let dropZoneSize: CGFloat = 10
-    
+
     var dropZone: DropZone
     var blockPosition = 0
     var dropZoneActivated = true
@@ -31,11 +31,11 @@ class CodeBlock: SKNode {
         resizeDropZone()
         dropZone.zPosition = 5
     }
-    
+
     func getBlockConstruct() -> Construct {
         return Construct.None
     }
-    
+
     func hover(location: CGPoint, insertionHandler: InsertionPosition) {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
@@ -70,14 +70,14 @@ class CodeBlock: SKNode {
         dropZoneActivated = true
         dropZone.hidden = false
     }
-    
+
     func resizeDropZone() {
         dropZone.removeFromParent()
         let selfFrame = self.calculateAccumulatedFrame()
         dropZone = DropZone(size: CGSizeMake(selfFrame.width, CodeBlock.dropZoneSize))
         self.addChild(dropZone)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

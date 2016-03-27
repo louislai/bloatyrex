@@ -105,16 +105,16 @@ class ProgramBlocks: SKNode {
         }
         flushBlocks()
     }
-    
+
     func getCode() -> Program? {
         return parseBlock(1)
     }
-    
+
     private func parseBlock(programCounter: Int) -> Program? {
         guard blocks.count > programCounter else {
             return nil
         }
-        
+
         let block: Statement?
         switch blocks[programCounter].getBlockConstruct() {
         case .ActionConstruct(let action):
@@ -122,7 +122,7 @@ class ProgramBlocks: SKNode {
         default:
             block = nil
         }
-        
+
         if let statement = block {
             if blocks.count > programCounter + 1 {
                 if let nextBlock = parseBlock(programCounter + 1) {
@@ -137,7 +137,7 @@ class ProgramBlocks: SKNode {
             return nil
         }
     }
-    
+
     private func flushBlocks() {
         var yPos: CGFloat = blocks[0].position.y
         let xPos = blocks[0].position.x
