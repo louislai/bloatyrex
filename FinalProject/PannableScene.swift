@@ -14,6 +14,9 @@ import SpriteKit
 ///  nodes that are intended to be pannable to the content and add nodes that should be fixed in
 ///  position regardless of panning to the overlay.
 ///
+///  PannableScene uses pan, double tap and pinch gesture recognizers for its translation and
+///  zooming functionality and hence may not work correctly if more of such recognizers are added.
+///
 ///  The node hierarchy is as follows:
 ///
 ///          PannableScene
@@ -65,20 +68,24 @@ class PannableScene: SKScene {
             action: #selector(PannableScene.handleDoubleTap(_:)))
         doubleTapRecognizer.numberOfTapsRequired = 2
         self.view!.addGestureRecognizer(doubleTapRecognizer)
+        let panRecognizer = UIPanGestureRecognizer(target: self,
+                                                   action: #selector(PannableScene.handlePan(_:)))
+        self.view!.addGestureRecognizer(panRecognizer)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // Handle the panning movement of the scene.
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let touch = touches.first {
-            // calculate the distance panned
-            let newPoint = touch.locationInNode(self)
-            let previousPoint = touch.previousLocationInNode(self)
-            var horizontalDisplacement = newPoint.x - previousPoint.x
-            var verticalDisplacement = newPoint.y - previousPoint.y
+    /**
+    Handles the translation of the viewpoint using the pan gesture.
+    */
+    func handlePan(sender: UIPanGestureRecognizer) {
+        if sender.state == .Changed {
+            var translation = sender.translationInView(sender.view!)
+            translation = CGPoint(x: translation.x, y: -translation.y)
+            var horizontalDisplacement = translation.x
+            var verticalDisplacement = translation.y
 
             // bound the area within which the viewpoint can pan
             if horizontalDisplacement > 0 {
@@ -100,6 +107,8 @@ class PannableScene: SKScene {
 
             // viewpoint moves in opposite direction from pan to simulate movement
             moveViewPointBy(-horizontalDisplacement, verticalDisplacement: -verticalDisplacement)
+
+            sender.setTranslation(CGPoint.zero, inView: sender.view)
         }
     }
 
