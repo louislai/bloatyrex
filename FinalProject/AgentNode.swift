@@ -27,7 +27,7 @@ class AgentNode: SKSpriteNode {
             case .NoAction:
                 return false
             case .RotateLeft:
-                setOrientationTo(Direction(rawValue: orientation.rawValue-1 % 4)!)
+                setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
                 return false
             case .RotateRight:
                 setOrientationTo(Direction(rawValue: orientation.rawValue+1 % 4)!)
