@@ -45,12 +45,10 @@ class PlayingMapScene: PannableScene {
     private var numberOfColumns: Int {
         return map.numberOfColumns
     }
-    let blockWidth = CGFloat(40.0)
-    let blockHeight = CGFloat(40.0)
     var blockSize: CGSize {
         return CGSize(
-            width: blockWidth,
-            height: blockHeight
+            width: GlobalConstants.Dimension.blockWidth,
+            height: GlobalConstants.Dimension.blockHeight
             )
     }
 
@@ -86,8 +84,8 @@ class PlayingMapScene: PannableScene {
 
     func setup() {
         let layerPosition = CGPoint(
-            x: -blockWidth * CGFloat(numberOfColumns) / 2,
-            y: -blockHeight * CGFloat(numberOfRows) / 2
+            x: -GlobalConstants.Dimension.blockWidth * CGFloat(numberOfColumns) / 2,
+            y: -GlobalConstants.Dimension.blockHeight * CGFloat(numberOfRows) / 2
         )
 
         // The blocksLayer represent the shape of the map.
@@ -107,14 +105,16 @@ class PlayingMapScene: PannableScene {
     }
 
     func run() {
-        if !programRetrieved {
-            for agent in activeAgentNodes {
-                if let program = programSupplier.retrieveProgram() {
-                    agent.delegate = Interpreter(program: program)
-                }
-            }
-            programRetrieved = true
+        guard !programRetrieved else {
+            resetAndRun()
+            return
         }
+        for agent in activeAgentNodes {
+            if let program = programSupplier.retrieveProgram() {
+                agent.delegate = Interpreter(program: program)
+            }
+        }
+        programRetrieved = true
         running = true
     }
 
@@ -124,6 +124,10 @@ class PlayingMapScene: PannableScene {
 
     func reset() {
         playingMapController.reset()
+    }
+
+    func resetAndRun() {
+        playingMapController.resetAndRun()
     }
 
     func goBack() {
@@ -259,8 +263,8 @@ class PlayingMapScene: PannableScene {
     // to unitsLayer
     func pointFor(row: Int, column: Int) -> CGPoint {
         return CGPoint(
-            x: CGFloat(column)*blockWidth,
-            y: CGFloat(row)*blockHeight
+            x: CGFloat(column)*GlobalConstants.Dimension.blockWidth,
+            y: CGFloat(row)*GlobalConstants.Dimension.blockHeight
         )
     }
 }
