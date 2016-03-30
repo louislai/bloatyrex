@@ -10,5 +10,14 @@ import UIKit
 
 class ProgrammingViewController: UIViewController {
     var map: Map!
-    var programSupplier: ProgramSupplier!
+
+    @IBAction func zoomButtonPressed(sender: UIButton) {
+        dismissViewControllerAnimated(false, completion: nil)
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? ThumbnailPlayingMapViewController {
+            destination.map = map
+        }
+    }
 }

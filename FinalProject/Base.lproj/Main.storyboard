@@ -181,8 +181,11 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLy-WU-ahl">
-                                <rect key="frame" x="967" y="707" width="37" height="41"/>
+                                <rect key="frame" x="957" y="697" width="37" height="41"/>
                                 <state key="normal" title="Button" image="zoom"/>
+                                <connections>
+                                    <segue destination="IvN-jd-ujU" kind="showDetail" animates="NO" id="Ygj-YH-BLV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -237,6 +240,13 @@
                                     <segue destination="r0Q-WW-r6m" kind="embed" id="gE0-cD-3Dc"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DqC-bw-K81">
+                                <rect key="frame" x="248" y="702" width="51" height="46"/>
+                                <state key="normal" title="Button" image="zoom"/>
+                                <connections>
+                                    <action selector="zoomButtonPressed:" destination="IvN-jd-ujU" eventType="touchUpInside" id="PzB-rD-CTf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -251,7 +261,7 @@
         <scene sceneID="20f-jf-KS7">
             <objects>
                 <viewController id="BGt-w1-RuZ" customClass="ThumbnailPlayingMapViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bth-qv-TzO">
+                    <view key="view" contentMode="scaleToFill" id="bth-qv-TzO" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
