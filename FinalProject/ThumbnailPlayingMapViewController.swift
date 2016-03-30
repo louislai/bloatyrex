@@ -6,4 +6,8 @@
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class ThumbnailPlayingMapViewController: UIViewController {
+    var map: Map!
+}

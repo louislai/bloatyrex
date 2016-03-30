@@ -59,6 +59,7 @@
 		BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */; };
 		BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */; };
 		BFFB1A3E1CABB78F00C746CD /* MapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A3D1CABB78F00C746CD /* MapNode.swift */; };
+		BFFB1A401CAC03AE00C746CD /* StaticMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +138,7 @@
 		BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammingViewController.swift; sourceTree = "<group>"; };
 		BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPlayingMapViewController.swift; sourceTree = "<group>"; };
 		BFFB1A3D1CABB78F00C746CD /* MapNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapNode.swift; sourceTree = "<group>"; };
+		BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticMapScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 			children = (
 				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
+				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,
 				BFFB1A3D1CABB78F00C746CD /* MapNode.swift */,
 				BF5339C61C941155007F56F0 /* AgentNode.swift */,
 				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
@@ -515,6 +518,7 @@
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
 				BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */,
 				B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */,
+				BFFB1A401CAC03AE00C746CD /* StaticMapScene.swift in Sources */,
 				BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */,
 				BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */,
 				1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */,

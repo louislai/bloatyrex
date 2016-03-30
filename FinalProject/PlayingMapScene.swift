@@ -9,9 +9,6 @@
 import SpriteKit
 
 struct PlayingMapSceneConstants {
-    struct NodeNames {
-        static let movesLeftLabel = "movesLeft"
-    }
     struct LabelText {
         static let play = "Play"
         static let pause = "Pause"
@@ -25,11 +22,9 @@ struct PlayingMapSceneConstants {
     }
 }
 
-class PlayingMapScene: PannableScene {
-    var mapNode: MapNode
+class PlayingMapScene: StaticMapScene {
     var running = false
     var movesLeft: Int
-    let hudLayer = SKNode()
     weak var playingMapController: PlayingMapViewController!
     var programSupplier: ProgramSupplier!
     var programRetrieved = false
@@ -40,16 +35,13 @@ class PlayingMapScene: PannableScene {
     var buttonSize: CGSize {
         return CGSize(
             width: GlobalConstants.Dimension.blockWidth*1.5,
-            height: GlobalConstants.Dimension.blockHeight*1.5
+            height: GlobalConstants.Dimension.blockHeight*2
         )
     }
 
-    init(size: CGSize, zoomLevel: CGFloat, map: Map) {
-        self.mapNode = MapNode(size: size, map: map)
-        self.movesLeft = mapNode.originalMovesLeft
-        super.init(size: size, zoomLevel: zoomLevel)
-        anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        backgroundColor = UIColor.whiteColor()
+    override init(size: CGSize, zoomLevel: CGFloat, map: Map) {
+        self.movesLeft = 11
+        super.init(size: size, zoomLevel: zoomLevel, map: map)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -73,11 +65,8 @@ class PlayingMapScene: PannableScene {
         timeOfLastMove = currentTime
     }
 
-    func setup() {
-        addNodeToContent(mapNode)
-        mapNode.setup()
-        addNodeToOverlay(hudLayer)
-        setupHud()
+    override func setup() {
+        super.setup()
         setupButtons()
     }
 
@@ -109,24 +98,6 @@ class PlayingMapScene: PannableScene {
 
     func goBack() {
         playingMapController.goBack()
-    }
-
-    func setupHud() {
-        // 1
-        let movesLeftLabel = SKLabelNode(text: "Moves Left: ")
-        movesLeftLabel.name = PlayingMapSceneConstants.NodeNames.movesLeftLabel
-
-        let layerPosition = CGPoint(
-            x: -movesLeftLabel.frame.size.width/2,
-            y: 300.0
-        )
-        // 2
-        movesLeftLabel.fontColor = SKColor.blueColor()
-        movesLeftLabel.text = String(format: "Moves Left: %d", mapNode.originalMovesLeft)
-
-        // 3
-        movesLeftLabel.position = layerPosition
-        hudLayer.addChild(movesLeftLabel)
     }
 
     func setupButtons() {
@@ -189,19 +160,10 @@ class PlayingMapScene: PannableScene {
 
     private func decrementMovesLeft() {
         movesLeft -= 1
-        if let node = hudLayer.childNodeWithName(PlayingMapSceneConstants.NodeNames.movesLeftLabel)
+        if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
             node.text = "Moves left: \(movesLeft)"
         }
 
-    }
-
-    // Convert a row, column pair into a CGPoint relative
-    // to unitsLayer
-    func pointFor(row: Int, column: Int) -> CGPoint {
-        return CGPoint(
-            x: CGFloat(column)*GlobalConstants.Dimension.blockWidth,
-            y: CGFloat(row)*GlobalConstants.Dimension.blockHeight
-        )
     }
 }
