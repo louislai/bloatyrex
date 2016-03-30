@@ -9,7 +9,7 @@
 import SpriteKit
 
 class AgentNode: SKSpriteNode {
-    weak var gameScene: PlayingMapScene!
+    weak var mapNode: MapNode!
     var orientation = Direction.Up
     var row: Int!
     var column: Int!
@@ -21,7 +21,7 @@ class AgentNode: SKSpriteNode {
         guard let delegate = delegate else {
             return false
         }
-        if let nextAction = delegate.nextAction(gameScene.map, agent: self) {
+        if let nextAction = delegate.nextAction(mapNode.map, agent: self) {
             print(nextAction)
             switch nextAction {
             case .NoAction:
@@ -56,21 +56,21 @@ class AgentNode: SKSpriteNode {
     // Return true if moveForward causes the agent to reach the goal
     func moveForward() -> Bool {
         if let (nextRow, nextColumn, nextUnit) = nextPosition() {
-            gameScene.map.clearMapUnitAt(row, column: column)
+            mapNode.map.clearMapUnitAt(row, column: column)
 
 
             row = nextRow
             column = nextColumn
 
             // Move sprite
-            let targetPoint = gameScene.pointFor(row, column: column)
+            let targetPoint = mapNode.pointFor(row, column: column)
             let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
             runAction(moveAction)
 
             if nextUnit == .Goal {
                 return true
             }
-            gameScene.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
+            mapNode.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
         }
         return false
     }
@@ -80,12 +80,12 @@ class AgentNode: SKSpriteNode {
         var nextColumn: Int = column
         switch orientation {
         case .Up:
-            guard row < gameScene.map.numberOfRows-1 else {
+            guard row < mapNode.map.numberOfRows-1 else {
                 return nil
             }
             nextRow += 1
         case .Right:
-            guard column < gameScene.map.numberOfColumns-1 else {
+            guard column < mapNode.map.numberOfColumns-1 else {
                 return nil
             }
             nextColumn += 1
@@ -101,7 +101,7 @@ class AgentNode: SKSpriteNode {
             nextColumn -= 1
 
         }
-        let unit = gameScene.map.retrieveMapUnitAt(nextRow, column: nextColumn)
+        let unit = mapNode.map.retrieveMapUnitAt(nextRow, column: nextColumn)
         guard let nextUnit = unit else {
             return nil
         }

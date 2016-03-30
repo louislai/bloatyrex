@@ -17,4 +17,9 @@ class GlobalConstants {
         static let blockWidth = CGFloat(40)
         static let blockHeight = CGFloat(40)
     }
+
+    struct zPosition {
+        static let front = CGFloat(2)
+        static let back = CGFloat(1)
+    }
 }

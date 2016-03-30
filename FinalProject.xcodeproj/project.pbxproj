@@ -56,6 +56,9 @@
 		BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */; };
 		BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */; };
 		BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */; };
+		BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */; };
+		BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */; };
+		BFFB1A3E1CABB78F00C746CD /* MapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A3D1CABB78F00C746CD /* MapNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +134,9 @@
 		BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Interpreter+LanguageDelegate.swift"; sourceTree = "<group>"; };
 		BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
 		BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramSupplier.swift; sourceTree = "<group>"; };
+		BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammingViewController.swift; sourceTree = "<group>"; };
+		BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPlayingMapViewController.swift; sourceTree = "<group>"; };
+		BFFB1A3D1CABB78F00C746CD /* MapNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +200,7 @@
 		3DF230A01C8F0617003420C0 /* FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				BFFB1A381CABB3D400C746CD /* ProgrammingScene */,
 				BF640D771CA7BFF000FC454F /* CodeBlocks */,
 				B01BF8D01CA12D7D00D02FCA /* LevelDesignerScene */,
 				BF8E12AA1C99ADD800B210C3 /* PlayingScene */,
@@ -268,6 +275,7 @@
 			children = (
 				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
+				BFFB1A3D1CABB78F00C746CD /* MapNode.swift */,
 				BF5339C61C941155007F56F0 /* AgentNode.swift */,
 				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
 				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
@@ -329,6 +337,15 @@
 				BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		BFFB1A381CABB3D400C746CD /* ProgrammingScene */ = {
+			isa = PBXGroup;
+			children = (
+				BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */,
+				BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */,
+			);
+			name = ProgrammingScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -503,10 +520,13 @@
 				1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */,
 				1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */,
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
+				BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */,
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
 				1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
+				BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */,
 				3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */,
+				BFFB1A3E1CABB78F00C746CD /* MapNode.swift in Sources */,
 				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
