@@ -28,6 +28,7 @@ class PlayingMapScene: StaticMapScene {
     weak var playingMapController: PlayingMapViewController!
     var programSupplier: ProgramSupplier!
     var programRetrieved = false
+    var playButton: SKButton!
 
     var timeOfLastMove: CFTimeInterval = 0.0
     let timePerMove: CFTimeInterval = 1.0
@@ -35,9 +36,22 @@ class PlayingMapScene: StaticMapScene {
     var buttonSize: CGSize {
         return CGSize(
             width: GlobalConstants.Dimension.blockWidth*1.5,
-            height: GlobalConstants.Dimension.blockHeight*2
+            height: GlobalConstants.Dimension.blockHeight*1.5
         )
     }
+    lazy var playLabel: SKSpriteNode = {
+        return SKSpriteNode(
+            texture: TextureManager.retrieveTexture(PlayingMapSceneConstants.ButtonSpriteName.play),
+            size: self.buttonSize
+        )
+    }()
+    lazy var pauseLabel: SKSpriteNode = {
+        return SKSpriteNode(
+            texture: TextureManager.retrieveTexture(PlayingMapSceneConstants.ButtonSpriteName.pause),
+            size: self.buttonSize
+        )
+    }()
+
 
     override init(size: CGSize, zoomLevel: CGFloat, map: Map) {
         self.movesLeft = 11
@@ -71,29 +85,25 @@ class PlayingMapScene: StaticMapScene {
     }
 
     func run() {
-        guard !programRetrieved else {
-            resetAndRun()
-            return
-        }
-        for agent in mapNode.activeAgentNodes {
-            if let program = programSupplier.retrieveProgram() {
-                agent.delegate = Interpreter(program: program)
+        if !programRetrieved {
+            for agent in mapNode.activeAgentNodes {
+                if let program = programSupplier.retrieveProgram() {
+                    agent.delegate = Interpreter(program: program)
+                }
             }
         }
         programRetrieved = true
-        running = true
-    }
-
-    func pause() {
-        running = false
+        if running {
+            running = false
+            playButton.setDefaultButton(playLabel)
+        } else {
+            running = true
+            playButton.setDefaultButton(pauseLabel)
+        }
     }
 
     func reset() {
         playingMapController.reset()
-    }
-
-    func resetAndRun() {
-        playingMapController.resetAndRun()
     }
 
     func goBack() {
@@ -102,26 +112,13 @@ class PlayingMapScene: StaticMapScene {
 
     func setupButtons() {
         // Setup Play button
-        let playLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.play)
-        playLabel.size = buttonSize
-        let playButton = SKButton(defaultButton: playLabel)
+        playButton = SKButton(defaultButton: playLabel)
         playButton.addTarget(self, selector: #selector(PlayingMapScene.run))
         playButton.position = CGPoint(
-            x: -80.0,
-            y: -300.0
-        )
-        addNodeToOverlay(playButton)
-
-        // Setup Pause button
-        let pauseLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.pause)
-        pauseLabel.size = buttonSize
-        let pauseButton = SKButton(defaultButton: pauseLabel)
-        pauseButton.addTarget(self, selector: #selector(PlayingMapScene.pause))
-        pauseButton.position = CGPoint(
             x: 0.0,
             y: -300.0
         )
-        addNodeToOverlay(pauseButton)
+        addNodeToOverlay(playButton)
 
         // Setup Reset button
         let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)

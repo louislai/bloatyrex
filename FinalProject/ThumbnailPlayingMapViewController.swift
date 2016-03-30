@@ -14,8 +14,15 @@ class ThumbnailPlayingMapViewController: UIViewController {
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
+        view.backgroundColor = UIColor.blueColor()
         print(view.bounds.size)
         // Configure the view
+        setUpScene()
+    }
+
+
+    func setUpScene() {
+        print(view.bounds.size)
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
         skView.showsFPS = true
