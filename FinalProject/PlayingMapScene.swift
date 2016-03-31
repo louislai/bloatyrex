@@ -78,7 +78,7 @@ class PlayingMapScene: StaticMapScene {
         decrementMovesLeft()
         timeOfLastMove = currentTime
         if gameEnded {
-            toggleRun()
+            pause()
         }
     }
 
@@ -88,6 +88,17 @@ class PlayingMapScene: StaticMapScene {
     }
 
     func toggleRun() {
+        if running {
+            pause()
+        // When user click the button after game ended
+        } else if gameEnded {
+            resetAndRun()
+        } else {
+            run()
+        }
+    }
+
+    func run() {
         if !programRetrieved {
             for agent in mapNode.activeAgentNodes {
                 if let program = programSupplier.retrieveProgram() {
@@ -96,17 +107,21 @@ class PlayingMapScene: StaticMapScene {
             }
         }
         programRetrieved = true
-        if running {
-            running = false
-            playButton.setDefaultButton(playLabel)
-        } else {
-            running = true
-            playButton.setDefaultButton(pauseLabel)
-        }
+        running = true
+        playButton.setDefaultButton(pauseLabel)
+    }
+
+    func pause() {
+        running = false
+        playButton.setDefaultButton(playLabel)
     }
 
     func reset() {
         playingMapController.reset()
+    }
+
+    func resetAndRun() {
+        playingMapController.resetAndRun()
     }
 
     func goBack() {
@@ -175,6 +190,5 @@ class PlayingMapScene: StaticMapScene {
             as? SKLabelNode {
             node.text = "Moves left: \(movesLeft)"
         }
-
     }
 }
