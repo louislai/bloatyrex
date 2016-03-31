@@ -26,6 +26,9 @@ import SpriteKit
 ///
 ///                    overlay
 ///
+///  It is important to account for the fact that the nodes added will be added to either the
+///  content or the overlay and hence no longer be direct descendants of the PannableScene itself.
+///
 ///  PannableScene uses pan, double tap and pinch gesture recognizers for its translation and
 ///  zooming functionality and hence may not work correctly if more of such recognizers are added.
 ///  The pan gesture recognizer uses two touches to function and so should not interfere with
@@ -35,7 +38,7 @@ import SpriteKit
 ///  didMoveToView method in order to get PannableScenes functionality.
 ///
 class PannableScene: SKScene {
-    private var content = SKNode()
+    var content = SKNode()
     var overlay = SKNode()
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
