@@ -46,6 +46,8 @@ class PannableScene: SKScene {
     private var initialScale: CGFloat
     private var minimumScale: CGFloat
     private var isPanningFromOverlay = false
+    private var horizontalPanDisabled: Bool
+    private var verticalPanDisabled: Bool
 
     /**
     Initialise the scene with a given size, and optional scale and overlay z position.
@@ -56,12 +58,15 @@ class PannableScene: SKScene {
     allows the zoom to be a max 2.0 times larger than the original zoom level.
     */
     init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
-        zoomRangeFactor: CGFloat = 2.0) {
-            initialScale = 1.0 / zoomLevel
-            minimumScale = initialScale / zoomRangeFactor
-            super.init(size: size)
-            viewpoint.setScale(initialScale)
-            overlay.zPosition = overlayZPosition
+         zoomRangeFactor: CGFloat = 2.0, enableDoubleTap: Bool = true,
+         disableHorizontalPan: Bool = false, disableVerticalPan: Bool = false) {
+        initialScale = 1.0 / zoomLevel
+        minimumScale = initialScale / zoomRangeFactor
+        horizontalPanDisabled = disableHorizontalPan
+        verticalPanDisabled = disableVerticalPan
+        super.init(size: size)
+        viewpoint.setScale(initialScale)
+        overlay.zPosition = overlayZPosition
     }
 
     override func didMoveToView(view: SKView) {
@@ -93,7 +98,8 @@ class PannableScene: SKScene {
 
     /**
     Handles the translation of the viewpoint using the pan gesture. Translation does not occur if
-    the gesture starts from a node in the overlay.
+    the gesture starts from a node in the overlay. Horizontal/vertical translation can be disabled
+    during initialization.
     */
     func handlePan(sender: UIPanGestureRecognizer) {
         if sender.state == .Began {
@@ -104,39 +110,34 @@ class PannableScene: SKScene {
                 isPanningFromOverlay = true
             }
         } else if sender.state == .Changed && isPanningFromOverlay == false {
-            var touchLocation = sender.locationInView(sender.view!)
-            touchLocation = self.convertPointFromView(touchLocation)
-            let touchedNode = self.nodeAtPoint(touchLocation)
+            var translation = sender.translationInView(sender.view!)
+            translation = CGPoint(x: translation.x, y: -translation.y)
+            var horizontalDisplacement = translation.x
+            var verticalDisplacement = translation.y
 
-            // only trigger if touched node is not part of overlay
-            if !isPartOfOverlay(touchedNode) {
-                var translation = sender.translationInView(sender.view!)
-                translation = CGPoint(x: translation.x, y: -translation.y)
-                var horizontalDisplacement = translation.x
-                var verticalDisplacement = translation.y
-
-                // bound the area within which the viewpoint can pan
-                if horizontalDisplacement > 0 {
-                    let distanceToLeftBoundary = self.size.width / 2 + viewpoint.position.x
-                    horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
-
-                } else if horizontalDisplacement < 0 {
-                    let distanceToRightBoundary = self.size.width / 2 - viewpoint.position.x
-                    horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
-                }
-                if verticalDisplacement > 0 {
-                    var distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
-                    distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
-                    verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
-                } else if verticalDisplacement < 0 {
-                    let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
-                    verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
-                }
-
-                // viewpoint moves in opposite direction from pan to simulate movement
-                moveViewPointBy(-horizontalDisplacement,
-                                verticalDisplacement: -verticalDisplacement)
+            if horizontalPanDisabled {
+                horizontalDisplacement = 0
+            } else if horizontalDisplacement > 0 {
+                let distanceToLeftBoundary = self.size.width / 2 + viewpoint.position.x
+                horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
+            } else if horizontalDisplacement < 0 {
+                let distanceToRightBoundary = self.size.width / 2 - viewpoint.position.x
+                horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
             }
+            if verticalPanDisabled {
+                verticalDisplacement = 0
+            } else if verticalDisplacement > 0 {
+                var distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
+                distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
+                verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
+            } else if verticalDisplacement < 0 {
+                let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
+                verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
+            }
+
+            // viewpoint moves in opposite direction from pan to simulate movement
+            moveViewPointBy(-horizontalDisplacement,
+                            verticalDisplacement: -verticalDisplacement)
 
             sender.setTranslation(CGPoint.zero, inView: sender.view)
         } else if sender.state == .Ended {
