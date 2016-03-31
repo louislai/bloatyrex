@@ -180,6 +180,10 @@
                                     <segue destination="DoE-e0-Afa" kind="embed" id="q5d-Zi-QFW"/>
                                 </connections>
                             </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLy-WU-ahl">
+                                <rect key="frame" x="967" y="707" width="37" height="41"/>
+                                <state key="normal" title="Button" image="zoom"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -210,7 +214,10 @@
             <point key="canvasLocation" x="-822" y="1194"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="zoom" width="512" height="512"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hWH-iy-DJu"/>
+        <segue reference="JCV-Rq-O91"/>
     </inferredMetricsTieBreakers>
 </document>
