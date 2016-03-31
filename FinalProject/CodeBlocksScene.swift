@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class CodeBlocksScene: SKScene, ProgramSupplier {
+class CodeBlocksScene: PannableScene, ProgramSupplier {
 
     enum PressState {
         case AddingBlock
@@ -30,39 +30,41 @@ class CodeBlocksScene: SKScene, ProgramSupplier {
         return programBlocks.getCode()
     }
     override func didMoveToView(view: SKView) {
+        super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
-        blankButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.7)
-        blockButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
-        wallButton.position = CGPoint(x: size.width * 0.1, y: size.height * 0.3)
-        programBlocks.position = CGPoint(x: size.width * 0.4, y: size.height * 0.9)
+        blankButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
+        blockButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
+        wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
+        programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
         wallButton.zPosition = 10
         blockButton.zPosition = 10
-        addChild(wallButton)
-        addChild(blockButton)
-        addChild(programBlocks)
-        addChild(blankButton)
+        addNodeToOverlay(wallButton)
+        addNodeToOverlay(blockButton)
+        addNodeToContent(programBlocks)
+        addNodeToOverlay(blankButton)
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first! as UITouch
-        let location = touch.locationInNode(self)
+        let locationInOverlay = touch.locationInNode(overlay)
+        let locationInContent = touch.locationInNode(content)
 
-        if blockButton.containsPoint(location) {
+        if blockButton.containsPoint(locationInOverlay) {
             heldBlock = blockButton
             blockButton.pickBlock(true)
             pressState = .AddingBlock
-        } else if wallButton.containsPoint(location) {
+        } else if wallButton.containsPoint(locationInOverlay) {
             heldBlock = wallButton
             wallButton.pickBlock(true)
             pressState = .AddingBlock
-        } else if blankButton.containsPoint(location) {
+        } else if blankButton.containsPoint(locationInOverlay) {
             heldBlock = blankButton
             blankButton.pickBlock(true)
             pressState = .AddingBlock
         }
 
-        if programBlocks.containsPoint(location) {
-            movedBlock = programBlocks.getBlock(location)
+        if programBlocks.containsPoint(locationInContent) {
+            movedBlock = programBlocks.getBlock(locationInContent)
             if let block = movedBlock {
                 block.deactivateDropZone()
                 pressState = .MovingBlock
