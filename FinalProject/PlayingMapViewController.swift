@@ -68,6 +68,14 @@ extension PlayingMapViewController {
         scene.removeFromParent()
         navigationController?.popViewControllerAnimated(true)
     }
+
+    func notifyGameWon() {
+        if let parent = parentViewController {
+            if let playingController = parent as? PlayingViewController {
+                playingController.notifyGameWon()
+            }
+        }
+    }
 }
 
 extension PlayingMapViewController: ProgramSupplier {
