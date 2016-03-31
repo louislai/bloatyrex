@@ -17,7 +17,7 @@ struct PlayingMapSceneConstants {
     struct ButtonSpriteName {
         static let play = "play"
         static let pause = "pause"
-        static let reset = "stop"
+        static let reset = "rewind"
         static let back = "back"
     }
 }
@@ -28,6 +28,7 @@ class PlayingMapScene: StaticMapScene {
     weak var playingMapController: PlayingMapViewController!
     var programSupplier: ProgramSupplier!
     var programRetrieved = false
+    var gameEnded = false
     var playButton: SKButton!
 
     var timeOfLastMove: CFTimeInterval = 0.0
@@ -73,10 +74,12 @@ class PlayingMapScene: StaticMapScene {
         if !running {
             return
         }
-
         moveActiveAgents()
         decrementMovesLeft()
         timeOfLastMove = currentTime
+        if gameEnded {
+            toggleRun()
+        }
     }
 
     override func setup() {
@@ -84,7 +87,7 @@ class PlayingMapScene: StaticMapScene {
         setupButtons()
     }
 
-    func run() {
+    func toggleRun() {
         if !programRetrieved {
             for agent in mapNode.activeAgentNodes {
                 if let program = programSupplier.retrieveProgram() {
@@ -113,7 +116,7 @@ class PlayingMapScene: StaticMapScene {
     func setupButtons() {
         // Setup Play button
         playButton = SKButton(defaultButton: playLabel)
-        playButton.addTarget(self, selector: #selector(PlayingMapScene.run))
+        playButton.addTarget(self, selector: #selector(PlayingMapScene.toggleRun))
         playButton.position = CGPoint(
             x: 0.0,
             y: -300.0
@@ -148,8 +151,15 @@ class PlayingMapScene: StaticMapScene {
         var nextActiveAgentNodes = [AgentNode]()
         for agentNode in mapNode.activeAgentNodes {
             // If agent hasnt reached toilet, add it to the next list
-            if !agentNode.runNextAction() {
-                nextActiveAgentNodes.append(agentNode)
+            if let result = agentNode.runNextAction() {
+                if result {
+                    agentNode.runWinningAnimation()
+                } else {
+                    agentNode.runLosingAnimation()
+                    gameEnded = true
+                }
+            } else {
+                 nextActiveAgentNodes.append(agentNode)
             }
         }
         mapNode.activeAgentNodes = nextActiveAgentNodes

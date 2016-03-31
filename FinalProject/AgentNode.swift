@@ -16,8 +16,10 @@ class AgentNode: SKSpriteNode {
     var delegate: LanguageDelegate?
     let timePerMoveMovement: NSTimeInterval = 0.5
 
-    // Return true if nextAction causes the agent to reach the goal
-    func runNextAction() -> Bool {
+    /// Return true if nextAction causes the agent to reach the goal
+    /// Return false if program terminates while not reaching the goal
+    /// Return nil if undecided
+    func runNextAction() -> Bool? {
         guard let delegate = delegate else {
             return false
         }
@@ -25,18 +27,19 @@ class AgentNode: SKSpriteNode {
             print(nextAction)
             switch nextAction {
             case .NoAction:
-                return false
+                return nil
             case .RotateLeft:
                 setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
-                return false
+                return nil
             case .RotateRight:
                 setOrientationTo(Direction(rawValue: orientation.rawValue+1 % 4)!)
-                return false
+                return nil
             case .Forward:
                 return moveForward()
             }
+        } else {
+            return false
         }
-        return false
     }
 
     func setOrientationTo(direction: Direction) {
@@ -53,8 +56,9 @@ class AgentNode: SKSpriteNode {
         }
     }
 
-    // Return true if moveForward causes the agent to reach the goal
-    func moveForward() -> Bool {
+    /// Return true if moveForward causes the agent to reach the goal
+    /// Return nil if undecided
+    func moveForward() -> Bool? {
         if let (nextRow, nextColumn, nextUnit) = nextPosition() {
             mapNode.map.clearMapUnitAt(row, column: column)
 
@@ -72,7 +76,28 @@ class AgentNode: SKSpriteNode {
             }
             mapNode.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
         }
-        return false
+        return nil
+    }
+
+    func runWinningAnimation() {
+        let textures = [
+            TextureManager.agentUpTexture,
+            TextureManager.agentRightTexture,
+            TextureManager.agentDownTexture,
+            TextureManager.agentLeftTexture
+        ]
+        let rotationAction = SKAction.repeatAction(
+            SKAction.animateWithTextures(textures, timePerFrame: 0.1),
+            count: 10
+        )
+        let scaleDownAction = SKAction.scaleBy(0.2, duration: 4)
+        let group = SKAction.group([rotationAction, scaleDownAction])
+        let sequence = SKAction.sequence([group, SKAction.removeFromParent()])
+        runAction(sequence)
+    }
+
+    func runLosingAnimation() {
+
     }
 
     private func nextPosition() -> (row: Int, column: Int, unit: MapUnit)? {
