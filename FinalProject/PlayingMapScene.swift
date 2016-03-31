@@ -156,10 +156,14 @@ class PlayingMapScene: StaticMapScene {
                     agentNode.runWinningAnimation()
                 } else {
                     agentNode.runLosingAnimation()
-                    gameEnded = true
                 }
+                gameEnded = true
             } else {
-                 nextActiveAgentNodes.append(agentNode)
+                if gameEnded {
+
+                } else {
+                    nextActiveAgentNodes.append(agentNode)
+                }
             }
         }
         mapNode.activeAgentNodes = nextActiveAgentNodes

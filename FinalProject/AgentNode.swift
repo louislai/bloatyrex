@@ -14,6 +14,7 @@ class AgentNode: SKSpriteNode {
     var row: Int!
     var column: Int!
     var delegate: LanguageDelegate?
+    var callbackAction = SKAction.runBlock {}
     let timePerMoveMovement: NSTimeInterval = 0.5
 
     /// Return true if nextAction causes the agent to reach the goal
@@ -92,7 +93,11 @@ class AgentNode: SKSpriteNode {
         )
         let scaleDownAction = SKAction.scaleBy(0.2, duration: 4)
         let group = SKAction.group([rotationAction, scaleDownAction])
-        let sequence = SKAction.sequence([group, SKAction.removeFromParent()])
+        let sequence = SKAction.sequence([
+            SKAction.waitForDuration(timePerMoveMovement),
+            group,
+            SKAction.removeFromParent()]
+        )
         runAction(sequence)
     }
 
