@@ -37,6 +37,20 @@ class SKButton: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func setDefaultButton(button: SKNode) {
+        defaultButton.removeFromParent()
+        defaultButton = button
+        addChild(defaultButton)
+    }
+
+    func setActiveButton(button: SKNode) {
+        if let existingButton = activeButton {
+            existingButton.removeFromParent()
+        }
+        activeButton = button
+        addChild(button)
+    }
+
     /**
     Add handler for when the button is tapped
 

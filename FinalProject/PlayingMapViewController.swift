@@ -33,11 +33,10 @@ class PlayingMapViewController: UIViewController {
         let skView = view as! SKView
 
         // Create and configure the scene
-        scene = PlayingMapScene(size: skView.bounds.size, zoomLevel: 1)
+        scene = PlayingMapScene(size: skView.bounds.size, zoomLevel: 1, map: map.copy() as! Map)
         scene.scaleMode = .AspectFill
 
         // Load the map
-        scene.map = map.copy() as! Map
         scene.playingMapController = self
         scene.programSupplier = self
         scene.setup()
@@ -59,8 +58,9 @@ extension PlayingMapViewController {
         reset()
         let delay = (Int64(NSEC_PER_SEC))
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
-                self.scene.run()
+            self.scene.run()
         })
+
     }
 
     func goBack() {

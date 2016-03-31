@@ -9,34 +9,38 @@
 import SpriteKit
 
 class AgentNode: SKSpriteNode {
-    weak var gameScene: PlayingMapScene!
+    weak var mapNode: MapNode!
     var orientation = Direction.Up
     var row: Int!
     var column: Int!
     var delegate: LanguageDelegate?
+    var callbackAction = SKAction.runBlock {}
     let timePerMoveMovement: NSTimeInterval = 0.5
 
-    // Return true if nextAction causes the agent to reach the goal
-    func runNextAction() -> Bool {
+    /// Return true if nextAction causes the agent to reach the goal
+    /// Return false if program terminates while not reaching the goal
+    /// Return nil if undecided
+    func runNextAction() -> Bool? {
         guard let delegate = delegate else {
             return false
         }
-        if let nextAction = delegate.nextAction(gameScene.map, agent: self) {
+        if let nextAction = delegate.nextAction(mapNode.map, agent: self) {
             print(nextAction)
             switch nextAction {
             case .NoAction:
-                return false
+                return nil
             case .RotateLeft:
                 setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
-                return false
+                return nil
             case .RotateRight:
                 setOrientationTo(Direction(rawValue: orientation.rawValue+1 % 4)!)
-                return false
+                return nil
             case .Forward:
                 return moveForward()
             }
+        } else {
+            return false
         }
-        return false
     }
 
     func setOrientationTo(direction: Direction) {
@@ -53,26 +57,56 @@ class AgentNode: SKSpriteNode {
         }
     }
 
-    // Return true if moveForward causes the agent to reach the goal
-    func moveForward() -> Bool {
+    /// Return true if moveForward causes the agent to reach the goal
+    /// Return nil if undecided
+    func moveForward() -> Bool? {
         if let (nextRow, nextColumn, nextUnit) = nextPosition() {
-            gameScene.map.clearMapUnitAt(row, column: column)
+            mapNode.map.clearMapUnitAt(row, column: column)
 
 
             row = nextRow
             column = nextColumn
 
             // Move sprite
-            let targetPoint = gameScene.pointFor(row, column: column)
+            let targetPoint = mapNode.pointFor(row, column: column)
             let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
             runAction(moveAction)
 
             if nextUnit == .Goal {
                 return true
             }
-            gameScene.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
+            mapNode.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
         }
-        return false
+        return nil
+    }
+
+    func runWinningAnimation() {
+        let textures = [
+            TextureManager.agentUpTexture, TextureManager.agentRightTexture, TextureManager.agentDownTexture, TextureManager.agentLeftTexture
+        ]
+        let rotationAction = SKAction.repeatAction(
+            SKAction.animateWithTextures(textures, timePerFrame: 0.1), count: 5
+        )
+        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
+        let group = SKAction.group([rotationAction, scaleDownAction])
+        let sequence = SKAction.sequence([
+            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
+        )
+        runAction(sequence)
+    }
+
+    func runLosingAnimation() {
+        let textureAction = SKAction.setTexture(TextureManager.retrieveTexture("poo"))
+        let leftWiggle = SKAction.rotateByAngle(CGFloat(M_PI/8.0), duration: 0.25)
+        let rightWiggle = leftWiggle.reversedAction()
+        let fullWiggle = SKAction.repeatAction(
+            SKAction.sequence([leftWiggle, rightWiggle]), count: 4)
+        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
+        let group = SKAction.group([textureAction, scaleDownAction, fullWiggle])
+        let sequence = SKAction.sequence([
+            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
+        )
+        runAction(sequence)
     }
 
     private func nextPosition() -> (row: Int, column: Int, unit: MapUnit)? {
@@ -80,12 +114,12 @@ class AgentNode: SKSpriteNode {
         var nextColumn: Int = column
         switch orientation {
         case .Up:
-            guard row < gameScene.map.numberOfRows-1 else {
+            guard row < mapNode.map.numberOfRows-1 else {
                 return nil
             }
             nextRow += 1
         case .Right:
-            guard column < gameScene.map.numberOfColumns-1 else {
+            guard column < mapNode.map.numberOfColumns-1 else {
                 return nil
             }
             nextColumn += 1
@@ -101,7 +135,7 @@ class AgentNode: SKSpriteNode {
             nextColumn -= 1
 
         }
-        let unit = gameScene.map.retrieveMapUnitAt(nextRow, column: nextColumn)
+        let unit = mapNode.map.retrieveMapUnitAt(nextRow, column: nextColumn)
         guard let nextUnit = unit else {
             return nil
         }

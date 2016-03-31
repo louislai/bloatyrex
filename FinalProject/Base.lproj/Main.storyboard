@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="551.5" y="157"/>
+            <point key="canvasLocation" x="-93.5" y="-78"/>
         </scene>
         <!--Level Selector Page View Controller-->
         <scene sceneID="rSA-Fq-nEy">
@@ -181,8 +181,11 @@
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLy-WU-ahl">
-                                <rect key="frame" x="967" y="707" width="37" height="41"/>
+                                <rect key="frame" x="957" y="697" width="37" height="41"/>
                                 <state key="normal" title="Button" image="zoom"/>
+                                <connections>
+                                    <segue destination="IvN-jd-ujU" kind="showDetail" animates="NO" id="Ygj-YH-BLV"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,6 +215,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDp-BH-rfl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-822" y="1194"/>
+        </scene>
+        <!--Programming View Controller-->
+        <scene sceneID="7PE-xW-v1W">
+            <objects>
+                <viewController id="IvN-jd-ujU" customClass="ProgrammingViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y6P-tZ-mbM"/>
+                        <viewControllerLayoutGuide type="bottom" id="j9f-Jz-r40"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A0i-kf-Mqz">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUB-cW-FRs" userLabel="Thumbnail View">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                <connections>
+                                    <segue destination="BGt-w1-RuZ" kind="embed" id="R8G-45-ZSX"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1uW-eq-fLl">
+                                <rect key="frame" x="319" y="0.0" width="705" height="768"/>
+                                <connections>
+                                    <segue destination="r0Q-WW-r6m" kind="embed" id="gE0-cD-3Dc"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DqC-bw-K81">
+                                <rect key="frame" x="248" y="702" width="51" height="46"/>
+                                <state key="normal" title="Button" image="zoom"/>
+                                <connections>
+                                    <action selector="zoomButtonPressed:" destination="IvN-jd-ujU" eventType="touchUpInside" id="PzB-rD-CTf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cyI-1T-6bX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="110"/>
+        </scene>
+        <!--Thumbnail Playing Map View Controller-->
+        <scene sceneID="20f-jf-KS7">
+            <objects>
+                <viewController id="BGt-w1-RuZ" customClass="ThumbnailPlayingMapViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PDl-Wi-lLG"/>
+                        <viewControllerLayoutGuide type="bottom" id="stt-Jf-bxN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bth-qv-TzO" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hth-aP-El8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aSV-pn-GlK">
+            <objects>
+                <viewController id="r0Q-WW-r6m" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ngz-TM-eQn"/>
+                        <viewControllerLayoutGuide type="bottom" id="gFq-lS-GQo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0Lk-qT-FF7">
+                        <rect key="frame" x="0.0" y="0.0" width="705" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9i3-aR-P3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
