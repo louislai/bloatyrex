@@ -14,9 +14,6 @@ import SpriteKit
 ///  nodes that are intended to be pannable to the content and add nodes that should be fixed in
 ///  position regardless of panning to the overlay.
 ///
-///  PannableScene uses pan, double tap and pinch gesture recognizers for its translation and
-///  zooming functionality and hence may not work correctly if more of such recognizers are added.
-///
 ///  The node hierarchy is as follows:
 ///
 ///          PannableScene
@@ -28,6 +25,15 @@ import SpriteKit
 ///                       |
 ///
 ///                    overlay
+///
+///  PannableScene uses pan, double tap and pinch gesture recognizers for its translation and
+///  zooming functionality and hence may not work correctly if more of such recognizers are added.
+///  The pan gesture recognizer uses two touches to function and so should not interfere with
+///  functions such as touchesMoved if they only require one touch.
+///
+///  Since PannableScene overrides didMoveToView, subclasses of PannableScene should call the super
+///  didMoveToView method in order to get PannableScenes functionality.
+///
 class PannableScene: SKScene {
     private var content = SKNode()
     var overlay = SKNode()
