@@ -82,31 +82,39 @@ class PannableScene: SKScene {
     */
     func handlePan(sender: UIPanGestureRecognizer) {
         if sender.state == .Changed {
-            var translation = sender.translationInView(sender.view!)
-            translation = CGPoint(x: translation.x, y: -translation.y)
-            var horizontalDisplacement = translation.x
-            var verticalDisplacement = translation.y
+            var touchLocation = sender.locationInView(sender.view!)
+            touchLocation = self.convertPointFromView(touchLocation)
+            let touchedNode = self.nodeAtPoint(touchLocation)
 
-            // bound the area within which the viewpoint can pan
-            if horizontalDisplacement > 0 {
-                let distanceToLeftBoundary = self.size.width / 2 + viewpoint.position.x
-                horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
+            // only trigger if touched node is not part of overlay
+            if !isPartOfOverlay(touchedNode) {
+                var translation = sender.translationInView(sender.view!)
+                translation = CGPoint(x: translation.x, y: -translation.y)
+                var horizontalDisplacement = translation.x
+                var verticalDisplacement = translation.y
 
-            } else if horizontalDisplacement < 0 {
-                let distanceToRightBoundary = self.size.width / 2 - viewpoint.position.x
-                horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
+                // bound the area within which the viewpoint can pan
+                if horizontalDisplacement > 0 {
+                    let distanceToLeftBoundary = self.size.width / 2 + viewpoint.position.x
+                    horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
+
+                } else if horizontalDisplacement < 0 {
+                    let distanceToRightBoundary = self.size.width / 2 - viewpoint.position.x
+                    horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
+                }
+                if verticalDisplacement > 0 {
+                    var distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
+                    distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
+                    verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
+                } else if verticalDisplacement < 0 {
+                    let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
+                    verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
+                }
+
+                // viewpoint moves in opposite direction from pan to simulate movement
+                moveViewPointBy(-horizontalDisplacement,
+                                verticalDisplacement: -verticalDisplacement)
             }
-            if verticalDisplacement > 0 {
-                var distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
-                distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
-                verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
-            } else if verticalDisplacement < 0 {
-                let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
-                verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
-            }
-
-            // viewpoint moves in opposite direction from pan to simulate movement
-            moveViewPointBy(-horizontalDisplacement, verticalDisplacement: -verticalDisplacement)
 
             sender.setTranslation(CGPoint.zero, inView: sender.view)
         }
@@ -180,5 +188,10 @@ class PannableScene: SKScene {
     private func moveViewPointBy(horizontalDisplacement: CGFloat, verticalDisplacement: CGFloat) {
         self.viewpoint.position = CGPoint(x: self.viewpoint.position.x + horizontalDisplacement,
             y: self.viewpoint.position.y + verticalDisplacement)
+    }
+
+    // Checks whether the given node is part of the overlay.
+    private func isPartOfOverlay(node: SKNode) -> Bool {
+         return node.inParentHierarchy(overlay)
     }
 }
