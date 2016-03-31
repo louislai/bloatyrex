@@ -28,6 +28,8 @@ import SpriteKit
 ///
 ///  It is important to account for the fact that the nodes added will be added to either the
 ///  content or the overlay and hence no longer be direct descendants of the PannableScene itself.
+///  For example, locationOfNode could have to be taken with respect to the content or
+///  the overlay node instead of self.
 ///
 ///  PannableScene uses pan, double tap and pinch gesture recognizers for its translation and
 ///  zooming functionality and hence may not work correctly if more of such recognizers are added.
