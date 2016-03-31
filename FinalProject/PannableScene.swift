@@ -30,10 +30,11 @@ import SpriteKit
 ///                    overlay
 class PannableScene: SKScene {
     private var content = SKNode()
-    private var overlay = SKNode()
+    var overlay = SKNode()
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
     private var minimumScale: CGFloat
+    private var isPanningFromOverlay = false
 
     /**
     Initialise the scene with a given size, and optional scale and overlay z position.
@@ -70,6 +71,8 @@ class PannableScene: SKScene {
         self.view!.addGestureRecognizer(doubleTapRecognizer)
         let panRecognizer = UIPanGestureRecognizer(target: self,
                                                    action: #selector(PannableScene.handlePan(_:)))
+        panRecognizer.maximumNumberOfTouches = 2
+        panRecognizer.minimumNumberOfTouches = 2
         self.view!.addGestureRecognizer(panRecognizer)
     }
 
@@ -81,11 +84,20 @@ class PannableScene: SKScene {
     Handles the translation of the viewpoint using the pan gesture.
     */
     func handlePan(sender: UIPanGestureRecognizer) {
-        if sender.state == .Changed {
+        if sender.state == .Began {
             var touchLocation = sender.locationInView(sender.view!)
             touchLocation = self.convertPointFromView(touchLocation)
             let touchedNode = self.nodeAtPoint(touchLocation)
-
+            if isPartOfOverlay(touchedNode) {
+                isPanningFromOverlay = true
+                print("iz now panning from overlay")
+            }
+        } else if sender.state == .Changed && isPanningFromOverlay == false {
+            var touchLocation = sender.locationInView(sender.view!)
+            touchLocation = self.convertPointFromView(touchLocation)
+            let touchedNode = self.nodeAtPoint(touchLocation)
+            print("iz part of overlay: \(isPartOfOverlay(touchedNode))")
+            print("iz panning from overlay: \(isPanningFromOverlay)")
             // only trigger if touched node is not part of overlay
             if !isPartOfOverlay(touchedNode) {
                 var translation = sender.translationInView(sender.view!)
@@ -117,6 +129,8 @@ class PannableScene: SKScene {
             }
 
             sender.setTranslation(CGPoint.zero, inView: sender.view)
+        } else if sender.state == .Ended {
+            isPanningFromOverlay = false
         }
     }
 
