@@ -33,7 +33,7 @@ class AgentNode: SKSpriteNode {
                 setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
                 return nil
             case .RotateRight:
-                setOrientationTo(Direction(rawValue: orientation.rawValue+1 % 4)!)
+                setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
                 return nil
             case .Forward:
                 return moveForward()
