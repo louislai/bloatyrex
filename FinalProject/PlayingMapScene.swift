@@ -28,8 +28,9 @@ class PlayingMapScene: StaticMapScene {
     weak var playingMapController: PlayingMapViewController!
     var programSupplier: ProgramSupplier!
     var programRetrieved = false
-    var gameEnded = false
+    var gameWon: Bool?
     var playButton: SKButton!
+    var resetButton: SKButton!
 
     var timeOfLastMove: CFTimeInterval = 0.0
     let timePerMove: CFTimeInterval = 1.0
@@ -77,8 +78,11 @@ class PlayingMapScene: StaticMapScene {
         moveActiveAgents()
         decrementMovesLeft()
         timeOfLastMove = currentTime
-        if gameEnded {
+        if let gameWon = gameWon {
             pause()
+            if !gameWon {
+                addRetryText()
+            }
         }
     }
 
@@ -91,7 +95,7 @@ class PlayingMapScene: StaticMapScene {
         if running {
             pause()
         // When user click the button after game ended
-        } else if gameEnded {
+        } else if gameWon != nil {
             resetAndRun()
         } else {
             run()
@@ -141,7 +145,7 @@ class PlayingMapScene: StaticMapScene {
         // Setup Reset button
         let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)
         resetLabel.size = buttonSize
-        let resetButton = SKButton(defaultButton: resetLabel)
+        resetButton = SKButton(defaultButton: resetLabel)
         resetButton.addTarget(self, selector: #selector(PlayingMapScene.reset))
         resetButton.position = CGPoint(
             x: 80.0,
@@ -162,6 +166,39 @@ class PlayingMapScene: StaticMapScene {
         addNodeToOverlay(backButton)
     }
 
+    func addRetryText() {
+
+        let arrowSize = CGSize(
+        width: buttonSize.width*2.0,
+        height: buttonSize.height*2.0
+        )
+        let arrowNode = SKSpriteNode(imageNamed: "arrow-over")
+        arrowNode.size = arrowSize
+        arrowNode.position = CGPoint(
+            x: resetButton.position.x+buttonSize.width*1.5,
+            y: resetButton.position.y+arrowSize.height/3.0
+        )
+        addChild(arrowNode)
+
+        let retryText = SKLabelNode(text: "Rewind to retry")
+        retryText.fontColor = UIColor.redColor()
+        retryText.position = CGPoint(
+            x: arrowNode.position.x,
+            y: arrowNode.position.y + buttonSize.height*1.1
+        )
+        addChild(retryText)
+        let waitAction = SKAction.waitForDuration(0.2)
+        let showHideAction = SKAction.repeatActionForever(
+            SKAction.sequence([
+                waitAction,
+                SKAction.hide(),
+                waitAction,
+                SKAction.unhide()
+                ])
+        )
+        arrowNode.runAction(showHideAction)
+    }
+
     private func moveActiveAgents() {
         var nextActiveAgentNodes = [AgentNode]()
         for agentNode in mapNode.activeAgentNodes {
@@ -169,14 +206,16 @@ class PlayingMapScene: StaticMapScene {
             if let result = agentNode.runNextAction() {
                 if result {
                     agentNode.runWinningAnimation()
+                    gameWon = true
                 } else {
                     agentNode.runLosingAnimation()
+                    gameWon = false
                 }
-                gameEnded = true
             } else {
-                if gameEnded {
-
+                if let gameWon = gameWon where gameWon == false {
+                    agentNode.runLosingAnimation()
                 } else {
+                    gameWon = nil
                     nextActiveAgentNodes.append(agentNode)
                 }
             }
