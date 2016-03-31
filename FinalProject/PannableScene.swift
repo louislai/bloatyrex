@@ -90,7 +90,8 @@ class PannableScene: SKScene {
     }
 
     /**
-    Handles the translation of the viewpoint using the pan gesture.
+    Handles the translation of the viewpoint using the pan gesture. Translation does not occur if
+    the gesture starts from a node in the overlay.
     */
     func handlePan(sender: UIPanGestureRecognizer) {
         if sender.state == .Began {
@@ -99,14 +100,12 @@ class PannableScene: SKScene {
             let touchedNode = self.nodeAtPoint(touchLocation)
             if isPartOfOverlay(touchedNode) {
                 isPanningFromOverlay = true
-                print("iz now panning from overlay")
             }
         } else if sender.state == .Changed && isPanningFromOverlay == false {
             var touchLocation = sender.locationInView(sender.view!)
             touchLocation = self.convertPointFromView(touchLocation)
             let touchedNode = self.nodeAtPoint(touchLocation)
-            print("iz part of overlay: \(isPartOfOverlay(touchedNode))")
-            print("iz panning from overlay: \(isPanningFromOverlay)")
+
             // only trigger if touched node is not part of overlay
             if !isPartOfOverlay(touchedNode) {
                 var translation = sender.translationInView(sender.view!)
@@ -163,32 +162,36 @@ class PannableScene: SKScene {
     }
 
     /**
-    Handles zooming in on the desired location using a tap.
+    Handles zooming in on the desired location using a double tap. Does not zoom or pan to tapped
+    location if the tapped location is on a node in the overlay.
     */
     func handleDoubleTap(sender: UITapGestureRecognizer) {
-        // zoom in on tapped location
         let tapLocation = sender.locationInView(sender.view)
         let zoomLocation = self.convertPointFromView(tapLocation)
-        var horizontalZoomLocation = zoomLocation.x
-        var verticalZoomLocation = zoomLocation.y
-        // restrict the tap location to within the scene
-        if horizontalZoomLocation < 0 {
-            horizontalZoomLocation = max(horizontalZoomLocation, -self.size.width / 2)
-        } else {
-            horizontalZoomLocation = min(horizontalZoomLocation, self.size.width / 2)
-        }
-        if verticalZoomLocation < 0 {
-            verticalZoomLocation = max(verticalZoomLocation, -self.size.height / 2)
-        } else {
-            verticalZoomLocation = min(verticalZoomLocation, self.size.height / 2)
-        }
-        let boundedZoomLocation = CGPoint(x: horizontalZoomLocation, y: verticalZoomLocation)
-        viewpoint.position = boundedZoomLocation
-        var newScale = viewpoint.xScale * 0.5
+        let touchedNode = self.nodeAtPoint(zoomLocation)
+        if !isPartOfOverlay(touchedNode) {
+             // zoom in on tapped location
+            var horizontalZoomLocation = zoomLocation.x
+            var verticalZoomLocation = zoomLocation.y
+            // restrict the tap location to within the scene
+            if horizontalZoomLocation < 0 {
+                horizontalZoomLocation = max(horizontalZoomLocation, -self.size.width / 2)
+            } else {
+                horizontalZoomLocation = min(horizontalZoomLocation, self.size.width / 2)
+            }
+            if verticalZoomLocation < 0 {
+                verticalZoomLocation = max(verticalZoomLocation, -self.size.height / 2)
+            } else {
+                verticalZoomLocation = min(verticalZoomLocation, self.size.height / 2)
+            }
+            let boundedZoomLocation = CGPoint(x: horizontalZoomLocation, y: verticalZoomLocation)
+            viewpoint.position = boundedZoomLocation
+            var newScale = viewpoint.xScale * 0.5
 
-        // restrict the maximum zoom
-        newScale = max(newScale, minimumScale)
-        viewpoint.setScale(newScale)
+            // restrict the maximum zoom
+            newScale = max(newScale, minimumScale)
+            viewpoint.setScale(newScale)
+        }
     }
 
     /**
