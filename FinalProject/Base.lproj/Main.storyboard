@@ -261,6 +261,10 @@
         <scene sceneID="20f-jf-KS7">
             <objects>
                 <viewController id="BGt-w1-RuZ" customClass="ThumbnailPlayingMapViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PDl-Wi-lLG"/>
+                        <viewControllerLayoutGuide type="bottom" id="stt-Jf-bxN"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bth-qv-TzO" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -274,6 +278,10 @@
         <scene sceneID="aSV-pn-GlK">
             <objects>
                 <viewController id="r0Q-WW-r6m" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ngz-TM-eQn"/>
+                        <viewControllerLayoutGuide type="bottom" id="gFq-lS-GQo"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="0Lk-qT-FF7">
                         <rect key="frame" x="0.0" y="0.0" width="705" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

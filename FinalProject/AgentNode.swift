@@ -82,27 +82,31 @@ class AgentNode: SKSpriteNode {
 
     func runWinningAnimation() {
         let textures = [
-            TextureManager.agentUpTexture,
-            TextureManager.agentRightTexture,
-            TextureManager.agentDownTexture,
-            TextureManager.agentLeftTexture
+            TextureManager.agentUpTexture, TextureManager.agentRightTexture, TextureManager.agentDownTexture, TextureManager.agentLeftTexture
         ]
         let rotationAction = SKAction.repeatAction(
-            SKAction.animateWithTextures(textures, timePerFrame: 0.1),
-            count: 10
+            SKAction.animateWithTextures(textures, timePerFrame: 0.1), count: 5
         )
-        let scaleDownAction = SKAction.scaleBy(0.2, duration: 4)
+        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
         let group = SKAction.group([rotationAction, scaleDownAction])
         let sequence = SKAction.sequence([
-            SKAction.waitForDuration(timePerMoveMovement),
-            group,
-            SKAction.removeFromParent()]
+            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
         )
         runAction(sequence)
     }
 
     func runLosingAnimation() {
-
+        let textureAction = SKAction.setTexture(TextureManager.retrieveTexture("poo"))
+        let leftWiggle = SKAction.rotateByAngle(CGFloat(M_PI/8.0), duration: 0.25)
+        let rightWiggle = leftWiggle.reversedAction()
+        let fullWiggle = SKAction.repeatAction(
+            SKAction.sequence([leftWiggle, rightWiggle]), count: 4)
+        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
+        let group = SKAction.group([textureAction, scaleDownAction, fullWiggle])
+        let sequence = SKAction.sequence([
+            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
+        )
+        runAction(sequence)
     }
 
     private func nextPosition() -> (row: Int, column: Int, unit: MapUnit)? {
