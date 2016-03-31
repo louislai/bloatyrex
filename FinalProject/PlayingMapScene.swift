@@ -80,7 +80,9 @@ class PlayingMapScene: StaticMapScene {
         timeOfLastMove = currentTime
         if let gameWon = gameWon {
             pause()
-            if !gameWon {
+            if gameWon {
+                playingMapController.notifyGameWon()
+            } else {
                 addRetryText()
             }
         }

@@ -175,7 +175,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b1a-cS-cD4" userLabel="Code Block Controller Container">
-                                <rect key="frame" x="559" y="64" width="465" height="704"/>
+                                <rect key="frame" x="559" y="0.0" width="465" height="768"/>
                                 <connections>
                                     <segue destination="DoE-e0-Afa" kind="embed" id="q5d-Zi-QFW"/>
                                 </connections>
@@ -187,11 +187,26 @@
                                     <segue destination="IvN-jd-ujU" kind="showDetail" animates="NO" id="Ygj-YH-BLV"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LHP-Ns-e2j" userLabel="EndGame">
+                                <rect key="frame" x="559" y="0.0" width="465" height="768"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You win!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfF-Ht-neX">
+                                        <rect key="frame" x="118" y="312" width="293" height="168"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="winningScreen" destination="LHP-Ns-e2j" id="Wrx-c7-MSB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYt-ss-aNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
