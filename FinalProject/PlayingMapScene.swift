@@ -203,24 +203,31 @@ class PlayingMapScene: StaticMapScene {
 
     private func moveActiveAgents() {
         var nextActiveAgentNodes = [AgentNode]()
+        var shouldWin = true
+        var shouldLose = false
         for agentNode in mapNode.activeAgentNodes {
             // If agent hasnt reached toilet, add it to the next list
             if let result = agentNode.runNextAction() {
                 if result {
                     agentNode.runWinningAnimation()
-                    gameWon = true
                 } else {
                     agentNode.runLosingAnimation()
-                    gameWon = false
+                    shouldWin = false
+                    shouldLose = true
                 }
             } else {
-                if let gameWon = gameWon where gameWon == false {
+                if shouldLose {
                     agentNode.runLosingAnimation()
                 } else {
-                    gameWon = nil
+                    shouldWin = false
                     nextActiveAgentNodes.append(agentNode)
                 }
             }
+        }
+        if shouldWin {
+            gameWon = true
+        } else if shouldLose {
+            gameWon = false
         }
         mapNode.activeAgentNodes = nextActiveAgentNodes
     }
