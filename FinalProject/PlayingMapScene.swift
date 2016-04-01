@@ -180,7 +180,7 @@ class PlayingMapScene: StaticMapScene {
             x: resetButton.position.x+buttonSize.width*1.5,
             y: resetButton.position.y+arrowSize.height/3.0
         )
-        addChild(arrowNode)
+        addNodeToOverlay(arrowNode)
 
         let retryText = SKLabelNode(text: "Rewind to retry")
         retryText.fontColor = UIColor.redColor()
@@ -188,7 +188,7 @@ class PlayingMapScene: StaticMapScene {
             x: arrowNode.position.x,
             y: arrowNode.position.y + buttonSize.height*1.1
         )
-        addChild(retryText)
+        addNodeToOverlay(retryText)
         let waitAction = SKAction.waitForDuration(0.2)
         let showHideAction = SKAction.repeatActionForever(
             SKAction.sequence([
