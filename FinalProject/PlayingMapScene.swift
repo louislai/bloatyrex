@@ -25,7 +25,6 @@ struct PlayingMapSceneConstants {
 class PlayingMapScene: StaticMapScene {
     var running = false
     var movesLeft: Int
-    weak var playingMapController: PlayingMapViewController!
     var programSupplier: ProgramSupplier!
     var programRetrieved = false
     var gameWon: Bool?
@@ -81,7 +80,7 @@ class PlayingMapScene: StaticMapScene {
         if let gameWon = gameWon {
             pause()
             if gameWon {
-                playingMapController.notifyGameWon()
+                NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameWon, object: self)
             } else {
                 addRetryText()
             }
@@ -123,15 +122,11 @@ class PlayingMapScene: StaticMapScene {
     }
 
     func reset() {
-        playingMapController.reset()
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameReset, object: self)
     }
 
     func resetAndRun() {
-        playingMapController.resetAndRun()
-    }
-
-    func goBack() {
-        playingMapController.goBack()
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameResetAndRun, object: self)
     }
 
     func setupButtons() {
@@ -154,16 +149,10 @@ class PlayingMapScene: StaticMapScene {
             y: -300.0
         )
         addNodeToOverlay(resetButton)
+    }
 
+    func addRetryText() {
 
-        // Setup Back Button
-        let backLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.back)
-        backLabel.size = buttonSize
-        let backButton = SKButton(defaultButton: backLabel)
-        backButton.addTarget(self, selector: #selector(PlayingMapScene.goBack))
-        backButton.position = CGPoint(
-            x: -200.0,
-            y: -300.0
         )
         addNodeToOverlay(backButton)
     }
@@ -180,7 +169,7 @@ class PlayingMapScene: StaticMapScene {
             x: resetButton.position.x+buttonSize.width*1.5,
             y: resetButton.position.y+arrowSize.height/3.0
         )
-        addChild(arrowNode)
+        addNodeToOverlay(arrowNode)
 
         let retryText = SKLabelNode(text: "Rewind to retry")
         retryText.fontColor = UIColor.redColor()
@@ -188,7 +177,7 @@ class PlayingMapScene: StaticMapScene {
             x: arrowNode.position.x,
             y: arrowNode.position.y + buttonSize.height*1.1
         )
-        addChild(retryText)
+        addNodeToOverlay(retryText)
         let waitAction = SKAction.waitForDuration(0.2)
         let showHideAction = SKAction.repeatActionForever(
             SKAction.sequence([
@@ -203,6 +192,8 @@ class PlayingMapScene: StaticMapScene {
 
     private func moveActiveAgents() {
         var nextActiveAgentNodes = [AgentNode]()
+        var shouldWin = true
+        var shouldLose = false
         for agentNode in mapNode.activeAgentNodes {
             // If agent hasnt reached toilet, add it to the next list
             if let result = agentNode.runNextAction() {
@@ -211,16 +202,22 @@ class PlayingMapScene: StaticMapScene {
                     gameWon = true
                 } else {
                     agentNode.runLosingAnimation()
-                    gameWon = false
+                    shouldWin = false
+                    shouldLose = true
                 }
             } else {
-                if let gameWon = gameWon where gameWon == false {
+                if shouldLose {
                     agentNode.runLosingAnimation()
                 } else {
-                    gameWon = nil
+                    shouldWin = false
                     nextActiveAgentNodes.append(agentNode)
                 }
             }
+        }
+        if shouldWin {
+            gameWon = true
+        } else if shouldLose {
+            gameWon = false
         }
         mapNode.activeAgentNodes = nextActiveAgentNodes
     }

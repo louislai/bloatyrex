@@ -420,7 +420,7 @@
 				TargetAttributes = {
 					3DF2309D1C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 62L5G97YTE;
+						DevelopmentTeam = XC99LK63YN;
 					};
 					3DF230B11C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
@@ -695,7 +695,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -709,7 +709,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
