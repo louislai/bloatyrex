@@ -13,6 +13,16 @@ class PlayingViewController: UIViewController {
     var programSupplier: ProgramSupplier!
     @IBOutlet var winningScreen: UIView!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        registerObservers()
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? PlayingMapViewController {
             destination.map = map
@@ -36,6 +46,29 @@ class PlayingViewController: UIViewController {
         UIView.animateWithDuration(0.5, animations: { _ in
             self.winningScreen.transform = CGAffineTransformMakeTranslation(-self.winningScreen.bounds.width, 0)
         })
+    }
+
+    func resetGameScene() {
+        UIView.animateWithDuration(0.5, animations: { _ in
+            self.winningScreen.transform = CGAffineTransformMakeTranslation(self.winningScreen.bounds.width, 0)
+        })
+    }
+
+    @IBAction func backButtonPressed(sender: UIButton) {
+        navigationController?.popViewControllerAnimated(true)
+    }
+
+    private func registerObservers() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(PlayingViewController.notifyGameWon),
+            name: GlobalConstants.Notification.gameWon,
+            object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(PlayingViewController.resetGameScene),
+            name: GlobalConstants.Notification.gameReset,
+            object: nil)
     }
 }
 

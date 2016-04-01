@@ -22,4 +22,10 @@ class GlobalConstants {
         static let front = CGFloat(2)
         static let back = CGFloat(1)
     }
+
+    struct Notification {
+        static let gameReset = "reset"
+        static let gameResetAndRun = "resetAndRun"
+        static let gameWon = "won"
+    }
 }

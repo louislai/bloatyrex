@@ -25,7 +25,6 @@ struct PlayingMapSceneConstants {
 class PlayingMapScene: StaticMapScene {
     var running = false
     var movesLeft: Int
-    weak var playingMapController: PlayingMapViewController!
     var programSupplier: ProgramSupplier!
     var programRetrieved = false
     var gameWon: Bool?
@@ -81,7 +80,7 @@ class PlayingMapScene: StaticMapScene {
         if let gameWon = gameWon {
             pause()
             if gameWon {
-                playingMapController.notifyGameWon()
+                NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameWon, object: self)
             } else {
                 addRetryText()
             }
@@ -123,15 +122,11 @@ class PlayingMapScene: StaticMapScene {
     }
 
     func reset() {
-        playingMapController.reset()
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameReset, object: self)
     }
 
     func resetAndRun() {
-        playingMapController.resetAndRun()
-    }
-
-    func goBack() {
-        playingMapController.goBack()
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameResetAndRun, object: self)
     }
 
     func setupButtons() {
@@ -154,18 +149,6 @@ class PlayingMapScene: StaticMapScene {
             y: -300.0
         )
         addNodeToOverlay(resetButton)
-
-
-        // Setup Back Button
-        let backLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.back)
-        backLabel.size = buttonSize
-        let backButton = SKButton(defaultButton: backLabel)
-        backButton.addTarget(self, selector: #selector(PlayingMapScene.goBack))
-        backButton.position = CGPoint(
-            x: -200.0,
-            y: -300.0
-        )
-        addNodeToOverlay(backButton)
     }
 
     func addRetryText() {
