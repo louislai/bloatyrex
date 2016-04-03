@@ -257,21 +257,19 @@ extension LevelDesigningMapScene {
 // This portion handles arrow tapping.
 extension LevelDesigningMapScene {
     func addArrows() {
-        let arrowOffsetX = CGFloat(maxNumberOfRows - numberOfRows) * blockWidth / 2
-        let arrowOffsetY = CGFloat(maxNumberOfColumns - numberOfColumns) * blockHeight / 2
+        let arrowOffsetX = CGFloat(maxNumberOfRows) * blockWidth / 2
+        let arrowOffsetY = CGFloat(maxNumberOfColumns) * blockHeight / 2
         arrowSprites = [:]
 
-        let verticalOffset = blockHeight * CGFloat(numberOfRows) / 2
-        let upOffset = verticalOffset + arrowOffsetY
-        let downOffset = -upOffset - blockHeight
+        let upOffset = arrowOffsetY
+        let downOffset = -arrowOffsetY - blockHeight
         addArrow("up-arrow", name: "Add Top", position: CGPoint(x: -blockWidth, y: upOffset))
         addArrow("down-arrow", name: "Remove Top", position: CGPoint(x: 0, y: upOffset))
         addArrow("down-arrow", name: "Add Bottom", position: CGPoint(x: -blockWidth, y: downOffset))
         addArrow("up-arrow", name: "Remove Bottom", position: CGPoint(x: 0, y: downOffset))
 
-        let horizontalOffset = blockWidth * CGFloat(numberOfColumns) / 2
-        let rightOffset = horizontalOffset + arrowOffsetX
-        let leftOffset = -rightOffset - blockWidth
+        let rightOffset = arrowOffsetX
+        let leftOffset = -arrowOffsetX - blockWidth
         addArrow("left-arrow", name: "Add Left", position: CGPoint(x: leftOffset, y: -blockHeight))
         addArrow("right-arrow", name: "Remove Left", position: CGPoint(x: leftOffset, y: 0))
         addArrow("right-arrow", name: "Add Right", position: CGPoint(x: rightOffset, y: -blockHeight))
