@@ -12,7 +12,8 @@ import SpriteKit
 class LevelDesigningViewController: UIViewController {
 
     var scene: LevelDesigningMapScene!
-    var map = Map(numberOfRows: 6, numberOfColumns: 6)
+    var map = Map(numberOfRows: LevelDesigningMapSceneConstants.Dimension.defaultNumberOfRows,
+                  numberOfColumns: LevelDesigningMapSceneConstants.Dimension.defaultNumberOfColumns)
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,6 +9,20 @@
 import SpriteKit
 import Darwin
 
+struct LevelDesigningMapSceneConstants {
+    struct Dimension {
+        static let minNumberOfRows = 1
+        static let maxNumberOfRows = 8
+        static let defaultNumberOfRows = 6
+        static let minNumberOfColumns = 1
+        static let maxNumberOfColumns = 8
+        static let defaultNumberOfColumns = 6
+    }
+    struct Position {
+        static let anchor = CGPoint(x: 0.5, y: 0.5)
+    }
+}
+
 class LevelDesigningMapScene: SKScene {
     var levelDesigningViewController: LevelDesigningViewController?
     var map: Map!
@@ -22,27 +36,20 @@ class LevelDesigningMapScene: SKScene {
     private var numberOfColumns: Int {
         return map.numberOfColumns
     }
-    let blockWidth = CGFloat(40.0)
-    let blockHeight = CGFloat(40.0)
     var blockSize: CGSize {
         return CGSize(
-            width: blockWidth,
-            height: blockHeight
+            width: GlobalConstants.Dimension.blockWidth,
+            height: GlobalConstants.Dimension.blockHeight
         )
     }
     var grid: [[SKSpriteNode]]!
     var paletteNode: SKSpriteNode!
     var currentMapUnitSelected = MapUnit.EmptySpace
     var arrowSprites: [String: SKSpriteNode]!
-    let minNumberOfRows = 1
-    let maxNumberOfRows = 8
-    let minNumberOfColumns = 1
-    let maxNumberOfColumns = 8
-    let filesArchive = FilesArchive()
 
     override init(size: CGSize) {
         super.init(size: size)
-        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        anchorPoint = LevelDesigningMapSceneConstants.Position.anchor
         backgroundColor = UIColor.whiteColor()
     }
 
@@ -85,8 +92,8 @@ class LevelDesigningMapScene: SKScene {
 
     func setLayerPositions() {
         let layerPosition = CGPoint(
-            x: -blockWidth * CGFloat(numberOfColumns) / 2,
-            y: -blockHeight * CGFloat(numberOfRows) / 2
+            x: -GlobalConstants.Dimension.blockWidth * CGFloat(numberOfColumns) / 2,
+            y: -GlobalConstants.Dimension.blockHeight * CGFloat(numberOfRows) / 2
         )
 
         // The blocksLayer represent the shape of the map.
@@ -154,19 +161,21 @@ class LevelDesigningMapScene: SKScene {
     // Convert a row, column pair into a CGPoint relative to unitsLayer
     func pointFor(row: Int, column: Int) -> CGPoint {
         return CGPoint(
-            x: CGFloat(column) * blockWidth,
-            y: CGFloat(row) * blockHeight
+            x: CGFloat(column) * GlobalConstants.Dimension.blockWidth,
+            y: CGFloat(row) * GlobalConstants.Dimension.blockHeight
         )
     }
 
     // Convert a CGPoint relative to unitsLayer to a row number
     func rowFor(point: CGPoint) -> Int {
-        return Int(floor(point.y/blockHeight + (CGFloat(numberOfRows) + 1)/2))
+        return Int(floor(point.y/GlobalConstants.Dimension.blockHeight
+            + (CGFloat(numberOfRows) + 1)/2))
     }
 
     // Convert a CGPoint relative to unitsLayer to a column number
     func columnFor(point: CGPoint) -> Int {
-        return Int(floor(point.x/blockWidth + (CGFloat(numberOfColumns) + 1)/2))
+        return Int(floor(point.x/GlobalConstants.Dimension.blockWidth
+            + (CGFloat(numberOfColumns) + 1)/2))
     }
 
     // Checks if the row and column number is valid
@@ -257,23 +266,33 @@ extension LevelDesigningMapScene {
 // This portion handles arrow tapping.
 extension LevelDesigningMapScene {
     func addArrows() {
-        let arrowOffsetX = CGFloat(maxNumberOfRows) * blockWidth / 2
-        let arrowOffsetY = CGFloat(maxNumberOfColumns) * blockHeight / 2
+        let arrowOffsetX = CGFloat(LevelDesigningMapSceneConstants.Dimension.maxNumberOfRows)
+            * GlobalConstants.Dimension.blockWidth / 2
+        let arrowOffsetY = CGFloat(LevelDesigningMapSceneConstants.Dimension.maxNumberOfColumns)
+            * GlobalConstants.Dimension.blockHeight / 2
         arrowSprites = [:]
 
         let upOffset = arrowOffsetY
-        let downOffset = -arrowOffsetY - blockHeight
-        addArrow("up-arrow", name: "Add Top", position: CGPoint(x: -blockWidth, y: upOffset))
-        addArrow("down-arrow", name: "Remove Top", position: CGPoint(x: 0, y: upOffset))
-        addArrow("down-arrow", name: "Add Bottom", position: CGPoint(x: -blockWidth, y: downOffset))
-        addArrow("up-arrow", name: "Remove Bottom", position: CGPoint(x: 0, y: downOffset))
+        let downOffset = -arrowOffsetY - GlobalConstants.Dimension.blockHeight
+        addArrow("up-arrow", name: "Add Top",
+                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth, y: upOffset))
+        addArrow("down-arrow", name: "Remove Top",
+                 position: CGPoint(x: 0, y: upOffset))
+        addArrow("down-arrow", name: "Add Bottom",
+                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth, y: downOffset))
+        addArrow("up-arrow", name: "Remove Bottom",
+                 position: CGPoint(x: 0, y: downOffset))
 
         let rightOffset = arrowOffsetX
-        let leftOffset = -arrowOffsetX - blockWidth
-        addArrow("left-arrow", name: "Add Left", position: CGPoint(x: leftOffset, y: -blockHeight))
-        addArrow("right-arrow", name: "Remove Left", position: CGPoint(x: leftOffset, y: 0))
-        addArrow("right-arrow", name: "Add Right", position: CGPoint(x: rightOffset, y: -blockHeight))
-        addArrow("left-arrow", name: "Remove Right", position: CGPoint(x: rightOffset, y: 0))
+        let leftOffset = -arrowOffsetX - GlobalConstants.Dimension.blockWidth
+        addArrow("left-arrow", name: "Add Left",
+                 position: CGPoint(x: leftOffset, y: -GlobalConstants.Dimension.blockHeight))
+        addArrow("right-arrow", name: "Remove Left",
+                 position: CGPoint(x: leftOffset, y: 0))
+        addArrow("right-arrow", name: "Add Right",
+                 position: CGPoint(x: rightOffset, y: -GlobalConstants.Dimension.blockHeight))
+        addArrow("left-arrow", name: "Remove Right",
+                 position: CGPoint(x: rightOffset, y: 0))
 
         updateArrows()
     }
@@ -291,19 +310,19 @@ extension LevelDesigningMapScene {
         for arrow in arrowSprites.values {
             presentArrow(arrow, toPresent: true)
         }
-        if numberOfRows == maxNumberOfRows {
+        if numberOfRows == LevelDesigningMapSceneConstants.Dimension.maxNumberOfRows {
             presentArrow(arrowSprites["Add Top"]!, toPresent: false)
             presentArrow(arrowSprites["Add Bottom"]!, toPresent: false)
         }
-        if numberOfRows == minNumberOfRows {
+        if numberOfRows == LevelDesigningMapSceneConstants.Dimension.minNumberOfRows {
             presentArrow(arrowSprites["Remove Top"]!, toPresent: false)
             presentArrow(arrowSprites["Remove Bottom"]!, toPresent: false)
         }
-        if numberOfColumns == maxNumberOfColumns {
+        if numberOfColumns == LevelDesigningMapSceneConstants.Dimension.maxNumberOfColumns {
             presentArrow(arrowSprites["Add Left"]!, toPresent: false)
             presentArrow(arrowSprites["Add Right"]!, toPresent: false)
         }
-        if numberOfColumns == minNumberOfColumns {
+        if numberOfColumns == LevelDesigningMapSceneConstants.Dimension.minNumberOfColumns {
             presentArrow(arrowSprites["Remove Left"]!, toPresent: false)
             presentArrow(arrowSprites["Remove Right"]!, toPresent: false)
         }
@@ -404,7 +423,8 @@ extension LevelDesigningMapScene {
 extension LevelDesigningMapScene {
     func addPalette() {
         let paletteBackgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
-        paletteNode = SKSpriteNode(color: paletteBackgroundColor, size: CGSize(width: 1024, height: 50))
+        paletteNode = SKSpriteNode(color: paletteBackgroundColor,
+                                   size: CGSize(width: 1024, height: 50))
         paletteLayer.addChild(paletteNode)
 
         let textures = [TextureManager.agentUpTexture,
@@ -438,7 +458,8 @@ extension LevelDesigningMapScene {
 // This portion deals with actions such as Save, Load, Test Level and Reset.
 extension LevelDesigningMapScene {
     func addActions() {
-        let actionsNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 1024, height: 40))
+        let actionsNode = SKSpriteNode(color: UIColor.blackColor(),
+                                       size: CGSize(width: 1024, height: 40))
         actionsLayer.addChild(actionsNode)
 
         let saveLabel = makeLabel("Save", position: CGPoint(x: -1024/2 + 30, y: 0))
@@ -466,12 +487,14 @@ extension LevelDesigningMapScene {
     }
 
     func testLevel() {
-        levelDesigningViewController?.performSegueWithIdentifier(GlobalConstants.SegueIdentifier.designToPlaying, sender: nil)
+        levelDesigningViewController?.performSegueWithIdentifier(
+            GlobalConstants.SegueIdentifier.designToPlaying, sender: nil)
     }
 
     func saveAction() {
         var name: UITextField?
         var savedSuccessfully = false
+        let maximumNumberOfCharacters = 30
         let saveAlert = UIAlertController(
             title: "Save",
             message: "Name this level!",
@@ -484,8 +507,10 @@ extension LevelDesigningMapScene {
             title: "OK",
             style: .Default,
             handler: { (action: UIAlertAction!) in
-                if name!.text!.characters.count <= 30 {
-                    savedSuccessfully = self.filesArchive.saveToPropertyList(self.map, name: name!.text!)
+                if name!.text!.characters.count <= maximumNumberOfCharacters {
+                    savedSuccessfully = GlobalConstants.filesArchive.saveToPropertyList(
+                        self.map,
+                        name: name!.text!)
                 }
                 if savedSuccessfully {
                     let successAlert = UIAlertController(
@@ -546,7 +571,9 @@ extension LevelDesigningMapScene {
             title: "Ok",
             style: .Default,
             handler: { (action: UIAlertAction!) in
-                self.resetMap(Map(numberOfRows: 6, numberOfColumns: 6))
+                self.resetMap(
+                    Map(numberOfRows: LevelDesigningMapSceneConstants.Dimension.defaultNumberOfRows,
+                        numberOfColumns: LevelDesigningMapSceneConstants.Dimension.defaultNumberOfColumns))
             }))
         resetAlert.addAction(UIAlertAction(
             title: "Cancel",
