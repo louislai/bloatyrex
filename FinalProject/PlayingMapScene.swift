@@ -153,12 +153,6 @@ class PlayingMapScene: StaticMapScene {
 
     func addRetryText() {
 
-        )
-        addNodeToOverlay(backButton)
-    }
-
-    func addRetryText() {
-
         let arrowSize = CGSize(
         width: buttonSize.width*2.0,
         height: buttonSize.height*2.0
