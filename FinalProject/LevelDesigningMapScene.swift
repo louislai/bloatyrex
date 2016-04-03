@@ -20,6 +20,8 @@ struct LevelDesigningMapSceneConstants {
     }
     struct Position {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
+        static let shiftLeft = CGFloat(-200)
+        static let shiftUp = CGFloat(100)
     }
 }
 
@@ -92,8 +94,10 @@ class LevelDesigningMapScene: SKScene {
 
     func setLayerPositions() {
         let layerPosition = CGPoint(
-            x: -GlobalConstants.Dimension.blockWidth * CGFloat(numberOfColumns) / 2,
+            x: -GlobalConstants.Dimension.blockWidth * CGFloat(numberOfColumns) / 2
+                + LevelDesigningMapSceneConstants.Position.shiftLeft,
             y: -GlobalConstants.Dimension.blockHeight * CGFloat(numberOfRows) / 2
+                + LevelDesigningMapSceneConstants.Position.shiftUp
         )
 
         // The blocksLayer represent the shape of the map.
@@ -168,13 +172,15 @@ class LevelDesigningMapScene: SKScene {
 
     // Convert a CGPoint relative to unitsLayer to a row number
     func rowFor(point: CGPoint) -> Int {
-        return Int(floor(point.y/GlobalConstants.Dimension.blockHeight
+        let pointY = point.y - LevelDesigningMapSceneConstants.Position.shiftUp
+        return Int(floor(pointY/GlobalConstants.Dimension.blockHeight
             + (CGFloat(numberOfRows) + 1)/2))
     }
 
     // Convert a CGPoint relative to unitsLayer to a column number
     func columnFor(point: CGPoint) -> Int {
-        return Int(floor(point.x/GlobalConstants.Dimension.blockWidth
+        let pointX = point.x - LevelDesigningMapSceneConstants.Position.shiftLeft
+        return Int(floor(pointX/GlobalConstants.Dimension.blockWidth
             + (CGFloat(numberOfColumns) + 1)/2))
     }
 
@@ -266,6 +272,8 @@ extension LevelDesigningMapScene {
 // This portion handles arrow tapping.
 extension LevelDesigningMapScene {
     func addArrows() {
+        let shiftLeft = LevelDesigningMapSceneConstants.Position.shiftLeft
+        let shiftUp = LevelDesigningMapSceneConstants.Position.shiftUp
         let arrowOffsetX = CGFloat(LevelDesigningMapSceneConstants.Dimension.maxNumberOfRows)
             * GlobalConstants.Dimension.blockWidth / 2
         let arrowOffsetY = CGFloat(LevelDesigningMapSceneConstants.Dimension.maxNumberOfColumns)
@@ -275,24 +283,24 @@ extension LevelDesigningMapScene {
         let upOffset = arrowOffsetY
         let downOffset = -arrowOffsetY - GlobalConstants.Dimension.blockHeight
         addArrow("up-arrow", name: "Add Top",
-                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth, y: upOffset))
+                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth + shiftLeft, y: upOffset + shiftUp))
         addArrow("down-arrow", name: "Remove Top",
-                 position: CGPoint(x: 0, y: upOffset))
+                 position: CGPoint(x: shiftLeft, y: upOffset + shiftUp))
         addArrow("down-arrow", name: "Add Bottom",
-                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth, y: downOffset))
+                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth + shiftLeft, y: downOffset + shiftUp))
         addArrow("up-arrow", name: "Remove Bottom",
-                 position: CGPoint(x: 0, y: downOffset))
+                 position: CGPoint(x: shiftLeft, y: downOffset + shiftUp))
 
         let rightOffset = arrowOffsetX
         let leftOffset = -arrowOffsetX - GlobalConstants.Dimension.blockWidth
         addArrow("left-arrow", name: "Add Left",
-                 position: CGPoint(x: leftOffset, y: -GlobalConstants.Dimension.blockHeight))
+                 position: CGPoint(x: leftOffset + shiftLeft, y: -GlobalConstants.Dimension.blockHeight + shiftUp))
         addArrow("right-arrow", name: "Remove Left",
-                 position: CGPoint(x: leftOffset, y: 0))
+                 position: CGPoint(x: leftOffset + shiftLeft, y: shiftUp))
         addArrow("right-arrow", name: "Add Right",
-                 position: CGPoint(x: rightOffset, y: -GlobalConstants.Dimension.blockHeight))
+                 position: CGPoint(x: rightOffset + shiftLeft, y: -GlobalConstants.Dimension.blockHeight + shiftUp))
         addArrow("left-arrow", name: "Remove Right",
-                 position: CGPoint(x: rightOffset, y: 0))
+                 position: CGPoint(x: rightOffset + shiftLeft, y: shiftUp))
 
         updateArrows()
     }
