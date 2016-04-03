@@ -14,6 +14,8 @@ class GlobalConstants {
     }
 
     struct Dimension {
+        static let screenWidth = CGFloat(1024)
+        static let screenHeight = CGFloat(768)
         static let blockWidth = CGFloat(40)
         static let blockHeight = CGFloat(40)
     }

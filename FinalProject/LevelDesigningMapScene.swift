@@ -22,6 +22,15 @@ struct DesigningMapConstants {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
         static let shiftLeft = CGFloat(-200)
         static let shiftUp = CGFloat(100)
+        
+        static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
+        static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
+                                        y: actionButtonY)
+        static let testLevelButton = CGPoint(x: -100, y: actionButtonY)
+        static let saveButton = CGPoint(x: 0, y: actionButtonY)
+        static let loadButton = CGPoint(x: 100, y: actionButtonY)
+        static let resetButton = CGPoint(x: GlobalConstants.Dimension.screenWidth/2 - 40,
+                                         y: actionButtonY)
     }
 }
 
@@ -66,15 +75,9 @@ class LevelDesigningMapScene: SKScene {
         addChild(blocksLayer)
         addChild(unitsLayer)
 
-        let palettePosition = CGPoint(x: 0, y: -768/2 + 20 + 45)
+        let palettePosition = CGPoint(x: 0, y: -768/2 + 20 + 95)
         paletteLayer.position = palettePosition
         addChild(paletteLayer)
-
-        // actionsLayer shows the actions that user can do, such as
-        // Save, Load, Play, Reset.
-        let actionsPosition = CGPoint(x: 0, y: -768/2 + 20)
-        actionsLayer.position = actionsPosition
-        addChild(actionsLayer)
 
         addArrows()
         addPalette()
@@ -233,12 +236,14 @@ extension LevelDesigningMapScene {
         let scenePoint = convertPointFromView(viewPoint)
         if let name = nodeAtPoint(scenePoint).name {
             switch name {
+            case "Back":
+                backAction()
             case "Save":
                 saveAction()
             case "Load":
                 loadAction()
-            case "Test Level":
-                testLevel()
+            case "Play":
+                playAction()
             case "Reset":
                 resetAction()
             case "Agent":
@@ -466,35 +471,31 @@ extension LevelDesigningMapScene {
 // This portion deals with actions such as Save, Load, Test Level and Reset.
 extension LevelDesigningMapScene {
     func addActions() {
-        let actionsNode = SKSpriteNode(color: UIColor.blackColor(),
-                                       size: CGSize(width: 1024, height: 40))
-        actionsLayer.addChild(actionsNode)
-
-        let saveLabel = makeLabel("Save", position: CGPoint(x: -1024/2 + 30, y: 0))
-        actionsNode.addChild(saveLabel)
-
-        let loadLabel = makeLabel("Load", position: CGPoint(x: -1024/2 + 80, y: 0))
-        actionsNode.addChild(loadLabel)
-
-        let testLevelLabel = makeLabel("Test Level", position: CGPoint(x: 0, y: 0))
-        actionsNode.addChild(testLevelLabel)
-
-        let resetLabel = makeLabel("Reset", position: CGPoint(x: 1024/2 - 30, y: 0))
-        actionsNode.addChild(resetLabel)
+        addActionButton("back", name: "Back",
+                        position: DesigningMapConstants.Position.backButton)
+        addActionButton("save", name: "Save",
+                        position: DesigningMapConstants.Position.saveButton)
+        addActionButton("open-folder", name: "Load",
+                        position: DesigningMapConstants.Position.loadButton)
+        addActionButton("play", name: "Play",
+                        position: DesigningMapConstants.Position.testLevelButton)
+        addActionButton("reset", name: "Reset",
+                        position: DesigningMapConstants.Position.resetButton)
+    }
+    
+    func addActionButton(imageNamed: String, name: String, position: CGPoint) {
+        let action = SKSpriteNode(texture: TextureManager.retrieveTexture(imageNamed))
+        action.name = name
+        action.size = CGSize(width: 60.0, height: 60.0)
+        action.position = position
+        addChild(action)
+    }
+    
+    func backAction() {
+        levelDesigningViewController?.goBack()
     }
 
-    // A wrapper to make SKLabelNode based on given label name and position
-    func makeLabel(labelName: String, position: CGPoint) -> SKLabelNode {
-        let label = SKLabelNode(text: labelName)
-        label.fontColor = UIColor.whiteColor()
-        label.fontName = "Arial"
-        label.fontSize = 17
-        label.position = position
-        label.name = labelName
-        return label
-    }
-
-    func testLevel() {
+    func playAction() {
         levelDesigningViewController?.performSegueWithIdentifier(
             GlobalConstants.SegueIdentifier.designToPlaying, sender: nil)
     }
