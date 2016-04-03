@@ -9,7 +9,7 @@
 import SpriteKit
 import Darwin
 
-struct LevelDesigningMapSceneConstants {
+struct DesigningMapConstants {
     struct Dimension {
         static let minNumberOfRows = 1
         static let maxNumberOfRows = 8
@@ -51,7 +51,7 @@ class LevelDesigningMapScene: SKScene {
 
     override init(size: CGSize) {
         super.init(size: size)
-        anchorPoint = LevelDesigningMapSceneConstants.Position.anchor
+        anchorPoint = DesigningMapConstants.Position.anchor
         backgroundColor = UIColor.whiteColor()
     }
 
@@ -95,9 +95,9 @@ class LevelDesigningMapScene: SKScene {
     func setLayerPositions() {
         let layerPosition = CGPoint(
             x: -GlobalConstants.Dimension.blockWidth * CGFloat(numberOfColumns) / 2
-                + LevelDesigningMapSceneConstants.Position.shiftLeft,
+                + DesigningMapConstants.Position.shiftLeft,
             y: -GlobalConstants.Dimension.blockHeight * CGFloat(numberOfRows) / 2
-                + LevelDesigningMapSceneConstants.Position.shiftUp
+                + DesigningMapConstants.Position.shiftUp
         )
 
         // The blocksLayer represent the shape of the map.
@@ -172,14 +172,14 @@ class LevelDesigningMapScene: SKScene {
 
     // Convert a CGPoint relative to unitsLayer to a row number
     func rowFor(point: CGPoint) -> Int {
-        let pointY = point.y - LevelDesigningMapSceneConstants.Position.shiftUp
+        let pointY = point.y - DesigningMapConstants.Position.shiftUp
         return Int(floor(pointY/GlobalConstants.Dimension.blockHeight
             + (CGFloat(numberOfRows) + 1)/2))
     }
 
     // Convert a CGPoint relative to unitsLayer to a column number
     func columnFor(point: CGPoint) -> Int {
-        let pointX = point.x - LevelDesigningMapSceneConstants.Position.shiftLeft
+        let pointX = point.x - DesigningMapConstants.Position.shiftLeft
         return Int(floor(pointX/GlobalConstants.Dimension.blockWidth
             + (CGFloat(numberOfColumns) + 1)/2))
     }
@@ -272,11 +272,11 @@ extension LevelDesigningMapScene {
 // This portion handles arrow tapping.
 extension LevelDesigningMapScene {
     func addArrows() {
-        let shiftLeft = LevelDesigningMapSceneConstants.Position.shiftLeft
-        let shiftUp = LevelDesigningMapSceneConstants.Position.shiftUp
-        let arrowOffsetX = CGFloat(LevelDesigningMapSceneConstants.Dimension.maxNumberOfRows)
+        let shiftLeft = DesigningMapConstants.Position.shiftLeft
+        let shiftUp = DesigningMapConstants.Position.shiftUp
+        let arrowOffsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfRows)
             * GlobalConstants.Dimension.blockWidth / 2
-        let arrowOffsetY = CGFloat(LevelDesigningMapSceneConstants.Dimension.maxNumberOfColumns)
+        let arrowOffsetY = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
             * GlobalConstants.Dimension.blockHeight / 2
         arrowSprites = [:]
 
@@ -318,19 +318,19 @@ extension LevelDesigningMapScene {
         for arrow in arrowSprites.values {
             presentArrow(arrow, toPresent: true)
         }
-        if numberOfRows == LevelDesigningMapSceneConstants.Dimension.maxNumberOfRows {
+        if numberOfRows == DesigningMapConstants.Dimension.maxNumberOfRows {
             presentArrow(arrowSprites["Add Top"]!, toPresent: false)
             presentArrow(arrowSprites["Add Bottom"]!, toPresent: false)
         }
-        if numberOfRows == LevelDesigningMapSceneConstants.Dimension.minNumberOfRows {
+        if numberOfRows == DesigningMapConstants.Dimension.minNumberOfRows {
             presentArrow(arrowSprites["Remove Top"]!, toPresent: false)
             presentArrow(arrowSprites["Remove Bottom"]!, toPresent: false)
         }
-        if numberOfColumns == LevelDesigningMapSceneConstants.Dimension.maxNumberOfColumns {
+        if numberOfColumns == DesigningMapConstants.Dimension.maxNumberOfColumns {
             presentArrow(arrowSprites["Add Left"]!, toPresent: false)
             presentArrow(arrowSprites["Add Right"]!, toPresent: false)
         }
-        if numberOfColumns == LevelDesigningMapSceneConstants.Dimension.minNumberOfColumns {
+        if numberOfColumns == DesigningMapConstants.Dimension.minNumberOfColumns {
             presentArrow(arrowSprites["Remove Left"]!, toPresent: false)
             presentArrow(arrowSprites["Remove Right"]!, toPresent: false)
         }
@@ -580,8 +580,8 @@ extension LevelDesigningMapScene {
             style: .Default,
             handler: { (action: UIAlertAction!) in
                 self.resetMap(
-                    Map(numberOfRows: LevelDesigningMapSceneConstants.Dimension.defaultNumberOfRows,
-                        numberOfColumns: LevelDesigningMapSceneConstants.Dimension.defaultNumberOfColumns))
+                    Map(numberOfRows: DesigningMapConstants.Dimension.defaultNumberOfRows,
+                        numberOfColumns: DesigningMapConstants.Dimension.defaultNumberOfColumns))
             }))
         resetAlert.addAction(UIAlertAction(
             title: "Cancel",
