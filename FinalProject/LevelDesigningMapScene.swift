@@ -83,6 +83,7 @@ class LevelDesigningMapScene: SKScene {
         addPalette()
         addActions()
         addBlocks()
+        addBorders()
     }
 
     func setGrid() {
@@ -149,7 +150,7 @@ class LevelDesigningMapScene: SKScene {
         blocksLayer.addChild(blockNode)
 
         // Checker
-        printGrid()
+        // printGrid()
     }
 
     func getBlockNode(mapUnit: MapUnit) -> SKSpriteNode {
@@ -279,9 +280,9 @@ extension LevelDesigningMapScene {
     func addArrows() {
         let shiftLeft = DesigningMapConstants.Position.shiftLeft
         let shiftUp = DesigningMapConstants.Position.shiftUp
-        let arrowOffsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfRows)
+        let arrowOffsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
             * GlobalConstants.Dimension.blockWidth / 2
-        let arrowOffsetY = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
+        let arrowOffsetY = CGFloat(DesigningMapConstants.Dimension.maxNumberOfRows)
             * GlobalConstants.Dimension.blockHeight / 2
         arrowSprites = [:]
 
@@ -601,5 +602,48 @@ extension LevelDesigningMapScene {
         setGrid()
         addBlocks()
         updateArrows()
+    }
+}
+
+extension LevelDesigningMapScene {
+    func addBorders() {
+        addBorder("Top")
+        addBorder("Bottom")
+        addBorder("Left")
+        addBorder("Right")
+    }
+    
+    func addBorder(edgeName: String) {
+        let dottedLine = SKSpriteNode(texture: TextureManager.retrieveTexture("dotted-line"))
+        dottedLine.zPosition = GlobalConstants.zPosition.back
+        dottedLine.size = CGSize(width: CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
+            * GlobalConstants.Dimension.blockWidth, height: dottedLine.size.height)
+        
+        if edgeName == "Left" || edgeName == "Right" {
+            let rotate = SKAction.rotateByAngle(CGFloat(M_PI_2), duration: NSTimeInterval(0))
+            dottedLine.runAction(rotate)
+        }
+        
+        var positionX = -GlobalConstants.Dimension.blockWidth/2 + DesigningMapConstants.Position.shiftLeft
+        var positionY = -GlobalConstants.Dimension.blockHeight/2 + DesigningMapConstants.Position.shiftUp
+        let offsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
+            * GlobalConstants.Dimension.blockWidth / 2 - 20
+        let offsetY = CGFloat(DesigningMapConstants.Dimension.maxNumberOfRows)
+            * GlobalConstants.Dimension.blockHeight / 2 - 20
+        switch edgeName {
+        case "Top":
+            positionY = offsetY + DesigningMapConstants.Position.shiftUp
+        case "Bottom":
+            positionY = -offsetY - GlobalConstants.Dimension.blockHeight + DesigningMapConstants.Position.shiftUp
+        case "Left":
+            positionX = -offsetX - GlobalConstants.Dimension.blockWidth + DesigningMapConstants.Position.shiftLeft
+        case "Right":
+            positionX = offsetX + DesigningMapConstants.Position.shiftLeft
+        default:
+            break
+        }
+        dottedLine.position = CGPointMake(positionX, positionY)
+        
+        addChild(dottedLine)
     }
 }
