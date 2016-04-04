@@ -11,22 +11,31 @@ import SpriteKit
 class CodeBlock: SKNode {
     static let dropZoneSize: CGFloat = 10
 
+    let containingBlock: ContainerBlockProtocol
+    
     var dropZone: DropZone
-    var blockPosition = 0
-    var dropZoneActivated = true
-    var dropZoneCenter: CGPoint {
+    private var blockPositionValue = 0
+    var blockPosition: Int {
         get {
-            if dropZoneActivated {
-                let frame = dropZone.calculateAccumulatedFrame()
-                return CGPoint(x: frame.midX, y: frame.midY)
-            } else {
-                return CGPoint(x: CGFloat.max, y: CGFloat.max)
-            }
+            return blockPositionValue
+        }
+        
+        set(newPosition) {
+            dropZone.blockPosition = newPosition
+            blockPositionValue = newPosition
+        }
+    }
+    var dropZoneActivated = true
+    var dropZones: [DropZone] {
+        get {
+            return [dropZone]
         }
     }
 
-    override init() {
-        dropZone = DropZone(size: CGSize(width: 150, height: CodeBlock.dropZoneSize))
+    init(containingBlock: ContainerBlockProtocol) {
+        dropZone = DropZone(size: CGSize(width: 150, height: CodeBlock.dropZoneSize),
+                            containingBlock: containingBlock)
+        self.containingBlock = containingBlock
         super.init()
         resizeDropZone()
         dropZone.zPosition = 5
@@ -74,7 +83,9 @@ class CodeBlock: SKNode {
     func resizeDropZone() {
         dropZone.removeFromParent()
         let selfFrame = self.calculateAccumulatedFrame()
-        dropZone = DropZone(size: CGSize(width: selfFrame.width, height: CodeBlock.dropZoneSize))
+        dropZone = DropZone(size: CGSize(width: selfFrame.width, height: CodeBlock.dropZoneSize),
+                            containingBlock: self.containingBlock)
+        dropZone.blockPosition = self.blockPosition
         self.addChild(dropZone)
     }
 

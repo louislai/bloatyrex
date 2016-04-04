@@ -11,10 +11,10 @@ import SpriteKit
 class MainBlock: CodeBlock {
     let blockBody: SKShapeNode
 
-    override init() {
+    override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKShapeNode(rect: CGRect(x: 0, y: CodeBlock.dropZoneSize, width: 150, height: 30), cornerRadius: 0)
         blockBody.fillColor = UIColor.blueColor()
-        super.init()
+        super.init(containingBlock: containingBlock)
         self.addChild(blockBody)
         self.resizeDropZone()
     }

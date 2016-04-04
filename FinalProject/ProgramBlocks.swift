@@ -8,13 +8,13 @@
 
 import SpriteKit
 
-class ProgramBlocks: SKNode {
+class ProgramBlocks: SKNode, ContainerBlockProtocol {
     private var blocks = [CodeBlock]()
     private let trash = TrashZone()
 
     override init() {
         super.init()
-        blocks.append(MainBlock())
+        blocks.append(MainBlock(containingBlock: self))
         trash.position = CGPoint(x: 300, y: -400)
         self.addChild(trash)
         self.addChild(blocks[0])
@@ -26,6 +26,7 @@ class ProgramBlocks: SKNode {
         let point = CGPoint(x: x, y: y)
 
         insertionHandler.position = nil
+        insertionHandler.container = nil
 
         selectClosestDropZone(point, insertionHandler: insertionHandler)
     }
@@ -37,8 +38,8 @@ class ProgramBlocks: SKNode {
         trash.unfocus()
     }
 
-    func insertBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
-        if let position = insertionHandler.position {
+    func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition) {
+        if let position = insertionPosition.position {
             blocks.insert(block, atIndex: position)
             self.addChild(block)
             flushBlocks()
@@ -64,17 +65,19 @@ class ProgramBlocks: SKNode {
 
     func selectClosestDropZone(location: CGPoint, insertionHandler: InsertionPosition) {
         var closestDistance = CGFloat.max
-        var closestBlock = blocks[0]
+        var closestDropZone = blocks[0].dropZones[0]
         trash.unfocus()
         for block in blocks {
             block.unfocus()
-            var zone = block.dropZoneCenter
-            zone.x += block.position.x
-            zone.y += block.position.y
-            let distance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) + pow((Float)(zone.y - location.y), 2)))
-            if distance < closestDistance {
-                closestDistance = distance
-                closestBlock = block
+            for zone in block.dropZones {
+                let frame = zone.calculateAccumulatedFrame()
+                let zoneX = frame.midX + block.position.x
+                let zoneY = frame.midY + block.position.y
+                let distance = (CGFloat)(sqrt(pow((Float)(zoneX - location.x), 2) + pow((Float)(zoneY - location.y), 2)))
+                if distance < closestDistance {
+                    closestDistance = distance
+                    closestDropZone = zone
+                }
             }
         }
         let zone = trash.dropZoneCenter
@@ -83,7 +86,7 @@ class ProgramBlocks: SKNode {
         if trashDistance < closestDistance {
             trash.focus(insertionHandler)
         } else {
-            closestBlock.focus(insertionHandler)
+            closestDropZone.focus(insertionHandler)
         }
     }
 

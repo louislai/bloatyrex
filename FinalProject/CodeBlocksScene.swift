@@ -19,6 +19,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward)
     let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft)
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight)
+    let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.Nest)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -35,10 +36,12 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         turnRightButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
         upButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
         turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
+        nestButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
         programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
         turnLeftButton.zPosition = 10
         upButton.zPosition = 10
         addNodeToOverlay(turnLeftButton)
+        addNodeToOverlay(nestButton)
         addNodeToOverlay(upButton)
         addNodeToContent(programBlocks)
         addNodeToOverlay(turnRightButton)
@@ -60,6 +63,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         } else if turnRightButton.containsPoint(locationInOverlay) {
             heldBlock = turnRightButton
             turnRightButton.pickBlock(true)
+            pressState = .AddingBlock
+        } else if nestButton.containsPoint(locationInOverlay) {
+            heldBlock = nestButton
+            nestButton.pickBlock(true)
             pressState = .AddingBlock
         }
 
@@ -114,15 +121,19 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.pickBlock(false)
                 programBlocks.endHover()
-                switch block.blockType {
-                case .Forward:
-                    programBlocks.insertBlock(ForwardBlock(), insertionHandler: insertionPosition)
-                case .TurnLeft:
-                    programBlocks.insertBlock(TurnLeftBlock(), insertionHandler: insertionPosition)
-                case .TurnRight:
-                    programBlocks.insertBlock(TurnRightBlock(), insertionHandler: insertionPosition)
-                default:
-                    break
+                if let insertionContainer = insertionPosition.container {
+                    switch block.blockType {
+                    case .Forward:
+                        insertionContainer.insertBlock(ForwardBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .TurnLeft:
+                        insertionContainer.insertBlock(TurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .TurnRight:
+                        insertionContainer.insertBlock(TurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .Nest:
+                        insertionContainer.insertBlock(NestableBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    default:
+                        break
+                    }
                 }
                 insertionPosition.position = nil
             }

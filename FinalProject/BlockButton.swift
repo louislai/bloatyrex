@@ -13,6 +13,7 @@ enum BlockType {
     case Forward
     case TurnLeft
     case TurnRight
+    case Nest
 }
 
 class BlockButton: SKNode {

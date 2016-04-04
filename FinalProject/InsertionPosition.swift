@@ -11,4 +11,5 @@ import SpriteKit
 class InsertionPosition {
     var trash = false
     var position: Int?
+    var container: ContainerBlockProtocol?
 }
