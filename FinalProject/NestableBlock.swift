@@ -17,7 +17,8 @@ class NestableBlock: CodeBlock {
     
     override var dropZones: [DropZone] {
         get {
-            return [dropZone, nestedDropZone]
+            let result = [dropZone, nestedDropZone] + nestedBlocks.dropZones
+            return result
         }
     }
     
@@ -42,6 +43,7 @@ class NestableBlock: CodeBlock {
     override func endHover() {
         super.endHover()
         self.unfocus()
+        nestedBlocks.unfocus()
     }
     
     override func flushBlocks() {
@@ -72,6 +74,7 @@ class NestableBlock: CodeBlock {
     override func unfocus() {
         super.unfocus()
         nestedDropZone.displayNormal()
+        nestedBlocks.unfocus()
     }
     
     required init?(coder aDecoder: NSCoder) {
