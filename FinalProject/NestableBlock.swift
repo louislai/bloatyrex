@@ -11,7 +11,7 @@ import SpriteKit
 class NestableBlock: CodeBlock {
     let nestingDepth: CGFloat = 20
     let topBlock: SKSpriteNode
-    let nestedBlocks = [CodeBlock]()
+    let nestedBlocks = NestingZone()
     let nestedDropZone: DropZone
     let bottomBlock: SKSpriteNode
     
@@ -22,19 +22,16 @@ class NestableBlock: CodeBlock {
     }
     
     override init(containingBlock: ContainerBlockProtocol) {
-        topBlock = SKSpriteNode(imageNamed: "wall")
-        topBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                     y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
         bottomBlock = SKSpriteNode(imageNamed: "wall")
-        bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                    y: 3 * topBlock.size.height / 2 +
-                                        CodeBlock.dropZoneSize + 49)
-        nestedDropZone = DropZone(size: CGSize(width: 50, height: 50), containingBlock: containingBlock)
-        nestedDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height + CodeBlock.dropZoneSize)
+        topBlock = SKSpriteNode(imageNamed: "wall")
+        nestedDropZone = DropZone(size: CGSize(width: 50, height: CodeBlock.dropZoneSize),
+                                  containingBlock: nestedBlocks)
         super.init(containingBlock: containingBlock)
         self.addChild(topBlock)
         self.addChild(nestedDropZone)
+        self.addChild(nestedBlocks)
         self.addChild(bottomBlock)
+        flushBlocks()
         self.resizeDropZone()
     }
     
@@ -45,6 +42,31 @@ class NestableBlock: CodeBlock {
     override func endHover() {
         super.endHover()
         self.unfocus()
+    }
+    
+    override func flushBlocks() {
+        if nestedBlocks.count > 0 {
+            let nestedBlocksFrame = nestedBlocks.calculateAccumulatedFrame()
+            nestedBlocks.position.x = nestingDepth
+            bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
+                                           y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
+            nestedBlocks.position.y = topBlock.size.height + nestedBlocksFrame.height +
+                CodeBlock.dropZoneSize
+            topBlock.position = CGPoint(x: topBlock.size.width / 2,
+                                        y: 3 * topBlock.size.height / 2 +
+                                            2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height)
+            nestedDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
+                CodeBlock.dropZoneSize + nestedBlocksFrame.height)
+        } else {
+            bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
+                                           y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
+            topBlock.position = CGPoint(x: topBlock.size.width / 2,
+                                        y: 3 * topBlock.size.height / 2 +
+                                            2 * CodeBlock.dropZoneSize)
+            nestedDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height + CodeBlock.dropZoneSize)
+            nestedBlocks.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
+                2 * CodeBlock.dropZoneSize)
+        }
     }
     
     override func unfocus() {

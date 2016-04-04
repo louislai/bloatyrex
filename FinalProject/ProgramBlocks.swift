@@ -141,13 +141,14 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         }
     }
 
-    private func flushBlocks() {
+    func flushBlocks() {
         var yPos: CGFloat = blocks[0].position.y
         let xPos = blocks[0].position.x
         for (i, block) in blocks.enumerate() {
             if i != 0 {
                 block.blockPosition = i
                 block.position.x = xPos
+                block.flushBlocks()
                 yPos -= block.calculateAccumulatedFrame().height
                 block.position.y = yPos
             }

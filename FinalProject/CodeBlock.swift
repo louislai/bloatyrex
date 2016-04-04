@@ -88,6 +88,10 @@ class CodeBlock: SKNode {
         dropZone.blockPosition = self.blockPosition
         self.addChild(dropZone)
     }
+    
+    func flushBlocks() {
+        return
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

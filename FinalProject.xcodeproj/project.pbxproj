@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D69B6C61CB2998B00C1FA04 /* ContainerBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */; };
 		1D69B6C81CB29E4500C1FA04 /* TrashContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */; };
+		1D69B6CA1CB2AA9200C1FA04 /* NestingZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */; };
 		1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D61C9984F6003E7B75 /* TrashZone.swift */; };
 		1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */; };
 		1D934FE71CAD6AC0009F1FBA /* NestableBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D934FE61CAD6AC0009F1FBA /* NestableBlock.swift */; };
@@ -85,6 +86,7 @@
 /* Begin PBXFileReference section */
 		1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerBlockProtocol.swift; sourceTree = "<group>"; };
 		1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrashContainer.swift; sourceTree = "<group>"; };
+		1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestingZone.swift; sourceTree = "<group>"; };
 		1D7E23D61C9984F6003E7B75 /* TrashZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TrashZone.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnRightBlock.swift; sourceTree = "<group>"; };
 		1D934FE61CAD6AC0009F1FBA /* NestableBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestableBlock.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				1DB4B0941C9920480010F727 /* MainBlock.swift */,
 				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
 				1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */,
+				1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */,
 			);
 			name = CodeBlocks;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */,
 				BFFB1A3E1CABB78F00C746CD /* MapNode.swift in Sources */,
 				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
+				1D69B6CA1CB2AA9200C1FA04 /* NestingZone.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,

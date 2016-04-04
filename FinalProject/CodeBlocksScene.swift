@@ -152,6 +152,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         case .Idle:
             break
         }
+        programBlocks.flushBlocks()
         pressState = .Idle
     }
 }
