@@ -93,6 +93,17 @@ class NestableBlock: CodeBlock {
         nestedBlocks.unfocus()
     }
     
+    override func getBlock(location: CGPoint) -> CodeBlock? {
+        let xLocation = location.x - self.position.x
+        let yLocation = location.y - self.position.y
+        let correctedLocation = CGPoint(x: xLocation, y: yLocation)
+        if nestedBlocks.containsPoint(correctedLocation) {
+            return nestedBlocks.getBlock(correctedLocation)
+        } else {
+            return self
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

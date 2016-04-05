@@ -12,7 +12,7 @@ class DropZone: SKNode {
 
     let hover: SKShapeNode
     let normal: SKShapeNode
-    let containingBlock: ContainerBlockProtocol
+    var containingBlock: ContainerBlockProtocol
 
     let cornerRadius: CGFloat = 2
     var blockPosition = 0

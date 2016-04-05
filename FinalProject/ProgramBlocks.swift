@@ -49,9 +49,10 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
     func getBlock(location: CGPoint) -> CodeBlock? {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
+        let correctedLocation = CGPoint(x: x, y: y)
         for block in blocks {
-            if block.containsPoint(CGPoint(x: x, y: y)) {
-                return block
+            if block.containsPoint(correctedLocation) {
+                return block.getBlock(correctedLocation)
             }
         }
         return nil
@@ -95,6 +96,10 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
 
     func getCode() -> Program? {
         return parseBlock(1)
+    }
+    
+    func removeBlockAtIndex(index: Int) {
+        blocks.removeAtIndex(index)
     }
     
     func reorderBlock(block: CodeBlock, insertionHandler: InsertionPosition) {

@@ -31,10 +31,26 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         }
     }
     
+    func removeBlockAtIndex(index: Int) {
+        blocks.removeAtIndex(index - 1)
+    }
+    
     func unfocus() {
         for block in blocks {
             block.unfocus()
         }
+    }
+    
+    func getBlock(location: CGPoint) -> CodeBlock? {
+        let x = location.x - self.position.x
+        let y = location.y - self.position.y
+        let correctedLocation = CGPoint(x: x, y: y)
+        for block in blocks {
+            if block.containsPoint(correctedLocation) {
+                return block.getBlock(correctedLocation)
+            }
+        }
+        return nil
     }
     
     private func flushBlocks() {

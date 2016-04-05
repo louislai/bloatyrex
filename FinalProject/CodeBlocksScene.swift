@@ -145,7 +145,17 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 } else {
                     block.activateDropZone()
                     programBlocks.endHover()
-                    programBlocks.reorderBlock(block, insertionHandler: insertionPosition)
+                    block.containingBlock.removeBlockAtIndex(block.blockPosition)
+                    block.removeFromParent()
+                    if let container = insertionPosition.container {
+                        block.containingBlock = container
+                        if let position = insertionPosition.position {
+                            if block.containingBlock === container && position > block.blockPosition {
+                                insertionPosition.position = position - 1
+                            }
+                            container.insertBlock(block, insertionPosition: insertionPosition)
+                        }
+                    }
                 }
             }
             movedBlock = nil

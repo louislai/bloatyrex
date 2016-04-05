@@ -11,7 +11,17 @@ import SpriteKit
 class CodeBlock: SKNode {
     static let dropZoneSize: CGFloat = 10
 
-    let containingBlock: ContainerBlockProtocol
+    private var containingBlockValue: ContainerBlockProtocol
+    var containingBlock: ContainerBlockProtocol {
+        get {
+            return containingBlockValue
+        }
+        
+        set(newBlock) {
+            containingBlockValue = newBlock
+            dropZone.containingBlock = newBlock
+        }
+    }
     
     var dropZone: DropZone
     private var blockPositionValue = 0
@@ -35,7 +45,7 @@ class CodeBlock: SKNode {
     init(containingBlock: ContainerBlockProtocol) {
         dropZone = DropZone(size: CGSize(width: 150, height: CodeBlock.dropZoneSize),
                             containingBlock: containingBlock)
-        self.containingBlock = containingBlock
+        self.containingBlockValue = containingBlock
         super.init()
         resizeDropZone()
         dropZone.zPosition = 5
@@ -91,6 +101,10 @@ class CodeBlock: SKNode {
     
     func flushBlocks() {
         return
+    }
+    
+    func getBlock(location: CGPoint) -> CodeBlock? {
+        return self
     }
 
     required init?(coder aDecoder: NSCoder) {
