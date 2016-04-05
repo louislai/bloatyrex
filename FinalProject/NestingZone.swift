@@ -47,4 +47,16 @@ class NestingZone: SKNode, ContainerBlockProtocol {
             block.position.y = yPos
         }
     }
+    
+    func activateDropZones() {
+        for block in blocks {
+            block.activateDropZone()
+        }
+    }
+    
+    func deactivateDropZones() {
+        for block in blocks {
+            block.deactivateDropZone()
+        }
+    }
 }

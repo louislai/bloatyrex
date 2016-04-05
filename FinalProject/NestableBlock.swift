@@ -17,8 +17,12 @@ class NestableBlock: CodeBlock {
     
     override var dropZones: [DropZone] {
         get {
-            let result = [dropZone, nestedDropZone] + nestedBlocks.dropZones
-            return result
+            if dropZoneActivated {
+                let result = [dropZone, nestedDropZone] + nestedBlocks.dropZones
+                return result
+            } else {
+                return []
+            }
         }
     }
     
@@ -69,6 +73,18 @@ class NestableBlock: CodeBlock {
             nestedBlocks.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
                 2 * CodeBlock.dropZoneSize)
         }
+    }
+    
+    override func activateDropZone() {
+        super.activateDropZone()
+        nestedDropZone.hidden = false
+        nestedBlocks.activateDropZones()
+    }
+    
+    override func deactivateDropZone() {
+        super.deactivateDropZone()
+        nestedDropZone.hidden = true
+        nestedBlocks.deactivateDropZones()
     }
     
     override func unfocus() {
