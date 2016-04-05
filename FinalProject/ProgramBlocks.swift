@@ -70,7 +70,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         for block in blocks {
             block.unfocus()
             for zone in block.dropZones {
-                let frame = zone.calculateAccumulatedFrame()
+                let frame = zone.frame
                 let center = CGPoint(x: frame.midX, y: frame.midY)
                 let zonePoint = zone.convertPoint(center, toNode: self)
                 let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
@@ -82,15 +82,21 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
             }
         }
         let zone = trash.dropZoneCenter
-        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) + pow((Float)(zone.y - location.y), 2)))
+        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) +
+            pow((Float)(zone.y - location.y), 2)))
         insertionHandler.trash = false
         if trashDistance < closestDistance {
             trash.focus(insertionHandler)
+            insertionHandler.trash = true
         } else {
             closestDropZone.focus(insertionHandler)
         }
     }
 
+    func getCode() -> Program? {
+        return parseBlock(1)
+    }
+    
     func reorderBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
         if insertionHandler.trash {
             if let _ = block as? MainBlock {
@@ -108,10 +114,6 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
             blocks.insert(block, atIndex: position)
         }
         flushBlocks()
-    }
-
-    func getCode() -> Program? {
-        return parseBlock(1)
     }
 
     private func parseBlock(programCounter: Int) -> Program? {
