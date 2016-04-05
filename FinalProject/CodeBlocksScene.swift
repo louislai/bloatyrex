@@ -12,6 +12,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
 
     enum PressState {
         case AddingBlock
+        case AddingBoolOp
         case MovingBlock
         case Idle
     }
@@ -19,7 +20,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward)
     let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft)
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight)
-    let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.Nest)
+    let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While)
+    let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -30,6 +32,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     func retrieveProgram() -> Program? {
         return programBlocks.getCode()
     }
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
@@ -37,12 +40,14 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         upButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
         turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
         nestButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
+        eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
         programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
         turnLeftButton.zPosition = 10
         upButton.zPosition = 10
         addNodeToOverlay(turnLeftButton)
         addNodeToOverlay(nestButton)
         addNodeToOverlay(upButton)
+        addNodeToOverlay(eyesButton)
         addNodeToContent(programBlocks)
         addNodeToOverlay(turnRightButton)
     }
@@ -68,6 +73,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = nestButton
             nestButton.pickBlock(true)
             pressState = .AddingBlock
+        } else if eyesButton.containsPoint(locationInOverlay) {
+            heldBlock = eyesButton
+            eyesButton.pickBlock(true)
+            pressState = .AddingBoolOp
         }
 
         if programBlocks.containsPoint(locationInContent) {
@@ -110,6 +119,13 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     }
                 }
             }
+        case .AddingBoolOp:
+            if let block = heldBlock {
+                block.moveBlock(CGPoint(x: xMovement, y: yMovement))
+                if programBlocks.containsPoint(touchLocation) {
+                    programBlocks.boolOpHover(touchLocation)
+                }
+            }
         case .Idle:
             break
         }
@@ -129,8 +145,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         insertionContainer.insertBlock(TurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .TurnRight:
                         insertionContainer.insertBlock(TurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .Nest:
-                        insertionContainer.insertBlock(NestableBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .While:
+                        insertionContainer.insertBlock(WhileBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     default:
                         break
                     }
@@ -159,6 +175,12 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 }
             }
             movedBlock = nil
+        case .AddingBoolOp:
+            if let block = heldBlock {
+                block.pickBlock(false)
+                programBlocks.endBoolOpHover()
+            }
+            heldBlock = nil
         case .Idle:
             break
         }

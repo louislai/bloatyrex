@@ -23,6 +23,12 @@ class CodeBlock: SKNode {
         }
     }
     
+    var boolOpZones: [BoolOpZone] {
+        get {
+            return []
+        }
+    }
+    
     var dropZone: DropZone
     private var blockPositionValue = 0
     var blockPosition: Int {

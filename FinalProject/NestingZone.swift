@@ -9,7 +9,7 @@
 import SpriteKit
 
 class NestingZone: SKNode, ContainerBlockProtocol {
-    private var blocks = [CodeBlock]()
+    var blocks = [CodeBlock]()
     var count: Int {
         get {
             return blocks.count

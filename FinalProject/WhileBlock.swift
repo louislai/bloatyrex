@@ -1,5 +1,5 @@
 //
-//  NestableBlock.swift
+//  WhileBlock.swift
 //  FinalProject
 //
 //  Created by Koh Wai Kit on 31/3/16.
@@ -8,12 +8,20 @@
 
 import SpriteKit
 
-class NestableBlock: CodeBlock {
+class WhileBlock: CodeBlock {
     let nestingDepth: CGFloat = 20
     let topBlock: SKSpriteNode
     let nestedBlocks = NestingZone()
     let nestedDropZone: DropZone
     let bottomBlock: SKSpriteNode
+    let boolOpZone: BoolOpZone
+    
+    override var boolOpZones: [BoolOpZone] {
+        get {
+            let result = getNestedBoolOpZones() + [boolOpZone]
+            return result
+        }
+    }
     
     override var dropZones: [DropZone] {
         get {
@@ -26,16 +34,26 @@ class NestableBlock: CodeBlock {
         }
     }
     
+    private func getNestedBoolOpZones() -> [BoolOpZone] {
+        var zones = [BoolOpZone]()
+        for block in nestedBlocks.blocks {
+            zones.appendContentsOf(block.boolOpZones)
+        }
+        return zones
+    }
+    
     override init(containingBlock: ContainerBlockProtocol) {
         bottomBlock = SKSpriteNode(imageNamed: "wall")
         topBlock = SKSpriteNode(imageNamed: "wall")
         nestedDropZone = DropZone(size: CGSize(width: 50, height: CodeBlock.dropZoneSize),
                                   containingBlock: nestedBlocks)
+        boolOpZone = BoolOpZone(size: CGSize(width: CodeBlock.dropZoneSize, height: topBlock.size.height))
         super.init(containingBlock: containingBlock)
         self.addChild(topBlock)
         self.addChild(nestedDropZone)
         self.addChild(nestedBlocks)
         self.addChild(bottomBlock)
+        self.addChild(boolOpZone)
         flushBlocks()
         self.resizeDropZone()
     }
@@ -61,6 +79,9 @@ class NestableBlock: CodeBlock {
             topBlock.position = CGPoint(x: topBlock.size.width / 2,
                                         y: 3 * topBlock.size.height / 2 +
                                             2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height)
+            boolOpZone.position = CGPoint(x: topBlock.size.width,
+                                         y: topBlock.size.height +
+                                            2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height)
             nestedDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
                 CodeBlock.dropZoneSize + nestedBlocksFrame.height)
         } else {
@@ -69,6 +90,8 @@ class NestableBlock: CodeBlock {
             topBlock.position = CGPoint(x: topBlock.size.width / 2,
                                         y: 3 * topBlock.size.height / 2 +
                                             2 * CodeBlock.dropZoneSize)
+            boolOpZone.position = CGPoint(x: topBlock.size.width, y: topBlock.size.height +
+                2 * CodeBlock.dropZoneSize)
             nestedDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height + CodeBlock.dropZoneSize)
             nestedBlocks.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
                 2 * CodeBlock.dropZoneSize)
