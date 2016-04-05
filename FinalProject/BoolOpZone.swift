@@ -14,6 +14,7 @@ class BoolOpZone: SKNode {
     let normal: SKShapeNode
     
     let cornerRadius: CGFloat = 2
+    var boolOpBlock: BoolOpBlock?
     var blockPosition = 0
     
     init(size: CGSize) {
@@ -27,6 +28,14 @@ class BoolOpZone: SKNode {
         super.init()
         self.addChild(normal)
         self.addChild(hover)
+    }
+    
+    func insertBlock(block: BoolOpBlock) {
+        boolOpBlock = block
+        block.position = CGPoint(x: 32, y: 32)
+        normal.hidden = true
+        hover.hidden = true
+        self.addChild(block)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -43,8 +52,8 @@ class BoolOpZone: SKNode {
         normal.hidden = false
     }
     
-    func focus(insertionPosition: InsertionPosition) {
+    func focus(insertionPosition: BoolOpInsertionPosition) {
         self.displayHover()
-        insertionPosition.position = self.blockPosition + 1
+        insertionPosition.zone = self
     }
 }

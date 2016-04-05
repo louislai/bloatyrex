@@ -28,6 +28,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     var pressState = PressState.Idle
 
     let insertionPosition = InsertionPosition()
+    let boolOpInsertionPosition = BoolOpInsertionPosition()
 
     func retrieveProgram() -> Program? {
         return programBlocks.getCode()
@@ -123,7 +124,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
-                    programBlocks.boolOpHover(touchLocation)
+                    programBlocks.boolOpHover(touchLocation, insertionHandler: boolOpInsertionPosition)
                 }
             }
         case .Idle:
@@ -179,6 +180,14 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.pickBlock(false)
                 programBlocks.endBoolOpHover()
+                if let zone = boolOpInsertionPosition.zone {
+                    switch block.blockType {
+                    case .Eyes:
+                        zone.insertBlock(SeeBlock())
+                    default:
+                        break
+                    }
+                }
             }
             heldBlock = nil
         case .Idle:

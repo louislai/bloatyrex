@@ -13,6 +13,7 @@
 		1D69B6CE1CB3AC8600C1FA04 /* BoolOpZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6CD1CB3AC8600C1FA04 /* BoolOpZone.swift */; };
 		1D69B6D01CB3AF0600C1FA04 /* BoolOpBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6CF1CB3AF0600C1FA04 /* BoolOpBlock.swift */; };
 		1D69B6D21CB3B24000C1FA04 /* SeeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6D11CB3B24000C1FA04 /* SeeBlock.swift */; };
+		1D69B6D41CB41A6300C1FA04 /* BoolOpInsertionPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6D31CB41A6300C1FA04 /* BoolOpInsertionPosition.swift */; };
 		1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D61C9984F6003E7B75 /* TrashZone.swift */; };
 		1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */; };
 		1D934FE71CAD6AC0009F1FBA /* WhileBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */; };
@@ -93,6 +94,7 @@
 		1D69B6CD1CB3AC8600C1FA04 /* BoolOpZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolOpZone.swift; sourceTree = "<group>"; };
 		1D69B6CF1CB3AF0600C1FA04 /* BoolOpBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolOpBlock.swift; sourceTree = "<group>"; };
 		1D69B6D11CB3B24000C1FA04 /* SeeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeeBlock.swift; sourceTree = "<group>"; };
+		1D69B6D31CB41A6300C1FA04 /* BoolOpInsertionPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolOpInsertionPosition.swift; sourceTree = "<group>"; };
 		1D7E23D61C9984F6003E7B75 /* TrashZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TrashZone.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnRightBlock.swift; sourceTree = "<group>"; };
 		1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhileBlock.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */,
 				1DB4B0941C9920480010F727 /* MainBlock.swift */,
 				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
+				1D69B6D31CB41A6300C1FA04 /* BoolOpInsertionPosition.swift */,
 				1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */,
 				1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */,
 				1D69B6CD1CB3AC8600C1FA04 /* BoolOpZone.swift */,
@@ -560,6 +563,7 @@
 				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
 				1D69B6CA1CB2AA9200C1FA04 /* NestingZone.swift in Sources */,
 				1D69B6CE1CB3AC8600C1FA04 /* BoolOpZone.swift in Sources */,
+				1D69B6D41CB41A6300C1FA04 /* BoolOpInsertionPosition.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,

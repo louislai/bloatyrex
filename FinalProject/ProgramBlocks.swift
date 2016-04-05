@@ -40,15 +40,15 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         trash.unfocus()
     }
     
-    func boolOpHover(location: CGPoint) {
+    func boolOpHover(location: CGPoint, insertionHandler: BoolOpInsertionPosition) {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
         let point = CGPoint(x: x, y: y)
         
-        selectClosestBoolOpZone(point)
+        selectClosestBoolOpZone(point, insertionHandler: insertionHandler)
     }
     
-    func selectClosestBoolOpZone(location: CGPoint) {
+    func selectClosestBoolOpZone(location: CGPoint, insertionHandler: BoolOpInsertionPosition) {
         var closestDistance = CGFloat.max
         var closestBoolOpZone: BoolOpZone?
         trash.unfocus()
@@ -74,7 +74,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
             trash.displayHover()
         } else {
             if let zone = closestBoolOpZone {
-                zone.displayHover()
+                zone.focus(insertionHandler)
             }
         }
     }
