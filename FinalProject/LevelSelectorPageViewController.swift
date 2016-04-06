@@ -217,13 +217,13 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
                                action: #selector(LevelSelectorPageViewController.goBack))
     }
     var renameButton: UIBarButtonItem {
-        return UIBarButtonItem(title: "Rename", style: .Plain, target: self,
-                               action: Selector("renameFile"))
+        return UIBarButtonItem(title: "Rename", style: .Plain, target: filesArchive,
+                               action: #selector(FilesArchive.renameFile(_:newFileName:)))
     }
     var deleteButton: UIBarButtonItem {
         let trashBinImage = UIImage(named: "trash")
-        return UIBarButtonItem(image: trashBinImage, style: .Plain, target: self,
-                               action: Selector("deleteFile"))
+        return UIBarButtonItem(image: trashBinImage, style: .Plain, target: filesArchive,
+                               action: #selector(FilesArchive.removeFile(_:)))
     }
 
     func resetNavigationBar() {

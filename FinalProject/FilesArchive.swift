@@ -8,9 +8,9 @@
 
 import Foundation
 
-class FilesArchive {
+class FilesArchive: NSObject {
 
-    init() {}
+    override init() {}
 
     private var documentDirectory: String {
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
@@ -26,9 +26,9 @@ class FilesArchive {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        let propertyListFiles = filesInDirectory.filter { ($0 as NSString).pathExtension == "plist" }
-        let propertyListFileNames = propertyListFiles.map { ($0 as NSString).stringByDeletingPathExtension }
-        return propertyListFileNames
+        let mapFiles = filesInDirectory.filter { ($0 as NSString).pathExtension == "map" }
+        let mapFileNames = mapFiles.map { ($0 as NSString).stringByDeletingPathExtension }
+        return mapFileNames
     }
 
     // Save Map into a file with given name.

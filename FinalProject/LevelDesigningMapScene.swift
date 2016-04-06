@@ -626,7 +626,7 @@ extension LevelDesigningMapScene {
         default:
             break
         }
-        dottedLine.position = CGPointMake(positionX, positionY)
+        dottedLine.position = CGPoint(x: positionX, y: positionY)
 
         addChild(dottedLine)
     }
