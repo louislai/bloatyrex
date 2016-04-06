@@ -162,13 +162,12 @@ class LevelCell: UICollectionViewCell {
                 renamedSuccessfully = self.filesArchive.renamePropertyList(originalFileName, newFileName: newName!.text!)
             }
             if renamedSuccessfully {
+                self.levelSelectorPageViewController.resetNavigationBar()
+                self.resetSearchBar()
+                self.reloadPageViewController()
                 let successAlert = UIAlertController(title: "Renamed!", message: "You have successfully renamed this level!",
                     preferredStyle: UIAlertControllerStyle.Alert)
-                successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
-                    self.levelSelectorPageViewController.resetNavigationBar()
-                    self.resetSearchBar()
-                    self.reloadPageViewController()
-                }))
+                successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
                 self.levelSelectorPageViewController.presentViewController(successAlert, animated: true, completion: nil)
             } else {
                 let failureAlert = UIAlertController(title: "Failed", message: "Failed to save this level.",
