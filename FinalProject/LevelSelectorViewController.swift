@@ -203,11 +203,21 @@ class LevelCell: UICollectionViewCell {
         return UIBarButtonItem(image: trashBinImage, style: .Plain, target: self,
                                action: #selector(LevelCell.deleteFile))
     }
+    var backButton: UIBarButtonItem {
+        return UIBarButtonItem(title: "< Back", style: .Plain, target: self,
+                               action: #selector(resetNavigationBar))
+    }
+
+    func resetNavigationBar() {
+        self.levelSelectorPageViewController.resetNavigationBar()
+        self.resetSearchBar()
+        self.reloadPageViewController()
+    }
 
     func setNavigationBar(fileName: String) {
         let navigationItem = navigationBar.items!.first!
         navigationItem.title = fileName
-        navigationItem.leftBarButtonItem = renameButton
+        navigationItem.leftBarButtonItems = [backButton, renameButton]
         navigationItem.rightBarButtonItem = deleteButton
         navigationBar.items = [navigationItem]
     }

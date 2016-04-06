@@ -228,7 +228,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
     func resetNavigationBar() {
         navigationItem.title = "Tap to load level, Press-and-hold for Settings"
-        navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItems = [backButton]
         navigationItem.rightBarButtonItem = nil
 
         navigationBar.items = [navigationItem]
