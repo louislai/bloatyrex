@@ -9,7 +9,7 @@
 import SpriteKit
 
 class WoodenBlockNode: MapUnitNode {
-    init() {
+    required init(type: MapUnitType = .WoodenBlock) {
         super.init(type: .WoodenBlock)
     }
     

@@ -55,7 +55,7 @@ class LevelDesigningMapScene: SKScene {
     }
     var grid: [[SKSpriteNode]]!
     var paletteNode: SKSpriteNode!
-    var currentMapUnitSelected = MapUnitType.EmptySpace
+    var currentMapUnitTypeSelected = MapUnitType.EmptySpace
     var arrowSprites: [String: SKSpriteNode]!
 
     override init(size: CGSize) {
@@ -117,8 +117,8 @@ class LevelDesigningMapScene: SKScene {
     func addBlocks() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
-                let mapUnit = map.retrieveMapUnitAt(row, column: column)!
-                setBlock(mapUnit, row: row, column: column)
+                let mapUnitType = map.retrieveMapUnitAt(row, column: column)!.type
+                setBlock(mapUnitType, row: row, column: column)
             }
         }
     }
@@ -137,11 +137,11 @@ class LevelDesigningMapScene: SKScene {
 
     // Set block at a given row and column with a given image
     func setBlock(mapUnit: MapUnitType, row: Int, column: Int) {
+        let blockNode = mapUnit.nodeClass.init()
         // Update model
-        map.setMapUnitAt(mapUnit, row: row, column: column)
+        map.setMapUnitAt(blockNode, row: row, column: column)
 
         // Update view
-        let blockNode = getBlockNode(mapUnit)
         blockNode.size = blockSize
         blockNode.position = pointFor(row, column: column)
         grid[row][column] = blockNode
@@ -151,19 +151,6 @@ class LevelDesigningMapScene: SKScene {
 
         // Checker
         // printGrid()
-    }
-
-    func getBlockNode(mapUnit: MapUnitType) -> SKSpriteNode {
-        switch mapUnit {
-        case .Agent:
-            return SKSpriteNode(texture: TextureManager.agentUpTexture)
-        case .EmptySpace:
-            return SKSpriteNode(texture: TextureManager.retrieveTexture("Block"))
-        case .Goal:
-            return SKSpriteNode(texture: TextureManager.retrieveTexture("toilet"))
-        case .Wall:
-            return SKSpriteNode(texture: TextureManager.retrieveTexture("wall"))
-        }
     }
 
     // Convert a row, column pair into a CGPoint relative to unitsLayer
@@ -195,14 +182,14 @@ class LevelDesigningMapScene: SKScene {
 
     // Prints the grid for checking purposes
     func printGrid() {
-        for row in (0..<map.numberOfRows).reverse() {
-            var string = ""
-            for column in 0..<map.numberOfColumns {
-                string += String(map.retrieveMapUnitAt(row, column: column)!.rawValue) + " "
-            }
-            print(string)
-        }
-        print("=====")
+//        for row in (0..<map.numberOfRows).reverse() {
+//            var string = ""
+//            for column in 0..<map.numberOfColumns {
+//                string += String(map.retrieveMapUnitAt(row, column: column)!.rawValue) + " "
+//            }
+//            print(string)
+//        }
+//        print("=====")
     }
 }
 
@@ -222,13 +209,13 @@ extension LevelDesigningMapScene {
         view.addGestureRecognizer(longPressGestureRecognizer)
     }
 
-    func handleGesture(sender: UIGestureRecognizer, mapUnit: MapUnit) {
+    func handleGesture(sender: UIGestureRecognizer, mapUnitType: MapUnitType) {
         let viewPoint = sender.locationInView(view)
         let scenePoint = convertPointFromView(viewPoint)
         let row = rowFor(scenePoint)
         let column = columnFor(scenePoint)
         if isValidRowAndColumn(row, column: column) {
-            setBlock(mapUnit, row: row, column: column)
+            setBlock(mapUnitType, row: row, column: column)
         }
     }
 
@@ -248,30 +235,30 @@ extension LevelDesigningMapScene {
             case "Reset":
                 resetAction()
             case "Agent":
-                updateCurrentItemSelected(MapUnit.Agent, nodeName: name)
+                updateCurrentItemSelected(.Agent, nodeName: name)
             case "Block":
-                updateCurrentItemSelected(MapUnit.EmptySpace, nodeName: name)
+                updateCurrentItemSelected(.EmptySpace, nodeName: name)
             case "Toilet":
-                updateCurrentItemSelected(MapUnit.Goal, nodeName: name)
+                updateCurrentItemSelected(.Goal, nodeName: name)
             case "Wall":
-                updateCurrentItemSelected(MapUnit.Wall, nodeName: name)
+                updateCurrentItemSelected(.Wall, nodeName: name)
             case "Add Top", "Remove Top", "Add Bottom", "Remove Bottom",
                 "Add Left", "Remove Left", "Add Right", "Remove Right":
                 updateGrid(name)
             default:
-                handleGesture(sender, mapUnit: currentMapUnitSelected)
+                handleGesture(sender, mapUnitType: currentMapUnitTypeSelected)
             }
         } else {
-            handleGesture(sender, mapUnit: currentMapUnitSelected)
+            handleGesture(sender, mapUnitType: currentMapUnitTypeSelected)
         }
     }
 
     func handlePan(sender: UIPanGestureRecognizer) {
-        handleGesture(sender, mapUnit: currentMapUnitSelected)
+        handleGesture(sender, mapUnitType: currentMapUnitTypeSelected)
     }
 
     func handleLongPress(sender: UILongPressGestureRecognizer) {
-        handleGesture(sender, mapUnit: MapUnit.EmptySpace)
+        handleGesture(sender, mapUnitType: .EmptySpace)
     }
 }
 
@@ -455,8 +442,8 @@ extension LevelDesigningMapScene {
         }
     }
 
-    func updateCurrentItemSelected(mapUnit: MapUnit, nodeName: String) {
-        currentMapUnitSelected = mapUnit
+    func updateCurrentItemSelected(mapUnitType: MapUnitType, nodeName: String) {
+        currentMapUnitTypeSelected = mapUnitType
 
         // Update View
         for node in paletteNode.children {

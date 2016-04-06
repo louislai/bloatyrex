@@ -17,10 +17,10 @@ class AgentNode: MapUnitNode {
     var callbackAction = SKAction.runBlock {}
     let timePerMoveMovement: NSTimeInterval = 0.5
 
-    init() {
+    required init(type: MapUnitType = .Agent) {
         super.init(type: .Agent)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

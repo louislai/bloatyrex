@@ -9,7 +9,7 @@
 import SpriteKit
 
 class WallNode: MapUnitNode {
-    init() {
+    required init(type: MapUnitType = .Wall) {
         super.init(type: .Wall)
     }
     

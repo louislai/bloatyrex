@@ -9,7 +9,7 @@
 import SpriteKit
 
 class HoleNode: MapUnitNode {
-    init() {
+    required init(type: MapUnitType = .Hole) {
         super.init(type: .Hole)
     }
     

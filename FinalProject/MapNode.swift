@@ -72,13 +72,12 @@ class MapNode: SKNode {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
                     where unit.type != .EmptySpace {
-                    var texture: SKTexture
+                    let sprite = unit
+
                     if unit.type == .Agent {
-                        texture = TextureManager.agentUpTexture
-                    } else {
-                        texture = TextureManager.retrieveTexture(unit.spriteName)
+                        sprite.texture = TextureManager.agentUpTexture
                     }
-                    let sprite = unit.spriteClass.init(texture: texture)
+
                     sprite.position = pointFor(row, column: column)
                     sprite.size = blockSize
                     sprite.zPosition = GlobalConstants.zPosition.back

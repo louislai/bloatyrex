@@ -11,7 +11,7 @@ import SpriteKit
 class MapUnitNode: SKSpriteNode {
     let type: MapUnitType
 
-    init(type: MapUnitType = .EmptySpace) {
+    required init(type: MapUnitType = .EmptySpace) {
         self.type = type
         let texture = TextureManager.retrieveTexture(type.spriteName)
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())

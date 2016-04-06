@@ -269,7 +269,6 @@
 				BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
 				BF5339C81C941459007F56F0 /* MapBlock.swift */,
-				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
 				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
 				BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */,
 			);
@@ -279,6 +278,7 @@
 		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
 				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,

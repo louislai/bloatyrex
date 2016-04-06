@@ -28,4 +28,16 @@ enum MapUnitType: Int {
         ]
         return spriteNames[rawValue]
     }
+
+    var nodeClass: MapUnitNode.Type {
+        let nodeClasses: [MapUnitNode.Type] = [
+            MapUnitNode.self,
+            AgentNode.self,
+            WallNode.self,
+            GoalNode.self,
+            HoleNode.self,
+            WoodenBlockNode.self
+        ]
+        return nodeClasses[rawValue]
+    }
 }
