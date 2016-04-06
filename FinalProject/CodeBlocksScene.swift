@@ -13,6 +13,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     enum PressState {
         case AddingBlock
         case AddingBoolOp
+        case AddingObject
         case MovingBlock
         case Idle
     }
@@ -22,6 +23,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight)
     let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While)
     let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes)
+    let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -42,9 +44,11 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
         nestButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
         eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
+        toiletButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
         programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
         turnLeftButton.zPosition = 10
         upButton.zPosition = 10
+        addNodeToOverlay(toiletButton)
         addNodeToOverlay(turnLeftButton)
         addNodeToOverlay(nestButton)
         addNodeToOverlay(upButton)
@@ -78,6 +82,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = eyesButton
             eyesButton.pickBlock(true)
             pressState = .AddingBoolOp
+        } else if toiletButton.containsPoint(locationInOverlay) {
+            heldBlock = toiletButton
+            toiletButton.pickBlock(true)
+            pressState = .AddingObject
         }
 
         if programBlocks.containsPoint(locationInContent) {
@@ -125,6 +133,13 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
                     programBlocks.boolOpHover(touchLocation, insertionHandler: boolOpInsertionPosition)
+                }
+            }
+        case .AddingObject:
+            if let block = heldBlock {
+                block.moveBlock(CGPoint(x: xMovement, y: yMovement))
+                if programBlocks.containsPoint(touchLocation) {
+                    //programBlocks.object(touchLocation)
                 }
             }
         case .Idle:
@@ -188,6 +203,21 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         break
                     }
                 }
+            }
+            heldBlock = nil
+        case .AddingObject:
+            if let block = heldBlock {
+                block.pickBlock(false)
+                /*
+                programBlocks.endBoolOpHover()
+                if let zone = boolOpInsertionPosition.zone {
+                    switch block.blockType {
+                    case .Eyes:
+                        zone.insertBlock(SeeBlock())
+                    default:
+                        break
+                    }
+                }*/
             }
             heldBlock = nil
         case .Idle:

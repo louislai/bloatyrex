@@ -23,6 +23,12 @@ class WhileBlock: CodeBlock {
         }
     }
     
+    override var objectDropZones: [ObjectDropZone] {
+        get {
+            return boolOpZone.objectDropZones
+        }
+    }
+    
     override var dropZones: [DropZone] {
         get {
             if dropZoneActivated {

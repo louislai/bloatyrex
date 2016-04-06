@@ -29,6 +29,12 @@ class CodeBlock: SKNode {
         }
     }
     
+    var objectDropZones: [ObjectDropZone] {
+        get {
+            return []
+        }
+    }
+    
     var dropZone: DropZone
     private var blockPositionValue = 0
     var blockPosition: Int {

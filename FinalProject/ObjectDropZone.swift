@@ -1,38 +1,27 @@
 //
-//  BoolOpZone.swift
+//  ObjectDropZone.swift
 //  FinalProject
 //
-//  Created by Koh Wai Kit on 5/4/16.
+//  Created by Koh Wai Kit on 6/4/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
 import SpriteKit
 
-class BoolOpZone: SKNode {
+class ObjectDropZone: SKNode {
     
     let hover: SKShapeNode
     let normal: SKShapeNode
     
     let cornerRadius: CGFloat = 2
-    var boolOpBlock: BoolOpBlock?
     var blockPosition = 0
-    
-    var objectDropZones: [ObjectDropZone] {
-        get {
-            if let block = boolOpBlock {
-                return block.objectDropZones
-            } else {
-                return []
-            }
-        }
-    }
     
     init(size: CGSize) {
         normal = SKShapeNode(rect: CGRect(x: 0, y: 0, width: size.width, height: size.height), cornerRadius: cornerRadius)
-        normal.strokeColor = UIColor.purpleColor()
+        normal.strokeColor = UIColor.greenColor()
         normal.lineWidth = 2
         hover = SKShapeNode(rect: CGRect(x: 0, y: 0, width: size.width, height: size.height), cornerRadius: cornerRadius)
-        hover.strokeColor = UIColor.purpleColor()
+        hover.strokeColor = UIColor.greenColor()
         hover.lineWidth = 5
         hover.hidden = true
         super.init()
@@ -41,10 +30,8 @@ class BoolOpZone: SKNode {
     }
     
     func insertBlock(block: BoolOpBlock) {
-        boolOpBlock = block
         normal.hidden = true
         hover.hidden = true
-        self.addChild(block)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,6 +50,5 @@ class BoolOpZone: SKNode {
     
     func focus(insertionPosition: BoolOpInsertionPosition) {
         self.displayHover()
-        insertionPosition.zone = self
     }
 }

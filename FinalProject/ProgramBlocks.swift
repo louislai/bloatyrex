@@ -48,6 +48,37 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         selectClosestBoolOpZone(point, insertionHandler: insertionHandler)
     }
     
+    func selectClosestObjectDropZone(location: CGPoint) {
+        var closestDistance = CGFloat.max
+        var closestBoolOpZone: ObjectDropZone?
+        trash.unfocus()
+        for block in blocks {
+            block.unfocus()
+            for zone in block.objectDropZones {
+                zone.displayNormal()
+                let frame = zone.frame
+                let center = CGPoint(x: frame.midX, y: frame.midY)
+                let zonePoint = zone.convertPoint(center, toNode: self)
+                let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
+                    + pow((Float)(zonePoint.y - location.y), 2)))
+                if distance < closestDistance {
+                    closestDistance = distance
+                    closestBoolOpZone = zone
+                }
+            }
+        }
+        let zone = trash.dropZoneCenter
+        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) +
+            pow((Float)(zone.y - location.y), 2)))
+        if trashDistance < closestDistance {
+            trash.displayHover()
+        } else {
+            if let zone = closestBoolOpZone {
+                //zone.focus(insertionHandler)
+            }
+        }
+    }
+    
     func selectClosestBoolOpZone(location: CGPoint, insertionHandler: BoolOpInsertionPosition) {
         var closestDistance = CGFloat.max
         var closestBoolOpZone: BoolOpZone?

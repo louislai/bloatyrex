@@ -15,6 +15,7 @@ enum BlockType {
     case TurnRight
     case While
     case Eyes
+    case Toilet
 }
 
 class BlockButton: SKNode {
@@ -26,6 +27,8 @@ class BlockButton: SKNode {
     init(imageNamed: String, blockType: BlockType) {
         button = SKSpriteNode(imageNamed: imageNamed)
         block = SKSpriteNode(imageNamed: imageNamed)
+        button.size = CGSize(width: 64, height: 64)
+        block.size = CGSize(width: 64, height: 64)
         block.hidden = true
         self.blockType = blockType
         super.init()
