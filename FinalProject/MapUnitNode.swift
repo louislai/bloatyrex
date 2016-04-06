@@ -13,7 +13,7 @@ class MapUnitNode: SKSpriteNode {
 
     required init(type: MapUnitType = .EmptySpace) {
         self.type = type
-        let texture = TextureManager.retrieveTexture(type.spriteName)
+        let texture = type.texture
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
     }
 

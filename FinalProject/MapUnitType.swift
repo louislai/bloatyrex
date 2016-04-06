@@ -17,16 +17,16 @@ enum MapUnitType: Int {
     case WoodenBlock
 
 
-    var spriteName: String {
-        let spriteNames = [
-            "space",
-            "agent",
-            "wall",
-            "toilet",
-            "hole",
-            "wooden-block"
+    var texture: SKTexture {
+        let textures = [
+            TextureManager.retrieveTexture("space"),
+            TextureManager.agentUpTexture,
+            TextureManager.retrieveTexture("wall"),
+            TextureManager.retrieveTexture("toilet"),
+            TextureManager.retrieveTexture("hole"),
+            TextureManager.retrieveTexture("wooden-block")
         ]
-        return spriteNames[rawValue]
+        return textures[rawValue]
     }
 
     var nodeClass: MapUnitNode.Type {
