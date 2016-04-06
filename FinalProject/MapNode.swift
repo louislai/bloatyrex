@@ -73,7 +73,6 @@ class MapNode: SKNode {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
                     where unit.type != .EmptySpace {
                     let sprite = unit
-
                     if unit.type == .Agent {
                         sprite.texture = TextureManager.agentUpTexture
                     }

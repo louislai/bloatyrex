@@ -428,10 +428,11 @@ extension LevelDesigningMapScene {
                                    size: CGSize(width: 1024, height: 50))
         paletteLayer.addChild(paletteNode)
 
-        let textures = [TextureManager.agentUpTexture,
-                        TextureManager.retrieveTexture("Block"),
-                        TextureManager.retrieveTexture("toilet"),
-                        TextureManager.retrieveTexture("wall")]
+        let textures = [MapUnitType.Agent.texture,
+                        MapUnitType.EmptySpace.texture,
+                        MapUnitType.Goal.texture,
+                        MapUnitType.Wall.texture
+        ]
         let textureNames = ["Agent", "Block", "Toilet", "Wall"]
         for position in 0..<textures.count {
             let spriteNode = SKSpriteNode(texture: textures[position])

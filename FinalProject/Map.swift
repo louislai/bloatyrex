@@ -35,7 +35,7 @@ class Map: NSObject, NSCoding {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(grid, forKey: "Grid")
         aCoder.encodeInteger(numberOfRows, forKey: "NumberOfRows")
-        aCoder.encodeInteger(numberOfColumns, forKey: "NumberOfRows")
+        aCoder.encodeInteger(numberOfColumns, forKey: "NumberOfColumns")
     }
 
     func setMapUnitAt(unit: MapUnitNode, row: Int, column: Int) {
