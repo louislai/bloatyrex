@@ -19,7 +19,7 @@ enum MapUnitType: Int {
 
     var spriteName: String {
         let spriteNames = [
-            "",
+            "space",
             "agent",
             "wall",
             "toilet",
