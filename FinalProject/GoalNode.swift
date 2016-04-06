@@ -8,4 +8,12 @@
 
 import SpriteKit
 
-class GoalNode: SKSpriteNode {}
+class GoalNode: MapUnitNode {
+    required init(type: MapUnitType = .Goal) {
+        super.init(type: .Goal)
+    }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+    }
+}

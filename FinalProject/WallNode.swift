@@ -8,4 +8,12 @@
 
 import SpriteKit
 
-class WallNode: SKSpriteNode {}
+class WallNode: MapUnitNode {
+    required init(type: MapUnitType = .Wall) {
+        super.init(type: .Wall)
+    }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+    }
+}

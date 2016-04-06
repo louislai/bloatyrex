@@ -34,7 +34,7 @@ indirect enum Predicate {
     case Negation(Predicate)
     case Conjunction(Predicate, Predicate)
     case Disjunction(Predicate, Predicate)
-    case CompareObservation(Observation, MapUnit)
+    case CompareObservation(Observation, MapUnitType)
 }
 
 enum Instructions {
