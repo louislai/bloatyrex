@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-enum MapUnit: Int {
+enum MapUnitType: Int {
     case EmptySpace = 0
     case Agent
     case Wall
@@ -27,17 +27,5 @@ enum MapUnit: Int {
             "wooden-block"
         ]
         return spriteNames[rawValue]
-    }
-
-    var spriteClass: SKSpriteNode.Type {
-        let classes: [SKSpriteNode.Type] = [
-            EmptySpaceNode.self,
-            AgentNode.self,
-            WallNode.self,
-            GoalNode.self,
-            HoleNode.self,
-            WoodenBlockNode.self
-        ]
-        return classes[rawValue]
     }
 }

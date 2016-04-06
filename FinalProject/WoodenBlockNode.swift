@@ -8,6 +8,14 @@
 
 import SpriteKit
 
-class WoodenBlockNode: SKSpriteNode {}
+class WoodenBlockNode: MapUnitNode {
+    init() {
+        super.init(type: .WoodenBlock)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
 

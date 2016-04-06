@@ -71,9 +71,9 @@ class MapNode: SKNode {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
-                    where unit != .EmptySpace {
+                    where unit.type != .EmptySpace {
                     var texture: SKTexture
-                    if unit == .Agent {
+                    if unit.type == .Agent {
                         texture = TextureManager.agentUpTexture
                     } else {
                         texture = TextureManager.retrieveTexture(unit.spriteName)

@@ -9,23 +9,23 @@
 import Foundation
 
 class Map: NSObject {
-    private var grid: [[MapUnit]]
+    private var grid: [[MapUnitNode]]
     let numberOfRows: Int
     let numberOfColumns: Int
 
     init(numberOfRows: Int, numberOfColumns: Int) {
         self.numberOfRows = numberOfRows
         self.numberOfColumns = numberOfColumns
-        self.grid = [[MapUnit]](
+        self.grid = [[MapUnitNode]](
             count: numberOfRows,
-            repeatedValue: [MapUnit](
+            repeatedValue: [MapUnitNode](
                 count: numberOfColumns,
-                repeatedValue: MapUnit.EmptySpace
+                repeatedValue: MapUnitNode()
             )
         )
     }
 
-    func setMapUnitAt(unit: MapUnit, row: Int, column: Int) {
+    func setMapUnitAt(unit: MapUnitNode, row: Int, column: Int) {
         guard row >= 0 && row < numberOfRows
             && column >= 0  && column < numberOfColumns else {
                 return
@@ -35,10 +35,10 @@ class Map: NSObject {
     }
 
     func clearMapUnitAt(row: Int, column: Int) {
-        setMapUnitAt(MapUnit.EmptySpace, row: row, column: column)
+        setMapUnitAt(MapUnitNode(), row: row, column: column)
     }
 
-    func retrieveMapUnitAt(row: Int, column: Int) -> MapUnit? {
+    func retrieveMapUnitAt(row: Int, column: Int) -> MapUnitNode? {
         guard row >= 0 && row < numberOfRows
             && column >= 0  && column < numberOfColumns else {
                 return nil

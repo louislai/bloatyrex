@@ -55,7 +55,7 @@ class LevelDesigningMapScene: SKScene {
     }
     var grid: [[SKSpriteNode]]!
     var paletteNode: SKSpriteNode!
-    var currentMapUnitSelected = MapUnit.EmptySpace
+    var currentMapUnitSelected = MapUnitType.EmptySpace
     var arrowSprites: [String: SKSpriteNode]!
 
     override init(size: CGSize) {
@@ -136,7 +136,7 @@ class LevelDesigningMapScene: SKScene {
     }
 
     // Set block at a given row and column with a given image
-    func setBlock(mapUnit: MapUnit, row: Int, column: Int) {
+    func setBlock(mapUnit: MapUnitType, row: Int, column: Int) {
         // Update model
         map.setMapUnitAt(mapUnit, row: row, column: column)
 
@@ -153,7 +153,7 @@ class LevelDesigningMapScene: SKScene {
         // printGrid()
     }
 
-    func getBlockNode(mapUnit: MapUnit) -> SKSpriteNode {
+    func getBlockNode(mapUnit: MapUnitType) -> SKSpriteNode {
         switch mapUnit {
         case .Agent:
             return SKSpriteNode(texture: TextureManager.agentUpTexture)

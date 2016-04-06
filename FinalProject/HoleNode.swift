@@ -8,4 +8,12 @@
 
 import SpriteKit
 
-class HoleNode: SKSpriteNode {}
+class HoleNode: MapUnitNode {
+    init() {
+        super.init(type: .Hole)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
