@@ -13,7 +13,7 @@ class WallNode: MapUnitNode {
         super.init(type: .Wall)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
     }
 }

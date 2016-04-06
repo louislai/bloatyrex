@@ -278,15 +278,15 @@
 		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
-				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
 				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,
 				BFFB1A3D1CABB78F00C746CD /* MapNode.swift */,
-				BF5339C61C941155007F56F0 /* AgentNode.swift */,
 				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
-				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
+				BF5339C61C941155007F56F0 /* AgentNode.swift */,
+				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
+				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
 				BFB045C91CB43485009F21EF /* HoleNode.swift */,
 				BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */,
 				BFB045CD1CB4C418009F21EF /* MapUnitNode.swift */,

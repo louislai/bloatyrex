@@ -21,8 +21,8 @@ class AgentNode: MapUnitNode {
         super.init(type: .Agent)
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
     }
 
     /// Return true if nextAction causes the agent to reach the goal

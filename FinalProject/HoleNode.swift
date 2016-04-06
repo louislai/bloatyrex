@@ -13,7 +13,7 @@ class HoleNode: MapUnitNode {
         super.init(type: .Hole)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
     }
 }
