@@ -60,7 +60,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if filtered.count == 0 {
+        if filtered.count == 0 && (searchBar.text?.isEmpty)! {
             searchActive = false
         } else {
             searchActive = true
@@ -202,7 +202,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        if filtered.count == 0 {
+        if filtered.count == 0 && searchText.isEmpty {
             searchActive = false
         } else {
             searchActive = true
