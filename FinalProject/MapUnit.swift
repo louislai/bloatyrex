@@ -13,13 +13,18 @@ enum MapUnit: Int {
     case Agent
     case Wall
     case Goal
+    case Hole
+    case WoodenBlock
+
 
     var spriteName: String {
         let spriteNames = [
             "",
             "agent",
             "wall",
-            "toilet"
+            "toilet",
+            "hole",
+            "wooden-block"
         ]
         return spriteNames[rawValue]
     }
@@ -29,7 +34,9 @@ enum MapUnit: Int {
             EmptySpaceNode.self,
             AgentNode.self,
             WallNode.self,
-            GoalNode.self
+            GoalNode.self,
+            HoleNode.self,
+            WoodenBlockNode.self
         ]
         return classes[rawValue]
     }

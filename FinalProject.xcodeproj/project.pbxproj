@@ -55,6 +55,8 @@
 		BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */; };
 		BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */; };
 		BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */; };
+		BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB045C91CB43485009F21EF /* HoleNode.swift */; };
+		BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */; };
 		BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */; };
 		BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */; };
 		BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */; };
@@ -134,6 +136,8 @@
 		BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureManager.swift; sourceTree = "<group>"; };
 		BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Interpreter+LanguageDelegate.swift"; sourceTree = "<group>"; };
 		BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
+		BFB045C91CB43485009F21EF /* HoleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoleNode.swift; sourceTree = "<group>"; };
+		BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoodenBlockNode.swift; sourceTree = "<group>"; };
 		BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramSupplier.swift; sourceTree = "<group>"; };
 		BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammingViewController.swift; sourceTree = "<group>"; };
 		BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPlayingMapViewController.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
 				BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
+				BFB045C91CB43485009F21EF /* HoleNode.swift */,
+				BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */,
 			);
 			name = GameEngine;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				1DB4B08F1C9913C00010F727 /* BlockButton.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
+				BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */,
 				B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */,
 				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
 				1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */,
@@ -525,6 +532,7 @@
 				1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */,
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
 				BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */,
+				BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */,
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
 				1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
