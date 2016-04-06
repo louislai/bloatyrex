@@ -216,15 +216,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         return UIBarButtonItem(title: "< Back", style: .Plain, target: self,
                                action: #selector(LevelSelectorPageViewController.goBack))
     }
-    var renameButton: UIBarButtonItem {
-        return UIBarButtonItem(title: "Rename", style: .Plain, target: self,
-                               action: Selector("renameFile"))
-    }
-    var deleteButton: UIBarButtonItem {
-        let trashBinImage = UIImage(named: "trash")
-        return UIBarButtonItem(image: trashBinImage, style: .Plain, target: self,
-                               action: Selector("deleteFile"))
-    }
 
     func resetNavigationBar() {
         navigationItem.title = "Tap to load level, Press-and-hold for Settings"
