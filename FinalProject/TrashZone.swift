@@ -23,6 +23,7 @@ class TrashZone: DropZone {
         trash.size.height = 100
         let size = trash.calculateAccumulatedFrame()
         super.init(size: CGSize(width: size.width, height: size.height),
+                   dropZoneCategory: BlockCategory.Action,
                    containingBlock: TrashContainer())
         self.addChild(trash)
         trash.position.x = size.width/2

@@ -23,13 +23,13 @@ class CodeBlock: SKNode {
         }
     }
     
-    var boolOpZones: [BoolOpZone] {
+    var boolOpZones: [DropZone] {
         get {
             return []
         }
     }
     
-    var objectDropZones: [ObjectDropZone] {
+    var objectDropZones: [DropZone] {
         get {
             return []
         }
@@ -48,7 +48,7 @@ class CodeBlock: SKNode {
         }
     }
     var dropZoneActivated = true
-    var dropZones: [DropZone] {
+    var actionZones: [DropZone] {
         get {
             return [dropZone]
         }
@@ -56,6 +56,7 @@ class CodeBlock: SKNode {
 
     init(containingBlock: ContainerBlockProtocol) {
         dropZone = DropZone(size: CGSize(width: 150, height: CodeBlock.dropZoneSize),
+                            dropZoneCategory: BlockCategory.Action,
                             containingBlock: containingBlock)
         self.containingBlockValue = containingBlock
         super.init()
@@ -105,8 +106,7 @@ class CodeBlock: SKNode {
     func resizeDropZone() {
         dropZone.removeFromParent()
         let selfFrame = self.calculateAccumulatedFrame()
-        dropZone = DropZone(size: CGSize(width: selfFrame.width, height: CodeBlock.dropZoneSize),
-                            containingBlock: self.containingBlock)
+        dropZone.resize(CGSize(width: selfFrame.width, height: CodeBlock.dropZoneSize))
         dropZone.blockPosition = self.blockPosition
         self.addChild(dropZone)
     }

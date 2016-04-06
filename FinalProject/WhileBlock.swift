@@ -14,22 +14,22 @@ class WhileBlock: CodeBlock {
     let nestedBlocks = NestingZone()
     let nestedDropZone: DropZone
     let bottomBlock: SKSpriteNode
-    let boolOpZone: BoolOpZone
+    let boolOpZone: DropZone
     
-    override var boolOpZones: [BoolOpZone] {
+    override var boolOpZones: [DropZone] {
         get {
             let result = getNestedBoolOpZones() + [boolOpZone]
             return result
         }
     }
     
-    override var objectDropZones: [ObjectDropZone] {
+    override var objectDropZones: [DropZone] {
         get {
-            return boolOpZone.objectDropZones
+            return boolOpZone.objectZones
         }
     }
     
-    override var dropZones: [DropZone] {
+    override var actionZones: [DropZone] {
         get {
             if dropZoneActivated {
                 let result = [dropZone, nestedDropZone] + nestedBlocks.dropZones
@@ -40,8 +40,8 @@ class WhileBlock: CodeBlock {
         }
     }
     
-    private func getNestedBoolOpZones() -> [BoolOpZone] {
-        var zones = [BoolOpZone]()
+    private func getNestedBoolOpZones() -> [DropZone] {
+        var zones = [DropZone]()
         for block in nestedBlocks.blocks {
             zones.appendContentsOf(block.boolOpZones)
         }
@@ -51,9 +51,12 @@ class WhileBlock: CodeBlock {
     override init(containingBlock: ContainerBlockProtocol) {
         bottomBlock = SKSpriteNode(imageNamed: "wall")
         topBlock = SKSpriteNode(imageNamed: "wall")
-        nestedDropZone = DropZone(size: CGSize(width: 50, height: CodeBlock.dropZoneSize),
+        nestedDropZone = DropZone(size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
+                                  dropZoneCategory: BlockCategory.Action,
                                   containingBlock: nestedBlocks)
-        boolOpZone = BoolOpZone(size: CGSize(width: CodeBlock.dropZoneSize, height: topBlock.size.height))
+        boolOpZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: topBlock.size.height),
+                              dropZoneCategory: BlockCategory.BoolOp,
+                              containingBlock: containingBlock)
         super.init(containingBlock: containingBlock)
         self.addChild(topBlock)
         self.addChild(nestedDropZone)

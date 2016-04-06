@@ -9,7 +9,7 @@
 import SpriteKit
 
 class BoolOpBlock: SKNode {
-    var objectDropZones: [ObjectDropZone] {
+    var objectZones: [DropZone] {
         return []
     }
 }

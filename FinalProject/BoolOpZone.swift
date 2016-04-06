@@ -17,10 +17,10 @@ class BoolOpZone: SKNode {
     var boolOpBlock: BoolOpBlock?
     var blockPosition = 0
     
-    var objectDropZones: [ObjectDropZone] {
+    var objectZones: [DropZone] {
         get {
             if let block = boolOpBlock {
-                return block.objectDropZones
+                return block.objectZones
             } else {
                 return []
             }

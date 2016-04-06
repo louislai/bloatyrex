@@ -11,19 +11,19 @@ import SpriteKit
 class CodeBlocksScene: PannableScene, ProgramSupplier {
 
     enum PressState {
-        case AddingBlock
+        case AddingBlock(BlockCategory)
         case AddingBoolOp
         case AddingObject
         case MovingBlock
         case Idle
     }
 
-    let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward)
-    let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft)
-    let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight)
-    let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While)
-    let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes)
-    let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet)
+    let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward, blockCategory: BlockCategory.Action)
+    let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft, blockCategory: BlockCategory.Action)
+    let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight, blockCategory: BlockCategory.Action)
+    let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While, blockCategory: BlockCategory.Action)
+    let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes, blockCategory: BlockCategory.BoolOp)
+    let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet, blockCategory: BlockCategory.Object)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -65,27 +65,27 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         if upButton.containsPoint(locationInOverlay) {
             heldBlock = upButton
             upButton.pickBlock(true)
-            pressState = .AddingBlock
+            pressState = .AddingBlock(upButton.blockCategory)
         } else if turnLeftButton.containsPoint(locationInOverlay) {
             heldBlock = turnLeftButton
             turnLeftButton.pickBlock(true)
-            pressState = .AddingBlock
+            pressState = .AddingBlock(turnLeftButton.blockCategory)
         } else if turnRightButton.containsPoint(locationInOverlay) {
             heldBlock = turnRightButton
             turnRightButton.pickBlock(true)
-            pressState = .AddingBlock
+            pressState = .AddingBlock(turnRightButton.blockCategory)
         } else if nestButton.containsPoint(locationInOverlay) {
             heldBlock = nestButton
             nestButton.pickBlock(true)
-            pressState = .AddingBlock
+            pressState = .AddingBlock(nestButton.blockCategory)
         } else if eyesButton.containsPoint(locationInOverlay) {
             heldBlock = eyesButton
             eyesButton.pickBlock(true)
-            pressState = .AddingBoolOp
+            pressState = .AddingBlock(eyesButton.blockCategory)
         } else if toiletButton.containsPoint(locationInOverlay) {
             heldBlock = toiletButton
             toiletButton.pickBlock(true)
-            pressState = .AddingObject
+            pressState = .AddingBlock(toiletButton.blockCategory)
         }
 
         if programBlocks.containsPoint(locationInContent) {
@@ -105,13 +105,11 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         let yMovement = touchLocation.y - previousLocation.y
 
         switch pressState {
-        case .AddingBlock:
+        case .AddingBlock(let category):
             if let block = heldBlock {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
-                    programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
-                } else {
-                    programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
+                    programBlocks.hover(touchLocation, category: category, insertionHandler: insertionPosition)
                 }
             }
         case .MovingBlock:
@@ -122,9 +120,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     block.position.x += xMovement
                     block.position.y += yMovement
                     if programBlocks.containsPoint(touchLocation) {
-                        programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
-                    } else {
-                        programBlocks.hover(touchLocation, insertionHandler: insertionPosition)
+                        programBlocks.hover(touchLocation, category: BlockCategory.Action, insertionHandler: insertionPosition)
                     }
                 }
             }
@@ -132,7 +128,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
-                    programBlocks.boolOpHover(touchLocation, insertionHandler: boolOpInsertionPosition)
+                    programBlocks.boolOpHover(touchLocation, insertionHandler: insertionPosition)
                 }
             }
         case .AddingObject:
@@ -196,11 +192,13 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 block.pickBlock(false)
                 programBlocks.endBoolOpHover()
                 if let zone = boolOpInsertionPosition.zone {
-                    switch block.blockType {
-                    case .Eyes:
-                        zone.insertBlock(SeeBlock())
-                    default:
-                        break
+                    if let container = insertionPosition.container {
+                        switch block.blockType {
+                        case .Eyes:
+                            zone.insertBlock(SeeBlock(containingBlock: container))
+                        default:
+                            break
+                        }
                     }
                 }
             }
