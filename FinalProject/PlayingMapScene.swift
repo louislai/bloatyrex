@@ -193,7 +193,6 @@ class PlayingMapScene: StaticMapScene {
             if let result = agentNode.runNextAction() {
                 if result {
                     agentNode.runWinningAnimation()
-                    gameWon = true
                 } else {
                     agentNode.runLosingAnimation()
                     shouldWin = false
