@@ -44,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCG-de-GbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2754" y="1654"/>
+            <point key="canvasLocation" x="970" y="2514"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="cdl-ir-dbv">
@@ -72,6 +72,9 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <segue destination="Wpj-nb-g8C" kind="show" identifier="loadLevelToPlay" id="p0G-XZ-8kD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GD-O0-MZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,20 +92,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBV-6B-4Sf">
-                                <rect key="frame" x="368" y="274" width="288" height="98"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="PLAY"/>
-                                <connections>
-                                    <segue destination="Wpj-nb-g8C" kind="show" id="hWH-iy-DJu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-6c-KJW">
                                 <rect key="frame" x="368" y="458" width="288" height="98"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="DESIGN LEVEL"/>
                                 <connections>
                                     <segue destination="E7z-cA-Cz9" kind="show" id="zWI-AD-rre"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBV-6B-4Sf">
+                                <rect key="frame" x="368" y="273" width="288" height="98"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal" title="LEVEL SELECT"/>
+                                <connections>
+                                    <segue destination="KiG-n3-lml" kind="show" id="LGY-AL-6yF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -319,6 +322,6 @@
         <image name="zoom" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hWH-iy-DJu"/>
+        <segue reference="p0G-XZ-8kD"/>
     </inferredMetricsTieBreakers>
 </document>

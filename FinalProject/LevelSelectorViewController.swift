@@ -31,6 +31,12 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         self.view.addSubview(collectionView)
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? PlayingViewController {
+            destination.map = loadedMap
+        }
+    }
+
     // Make this number of cell
     func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
@@ -57,9 +63,15 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! LevelCell
         let fileName = cell.textLabel.text!
         if let loadedMap = filesArchive.loadFromPropertyList(fileName) {
-            let levelDesigningViewController = previousViewController as! LevelDesigningViewController
-            levelDesigningViewController.map = loadedMap
-            levelDesigningViewController.viewDidLoad()
+            if previousViewController is LevelDesigningViewController {
+                let levelDesigningViewController = previousViewController as! LevelDesigningViewController
+                levelDesigningViewController.map = loadedMap
+                levelDesigningViewController.viewDidLoad()
+            } else if previousViewController is TitleViewController {
+                /// load selected level to play
+                self.loadedMap = loadedMap
+                performSegueWithIdentifier("loadLevelToPlay", sender: self)
+            }
         }
         dismissViewControllerAnimated(true, completion: nil)
     }

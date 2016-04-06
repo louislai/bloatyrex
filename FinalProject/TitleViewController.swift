@@ -18,4 +18,12 @@ class TitleViewController: UIViewController {
         navigationController?.navigationBar.hidden = true
         automaticallyAdjustsScrollViewInsets = false
     }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? LevelSelectorPageViewController {
+            destination.currentStoryboard = self.storyboard
+            destination.previousViewController = self
+            destination.numberOfItemsPerPage = 15
+        }
+    }
 }
