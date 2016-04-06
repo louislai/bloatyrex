@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Map: NSObject {
+class Map: NSObject, NSCoding {
     private var grid: [[MapUnitNode]]
     let numberOfRows: Int
     let numberOfColumns: Int
@@ -23,6 +23,19 @@ class Map: NSObject {
                 repeatedValue: MapUnitNode()
             )
         )
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        self.grid = aDecoder.decodeObjectForKey("Grid") as! [[MapUnitNode]]
+        self.numberOfRows = aDecoder.decodeIntegerForKey("NumberOfRows")
+        self.numberOfColumns = aDecoder.decodeIntegerForKey("NumberOfColumns")
+        super.init()
+    }
+
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(grid, forKey: "Grid")
+        aCoder.encodeInteger(numberOfRows, forKey: "NumberOfRows")
+        aCoder.encodeInteger(numberOfColumns, forKey: "NumberOfRows")
     }
 
     func setMapUnitAt(unit: MapUnitNode, row: Int, column: Int) {

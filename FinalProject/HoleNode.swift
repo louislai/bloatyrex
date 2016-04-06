@@ -12,7 +12,7 @@ class HoleNode: MapUnitNode {
     required init(type: MapUnitType = .Hole) {
         super.init(type: .Hole)
     }
-    
+
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
     }

@@ -21,4 +21,3 @@ class MapUnitNode: SKSpriteNode {
         self.init()
     }
 }
-

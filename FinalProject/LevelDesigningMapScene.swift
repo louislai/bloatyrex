@@ -505,7 +505,7 @@ extension LevelDesigningMapScene {
             style: .Default,
             handler: { (action: UIAlertAction!) in
                 if name!.text!.characters.count <= maximumNumberOfCharacters {
-                    savedSuccessfully = GlobalConstants.filesArchive.saveToPropertyList(
+                    savedSuccessfully = GlobalConstants.filesArchive.saveToFile(
                         self.map,
                         name: name!.text!)
                 }

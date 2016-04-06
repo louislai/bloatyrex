@@ -12,10 +12,8 @@ class WoodenBlockNode: MapUnitNode {
     required init(type: MapUnitType = .WoodenBlock) {
         super.init(type: .WoodenBlock)
     }
-    
+
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
     }
 }
-
-

@@ -56,7 +56,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! LevelCell
         let fileName = cell.textLabel.text!
-        if let loadedMap = filesArchive.loadFromPropertyList(fileName) {
+        if let loadedMap = filesArchive.loadFromFile(fileName) {
             let levelDesigningViewController = previousViewController as! LevelDesigningViewController
             levelDesigningViewController.map = loadedMap
             levelDesigningViewController.viewDidLoad()
@@ -118,7 +118,7 @@ class LevelCell: UICollectionViewCell {
             message: "'\(fileName)' will be deleted. This action cannot be undone.",
             preferredStyle: UIAlertControllerStyle.Alert)
         deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
-            self.filesArchive.removePropertyList(fileName)
+            self.filesArchive.removeFile(fileName)
             let successAlert = UIAlertController(title: "Deleted!",
                 message: "You have successfully deleted \(fileName)!",
                 preferredStyle: UIAlertControllerStyle.Alert)
@@ -147,7 +147,7 @@ class LevelCell: UICollectionViewCell {
         }
         renameAlert.addAction(UIAlertAction(title: "Confirm", style: .Default, handler: { (action: UIAlertAction!) in
             if newName!.text!.characters.count <= 30 {
-                renamedSuccessfully = self.filesArchive.renamePropertyList(originalFileName, newFileName: newName!.text!)
+                renamedSuccessfully = self.filesArchive.renameFile(originalFileName, newFileName: newName!.text!)
             }
             if renamedSuccessfully {
                 let successAlert = UIAlertController(title: "Renamed!", message: "You have successfully renamed this level!",
