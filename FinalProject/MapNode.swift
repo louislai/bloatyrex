@@ -58,7 +58,7 @@ class MapNode: SKNode {
     func addBlocks() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
-                let blockNode = SKSpriteNode(texture: TextureManager.retrieveTexture("Block"))
+                let blockNode = MapUnitType.EmptySpace.nodeClass.init()
                 blockNode.size = blockSize
                 blockNode.position = pointFor(row, column: column)
                 blocksLayer.addChild(blockNode)

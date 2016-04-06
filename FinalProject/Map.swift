@@ -63,7 +63,11 @@ class Map: NSObject, NSCoding {
 extension Map: NSCopying {
     func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = Map(numberOfRows: numberOfRows, numberOfColumns: numberOfColumns)
-        copy.grid = grid
+        for row in 0..<numberOfRows {
+            for column in 0..<numberOfColumns {
+                copy.grid[row][column] = grid[row][column].copy() as! MapUnitNode
+            }
+        }
         return copy
     }
 }

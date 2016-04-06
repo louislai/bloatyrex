@@ -20,4 +20,8 @@ class MapUnitNode: SKSpriteNode {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
     }
+
+    override func copyWithZone(zone: NSZone) -> AnyObject {
+        return type.nodeClass.init(type: type)
+    }
 }
