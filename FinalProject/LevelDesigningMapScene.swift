@@ -163,6 +163,8 @@ class LevelDesigningMapScene: SKScene {
             return SKSpriteNode(texture: TextureManager.retrieveTexture("toilet"))
         case .Wall:
             return SKSpriteNode(texture: TextureManager.retrieveTexture("wall"))
+        default:
+            return SKSpriteNode()
         }
     }
 

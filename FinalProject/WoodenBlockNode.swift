@@ -9,5 +9,3 @@
 import SpriteKit
 
 class WoodenBlockNode: SKSpriteNode {}
-
-
