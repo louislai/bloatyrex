@@ -30,7 +30,7 @@ class PlayingViewController: UIViewController {
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             programSupplier = destination
         } else if let destination = segue.destinationViewController as? ProgrammingViewController {
-            destination.map = map
+            destination.map = map.copy() as! Map
         }
     }
 
