@@ -22,6 +22,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While, blockCategory: BlockCategory.Action)
     let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes, blockCategory: BlockCategory.BoolOp)
     let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet, blockCategory: BlockCategory.Object)
+    let holeButton = BlockButton(imageNamed: "hole", blockType: BlockType.Hole, blockCategory: BlockCategory.Object)
+    let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.Wall, blockCategory: BlockCategory.Object)
+    let woodButton = BlockButton(imageNamed: "wooden-block", blockType: BlockType.Wood, blockCategory: BlockCategory.Object)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -42,10 +45,16 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         nestButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
         eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
         toiletButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
+        wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
+        holeButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.3)
+        woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.4)
         programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
         turnLeftButton.zPosition = 10
         upButton.zPosition = 10
         addNodeToOverlay(toiletButton)
+        addNodeToOverlay(wallButton)
+        addNodeToOverlay(holeButton)
+        addNodeToOverlay(woodButton)
         addNodeToOverlay(turnLeftButton)
         addNodeToOverlay(nestButton)
         addNodeToOverlay(upButton)
@@ -83,6 +92,18 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = toiletButton
             toiletButton.pickBlock(true)
             pressState = .AddingBlock(toiletButton.blockCategory)
+        } else if wallButton.containsPoint(locationInOverlay) {
+            heldBlock = wallButton
+            wallButton.pickBlock(true)
+            pressState = .AddingBlock(wallButton.blockCategory)
+        } else if holeButton.containsPoint(locationInOverlay) {
+            heldBlock = holeButton
+            holeButton.pickBlock(true)
+            pressState = .AddingBlock(holeButton.blockCategory)
+        } else if woodButton.containsPoint(locationInOverlay) {
+            heldBlock = woodButton
+            woodButton.pickBlock(true)
+            pressState = .AddingBlock(woodButton.blockCategory)
         }
 
         if programBlocks.containsPoint(locationInContent) {
@@ -149,6 +170,18 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     case .Toilet:
                         if let zone = insertionPosition.zone {
                             zone.insertObjectBlock(ToiletBlock(containingBlock: insertionContainer))
+                        }
+                    case .Hole:
+                        if let zone = insertionPosition.zone {
+                            zone.insertObjectBlock(HoleBlock(containingBlock: insertionContainer))
+                        }
+                    case .Wall:
+                        if let zone = insertionPosition.zone {
+                            zone.insertObjectBlock(WallBlock(containingBlock: insertionContainer))
+                        }
+                    case .Wood:
+                        if let zone = insertionPosition.zone {
+                            zone.insertObjectBlock(WoodBlock(containingBlock: insertionContainer))
                         }
                     default:
                         break

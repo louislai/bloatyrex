@@ -1,18 +1,18 @@
 //
-//  ToiletBlock.swift
+//  HoleBlock.swift
 //  FinalProject
 //
-//  Created by Koh Wai Kit on 6/4/16.
+//  Created by Koh Wai Kit on 7/4/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
 import SpriteKit
 
-class ToiletBlock: ObjectBlock {
+class HoleBlock: ObjectBlock {
     let blockBody: SKSpriteNode
     
     init(containingBlock: ContainerBlockProtocol) {
-        blockBody = SKSpriteNode(imageNamed: "toilet")
+        blockBody = SKSpriteNode(imageNamed: "hole")
         blockBody.size = CGSize(width: 64, height: 64)
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
         super.init()
@@ -20,7 +20,7 @@ class ToiletBlock: ObjectBlock {
     }
     
     override func getMapUnit() -> MapUnitType {
-        return MapUnitType.Goal
+        return MapUnitType.Hole
     }
     
     required init?(coder aDecoder: NSCoder) {

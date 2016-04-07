@@ -16,6 +16,9 @@ enum BlockType {
     case While
     case Eyes
     case Toilet
+    case Wall
+    case Hole
+    case Wood
 }
 
 class BlockButton: SKNode {
