@@ -9,13 +9,13 @@ import SpriteKit
 
 class ToiletBlock: ObjectBlock {
     let blockBody: SKSpriteNode
-    let objectDropZone: ObjectDropZone
+    let objectDropZone: DropZone
     
-    override init() {
+    init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "toilet")
         blockBody.size = CGSize(width: 64, height: 64)
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
-        objectDropZone = ObjectDropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: blockBody.size.height))
+        objectDropZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: blockBody.size.height), dropZoneCategory: BlockCategory.Object, containingBlock: containingBlock)
         objectDropZone.position = CGPoint(x: blockBody.size.width, y: 0)
         super.init()
         addChild(blockBody)

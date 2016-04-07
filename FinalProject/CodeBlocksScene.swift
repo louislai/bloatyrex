@@ -12,7 +12,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
 
     enum PressState {
         case AddingBlock(BlockCategory)
-        case AddingObject
         case MovingBlock
         case Idle
     }
@@ -122,13 +121,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     }
                 }
             }
-        case .AddingObject:
-            if let block = heldBlock {
-                block.moveBlock(CGPoint(x: xMovement, y: yMovement))
-                if programBlocks.containsPoint(touchLocation) {
-                    //programBlocks.object(touchLocation)
-                }
-            }
         case .Idle:
             break
         }
@@ -155,6 +147,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         if let zone = insertionPosition.zone {
                             zone.insertBlock(SeeBlock(containingBlock: insertionContainer))
                         }
+                    case .Toilet:
+                        break
                     default:
                         break
                     }
@@ -183,21 +177,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 }
             }
             movedBlock = nil
-        case .AddingObject:
-            if let block = heldBlock {
-                block.pickBlock(false)
-                /*
-                programBlocks.endBoolOpHover()
-                if let zone = boolOpInsertionPosition.zone {
-                    switch block.blockType {
-                    case .Eyes:
-                        zone.insertBlock(SeeBlock())
-                    default:
-                        break
-                    }
-                }*/
-            }
-            heldBlock = nil
         case .Idle:
             break
         }

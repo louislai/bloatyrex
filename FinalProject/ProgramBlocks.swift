@@ -37,23 +37,6 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         selectClosestDropZone(point, dropZoneCategory: category, insertionHandler: insertionHandler)
     }
     
-    func endBoolOpHover() {
-        for block in blocks {
-            for zone in block.boolOpZones {
-                zone.displayNormal()
-            }
-        }
-        trash.unfocus()
-    }
-    
-    func boolOpHover(location: CGPoint, insertionHandler: InsertionPosition) {
-        let x = location.x - self.position.x
-        let y = location.y - self.position.y
-        let point = CGPoint(x: x, y: y)
-        
-        selectClosestBoolOpZone(point, insertionHandler: insertionHandler)
-    }
-    
     func selectClosestDropZone(location: CGPoint,
                                dropZoneCategory: BlockCategory,
                                insertionHandler: InsertionPosition) {
@@ -94,73 +77,14 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
             closestDropZone.focus(insertionHandler)
         }
     }
-    
-    func selectClosestObjectDropZone(location: CGPoint) {
-        var closestDistance = CGFloat.max
-        var closestBoolOpZone: DropZone?
-        trash.unfocus()
-        for block in blocks {
-            block.unfocus()
-            for zone in block.objectDropZones {
-                zone.displayNormal()
-                let frame = zone.frame
-                let center = CGPoint(x: frame.midX, y: frame.midY)
-                let zonePoint = zone.convertPoint(center, toNode: self)
-                let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
-                    + pow((Float)(zonePoint.y - location.y), 2)))
-                if distance < closestDistance {
-                    closestDistance = distance
-                    closestBoolOpZone = zone
-                }
-            }
-        }
-        let zone = trash.dropZoneCenter
-        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) +
-            pow((Float)(zone.y - location.y), 2)))
-        if trashDistance < closestDistance {
-            trash.displayHover()
-        } else {
-            if let zone = closestBoolOpZone {
-                //zone.focus(insertionHandler)
-            }
-        }
-    }
-    
-    func selectClosestBoolOpZone(location: CGPoint, insertionHandler: InsertionPosition) {
-        var closestDistance = CGFloat.max
-        var closestBoolOpZone: DropZone?
-        trash.unfocus()
-        for block in blocks {
-            block.unfocus()
-            for zone in block.boolOpZones {
-                zone.displayNormal()
-                let frame = zone.frame
-                let center = CGPoint(x: frame.midX, y: frame.midY)
-                let zonePoint = zone.convertPoint(center, toNode: self)
-                let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
-                    + pow((Float)(zonePoint.y - location.y), 2)))
-                if distance < closestDistance {
-                    closestDistance = distance
-                    closestBoolOpZone = zone
-                }
-            }
-        }
-        let zone = trash.dropZoneCenter
-        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) +
-            pow((Float)(zone.y - location.y), 2)))
-        if trashDistance < closestDistance {
-            trash.displayHover()
-        } else {
-            if let zone = closestBoolOpZone {
-                zone.focus(insertionHandler)
-            }
-        }
-    }
 
     func endHover() {
         for block in blocks {
             block.endHover()
             for zone in block.boolOpZones {
+                zone.displayNormal()
+            }
+            for zone in block.objectDropZones {
                 zone.displayNormal()
             }
         }
