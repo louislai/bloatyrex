@@ -153,6 +153,8 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         switch blocks[programCounter].getBlockConstruct() {
         case .ActionConstruct(let action):
             block = Statement.ActionStatement(action)
+        case .LoopExpressionConstruct(let loopExpression):
+            block = Statement.LoopStatement(loopExpression)
         default:
             block = nil
         }

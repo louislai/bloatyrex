@@ -11,10 +11,17 @@ import SpriteKit
 class SeeBlock: BoolOpBlock {
     let blockBody: SKSpriteNode
     let objectDropZone: DropZone
-    var objectBlock: ObjectBlock?
     
     override var objectZones: [DropZone] {
         return [objectDropZone]
+    }
+    
+    override func getBlockPredicate() -> Predicate? {
+        if let object = objectDropZone.getObject() {
+            return Predicate.CompareObservation(Observation.LookForward, object)
+        } else {
+            return nil
+        }
     }
     
     init(containingBlock: ContainerBlockProtocol) {
@@ -27,12 +34,6 @@ class SeeBlock: BoolOpBlock {
         super.init()
         addChild(blockBody)
         addChild(objectDropZone)
-    }
-    
-    override func insertBlock(block: ObjectBlock) {
-        objectBlock = block
-        objectDropZone.hidden = true
-        self.addChild(block)
     }
     
     required init?(coder aDecoder: NSCoder) {

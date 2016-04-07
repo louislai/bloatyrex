@@ -136,4 +136,26 @@ class DropZone: SKNode {
             insertionPosition.container = self.containingBlock
         }
     }
+    
+    func getBlockPredicate() -> Predicate? {
+        switch category {
+        case .Action:
+            return nil
+        case .BoolOp:
+            return boolOpBlock?.getBlockPredicate()
+        case .Object:
+            return nil
+        }
+    }
+    
+    func getObject() -> MapUnit? {
+        switch category {
+        case .Action:
+            return nil
+        case .BoolOp:
+            return nil
+        case .Object:
+            return objectBlock?.getMapUnit()
+        }
+    }
 }

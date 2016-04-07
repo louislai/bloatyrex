@@ -53,6 +53,34 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         return nil
     }
     
+    func parseBlock(programCounter: Int) -> Program? {
+        guard blocks.count > programCounter else {
+            return nil
+        }
+        
+        let block: Statement?
+        switch blocks[programCounter].getBlockConstruct() {
+        case .ActionConstruct(let action):
+            block = Statement.ActionStatement(action)
+        default:
+            block = nil
+        }
+        
+        if let statement = block {
+            if blocks.count > programCounter + 1 {
+                if let nextBlock = parseBlock(programCounter + 1) {
+                    return Program.MultipleStatement(statement, nextBlock)
+                } else {
+                    return nil
+                }
+            } else {
+                return Program.SingleStatement(statement)
+            }
+        } else {
+            return nil
+        }
+    }
+    
     private func flushBlocks() {
         var yPos: CGFloat = 0
         let xPos: CGFloat = 0

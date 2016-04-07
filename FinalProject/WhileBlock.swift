@@ -16,6 +16,18 @@ class WhileBlock: CodeBlock {
     let bottomBlock: SKSpriteNode
     let boolOpZone: DropZone
     
+    override func getBlockConstruct() -> Construct {
+        if let predicate = boolOpZone.getBlockPredicate() {
+            print("predicate get")
+            if let program = nestedBlocks.parseBlock(0) {
+                print("program get")
+                return Construct.LoopExpressionConstruct(LoopExpression.While(predicate, program))
+            }
+        }
+        print("fail")
+        return Construct.None
+    }
+    
     override var boolOpZones: [DropZone] {
         get {
             let result = getNestedBoolOpZones() + [boolOpZone]
@@ -65,10 +77,6 @@ class WhileBlock: CodeBlock {
         self.addChild(boolOpZone)
         flushBlocks()
         self.resizeDropZone()
-    }
-    
-    override func getBlockConstruct() -> Construct {
-        return Construct.ActionConstruct(Action.Forward)
     }
     
     override func endHover() {

@@ -18,6 +18,10 @@ class ToiletBlock: ObjectBlock {
         addChild(blockBody)
     }
     
+    override func getMapUnit() -> MapUnit {
+        return MapUnit.Goal
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

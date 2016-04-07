@@ -14,5 +14,10 @@ class BoolOpBlock: SKNode {
     }
     
     func insertBlock(block: ObjectBlock) {
+        
+    }
+    
+    func getBlockPredicate() -> Predicate? {
+        return nil
     }
 }
