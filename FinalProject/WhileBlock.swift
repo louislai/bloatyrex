@@ -18,13 +18,10 @@ class WhileBlock: CodeBlock {
     
     override func getBlockConstruct() -> Construct {
         if let predicate = boolOpZone.getBlockPredicate() {
-            print("predicate get")
             if let program = nestedBlocks.parseBlock(0) {
-                print("program get")
                 return Construct.LoopExpressionConstruct(LoopExpression.While(predicate, program))
             }
         }
-        print("fail")
         return Construct.None
     }
     
