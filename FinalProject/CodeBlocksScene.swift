@@ -19,12 +19,13 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward, blockCategory: BlockCategory.Action)
     let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft, blockCategory: BlockCategory.Action)
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight, blockCategory: BlockCategory.Action)
-    let nestButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While, blockCategory: BlockCategory.Action)
+    let whileButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While, blockCategory: BlockCategory.Action)
     let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes, blockCategory: BlockCategory.BoolOp)
     let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet, blockCategory: BlockCategory.Object)
     let holeButton = BlockButton(imageNamed: "hole", blockType: BlockType.Hole, blockCategory: BlockCategory.Object)
     let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.Wall, blockCategory: BlockCategory.Object)
     let woodButton = BlockButton(imageNamed: "wooden-block", blockType: BlockType.Wood, blockCategory: BlockCategory.Object)
+    let ifButton = BlockButton(imageNamed: "trash", blockType: BlockType.If, blockCategory: BlockCategory.Action)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: CodeBlock?
@@ -39,15 +40,16 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
-        turnRightButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
-        upButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
-        turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
-        nestButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
+        upButton.position = CGPoint(x: size.width * -0.1, y: size.height * 0.3)
+        turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
+        turnRightButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
+        whileButton.position = CGPoint(x: size.width * -0.1, y: size.height * 0.1)
+        ifButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
         eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
-        toiletButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
-        wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
-        holeButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.3)
-        woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.4)
+        toiletButton.position = CGPoint(x: size.width * -0.1, y: size.height * -0.1)
+        wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
+        holeButton.position = CGPoint(x: size.width * -0.1, y: size.height * -0.2)
+        woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
         programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
         turnLeftButton.zPosition = 10
         upButton.zPosition = 10
@@ -56,11 +58,12 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         addNodeToOverlay(holeButton)
         addNodeToOverlay(woodButton)
         addNodeToOverlay(turnLeftButton)
-        addNodeToOverlay(nestButton)
+        addNodeToOverlay(whileButton)
         addNodeToOverlay(upButton)
         addNodeToOverlay(eyesButton)
-        addNodeToContent(programBlocks)
         addNodeToOverlay(turnRightButton)
+        addNodeToOverlay(ifButton)
+        addNodeToContent(programBlocks)
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -80,10 +83,14 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = turnRightButton
             turnRightButton.pickBlock(true)
             pressState = .AddingBlock(turnRightButton.blockCategory)
-        } else if nestButton.containsPoint(locationInOverlay) {
-            heldBlock = nestButton
-            nestButton.pickBlock(true)
-            pressState = .AddingBlock(nestButton.blockCategory)
+        } else if whileButton.containsPoint(locationInOverlay) {
+            heldBlock = whileButton
+            whileButton.pickBlock(true)
+            pressState = .AddingBlock(whileButton.blockCategory)
+        } else if ifButton.containsPoint(locationInOverlay) {
+            heldBlock = ifButton
+            ifButton.pickBlock(true)
+            pressState = .AddingBlock(ifButton.blockCategory)
         } else if eyesButton.containsPoint(locationInOverlay) {
             heldBlock = eyesButton
             eyesButton.pickBlock(true)
@@ -163,6 +170,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         insertionContainer.insertBlock(TurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .While:
                         insertionContainer.insertBlock(WhileBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .If:
+                        insertionContainer.insertBlock(IfBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .Eyes:
                         if let zone = insertionPosition.zone {
                             zone.insertBlock(SeeBlock(containingBlock: insertionContainer))

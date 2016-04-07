@@ -155,6 +155,8 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
             block = Statement.ActionStatement(action)
         case .LoopExpressionConstruct(let loopExpression):
             block = Statement.LoopStatement(loopExpression)
+        case .ConditionalExpressionConstruct(let conditional):
+            block = Statement.ConditionalStatement(conditional)
         default:
             block = nil
         }
