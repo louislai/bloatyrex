@@ -12,4 +12,7 @@ class BoolOpBlock: SKNode {
     var objectZones: [DropZone] {
         return []
     }
+    
+    func insertBlock(block: ObjectBlock) {
+    }
 }

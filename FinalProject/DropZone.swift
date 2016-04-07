@@ -13,8 +13,10 @@ class DropZone: SKNode {
     private var hover: SKShapeNode
     private var normal: SKShapeNode
     let category: BlockCategory
+    var activated = true
     var containingBlock: ContainerBlockProtocol
     var boolOpBlock: BoolOpBlock?
+    var objectBlock: ObjectBlock?
     
     var objectZones: [DropZone] {
         get {
@@ -77,13 +79,17 @@ class DropZone: SKNode {
     }
 
     func displayHover() {
-        hover.hidden = false
-        normal.hidden = true
+        if activated {
+            hover.hidden = false
+            normal.hidden = true
+        }
     }
 
     func displayNormal() {
-        hover.hidden = true
-        normal.hidden = false
+        if activated {
+            hover.hidden = true
+            normal.hidden = false
+        }
     }
     
     func resize(size: CGSize) {
@@ -103,6 +109,15 @@ class DropZone: SKNode {
         boolOpBlock = block
         normal.hidden = true
         hover.hidden = true
+        activated = false
+        self.addChild(block)
+    }
+    
+    func insertObjectBlock(block: ObjectBlock) {
+        objectBlock = block
+        normal.hidden = true
+        hover.hidden = true
+        activated = false
         self.addChild(block)
     }
     
@@ -117,7 +132,8 @@ class DropZone: SKNode {
             insertionPosition.zone = self
             insertionPosition.container = self.containingBlock
         case .Object:
-            break
+            insertionPosition.zone = self
+            insertionPosition.container = self.containingBlock
         }
     }
 }

@@ -309,11 +309,11 @@
 			children = (
 				1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */,
 				1D69B6CF1CB3AF0600C1FA04 /* BoolOpBlock.swift */,
+				1DB4B08C1C99073F0010F727 /* DropZone.swift */,
 				1D69B6D11CB3B24000C1FA04 /* SeeBlock.swift */,
 				1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */,
 				1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */,
 				1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */,
-				1DB4B08C1C99073F0010F727 /* DropZone.swift */,
 				1D7E23D61C9984F6003E7B75 /* TrashZone.swift */,
 				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
 				1DB4B0901C991F260010F727 /* ProgramBlocks.swift */,

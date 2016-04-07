@@ -132,7 +132,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.pickBlock(false)
                 programBlocks.endHover()
-                print(insertionPosition.container)
                 if let insertionContainer = insertionPosition.container {
                     switch block.blockType {
                     case .Forward:
@@ -148,7 +147,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                             zone.insertBlock(SeeBlock(containingBlock: insertionContainer))
                         }
                     case .Toilet:
-                        break
+                        if let zone = insertionPosition.zone {
+                            zone.insertObjectBlock(ToiletBlock(containingBlock: insertionContainer))
+                        }
                     default:
                         break
                     }
