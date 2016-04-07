@@ -115,6 +115,7 @@ class DropZone: SKNode {
             insertionPosition.container = self.containingBlock
         case .BoolOp:
             insertionPosition.zone = self
+            insertionPosition.container = self.containingBlock
         case .Object:
             break
         }

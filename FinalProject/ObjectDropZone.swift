@@ -48,7 +48,7 @@ class ObjectDropZone: SKNode {
         normal.hidden = false
     }
     
-    func focus(insertionPosition: BoolOpInsertionPosition) {
+    func focus(insertionPosition: InsertionPosition) {
         self.displayHover()
     }
 }

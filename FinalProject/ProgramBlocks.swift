@@ -160,6 +160,9 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
     func endHover() {
         for block in blocks {
             block.endHover()
+            for zone in block.boolOpZones {
+                zone.displayNormal()
+            }
         }
         trash.unfocus()
     }

@@ -12,7 +12,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
 
     enum PressState {
         case AddingBlock(BlockCategory)
-        case AddingBoolOp
         case AddingObject
         case MovingBlock
         case Idle
@@ -30,7 +29,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     var pressState = PressState.Idle
 
     let insertionPosition = InsertionPosition()
-    let boolOpInsertionPosition = BoolOpInsertionPosition()
 
     func retrieveProgram() -> Program? {
         return programBlocks.getCode()
@@ -124,13 +122,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     }
                 }
             }
-        case .AddingBoolOp:
-            if let block = heldBlock {
-                block.moveBlock(CGPoint(x: xMovement, y: yMovement))
-                if programBlocks.containsPoint(touchLocation) {
-                    programBlocks.boolOpHover(touchLocation, insertionHandler: insertionPosition)
-                }
-            }
         case .AddingObject:
             if let block = heldBlock {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
@@ -149,6 +140,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.pickBlock(false)
                 programBlocks.endHover()
+                print(insertionPosition.container)
                 if let insertionContainer = insertionPosition.container {
                     switch block.blockType {
                     case .Forward:
@@ -159,6 +151,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         insertionContainer.insertBlock(TurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .While:
                         insertionContainer.insertBlock(WhileBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .Eyes:
+                        if let zone = insertionPosition.zone {
+                            zone.insertBlock(SeeBlock(containingBlock: insertionContainer))
+                        }
                     default:
                         break
                     }
@@ -187,22 +183,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 }
             }
             movedBlock = nil
-        case .AddingBoolOp:
-            if let block = heldBlock {
-                block.pickBlock(false)
-                programBlocks.endBoolOpHover()
-                if let zone = boolOpInsertionPosition.zone {
-                    if let container = insertionPosition.container {
-                        switch block.blockType {
-                        case .Eyes:
-                            zone.insertBlock(SeeBlock(containingBlock: container))
-                        default:
-                            break
-                        }
-                    }
-                }
-            }
-            heldBlock = nil
         case .AddingObject:
             if let block = heldBlock {
                 block.pickBlock(false)
