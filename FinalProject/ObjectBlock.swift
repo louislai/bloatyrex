@@ -9,7 +9,7 @@
 import SpriteKit
 
 class ObjectBlock: SKNode {
-    func getMapUnit() -> MapUnit {
-        return MapUnit.EmptySpace
+    func getMapUnit() -> MapUnitType {
+        return MapUnitType.EmptySpace
     }
 }

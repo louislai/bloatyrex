@@ -44,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCG-de-GbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2754" y="1654"/>
+            <point key="canvasLocation" x="970" y="2514"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="cdl-ir-dbv">
@@ -72,6 +72,9 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <segue destination="Wpj-nb-g8C" kind="show" identifier="loadLevelToPlay" id="p0G-XZ-8kD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8GD-O0-MZP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -89,20 +92,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBV-6B-4Sf">
-                                <rect key="frame" x="368" y="274" width="288" height="98"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="PLAY"/>
-                                <connections>
-                                    <segue destination="Wpj-nb-g8C" kind="show" id="hWH-iy-DJu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-6c-KJW">
                                 <rect key="frame" x="368" y="458" width="288" height="98"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <state key="normal" title="DESIGN LEVEL"/>
                                 <connections>
                                     <segue destination="E7z-cA-Cz9" kind="show" id="zWI-AD-rre"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBV-6B-4Sf">
+                                <rect key="frame" x="368" y="273" width="288" height="98"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <state key="normal" title="LEVEL SELECT"/>
+                                <connections>
+                                    <segue destination="KiG-n3-lml" kind="show" id="LGY-AL-6yF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -175,7 +178,7 @@
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b1a-cS-cD4" userLabel="Code Block Controller Container">
-                                <rect key="frame" x="559" y="64" width="465" height="704"/>
+                                <rect key="frame" x="559" y="0.0" width="465" height="768"/>
                                 <connections>
                                     <segue destination="DoE-e0-Afa" kind="embed" id="q5d-Zi-QFW"/>
                                 </connections>
@@ -187,11 +190,33 @@
                                     <segue destination="IvN-jd-ujU" kind="showDetail" animates="NO" id="Ygj-YH-BLV"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LHP-Ns-e2j" userLabel="EndGame">
+                                <rect key="frame" x="559" y="0.0" width="465" height="768"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You win!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfF-Ht-neX">
+                                        <rect key="frame" x="118" y="312" width="293" height="168"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKj-uN-s3O">
+                                <rect key="frame" x="26" y="688" width="59" height="60"/>
+                                <state key="normal" title="Button" image="back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="839-ri-ME9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                    <connections>
+                        <outlet property="winningScreen" destination="LHP-Ns-e2j" id="Wrx-c7-MSB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYt-ss-aNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -293,9 +318,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="512" height="512"/>
         <image name="zoom" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="JCV-Rq-O91"/>
+        <segue reference="p0G-XZ-8kD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -47,7 +47,7 @@
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF49FA511CA61ACF00546F43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* Constants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
-		BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */; };
+		BF4C52F41C910D5E00C56DD2 /* MapUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */; };
 		BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F51C9110A000C56DD2 /* Action.swift */; };
 		BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C41C941134007F56F0 /* LanguageDelegate.swift */; };
 		BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* AgentNode.swift */; };
@@ -57,12 +57,14 @@
 		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
 		BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */; };
 		BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B21C948C9A00DAE175 /* WallNode.swift */; };
-		BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */; };
 		BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B61C948CB500DAE175 /* GoalNode.swift */; };
 		BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B81C952E6300DAE175 /* Observation.swift */; };
 		BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */; };
 		BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */; };
 		BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */; };
+		BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB045C91CB43485009F21EF /* HoleNode.swift */; };
+		BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */; };
+		BFB045CE1CB4C418009F21EF /* MapUnitNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB045CD1CB4C418009F21EF /* MapUnitNode.swift */; };
 		BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */; };
 		BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */; };
 		BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */; };
@@ -134,7 +136,7 @@
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF49FA501CA61ACF00546F43 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnit.swift; sourceTree = "<group>"; };
+		BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnitType.swift; sourceTree = "<group>"; };
 		BF4C52F51C9110A000C56DD2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		BF5339C41C941134007F56F0 /* LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageDelegate.swift; path = FinalProject/LanguageDelegate.swift; sourceTree = "<group>"; };
 		BF5339C61C941155007F56F0 /* AgentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNode.swift; sourceTree = "<group>"; };
@@ -144,12 +146,14 @@
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SamplePrograms.swift; path = FinalProject/SamplePrograms.swift; sourceTree = "<group>"; };
 		BF8FA5B21C948C9A00DAE175 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
-		BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySpaceNode.swift; sourceTree = "<group>"; };
 		BF8FA5B61C948CB500DAE175 /* GoalNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalNode.swift; sourceTree = "<group>"; };
 		BF8FA5B81C952E6300DAE175 /* Observation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
 		BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextureManager.swift; sourceTree = "<group>"; };
 		BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Interpreter+LanguageDelegate.swift"; sourceTree = "<group>"; };
 		BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
+		BFB045C91CB43485009F21EF /* HoleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoleNode.swift; sourceTree = "<group>"; };
+		BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoodenBlockNode.swift; sourceTree = "<group>"; };
+		BFB045CD1CB4C418009F21EF /* MapUnitNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnitNode.swift; sourceTree = "<group>"; };
 		BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramSupplier.swift; sourceTree = "<group>"; };
 		BFFB1A391CABB3F300C746CD /* ProgrammingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammingViewController.swift; sourceTree = "<group>"; };
 		BFFB1A3B1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbnailPlayingMapViewController.swift; sourceTree = "<group>"; };
@@ -278,10 +282,9 @@
 			children = (
 				B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */,
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
-				BF4C52F31C910D5E00C56DD2 /* MapUnit.swift */,
+				BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
 				BF5339C81C941459007F56F0 /* MapBlock.swift */,
-				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
 				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
 				BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */,
 			);
@@ -295,11 +298,14 @@
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,
 				BFFB1A3D1CABB78F00C746CD /* MapNode.swift */,
-				BF5339C61C941155007F56F0 /* AgentNode.swift */,
 				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
-				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
-				BF8FA5B41C948CA400DAE175 /* EmptySpaceNode.swift */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
+				BF5339C61C941155007F56F0 /* AgentNode.swift */,
+				BF8FA5B61C948CB500DAE175 /* GoalNode.swift */,
+				BF8FA5B21C948C9A00DAE175 /* WallNode.swift */,
+				BFB045C91CB43485009F21EF /* HoleNode.swift */,
+				BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */,
+				BFB045CD1CB4C418009F21EF /* MapUnitNode.swift */,
 			);
 			name = GameEngine;
 			sourceTree = "<group>";
@@ -444,7 +450,7 @@
 				TargetAttributes = {
 					3DF2309D1C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 62L5G97YTE;
+						DevelopmentTeam = XC99LK63YN;
 					};
 					3DF230B11C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
@@ -526,12 +532,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFB045CE1CB4C418009F21EF /* MapUnitNode.swift in Sources */,
 				BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */,
 				BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */,
 				BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */,
 				1DB4B08F1C9913C00010F727 /* BlockButton.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
+				BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */,
 				B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */,
 				BF8FA5B51C948CA400DAE175 /* EmptySpaceNode.swift in Sources */,
 				1D69B6D01CB3AF0600C1FA04 /* BoolOpBlock.swift in Sources */,
@@ -554,6 +562,7 @@
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
 				BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */,
 				1D934FE71CAD6AC0009F1FBA /* WhileBlock.swift in Sources */,
+				BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */,
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
 				1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
@@ -569,7 +578,7 @@
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
 				1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */,
 				1DB4B08D1C99073F0010F727 /* DropZone.swift in Sources */,
-				BF4C52F41C910D5E00C56DD2 /* MapUnit.swift in Sources */,
+				BF4C52F41C910D5E00C56DD2 /* MapUnitType.swift in Sources */,
 				B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
 				1D69B6DA1CB5592600C1FA04 /* ToiletBlock.swift in Sources */,
@@ -727,7 +736,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -741,7 +750,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

@@ -9,6 +9,31 @@
 import SpriteKit
 import Darwin
 
+struct DesigningMapConstants {
+    struct Dimension {
+        static let minNumberOfRows = 1
+        static let maxNumberOfRows = 8
+        static let defaultNumberOfRows = 6
+        static let minNumberOfColumns = 1
+        static let maxNumberOfColumns = 8
+        static let defaultNumberOfColumns = 6
+    }
+    struct Position {
+        static let anchor = CGPoint(x: 0.5, y: 0.5)
+        static let shiftLeft = CGFloat(-200)
+        static let shiftUp = CGFloat(100)
+
+        static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
+        static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
+                                        y: actionButtonY)
+        static let testLevelButton = CGPoint(x: -100, y: actionButtonY)
+        static let saveButton = CGPoint(x: 0, y: actionButtonY)
+        static let loadButton = CGPoint(x: 100, y: actionButtonY)
+        static let resetButton = CGPoint(x: GlobalConstants.Dimension.screenWidth/2 - 40,
+                                         y: actionButtonY)
+    }
+}
+
 class LevelDesigningMapScene: SKScene {
     var levelDesigningViewController: LevelDesigningViewController?
     var map: Map!
@@ -22,27 +47,20 @@ class LevelDesigningMapScene: SKScene {
     private var numberOfColumns: Int {
         return map.numberOfColumns
     }
-    let blockWidth = CGFloat(40.0)
-    let blockHeight = CGFloat(40.0)
     var blockSize: CGSize {
         return CGSize(
-            width: blockWidth,
-            height: blockHeight
+            width: GlobalConstants.Dimension.blockWidth,
+            height: GlobalConstants.Dimension.blockHeight
         )
     }
     var grid: [[SKSpriteNode]]!
     var paletteNode: SKSpriteNode!
-    var currentMapUnitSelected = MapUnit.EmptySpace
+    var currentMapUnitTypeSelected = MapUnitType.EmptySpace
     var arrowSprites: [String: SKSpriteNode]!
-    let minNumberOfRows = 1
-    let maxNumberOfRows = 8
-    let minNumberOfColumns = 1
-    let maxNumberOfColumns = 8
-    let filesArchive = FilesArchive()
 
     override init(size: CGSize) {
         super.init(size: size)
-        anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        anchorPoint = DesigningMapConstants.Position.anchor
         backgroundColor = UIColor.whiteColor()
     }
 
@@ -57,20 +75,15 @@ class LevelDesigningMapScene: SKScene {
         addChild(blocksLayer)
         addChild(unitsLayer)
 
-        let palettePosition = CGPoint(x: 0, y: -768/2 + 20 + 45)
+        let palettePosition = CGPoint(x: 0, y: -768/2 + 20 + 95)
         paletteLayer.position = palettePosition
         addChild(paletteLayer)
-
-        // actionsLayer shows the actions that user can do, such as
-        // Save, Load, Play, Reset.
-        let actionsPosition = CGPoint(x: 0, y: -768/2 + 20)
-        actionsLayer.position = actionsPosition
-        addChild(actionsLayer)
 
         addArrows()
         addPalette()
         addActions()
         addBlocks()
+        addBorders()
     }
 
     func setGrid() {
@@ -85,8 +98,10 @@ class LevelDesigningMapScene: SKScene {
 
     func setLayerPositions() {
         let layerPosition = CGPoint(
-            x: -blockWidth * CGFloat(numberOfColumns) / 2,
-            y: -blockHeight * CGFloat(numberOfRows) / 2
+            x: -GlobalConstants.Dimension.blockWidth * CGFloat(numberOfColumns) / 2
+                + DesigningMapConstants.Position.shiftLeft,
+            y: -GlobalConstants.Dimension.blockHeight * CGFloat(numberOfRows) / 2
+                + DesigningMapConstants.Position.shiftUp
         )
 
         // The blocksLayer represent the shape of the map.
@@ -102,8 +117,8 @@ class LevelDesigningMapScene: SKScene {
     func addBlocks() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
-                let mapUnit = map.retrieveMapUnitAt(row, column: column)!
-                setBlock(mapUnit, row: row, column: column)
+                let mapUnitType = map.retrieveMapUnitAt(row, column: column)!.type
+                setBlock(mapUnitType, row: row, column: column)
             }
         }
     }
@@ -121,12 +136,12 @@ class LevelDesigningMapScene: SKScene {
     }
 
     // Set block at a given row and column with a given image
-    func setBlock(mapUnit: MapUnit, row: Int, column: Int) {
+    func setBlock(mapUnit: MapUnitType, row: Int, column: Int) {
+        let blockNode = mapUnit.nodeClass.init()
         // Update model
-        map.setMapUnitAt(mapUnit, row: row, column: column)
+        map.setMapUnitAt(blockNode, row: row, column: column)
 
         // Update view
-        let blockNode = getBlockNode(mapUnit)
         blockNode.size = blockSize
         blockNode.position = pointFor(row, column: column)
         grid[row][column] = blockNode
@@ -135,38 +150,29 @@ class LevelDesigningMapScene: SKScene {
         blocksLayer.addChild(blockNode)
 
         // Checker
-        printGrid()
-    }
-
-    func getBlockNode(mapUnit: MapUnit) -> SKSpriteNode {
-        switch mapUnit {
-        case .Agent:
-            return SKSpriteNode(texture: TextureManager.agentUpTexture)
-        case .EmptySpace:
-            return SKSpriteNode(texture: TextureManager.retrieveTexture("Block"))
-        case .Goal:
-            return SKSpriteNode(texture: TextureManager.retrieveTexture("toilet"))
-        case .Wall:
-            return SKSpriteNode(texture: TextureManager.retrieveTexture("wall"))
-        }
+        // printGrid()
     }
 
     // Convert a row, column pair into a CGPoint relative to unitsLayer
     func pointFor(row: Int, column: Int) -> CGPoint {
         return CGPoint(
-            x: CGFloat(column) * blockWidth,
-            y: CGFloat(row) * blockHeight
+            x: CGFloat(column) * GlobalConstants.Dimension.blockWidth,
+            y: CGFloat(row) * GlobalConstants.Dimension.blockHeight
         )
     }
 
     // Convert a CGPoint relative to unitsLayer to a row number
     func rowFor(point: CGPoint) -> Int {
-        return Int(floor(point.y/blockHeight + (CGFloat(numberOfRows) + 1)/2))
+        let pointY = point.y - DesigningMapConstants.Position.shiftUp
+        return Int(floor(pointY/GlobalConstants.Dimension.blockHeight
+            + (CGFloat(numberOfRows) + 1)/2))
     }
 
     // Convert a CGPoint relative to unitsLayer to a column number
     func columnFor(point: CGPoint) -> Int {
-        return Int(floor(point.x/blockWidth + (CGFloat(numberOfColumns) + 1)/2))
+        let pointX = point.x - DesigningMapConstants.Position.shiftLeft
+        return Int(floor(pointX/GlobalConstants.Dimension.blockWidth
+            + (CGFloat(numberOfColumns) + 1)/2))
     }
 
     // Checks if the row and column number is valid
@@ -176,14 +182,14 @@ class LevelDesigningMapScene: SKScene {
 
     // Prints the grid for checking purposes
     func printGrid() {
-        for row in (0..<map.numberOfRows).reverse() {
-            var string = ""
-            for column in 0..<map.numberOfColumns {
-                string += String(map.retrieveMapUnitAt(row, column: column)!.rawValue) + " "
-            }
-            print(string)
-        }
-        print("=====")
+//        for row in (0..<map.numberOfRows).reverse() {
+//            var string = ""
+//            for column in 0..<map.numberOfColumns {
+//                string += String(map.retrieveMapUnitAt(row, column: column)!.rawValue) + " "
+//            }
+//            print(string)
+//        }
+//        print("=====")
     }
 }
 
@@ -203,13 +209,13 @@ extension LevelDesigningMapScene {
         view.addGestureRecognizer(longPressGestureRecognizer)
     }
 
-    func handleGesture(sender: UIGestureRecognizer, mapUnit: MapUnit) {
+    func handleGesture(sender: UIGestureRecognizer, mapUnitType: MapUnitType) {
         let viewPoint = sender.locationInView(view)
         let scenePoint = convertPointFromView(viewPoint)
         let row = rowFor(scenePoint)
         let column = columnFor(scenePoint)
         if isValidRowAndColumn(row, column: column) {
-            setBlock(mapUnit, row: row, column: column)
+            setBlock(mapUnitType, row: row, column: column)
         }
     }
 
@@ -218,64 +224,76 @@ extension LevelDesigningMapScene {
         let scenePoint = convertPointFromView(viewPoint)
         if let name = nodeAtPoint(scenePoint).name {
             switch name {
+            case "Back":
+                backAction()
             case "Save":
                 saveAction()
             case "Load":
                 loadAction()
-            case "Test Level":
-                testLevel()
+            case "Play":
+                playAction()
             case "Reset":
                 resetAction()
             case "Agent":
-                updateCurrentItemSelected(MapUnit.Agent, nodeName: name)
+                updateCurrentItemSelected(.Agent, nodeName: name)
             case "Block":
-                updateCurrentItemSelected(MapUnit.EmptySpace, nodeName: name)
+                updateCurrentItemSelected(.EmptySpace, nodeName: name)
             case "Toilet":
-                updateCurrentItemSelected(MapUnit.Goal, nodeName: name)
+                updateCurrentItemSelected(.Goal, nodeName: name)
             case "Wall":
-                updateCurrentItemSelected(MapUnit.Wall, nodeName: name)
+                updateCurrentItemSelected(.Wall, nodeName: name)
             case "Add Top", "Remove Top", "Add Bottom", "Remove Bottom",
                 "Add Left", "Remove Left", "Add Right", "Remove Right":
                 updateGrid(name)
             default:
-                handleGesture(sender, mapUnit: currentMapUnitSelected)
+                handleGesture(sender, mapUnitType: currentMapUnitTypeSelected)
             }
         } else {
-            handleGesture(sender, mapUnit: currentMapUnitSelected)
+            handleGesture(sender, mapUnitType: currentMapUnitTypeSelected)
         }
     }
 
     func handlePan(sender: UIPanGestureRecognizer) {
-        handleGesture(sender, mapUnit: currentMapUnitSelected)
+        handleGesture(sender, mapUnitType: currentMapUnitTypeSelected)
     }
 
     func handleLongPress(sender: UILongPressGestureRecognizer) {
-        handleGesture(sender, mapUnit: MapUnit.EmptySpace)
+        handleGesture(sender, mapUnitType: .EmptySpace)
     }
 }
 
 // This portion handles arrow tapping.
 extension LevelDesigningMapScene {
     func addArrows() {
-        let arrowOffsetX = CGFloat(maxNumberOfRows - numberOfRows) * blockWidth / 2
-        let arrowOffsetY = CGFloat(maxNumberOfColumns - numberOfColumns) * blockHeight / 2
+        let shiftLeft = DesigningMapConstants.Position.shiftLeft
+        let shiftUp = DesigningMapConstants.Position.shiftUp
+        let arrowOffsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
+            * GlobalConstants.Dimension.blockWidth / 2
+        let arrowOffsetY = CGFloat(DesigningMapConstants.Dimension.maxNumberOfRows)
+            * GlobalConstants.Dimension.blockHeight / 2
         arrowSprites = [:]
 
-        let verticalOffset = blockHeight * CGFloat(numberOfRows) / 2
-        let upOffset = verticalOffset + arrowOffsetY
-        let downOffset = -upOffset - blockHeight
-        addArrow("up-arrow", name: "Add Top", position: CGPoint(x: -blockWidth, y: upOffset))
-        addArrow("down-arrow", name: "Remove Top", position: CGPoint(x: 0, y: upOffset))
-        addArrow("down-arrow", name: "Add Bottom", position: CGPoint(x: -blockWidth, y: downOffset))
-        addArrow("up-arrow", name: "Remove Bottom", position: CGPoint(x: 0, y: downOffset))
+        let upOffset = arrowOffsetY
+        let downOffset = -arrowOffsetY - GlobalConstants.Dimension.blockHeight
+        addArrow("up-arrow", name: "Add Top",
+                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth + shiftLeft, y: upOffset + shiftUp))
+        addArrow("down-arrow", name: "Remove Top",
+                 position: CGPoint(x: shiftLeft, y: upOffset + shiftUp))
+        addArrow("down-arrow", name: "Add Bottom",
+                 position: CGPoint(x: -GlobalConstants.Dimension.blockWidth + shiftLeft, y: downOffset + shiftUp))
+        addArrow("up-arrow", name: "Remove Bottom",
+                 position: CGPoint(x: shiftLeft, y: downOffset + shiftUp))
 
-        let horizontalOffset = blockWidth * CGFloat(numberOfColumns) / 2
-        let rightOffset = horizontalOffset + arrowOffsetX
-        let leftOffset = -rightOffset - blockWidth
-        addArrow("left-arrow", name: "Add Left", position: CGPoint(x: leftOffset, y: -blockHeight))
-        addArrow("right-arrow", name: "Remove Left", position: CGPoint(x: leftOffset, y: 0))
-        addArrow("right-arrow", name: "Add Right", position: CGPoint(x: rightOffset, y: -blockHeight))
-        addArrow("left-arrow", name: "Remove Right", position: CGPoint(x: rightOffset, y: 0))
+        let rightOffset = arrowOffsetX
+        let leftOffset = -arrowOffsetX - GlobalConstants.Dimension.blockWidth
+        addArrow("left-arrow", name: "Add Left",
+                 position: CGPoint(x: leftOffset + shiftLeft, y: -GlobalConstants.Dimension.blockHeight + shiftUp))
+        addArrow("right-arrow", name: "Remove Left",
+                 position: CGPoint(x: leftOffset + shiftLeft, y: shiftUp))
+        addArrow("right-arrow", name: "Add Right",
+                 position: CGPoint(x: rightOffset + shiftLeft, y: -GlobalConstants.Dimension.blockHeight + shiftUp))
+        addArrow("left-arrow", name: "Remove Right",
+                 position: CGPoint(x: rightOffset + shiftLeft, y: shiftUp))
 
         updateArrows()
     }
@@ -293,19 +311,19 @@ extension LevelDesigningMapScene {
         for arrow in arrowSprites.values {
             presentArrow(arrow, toPresent: true)
         }
-        if numberOfRows == maxNumberOfRows {
+        if numberOfRows == DesigningMapConstants.Dimension.maxNumberOfRows {
             presentArrow(arrowSprites["Add Top"]!, toPresent: false)
             presentArrow(arrowSprites["Add Bottom"]!, toPresent: false)
         }
-        if numberOfRows == minNumberOfRows {
+        if numberOfRows == DesigningMapConstants.Dimension.minNumberOfRows {
             presentArrow(arrowSprites["Remove Top"]!, toPresent: false)
             presentArrow(arrowSprites["Remove Bottom"]!, toPresent: false)
         }
-        if numberOfColumns == maxNumberOfColumns {
+        if numberOfColumns == DesigningMapConstants.Dimension.maxNumberOfColumns {
             presentArrow(arrowSprites["Add Left"]!, toPresent: false)
             presentArrow(arrowSprites["Add Right"]!, toPresent: false)
         }
-        if numberOfColumns == minNumberOfColumns {
+        if numberOfColumns == DesigningMapConstants.Dimension.minNumberOfColumns {
             presentArrow(arrowSprites["Remove Left"]!, toPresent: false)
             presentArrow(arrowSprites["Remove Right"]!, toPresent: false)
         }
@@ -406,13 +424,15 @@ extension LevelDesigningMapScene {
 extension LevelDesigningMapScene {
     func addPalette() {
         let paletteBackgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
-        paletteNode = SKSpriteNode(color: paletteBackgroundColor, size: CGSize(width: 1024, height: 50))
+        paletteNode = SKSpriteNode(color: paletteBackgroundColor,
+                                   size: CGSize(width: 1024, height: 50))
         paletteLayer.addChild(paletteNode)
 
-        let textures = [TextureManager.agentUpTexture,
-                        TextureManager.retrieveTexture("Block"),
-                        TextureManager.retrieveTexture("toilet"),
-                        TextureManager.retrieveTexture("wall")]
+        let textures = [MapUnitType.Agent.texture,
+                        MapUnitType.EmptySpace.texture,
+                        MapUnitType.Goal.texture,
+                        MapUnitType.Wall.texture
+        ]
         let textureNames = ["Agent", "Block", "Toilet", "Wall"]
         for position in 0..<textures.count {
             let spriteNode = SKSpriteNode(texture: textures[position])
@@ -423,8 +443,8 @@ extension LevelDesigningMapScene {
         }
     }
 
-    func updateCurrentItemSelected(mapUnit: MapUnit, nodeName: String) {
-        currentMapUnitSelected = mapUnit
+    func updateCurrentItemSelected(mapUnitType: MapUnitType, nodeName: String) {
+        currentMapUnitTypeSelected = mapUnitType
 
         // Update View
         for node in paletteNode.children {
@@ -440,40 +460,39 @@ extension LevelDesigningMapScene {
 // This portion deals with actions such as Save, Load, Test Level and Reset.
 extension LevelDesigningMapScene {
     func addActions() {
-        let actionsNode = SKSpriteNode(color: UIColor.blackColor(), size: CGSize(width: 1024, height: 40))
-        actionsLayer.addChild(actionsNode)
-
-        let saveLabel = makeLabel("Save", position: CGPoint(x: -1024/2 + 30, y: 0))
-        actionsNode.addChild(saveLabel)
-
-        let loadLabel = makeLabel("Load", position: CGPoint(x: -1024/2 + 80, y: 0))
-        actionsNode.addChild(loadLabel)
-
-        let testLevelLabel = makeLabel("Test Level", position: CGPoint(x: 0, y: 0))
-        actionsNode.addChild(testLevelLabel)
-
-        let resetLabel = makeLabel("Reset", position: CGPoint(x: 1024/2 - 30, y: 0))
-        actionsNode.addChild(resetLabel)
+        addActionButton("back", name: "Back",
+                        position: DesigningMapConstants.Position.backButton)
+        addActionButton("save", name: "Save",
+                        position: DesigningMapConstants.Position.saveButton)
+        addActionButton("open-folder", name: "Load",
+                        position: DesigningMapConstants.Position.loadButton)
+        addActionButton("play", name: "Play",
+                        position: DesigningMapConstants.Position.testLevelButton)
+        addActionButton("reset", name: "Reset",
+                        position: DesigningMapConstants.Position.resetButton)
     }
 
-    // A wrapper to make SKLabelNode based on given label name and position
-    func makeLabel(labelName: String, position: CGPoint) -> SKLabelNode {
-        let label = SKLabelNode(text: labelName)
-        label.fontColor = UIColor.whiteColor()
-        label.fontName = "Arial"
-        label.fontSize = 17
-        label.position = position
-        label.name = labelName
-        return label
+    func addActionButton(imageNamed: String, name: String, position: CGPoint) {
+        let action = SKSpriteNode(texture: TextureManager.retrieveTexture(imageNamed))
+        action.name = name
+        action.size = CGSize(width: 60.0, height: 60.0)
+        action.position = position
+        addChild(action)
     }
 
-    func testLevel() {
-        levelDesigningViewController?.performSegueWithIdentifier(GlobalConstants.SegueIdentifier.designToPlaying, sender: nil)
+    func backAction() {
+        levelDesigningViewController?.goBack()
+    }
+
+    func playAction() {
+        levelDesigningViewController?.performSegueWithIdentifier(
+            GlobalConstants.SegueIdentifier.designToPlaying, sender: nil)
     }
 
     func saveAction() {
         var name: UITextField?
         var savedSuccessfully = false
+        let maximumNumberOfCharacters = 30
         let saveAlert = UIAlertController(
             title: "Save",
             message: "Name this level!",
@@ -486,8 +505,10 @@ extension LevelDesigningMapScene {
             title: "OK",
             style: .Default,
             handler: { (action: UIAlertAction!) in
-                if name!.text!.characters.count <= 30 {
-                    savedSuccessfully = self.filesArchive.saveToPropertyList(self.map, name: name!.text!)
+                if name!.text!.characters.count <= maximumNumberOfCharacters {
+                    savedSuccessfully = GlobalConstants.filesArchive.saveToFile(
+                        self.map,
+                        name: name!.text!)
                 }
                 if savedSuccessfully {
                     let successAlert = UIAlertController(
@@ -530,9 +551,6 @@ extension LevelDesigningMapScene {
         levelSelectorPageViewController.currentStoryboard = levelDesigningViewController!.storyboard
         levelSelectorPageViewController.previousViewController = levelDesigningViewController
         levelSelectorPageViewController.numberOfItemsPerPage = 15
-        levelSelectorPageViewController.totalNumberOfPages = Int(ceil(Double(
-            levelSelectorPageViewController.totalNumberOfItems) /
-            Double(levelSelectorPageViewController.numberOfItemsPerPage!)))
         levelDesigningViewController!.presentViewController(
             levelSelectorPageViewController,
             animated: true,
@@ -548,7 +566,9 @@ extension LevelDesigningMapScene {
             title: "Ok",
             style: .Default,
             handler: { (action: UIAlertAction!) in
-                self.resetMap(Map(numberOfRows: 6, numberOfColumns: 6))
+                self.resetMap(
+                    Map(numberOfRows: DesigningMapConstants.Dimension.defaultNumberOfRows,
+                        numberOfColumns: DesigningMapConstants.Dimension.defaultNumberOfColumns))
             }))
         resetAlert.addAction(UIAlertAction(
             title: "Cancel",
@@ -567,5 +587,48 @@ extension LevelDesigningMapScene {
         setGrid()
         addBlocks()
         updateArrows()
+    }
+}
+
+extension LevelDesigningMapScene {
+    func addBorders() {
+        addBorder("Top")
+        addBorder("Bottom")
+        addBorder("Left")
+        addBorder("Right")
+    }
+
+    func addBorder(edgeName: String) {
+        let dottedLine = SKSpriteNode(texture: TextureManager.retrieveTexture("dotted-line"))
+        dottedLine.zPosition = GlobalConstants.zPosition.back
+        dottedLine.size = CGSize(width: CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
+            * GlobalConstants.Dimension.blockWidth, height: dottedLine.size.height)
+
+        if edgeName == "Left" || edgeName == "Right" {
+            let rotate = SKAction.rotateByAngle(CGFloat(M_PI_2), duration: NSTimeInterval(0))
+            dottedLine.runAction(rotate)
+        }
+
+        var positionX = -GlobalConstants.Dimension.blockWidth/2 + DesigningMapConstants.Position.shiftLeft
+        var positionY = -GlobalConstants.Dimension.blockHeight/2 + DesigningMapConstants.Position.shiftUp
+        let offsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
+            * GlobalConstants.Dimension.blockWidth / 2 - 20
+        let offsetY = CGFloat(DesigningMapConstants.Dimension.maxNumberOfRows)
+            * GlobalConstants.Dimension.blockHeight / 2 - 20
+        switch edgeName {
+        case "Top":
+            positionY = offsetY + DesigningMapConstants.Position.shiftUp
+        case "Bottom":
+            positionY = -offsetY - GlobalConstants.Dimension.blockHeight + DesigningMapConstants.Position.shiftUp
+        case "Left":
+            positionX = -offsetX - GlobalConstants.Dimension.blockWidth + DesigningMapConstants.Position.shiftLeft
+        case "Right":
+            positionX = offsetX + DesigningMapConstants.Position.shiftLeft
+        default:
+            break
+        }
+        dottedLine.position = CGPoint(x: positionX, y: positionY)
+
+        addChild(dottedLine)
     }
 }

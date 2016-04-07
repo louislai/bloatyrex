@@ -58,7 +58,7 @@ class MapNode: SKNode {
     func addBlocks() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
-                let blockNode = SKSpriteNode(texture: TextureManager.retrieveTexture("Block"))
+                let blockNode = MapUnitType.EmptySpace.nodeClass.init()
                 blockNode.size = blockSize
                 blockNode.position = pointFor(row, column: column)
                 blocksLayer.addChild(blockNode)
@@ -71,14 +71,12 @@ class MapNode: SKNode {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
-                    where unit != .EmptySpace {
-                    var texture: SKTexture
-                    if unit == .Agent {
-                        texture = TextureManager.agentUpTexture
-                    } else {
-                        texture = TextureManager.retrieveTexture(unit.spriteName)
+                    where unit.type != .EmptySpace {
+                    let sprite = unit
+                    if unit.type == .Agent {
+                        sprite.texture = TextureManager.agentUpTexture
                     }
-                    let sprite = unit.spriteClass.init(texture: texture)
+
                     sprite.position = pointFor(row, column: column)
                     sprite.size = blockSize
                     sprite.zPosition = GlobalConstants.zPosition.back

@@ -77,11 +77,11 @@ struct Sample {
     static let sampleProgram3 = Program.MultipleStatement(
         .LoopStatement(
             .While(
-                .Negation(.CompareObservation(.LookForward, MapUnit.Goal)),
+                .Negation(.CompareObservation(.LookForward, MapUnitType.Goal)),
                 Program.MultipleStatement(
                     .LoopStatement(
                         .While(
-                            .Negation(.CompareObservation(.LookForward, MapUnit.Wall)),
+                            .Negation(.CompareObservation(.LookForward, MapUnitType.Wall)),
                             Program.SingleStatement(
                                 .ActionStatement(.Forward)
                             )

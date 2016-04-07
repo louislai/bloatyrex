@@ -148,7 +148,7 @@ class DropZone: SKNode {
         }
     }
     
-    func getObject() -> MapUnit? {
+    func getObject() -> MapUnitType? {
         switch category {
         case .Action:
             return nil

@@ -18,8 +18,8 @@ class ToiletBlock: ObjectBlock {
         addChild(blockBody)
     }
     
-    override func getMapUnit() -> MapUnit {
-        return MapUnit.Goal
+    override func getMapUnit() -> MapUnitType {
+        return MapUnitType.Goal
     }
     
     required init?(coder aDecoder: NSCoder) {

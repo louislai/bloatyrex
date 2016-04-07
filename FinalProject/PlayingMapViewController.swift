@@ -17,6 +17,8 @@ class PlayingMapViewController: UIViewController {
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
+        registerObservers()
+
         print(view.bounds.size)
         // Configure the view
         let skView = view as! SKView
@@ -37,11 +39,28 @@ class PlayingMapViewController: UIViewController {
         scene.scaleMode = .AspectFill
 
         // Load the map
-        scene.playingMapController = self
         scene.programSupplier = self
         scene.setup()
 
         return scene
+    }
+
+    private func registerObservers() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(PlayingMapViewController.reset),
+            name: GlobalConstants.Notification.gameReset,
+            object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(PlayingMapViewController.resetAndRun),
+            name: GlobalConstants.Notification.gameResetAndRun,
+            object: nil)
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
 
@@ -60,13 +79,6 @@ extension PlayingMapViewController {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
             self.scene.run()
         })
-
-    }
-
-    func goBack() {
-        scene.removeAllActions()
-        scene.removeFromParent()
-        navigationController?.popViewControllerAnimated(true)
     }
 }
 

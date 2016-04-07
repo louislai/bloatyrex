@@ -8,14 +8,23 @@
 
 import SpriteKit
 
-class AgentNode: SKSpriteNode {
+class AgentNode: MapUnitNode {
     weak var mapNode: MapNode!
     var orientation = Direction.Up
     var row: Int!
     var column: Int!
     var delegate: LanguageDelegate?
     var callbackAction = SKAction.runBlock {}
+    var numberOfMoves = 11
     let timePerMoveMovement: NSTimeInterval = 0.5
+
+    required init(type: MapUnitType = .Agent) {
+        super.init(type: .Agent)
+    }
+
+    required convenience init?(coder aDecoder: NSCoder) {
+        self.init()
+    }
 
     /// Return true if nextAction causes the agent to reach the goal
     /// Return false if program terminates while not reaching the goal
@@ -72,10 +81,10 @@ class AgentNode: SKSpriteNode {
             let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
             runAction(moveAction)
 
-            if nextUnit == .Goal {
+            if nextUnit.type == .Goal {
                 return true
             }
-            mapNode.map.setMapUnitAt(.Agent, row: nextRow, column: nextColumn)
+            mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
         }
         return nil
     }
@@ -109,7 +118,7 @@ class AgentNode: SKSpriteNode {
         runAction(sequence)
     }
 
-    private func nextPosition() -> (row: Int, column: Int, unit: MapUnit)? {
+    private func nextPosition() -> (row: Int, column: Int, unit: MapUnitNode)? {
         var nextRow: Int = row
         var nextColumn: Int = column
         switch orientation {
@@ -139,7 +148,7 @@ class AgentNode: SKSpriteNode {
         guard let nextUnit = unit else {
             return nil
         }
-        guard nextUnit != .Agent && nextUnit != .Wall else {
+        guard nextUnit.type != .Agent && nextUnit.type != .Wall else {
             return nil
         }
         return (row: nextRow, column: nextColumn, unit: nextUnit)

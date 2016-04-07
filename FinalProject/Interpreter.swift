@@ -108,18 +108,30 @@ class Interpreter {
         }
     }
 
-    private func observedObject(observation: Observation, map: Map, agent: AgentProtocol) -> MapUnit? {
+    private func observedObject(observation: Observation, map: Map, agent: AgentProtocol) -> MapUnitType? {
         switch observation {
         case .LookForward:
             switch agent.direction {
             case .Right:
-                return map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition + 1)
+                guard let unit = map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition + 1) else {
+                    return nil
+                }
+                return unit.type
             case .Left:
-                return map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition - 1)
+                guard let unit = map.retrieveMapUnitAt(agent.yPosition, column: agent.xPosition - 1) else {
+                    return nil
+                }
+                return unit.type
             case .Down:
-                return map.retrieveMapUnitAt(agent.yPosition - 1, column: agent.xPosition)
+                guard let unit = map.retrieveMapUnitAt(agent.yPosition - 1, column: agent.xPosition) else {
+                    return nil
+                }
+                return unit.type
             case .Up:
-                return map.retrieveMapUnitAt(agent.yPosition + 1, column: agent.xPosition)
+                guard let unit = map.retrieveMapUnitAt(agent.yPosition + 1, column: agent.xPosition) else {
+                    return nil
+                }
+                return unit.type
             }
         }
     }

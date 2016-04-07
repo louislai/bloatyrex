@@ -12,7 +12,8 @@ import SpriteKit
 class LevelDesigningViewController: UIViewController {
 
     var scene: LevelDesigningMapScene!
-    var map = Map(numberOfRows: 6, numberOfColumns: 6)
+    var map = Map(numberOfRows: DesigningMapConstants.Dimension.defaultNumberOfRows,
+                  numberOfColumns: DesigningMapConstants.Dimension.defaultNumberOfColumns)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,10 @@ class LevelDesigningViewController: UIViewController {
 
         // Present the scene.
         skView.presentScene(scene)
+    }
+
+    func goBack() {
+        navigationController?.popViewControllerAnimated(true)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

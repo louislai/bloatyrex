@@ -8,9 +8,9 @@
 
 import Foundation
 
-class FilesArchive {
+class FilesArchive: NSObject {
 
-    init() {}
+    override init() {}
 
     private var documentDirectory: String {
         let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,
@@ -26,74 +26,50 @@ class FilesArchive {
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        let propertyListFiles = filesInDirectory.filter { ($0 as NSString).pathExtension == "plist" }
-        let propertyListFileNames = propertyListFiles.map { ($0 as NSString).stringByDeletingPathExtension }
-        return propertyListFileNames
+        let mapFiles = filesInDirectory.filter { ($0 as NSString).pathExtension == "map" }
+        let mapFileNames = mapFiles.map { ($0 as NSString).stringByDeletingPathExtension }
+        return mapFileNames
     }
 
-    // Save Map into a .plist file with given name.
+    // Save Map into a file with given name.
     // Returns: true if save is successful, false otherwise.
-    func saveToPropertyList(map: Map, name: String) -> Bool {
+    func saveToFile(map: Map, name: String) -> Bool {
         if name.isEmpty {
             return false
         } else {
-            let filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(name + ".plist")
+            let filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(name + ".map")
 
-            let dictionary = NSMutableDictionary()
-            dictionary.setObject(map.numberOfRows, forKey: "Number Of Rows")
-            dictionary.setObject(map.numberOfColumns, forKey: "Number Of Columns")
-            for row in 0..<map.numberOfRows {
-                for column in 0..<map.numberOfColumns {
-                    let value = map.retrieveMapUnitAt(row, column: column)!.rawValue
-                    dictionary.setObject(value, forKey: "\([row, column])")
-                }
-            }
-            let isSaved = dictionary.writeToFile(filePath, atomically: true)
-            return isSaved
+            let data = NSMutableData()
+            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+            archiver.encodeObject(map)
+            archiver.finishEncoding()
+            return data.writeToFile(filePath, atomically: true)
         }
     }
 
     // Reconstruct Map for a given filePath
     // Returns: Map if filePath exist, nil otherwise
-    func loadFromPropertyList(fileName: String) -> Map? {
+    func loadFromFile(fileName: String) -> Map? {
         var filePath: String
-        let plistExtension = ".plist"
-        if fileName.containsString(plistExtension) {
+        let mapExtension = ".map"
+        if fileName.containsString(mapExtension) {
             filePath = fileName
         } else {
-            filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(fileName + ".plist")
+            filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(fileName + ".map")
         }
-        var map: Map? = nil
-        if var dictionary = NSDictionary(contentsOfFile: filePath) as? [String: AnyObject] {
-            let rows = dictionary.removeValueForKey("Number Of Rows") as! Int
-            let columns = dictionary.removeValueForKey("Number Of Columns") as! Int
-            map = Map(numberOfRows: rows, numberOfColumns: columns)
-            for arrayString in dictionary.keys {
-                let coordinatesArrayString = String(arrayString.characters.filter { $0 != "[" && $0 != "]" })
-                let coordinatesArray = coordinatesArrayString.componentsSeparatedByString(", ")
-                let row = Int(coordinatesArray[0])!
-                let column = Int(coordinatesArray[1])!
-                let typeValue = dictionary[arrayString]! as! Int
-                switch typeValue {
-                case MapUnit.Agent.rawValue:
-                    map!.setMapUnitAt(MapUnit.Agent, row: row, column: column)
-                case MapUnit.EmptySpace.rawValue:
-                    map!.setMapUnitAt(MapUnit.EmptySpace, row: row, column: column)
-                case MapUnit.Goal.rawValue:
-                    map!.setMapUnitAt(MapUnit.Goal, row: row, column: column)
-                case MapUnit.Wall.rawValue:
-                    map!.setMapUnitAt(MapUnit.Wall, row: row, column: column)
-                default:
-                    break
-                }
-            }
+        guard let data = NSFileManager.defaultManager().contentsAtPath(filePath) else {
+            return nil
+        }
+        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+        guard let map = unarchiver.decodeObject() as? Map else {
+                return nil
         }
         return map
     }
 
-    // Remove the plist file from the directory
-    func removePropertyList(fileName: String) {
-        let filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(fileName + ".plist")
+    // Remove the map file from the directory
+    func removeFile(fileName: String) {
+        let filePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(fileName + ".map")
         do {
             try NSFileManager.defaultManager().removeItemAtPath(filePath)
         } catch let error as NSError {
@@ -102,13 +78,13 @@ class FilesArchive {
     }
 
     // Rename the original plist filename from the directory with the new plist filename
-    func renamePropertyList(originalFileName: String, newFileName: String) -> Bool {
+    func renameFile(originalFileName: String, newFileName: String) -> Bool {
         if newFileName.isEmpty {
             return false
         } else {
             var success: Bool?
-            let originalFilePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(originalFileName + ".plist")
-            let newFilePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(newFileName + ".plist")
+            let originalFilePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(originalFileName + ".map")
+            let newFilePath = (documentDirectory as AnyObject).stringByAppendingPathComponent(newFileName + ".map")
             do {
                 try NSFileManager.defaultManager().moveItemAtPath(originalFilePath, toPath: newFilePath)
                 success = true

@@ -42,7 +42,7 @@ class StaticMapScene: PannableScene {
         movesLeftLabel.name = StaticMapSceneConstants.NodeNames.movesLeftLabel
 
         let layerPosition = CGPoint(
-            x: -movesLeftLabel.frame.size.width/2,
+            x: 0,
             y: 300.0
         )
         // 2

@@ -8,24 +8,37 @@
 
 import Foundation
 
-class Map: NSObject {
-    private var grid: [[MapUnit]]
+class Map: NSObject, NSCoding {
+    private var grid: [[MapUnitNode]]
     let numberOfRows: Int
     let numberOfColumns: Int
 
     init(numberOfRows: Int, numberOfColumns: Int) {
         self.numberOfRows = numberOfRows
         self.numberOfColumns = numberOfColumns
-        self.grid = [[MapUnit]](
+        self.grid = [[MapUnitNode]](
             count: numberOfRows,
-            repeatedValue: [MapUnit](
+            repeatedValue: [MapUnitNode](
                 count: numberOfColumns,
-                repeatedValue: MapUnit.EmptySpace
+                repeatedValue: MapUnitNode()
             )
         )
     }
 
-    func setMapUnitAt(unit: MapUnit, row: Int, column: Int) {
+    required init?(coder aDecoder: NSCoder) {
+        self.grid = aDecoder.decodeObjectForKey("Grid") as! [[MapUnitNode]]
+        self.numberOfRows = aDecoder.decodeIntegerForKey("NumberOfRows")
+        self.numberOfColumns = aDecoder.decodeIntegerForKey("NumberOfColumns")
+        super.init()
+    }
+
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(grid, forKey: "Grid")
+        aCoder.encodeInteger(numberOfRows, forKey: "NumberOfRows")
+        aCoder.encodeInteger(numberOfColumns, forKey: "NumberOfColumns")
+    }
+
+    func setMapUnitAt(unit: MapUnitNode, row: Int, column: Int) {
         guard row >= 0 && row < numberOfRows
             && column >= 0  && column < numberOfColumns else {
                 return
@@ -35,10 +48,10 @@ class Map: NSObject {
     }
 
     func clearMapUnitAt(row: Int, column: Int) {
-        setMapUnitAt(MapUnit.EmptySpace, row: row, column: column)
+        setMapUnitAt(MapUnitNode(), row: row, column: column)
     }
 
-    func retrieveMapUnitAt(row: Int, column: Int) -> MapUnit? {
+    func retrieveMapUnitAt(row: Int, column: Int) -> MapUnitNode? {
         guard row >= 0 && row < numberOfRows
             && column >= 0  && column < numberOfColumns else {
                 return nil
@@ -50,7 +63,11 @@ class Map: NSObject {
 extension Map: NSCopying {
     func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = Map(numberOfRows: numberOfRows, numberOfColumns: numberOfColumns)
-        copy.grid = grid
+        for row in 0..<numberOfRows {
+            for column in 0..<numberOfColumns {
+                copy.grid[row][column] = grid[row][column].copy() as! MapUnitNode
+            }
+        }
         return copy
     }
 }

@@ -14,6 +14,8 @@ class GlobalConstants {
     }
 
     struct Dimension {
+        static let screenWidth = CGFloat(1024)
+        static let screenHeight = CGFloat(768)
         static let blockWidth = CGFloat(40)
         static let blockHeight = CGFloat(40)
     }
@@ -22,4 +24,12 @@ class GlobalConstants {
         static let front = CGFloat(2)
         static let back = CGFloat(1)
     }
+
+    struct Notification {
+        static let gameReset = "reset"
+        static let gameResetAndRun = "resetAndRun"
+        static let gameWon = "won"
+    }
+
+    static let filesArchive = FilesArchive()
 }
