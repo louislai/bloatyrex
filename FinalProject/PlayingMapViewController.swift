@@ -80,14 +80,6 @@ extension PlayingMapViewController {
             self.scene.run()
         })
     }
-
-    func notifyGameWon() {
-        if let parent = parentViewController {
-            if let playingController = parent as? PlayingViewController {
-                playingController.notifyGameWon()
-            }
-        }
-    }
 }
 
 extension PlayingMapViewController: ProgramSupplier {
