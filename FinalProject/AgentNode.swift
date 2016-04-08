@@ -14,7 +14,6 @@ class AgentNode: MapUnitNode {
     var row: Int!
     var column: Int!
     var delegate: LanguageDelegate?
-    var callbackAction = SKAction.runBlock {}
     var numberOfMoves = 11
     let timePerMoveMovement: NSTimeInterval = 0.5
 
@@ -73,6 +72,12 @@ class AgentNode: MapUnitNode {
     /// Return nil if undecided
     func moveForward() -> Bool? {
         if let (nextRow, nextColumn, nextUnit) = nextPosition() {
+            // Branch off to push method if nextUnit is a wooden block
+            if nextUnit.type == .WoodenBlock {
+                return push()
+            }
+
+
             mapNode.map.clearMapUnitAt(row, column: column)
 
 
@@ -89,6 +94,32 @@ class AgentNode: MapUnitNode {
             }
             mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
         }
+        return nil
+    }
+
+    /// Return true if push causes the agent to reach the goal
+    /// Return nil if undecided
+    func push() -> Bool? {
+        guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
+            return nil
+        }
+        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2) else {
+            return nil
+        }
+        guard isReachableUnit(nextNextUnit) else {
+            return nil
+        }
+        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
+        let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
+        let agentCurrentPoint = mapNode.pointFor(row, column: column)
+        let contactPoint = CGPoint(
+            x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
+            y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
+        )
+        let moveToContactPointAction = SKAction.moveTo(
+            contactPoint,
+            duration: timePerMoveMovement * 0.5
+        )
         return nil
     }
 
@@ -116,7 +147,7 @@ class AgentNode: MapUnitNode {
 
         // Move sprite
         let targetPoint = mapNode.pointFor(row, column: column)
-        let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
+        let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement*2.0)
         runAction(moveAction)
 
         if nextNextUnit.type == .Goal {
