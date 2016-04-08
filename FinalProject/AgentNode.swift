@@ -15,6 +15,7 @@ class AgentNode: MapUnitNode {
     var column: Int!
     var delegate: LanguageDelegate?
     var callbackAction = SKAction.runBlock {}
+    var numberOfMoves = 11
     let timePerMoveMovement: NSTimeInterval = 0.5
 
     required init(type: MapUnitType = .Agent) {

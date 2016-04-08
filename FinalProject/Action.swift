@@ -13,4 +13,5 @@ enum Action {
     case Forward
     case RotateLeft
     case RotateRight
+    case Jump
 }

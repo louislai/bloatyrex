@@ -20,6 +20,8 @@ struct PlayingMapSceneConstants {
         static let reset = "rewind"
         static let back = "back"
     }
+    static let buttonYPosition = CGFloat(-334)
+    static let buttonDimension = CGFloat(60)
 }
 
 class PlayingMapScene: StaticMapScene {
@@ -36,8 +38,8 @@ class PlayingMapScene: StaticMapScene {
 
     var buttonSize: CGSize {
         return CGSize(
-            width: GlobalConstants.Dimension.blockWidth*1.5,
-            height: GlobalConstants.Dimension.blockHeight*1.5
+            width: PlayingMapSceneConstants.buttonDimension,
+            height: PlayingMapSceneConstants.buttonDimension
         )
     }
     lazy var playLabel: SKSpriteNode = {
@@ -135,7 +137,7 @@ class PlayingMapScene: StaticMapScene {
         playButton.addTarget(self, selector: #selector(PlayingMapScene.toggleRun))
         playButton.position = CGPoint(
             x: 0.0,
-            y: -300.0
+            y: PlayingMapSceneConstants.buttonYPosition
         )
         addNodeToOverlay(playButton)
 
@@ -146,7 +148,7 @@ class PlayingMapScene: StaticMapScene {
         resetButton.addTarget(self, selector: #selector(PlayingMapScene.reset))
         resetButton.position = CGPoint(
             x: 80.0,
-            y: -300.0
+            y: PlayingMapSceneConstants.buttonYPosition
         )
         addNodeToOverlay(resetButton)
     }
@@ -193,7 +195,6 @@ class PlayingMapScene: StaticMapScene {
             if let result = agentNode.runNextAction() {
                 if result {
                     agentNode.runWinningAnimation()
-                    gameWon = true
                 } else {
                     agentNode.runLosingAnimation()
                     shouldWin = false
