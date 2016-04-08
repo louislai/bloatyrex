@@ -191,12 +191,19 @@ class PannableScene: SKScene {
                 } else {
                     verticalZoomLocation = min(verticalZoomLocation, self.size.height / 2)
                 }
-                let boundedZoomLocation = CGPoint(x: horizontalZoomLocation, y: verticalZoomLocation)
+                let boundedZoomLocation = CGPoint(x: horizontalZoomLocation,
+                                                  y: verticalZoomLocation)
                 viewpoint.position = boundedZoomLocation
                 var newScale = viewpoint.xScale * 0.5
 
                 // restrict the maximum zoom
                 newScale = max(newScale, minimumScale)
+
+                // zoom out if already at maximum zoom
+                if viewpoint.xScale == minimumScale {
+                    newScale = initialScale
+                }
+
                 viewpoint.setScale(newScale)
             }
         }
