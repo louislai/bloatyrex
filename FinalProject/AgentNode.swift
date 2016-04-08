@@ -100,26 +100,60 @@ class AgentNode: MapUnitNode {
     /// Return true if push causes the agent to reach the goal
     /// Return nil if undecided
     func push() -> Bool? {
+        let widthCorrection: CGFloat = 0.0
         guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
             return nil
         }
         guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2) else {
             return nil
         }
-        guard isReachableUnit(nextNextUnit) else {
+        guard nextNextUnit.type == .EmptySpace else {
             return nil
         }
         let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
         let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
         let agentCurrentPoint = mapNode.pointFor(row, column: column)
         let contactPoint = CGPoint(
-            x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
-            y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
+            x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0 - widthCorrection,
+            y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0 - widthCorrection
         )
-        let moveToContactPointAction = SKAction.moveTo(
+        let agentMoveToContactPointAction = SKAction.moveTo(
             contactPoint,
             duration: timePerMoveMovement * 0.5
         )
+        let nextContactPoint = CGPoint(
+            x: contactPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
+            y: contactPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
+        )
+        let agentPushAction = SKAction.moveTo(
+            nextContactPoint,
+            duration: timePerMoveMovement
+        )
+        let agentRetreatAction = SKAction.moveTo(agentTargetPoint, duration: timePerMoveMovement * 0.5)
+        let allAgentActions = SKAction.sequence(
+            [
+                agentMoveToContactPointAction,
+                agentPushAction,
+                agentRetreatAction
+            ]
+        )
+
+        let blockPushAction = SKAction.moveTo(woodenBlockTargetPoint, duration: timePerMoveMovement)
+        let allBlockActions = SKAction.sequence(
+            [
+                SKAction.waitForDuration(timePerMoveMovement*0.5),
+                blockPushAction
+            ]
+        )
+        runAction(allAgentActions)
+        nextUnit.runAction(allBlockActions)
+
+        // Change map
+        mapNode.map.clearMapUnitAt(row, column: column)
+        mapNode.map.setMapUnitAt(nextUnit, row: nextNextRow, column: nextNextColumn)
+        row = nextRow
+        column = nextColumn
+        mapNode.map.setMapUnitAt(self, row: row, column: column)
         return nil
     }
 
