@@ -15,6 +15,10 @@ enum MapUnitType: Int {
     case Goal
     case Hole
     case WoodenBlock
+    case Monster
+    case Signboard
+    case Door
+    case Key
 
     var texture: SKTexture {
         let textures = [
