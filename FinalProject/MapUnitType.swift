@@ -16,7 +16,6 @@ enum MapUnitType: Int {
     case Hole
     case WoodenBlock
 
-
     var texture: SKTexture {
         let textures = [
             TextureManager.retrieveTexture("space"),

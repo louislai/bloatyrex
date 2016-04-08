@@ -148,7 +148,10 @@ class AgentNode: MapUnitNode {
         guard let nextUnit = unit else {
             return nil
         }
-        guard nextUnit.type != .Agent && nextUnit.type != .Wall else {
+
+        let invalidTypes: [MapUnitType] = [.Agent, .Wall, .Hole]
+
+        guard !invalidTypes.contains(nextUnit.type) else {
             return nil
         }
         return (row: nextRow, column: nextColumn, unit: nextUnit)
