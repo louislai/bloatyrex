@@ -20,7 +20,6 @@ enum MapUnitType: Int {
     case Door
     case Key
 
-
     var texture: SKTexture {
         let textures = [
             TextureManager.retrieveTexture("space"),
