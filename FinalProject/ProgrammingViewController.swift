@@ -9,27 +9,28 @@
 import UIKit
 
 class ProgrammingViewController: UIViewController {
+    var delegate: FinishedEditingProgramDelegate!
     var map: Map!
-    var programSupplier: ProgramSupplier!
-    var storedProgram: Program!
+    var programBlocksSupplier: ProgramBlocksSupplier!
+    var storedProgramBlocks: ProgramBlocks!
 
     @IBAction func zoomButtonPressed(sender: UIButton) {
-        storedProgram = programSupplier.retrieveProgram()
-        programSupplier = nil
-        dismissViewControllerAnimated(false, completion: nil)
+        storedProgramBlocks = programBlocksSupplier.retrieveProgramBlocks()
+        programBlocksSupplier = nil
+        delegate.finishedEditing(self)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? ThumbnailPlayingMapViewController {
             destination.map = map
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
-            programSupplier = destination
+            programBlocksSupplier = destination
         }
     }
 }
 
-extension ProgrammingViewController: ProgramSupplier {
-    func retrieveProgram() -> Program? {
-        return storedProgram
+extension ProgrammingViewController: ProgramBlocksSupplier {
+    func retrieveProgramBlocks() -> ProgramBlocks {
+        return storedProgramBlocks
     }
 }

@@ -36,6 +36,8 @@
 		1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0961C9927170010F727 /* InsertionPosition.swift */; };
 		1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */; };
 		1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */; };
+		3D1592671CBACA46009E8559 /* ProgramBlocksSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */; };
+		3D15926A1CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */; };
 		3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21216A1C9A55F000E6564B /* PannableScene.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
@@ -124,6 +126,8 @@
 		1DB4B0961C9927170010F727 /* InsertionPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertionPosition.swift; sourceTree = "<group>"; };
 		1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ForwardBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TurnLeftBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramBlocksSupplier.swift; sourceTree = "<group>"; };
+		3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedEditingProgramDelegate.swift; sourceTree = "<group>"; };
 		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PannableScene.swift; path = FinalProject/PannableScene.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +209,14 @@
 			name = Language;
 			sourceTree = "<group>";
 		};
+		3D1592681CBACD10009E8559 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +224,7 @@
 				BF49FA501CA61ACF00546F43 /* Constants.swift */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,
 				BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */,
+				3D1592681CBACD10009E8559 /* Delegates */,
 				3DF230A01C8F0617003420C0 /* FinalProject */,
 				3DF230B51C8F0617003420C0 /* FinalProjectTests */,
 				3DF230C01C8F0617003420C0 /* FinalProjectUITests */,
@@ -383,6 +396,7 @@
 				BF5339C41C941134007F56F0 /* LanguageDelegate.swift */,
 				1DB4B0841C951E250010F727 /* AgentProtocol.swift */,
 				BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */,
+				3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -547,6 +561,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D1592671CBACA46009E8559 /* ProgramBlocksSupplier.swift in Sources */,
 				BFB045CE1CB4C418009F21EF /* MapUnitNode.swift in Sources */,
 				BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */,
 				BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */,
@@ -578,6 +593,7 @@
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
 				BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */,
 				1D934FE71CAD6AC0009F1FBA /* WhileBlock.swift in Sources */,
+				3D15926A1CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift in Sources */,
 				BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */,
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
 				1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */,

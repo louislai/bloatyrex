@@ -11,6 +11,8 @@ import UIKit
 class PlayingViewController: UIViewController {
     var map: Map!
     var programSupplier: ProgramSupplier!
+    var programBlocksSupplier: ProgramBlocksSupplier!
+    var codeBlocksDisplay: CodeBlocksViewController!
     @IBOutlet var winningScreen: UIView!
 
     override func viewDidLoad() {
@@ -28,10 +30,12 @@ class PlayingViewController: UIViewController {
             destination.map = map
             destination.programSupplier = self
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
-
-        } else if let destination = segue.destinationViewController as? ProgrammingViewController {
-            destination.map = map.copy() as! Map
+            codeBlocksDisplay = destination
             programSupplier = destination
+        } else if let destination = segue.destinationViewController as? ProgrammingViewController {
+            destination.delegate = self
+            destination.map = map.copy() as! Map
+            programBlocksSupplier = destination
         }
     }
 
@@ -76,5 +80,14 @@ class PlayingViewController: UIViewController {
 extension PlayingViewController: ProgramSupplier {
     func retrieveProgram() -> Program? {
         return programSupplier.retrieveProgram()
+    }
+}
+
+// MARK: - FinishedEditingProgramDelegate
+extension PlayingViewController:FinishedEditingProgramDelegate {
+    func finishedEditing(controller: ProgrammingViewController) {
+        let programBlocksToDisplay = controller.storedProgramBlocks
+        controller.dismissViewControllerAnimated(true, completion: nil)
+        codeBlocksDisplay.scene.setProgramBlocks(programBlocksToDisplay)
     }
 }

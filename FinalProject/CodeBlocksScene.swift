@@ -26,7 +26,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.Wall, blockCategory: BlockCategory.Object)
     let woodButton = BlockButton(imageNamed: "wooden-block", blockType: BlockType.Wood, blockCategory: BlockCategory.Object)
     let ifButton = BlockButton(imageNamed: "trash", blockType: BlockType.If, blockCategory: BlockCategory.Action)
-    let programBlocks = ProgramBlocks()
+    private var programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: MovableBlockProtocol?
     var pressState = PressState.Idle
@@ -35,6 +35,18 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
 
     func retrieveProgram() -> Program? {
         return programBlocks.getCode()
+    }
+
+    func getProgramBlocks() -> ProgramBlocks {
+        return programBlocks
+    }
+
+    func setProgramBlocks(blocks: ProgramBlocks) {
+        programBlocks.removeFromParent()
+        programBlocks = blocks
+        programBlocks.removeFromParent()
+        programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
+        addNodeToContent(programBlocks)
     }
     
     override func didMoveToView(view: SKView) {

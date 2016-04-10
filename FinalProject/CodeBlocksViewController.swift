@@ -36,3 +36,9 @@ extension CodeBlocksViewController: ProgramSupplier {
         return scene.retrieveProgram()
     }
 }
+
+extension CodeBlocksViewController: ProgramBlocksSupplier {
+    func retrieveProgramBlocks() -> ProgramBlocks {
+        return scene.getProgramBlocks()
+    }
+}
