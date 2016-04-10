@@ -41,7 +41,7 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         }
     }
     
-    func getBlock(location: CGPoint) -> CodeBlock? {
+    func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
         let correctedLocation = CGPoint(x: x, y: y)

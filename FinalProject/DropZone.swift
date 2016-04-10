@@ -158,4 +158,27 @@ class DropZone: SKNode {
             return objectBlock?.getMapUnit()
         }
     }
+    
+    func getBlock(location: CGPoint) -> MovableBlockProtocol? {
+        let correctedX = location.x - self.position.x
+        let correctedY = location.y - self.position.y
+        let updatedLocation = CGPoint(x: correctedX, y: correctedY)
+        switch category {
+        case .Action:
+            return nil
+        case .BoolOp:
+            if let block = boolOpBlock {
+                if block.containsPoint(updatedLocation) {
+                    return block.getBlock(updatedLocation)
+                }
+            }
+        case .Object:
+            if let block = objectBlock {
+                if block.containsPoint(updatedLocation) {
+                    return objectBlock!
+                }
+            }
+        }
+        return nil
+    }
 }

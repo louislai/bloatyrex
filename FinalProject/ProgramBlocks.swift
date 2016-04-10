@@ -21,20 +21,17 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
     override init() {
         super.init()
         blocks.append(MainBlock(containingBlock: self))
-        trash.position = CGPoint(x: 300, y: -400)
+        trash.position = CGPoint(x: 100, y: -400)
         self.addChild(trash)
         self.addChild(blocks[0])
     }
 
     func hover(location: CGPoint, category: BlockCategory, insertionHandler: InsertionPosition) {
-        let x = location.x - self.position.x
-        let y = location.y - self.position.y
-        let point = CGPoint(x: x, y: y)
 
         insertionHandler.position = nil
         insertionHandler.container = nil
 
-        selectClosestDropZone(point, dropZoneCategory: category, insertionHandler: insertionHandler)
+        selectClosestDropZone(location, dropZoneCategory: category, insertionHandler: insertionHandler)
     }
     
     func selectClosestDropZone(location: CGPoint,
@@ -43,6 +40,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         var closestDistance = CGFloat.max
         var closestDropZone = blocks[0].actionZones[0]
         trash.unfocus()
+        print("here")
         for block in blocks {
             block.unfocus()
             let zones: [DropZone]
@@ -55,9 +53,10 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
                 zones = block.objectDropZones
             }
             for zone in zones {
-                let frame = zone.frame
+                let frame = zone.calculateAccumulatedFrame()
                 let center = CGPoint(x: frame.midX, y: frame.midY)
                 let zonePoint = zone.convertPoint(center, toNode: self)
+                print(zonePoint)
                 let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
                     + pow((Float)(zonePoint.y - location.y), 2)))
                 if distance < closestDistance {
@@ -99,7 +98,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         }
     }
 
-    func getBlock(location: CGPoint) -> CodeBlock? {
+    func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
         let correctedLocation = CGPoint(x: x, y: y)

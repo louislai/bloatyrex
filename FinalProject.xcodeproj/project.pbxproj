@@ -18,6 +18,7 @@
 		1D69B6DE1CB6A15C00C1FA04 /* HoleBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6DD1CB6A15C00C1FA04 /* HoleBlock.swift */; };
 		1D69B6E01CB6A1D900C1FA04 /* WoodBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6DF1CB6A1D900C1FA04 /* WoodBlock.swift */; };
 		1D69B6E21CB6B37E00C1FA04 /* IfBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6E11CB6B37E00C1FA04 /* IfBlock.swift */; };
+		1D69B6E41CB9FF3900C1FA04 /* MovableBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6E31CB9FF3900C1FA04 /* MovableBlockProtocol.swift */; };
 		1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D61C9984F6003E7B75 /* TrashZone.swift */; };
 		1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */; };
 		1D934FE71CAD6AC0009F1FBA /* WhileBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */; };
@@ -105,6 +106,7 @@
 		1D69B6DD1CB6A15C00C1FA04 /* HoleBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoleBlock.swift; sourceTree = "<group>"; };
 		1D69B6DF1CB6A1D900C1FA04 /* WoodBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoodBlock.swift; sourceTree = "<group>"; };
 		1D69B6E11CB6B37E00C1FA04 /* IfBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IfBlock.swift; sourceTree = "<group>"; };
+		1D69B6E31CB9FF3900C1FA04 /* MovableBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovableBlockProtocol.swift; sourceTree = "<group>"; };
 		1D7E23D61C9984F6003E7B75 /* TrashZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TrashZone.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnRightBlock.swift; sourceTree = "<group>"; };
 		1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhileBlock.swift; sourceTree = "<group>"; };
@@ -329,9 +331,9 @@
 				1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */,
 				1DB4B0881C97FC840010F727 /* CodeBlocksViewController.swift */,
 				1DB4B08A1C97FD940010F727 /* CodeBlocksScene.swift */,
+				1DB4B0901C991F260010F727 /* ProgramBlocks.swift */,
 				1D7E23D61C9984F6003E7B75 /* TrashZone.swift */,
 				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
-				1DB4B0901C991F260010F727 /* ProgramBlocks.swift */,
 				1DB4B0921C991FC30010F727 /* CodeBlock.swift */,
 				1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */,
 				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
@@ -341,6 +343,7 @@
 				1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */,
 				1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */,
 				1D69B6D71CB5583600C1FA04 /* ObjectBlock.swift */,
+				1D69B6E31CB9FF3900C1FA04 /* MovableBlockProtocol.swift */,
 				1D69B6DD1CB6A15C00C1FA04 /* HoleBlock.swift */,
 				1D69B6DF1CB6A1D900C1FA04 /* WoodBlock.swift */,
 				1D69B6DB1CB6A0BE00C1FA04 /* WallBlock.swift */,
@@ -550,6 +553,7 @@
 				BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */,
 				1D69B6E21CB6B37E00C1FA04 /* IfBlock.swift in Sources */,
 				1DB4B08F1C9913C00010F727 /* BlockButton.swift in Sources */,
+				1D69B6E41CB9FF3900C1FA04 /* MovableBlockProtocol.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
 				BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */,

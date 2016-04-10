@@ -28,7 +28,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let ifButton = BlockButton(imageNamed: "trash", blockType: BlockType.If, blockCategory: BlockCategory.Action)
     let programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
-    var movedBlock: CodeBlock?
+    var movedBlock: MovableBlockProtocol?
     var pressState = PressState.Idle
 
     let insertionPosition = InsertionPosition()
@@ -125,6 +125,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first! as UITouch
         let touchLocation = touch.locationInNode(self)
+        let updatedLocation = programBlocks.convertPoint(touchLocation, fromNode: self)
         let previousLocation = touch.previousLocationInNode(self)
         let xMovement = touchLocation.x - previousLocation.x
         let yMovement = touchLocation.y - previousLocation.y
@@ -134,7 +135,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
-                    programBlocks.hover(touchLocation, category: category, insertionHandler: insertionPosition)
+                    programBlocks.hover(updatedLocation, category: category, insertionHandler: insertionPosition)
                 }
             }
         case .MovingBlock:
@@ -145,7 +146,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     block.position.x += xMovement
                     block.position.y += yMovement
                     if programBlocks.containsPoint(touchLocation) {
-                        programBlocks.hover(touchLocation, category: BlockCategory.Action, insertionHandler: insertionPosition)
+                        programBlocks.hover(updatedLocation, category: BlockCategory.Action, insertionHandler: insertionPosition)
                     }
                 }
             }
@@ -214,7 +215,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                             if block.containingBlock === container && position > block.blockPosition {
                                 insertionPosition.position = position - 1
                             }
-                            container.insertBlock(block, insertionPosition: insertionPosition)
+                            if let codeBlock = block as? CodeBlock {
+                                container.insertBlock(codeBlock, insertionPosition: insertionPosition)
+                            }
                         }
                     }
                 }

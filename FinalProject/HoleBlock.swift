@@ -11,11 +11,11 @@ import SpriteKit
 class HoleBlock: ObjectBlock {
     let blockBody: SKSpriteNode
     
-    init(containingBlock: ContainerBlockProtocol) {
+    override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "hole")
         blockBody.size = CGSize(width: 64, height: 64)
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
-        super.init()
+        super.init(containingBlock: containingBlock)
         addChild(blockBody)
     }
     

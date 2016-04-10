@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class CodeBlock: SKNode {
+class CodeBlock: SKNode, MovableBlockProtocol {
     static let dropZoneSize: CGFloat = 10
 
     private var containingBlockValue: ContainerBlockProtocol
@@ -115,7 +115,7 @@ class CodeBlock: SKNode {
         return
     }
     
-    func getBlock(location: CGPoint) -> CodeBlock? {
+    func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         return self
     }
 

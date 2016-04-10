@@ -24,14 +24,24 @@ class SeeBlock: BoolOpBlock {
         }
     }
     
-    init(containingBlock: ContainerBlockProtocol) {
+    override func getBlock(location: CGPoint) -> MovableBlockProtocol? {
+        let updatedX = location.x - self.position.x
+        let updatedY = location.y - self.position.y
+        let updatedLocation = CGPoint(x: updatedX, y: updatedY)
+        if objectDropZone.containsPoint(updatedLocation) {
+            return objectDropZone.getBlock(updatedLocation)
+        }
+        return self
+    }
+    
+    override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "eyes")
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
         objectDropZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: blockBody.size.height),
                                   dropZoneCategory: BlockCategory.Object,
                                   containingBlock: containingBlock)
         objectDropZone.position = CGPoint(x: blockBody.size.width, y: 0)
-        super.init()
+        super.init(containingBlock: containingBlock)
         addChild(blockBody)
         addChild(objectDropZone)
     }

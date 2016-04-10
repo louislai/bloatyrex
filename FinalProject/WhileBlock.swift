@@ -130,12 +130,14 @@ class WhileBlock: CodeBlock {
         nestedBlocks.unfocus()
     }
     
-    override func getBlock(location: CGPoint) -> CodeBlock? {
+    override func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let xLocation = location.x - self.position.x
         let yLocation = location.y - self.position.y
         let correctedLocation = CGPoint(x: xLocation, y: yLocation)
         if nestedBlocks.containsPoint(correctedLocation) {
             return nestedBlocks.getBlock(correctedLocation)
+        } else if boolOpZone.containsPoint(correctedLocation) {
+            return boolOpZone.getBlock(correctedLocation)
         } else {
             return self
         }
