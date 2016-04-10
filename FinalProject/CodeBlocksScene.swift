@@ -46,7 +46,11 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         programBlocks.removeFromParent()
         programBlocks = blocks
         programBlocks.removeFromParent()
-        programBlocks.position = CGPoint(x: size.width * 0.6, y: size.height * 0.9)
+        if editEnabled {
+            programBlocks.position = CGPoint(x: size.width * 0.6, y: size.height * 0.9)
+        } else {
+            programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height * 0.9)
+        }
         addNodeToContent(programBlocks)
     }
     
@@ -78,7 +82,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             addNodeToOverlay(turnRightButton)
             addNodeToOverlay(ifButton)
         }
-        programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
+        programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height * 0.9)
         addNodeToContent(programBlocks)
     }
 
