@@ -174,17 +174,10 @@ class PannableScene: SKScene {
                 let distanceToBottomBoundaryOfContent = contentFrame.height
                     - viewpoint.position.y
                 let distanceToBottomBoundary = self.size.height - viewpoint.position.y
-                print("distance to bottom boundary: \(distanceToBottomBoundary)")
-                print("distance to bottom boundary of content: \(distanceToBottomBoundaryOfContent)")
-                print("viewpoint y position: \(viewpoint.position.y)")
-                print("content size: \(content.frame.height)")
-                //distanceToBottomBoundary = min(distanceToBottomBoundary,
-                //                               distanceToBottomBoundaryOfContent)
-                //distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
                 var distanceToViewContentBottom = distanceToBottomBoundaryOfContent -
                     distanceToBottomBoundary
                 distanceToViewContentBottom = max(distanceToViewContentBottom, 0)
-                var minimumAllowedVerticalViewpointPosition = self.size.height / 2 -
+                var minimumAllowedVerticalViewpointPosition = originalViewpointPosition.y -
                     distanceToViewContentBottom
                 if distanceToViewContentBottom > 0 {
                     minimumAllowedVerticalViewpointPosition -= 50
@@ -197,7 +190,7 @@ class PannableScene: SKScene {
 
                 verticalDisplacement = min(-minimumAllowedVerticalViewpointDisplacement, verticalDisplacement)
             } else if verticalDisplacement < 0 {
-                var distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
+                let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
 
                 verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
             }
