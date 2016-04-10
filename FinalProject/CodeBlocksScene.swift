@@ -81,6 +81,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             addNodeToOverlay(eyesButton)
             addNodeToOverlay(turnRightButton)
             addNodeToOverlay(ifButton)
+            programBlocks.revealTrash()
+        } else {
+            programBlocks.hideTrash()
         }
         programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height * 0.9)
         addNodeToContent(programBlocks)

@@ -89,6 +89,7 @@ extension PlayingViewController: ProgramSupplier {
 extension PlayingViewController:FinishedEditingProgramDelegate {
     func finishedEditing(controller: ProgrammingViewController) {
         let programBlocksToDisplay = controller.storedProgramBlocks
+        programBlocksToDisplay.hideTrash()
         controller.dismissViewControllerAnimated(true, completion: nil)
         codeBlocksDisplay.scene.setProgramBlocks(programBlocksToDisplay)
     }

@@ -25,6 +25,7 @@ class ProgrammingViewController: UIViewController {
             destination.map = map
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             destination.editEnabled = true
+            storedProgramBlocks.revealTrash()
             destination.programBlocksToLoad = storedProgramBlocks
             programBlocksSupplier = destination
         }

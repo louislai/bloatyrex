@@ -26,6 +26,14 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         self.addChild(blocks[0])
     }
 
+    func hideTrash() {
+        trash.alpha = 0
+    }
+
+    func revealTrash() {
+        trash.alpha = 1
+    }
+
     func hover(location: CGPoint, category: BlockCategory, insertionHandler: InsertionPosition) {
 
         insertionHandler.position = nil
