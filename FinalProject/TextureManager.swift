@@ -21,37 +21,37 @@ class TextureManager {
     }
     static let agentUpTexture = SKTexture(
         rect: CGRect(
-            x: 0.333,
-            y: 0,
-            width: 0.333,
-            height: 0.25
+            x: 43.0/521.0,
+            y: 48.0/175.0,
+            width: 21.0/521.0,
+            height: 39.0/175.0
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
     static let agentRightTexture = SKTexture(
         rect: CGRect(
-            x: 0.333,
-            y: 0.25,
-            width: 0.333,
-            height: 0.25
+            x: 176.0/521.0,
+            y: 87.0/175.0,
+            width: 25.0/521.0,
+            height: 39.0/175.0
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
     static let agentLeftTexture = SKTexture(
         rect: CGRect(
-            x: 0.333,
-            y: 0.5,
-            width: 0.333,
-            height: 0.25
+            x: 175.0/521.0,
+            y: 45.0/175.0,
+            width: 25.0/521.0,
+            height: 39.0/175.0
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
     static let agentDownTexture = SKTexture(
         rect: CGRect(
-            x: 0.333,
-            y: 0.75,
-            width: 0.333,
-            height: 0.25
+            x: 43.0/521.0,
+            y: 88.0/175.0,
+            width: 21.0/521.0,
+            height: 39.0/175.0
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
