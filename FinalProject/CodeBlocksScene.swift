@@ -30,6 +30,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     var heldBlock: BlockButton?
     var movedBlock: MovableBlockProtocol?
     var pressState = PressState.Idle
+    var editEnabled = false
 
     let insertionPosition = InsertionPosition()
 
@@ -45,39 +46,46 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         programBlocks.removeFromParent()
         programBlocks = blocks
         programBlocks.removeFromParent()
+        programBlocks.position = CGPoint(x: size.width * 0.6, y: size.height * 0.9)
         addNodeToContent(programBlocks)
     }
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
-        upButton.position = CGPoint(x: size.width * -0.1, y: size.height * 0.3)
-        turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
-        turnRightButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
-        whileButton.position = CGPoint(x: size.width * -0.1, y: size.height * 0.1)
-        ifButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
-        eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
-        toiletButton.position = CGPoint(x: size.width * -0.1, y: size.height * -0.1)
-        wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
-        holeButton.position = CGPoint(x: size.width * -0.1, y: size.height * -0.2)
-        woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
+
+        if editEnabled {
+            upButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.3)
+            turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
+            turnRightButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
+            whileButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.1)
+            ifButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
+            eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
+            toiletButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.1)
+            wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
+            holeButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.2)
+            woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
+            turnLeftButton.zPosition = 10
+            upButton.zPosition = 10
+            addNodeToOverlay(toiletButton)
+            addNodeToOverlay(wallButton)
+            addNodeToOverlay(holeButton)
+            addNodeToOverlay(woodButton)
+            addNodeToOverlay(turnLeftButton)
+            addNodeToOverlay(whileButton)
+            addNodeToOverlay(upButton)
+            addNodeToOverlay(eyesButton)
+            addNodeToOverlay(turnRightButton)
+            addNodeToOverlay(ifButton)
+        }
         programBlocks.position = CGPoint(x: size.width * 0.5, y: size.height * 0.9)
-        turnLeftButton.zPosition = 10
-        upButton.zPosition = 10
-        addNodeToOverlay(toiletButton)
-        addNodeToOverlay(wallButton)
-        addNodeToOverlay(holeButton)
-        addNodeToOverlay(woodButton)
-        addNodeToOverlay(turnLeftButton)
-        addNodeToOverlay(whileButton)
-        addNodeToOverlay(upButton)
-        addNodeToOverlay(eyesButton)
-        addNodeToOverlay(turnRightButton)
-        addNodeToOverlay(ifButton)
         addNodeToContent(programBlocks)
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if !editEnabled {
+            return
+        }
         let touch = touches.first! as UITouch
         let locationInOverlay = touch.locationInNode(overlay)
         let locationInContent = touch.locationInNode(content)
@@ -134,6 +142,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     }
 
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if !editEnabled {
+            return
+        }
         let touch = touches.first! as UITouch
         let touchLocation = touch.locationInNode(self)
         let previousLocation = touch.previousLocationInNode(self)
@@ -166,6 +177,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if !editEnabled {
+            return
+        }
         switch pressState {
         case .AddingBlock:
             if let block = heldBlock {

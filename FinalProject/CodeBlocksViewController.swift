@@ -13,6 +13,7 @@ class CodeBlocksViewController: UIViewController {
 
     var scene: CodeBlocksScene!
     var programBlocksToLoad: ProgramBlocks?
+    var editEnabled: Bool!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -22,6 +23,7 @@ class CodeBlocksViewController: UIViewController {
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .ResizeFill
+        scene.editEnabled = editEnabled
         skView.presentScene(scene)
 
         if let programBlocksToLoad = programBlocksToLoad {

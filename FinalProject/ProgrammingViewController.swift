@@ -24,6 +24,7 @@ class ProgrammingViewController: UIViewController {
         if let destination = segue.destinationViewController as? ThumbnailPlayingMapViewController {
             destination.map = map
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
+            destination.editEnabled = true
             destination.programBlocksToLoad = storedProgramBlocks
             programBlocksSupplier = destination
         }

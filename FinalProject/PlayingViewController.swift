@@ -30,6 +30,7 @@ class PlayingViewController: UIViewController {
             destination.map = map
             destination.programSupplier = self
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
+            destination.editEnabled = false
             codeBlocksDisplay = destination
             programSupplier = destination
             displayedProgramBlocksSupplier = destination
