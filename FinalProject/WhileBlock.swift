@@ -83,6 +83,7 @@ class WhileBlock: CodeBlock {
     }
     
     override func flushBlocks() {
+        nestedBlocks.flushBlocks()
         if nestedBlocks.count > 0 {
             let nestedBlocksFrame = nestedBlocks.calculateAccumulatedFrame()
             nestedBlocks.position.x = nestingDepth

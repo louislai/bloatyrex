@@ -125,7 +125,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first! as UITouch
         let touchLocation = touch.locationInNode(self)
-        let updatedLocation = programBlocks.convertPoint(touchLocation, fromNode: self)
         let previousLocation = touch.previousLocationInNode(self)
         let xMovement = touchLocation.x - previousLocation.x
         let yMovement = touchLocation.y - previousLocation.y
@@ -135,7 +134,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             if let block = heldBlock {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
-                    programBlocks.hover(updatedLocation, category: category, insertionHandler: insertionPosition)
+                    programBlocks.hover(touchLocation, category: category, insertionHandler: insertionPosition)
                 }
             }
         case .MovingBlock:
@@ -146,7 +145,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     block.position.x += xMovement
                     block.position.y += yMovement
                     if programBlocks.containsPoint(touchLocation) {
-                        programBlocks.hover(updatedLocation, category: block.category, insertionHandler: insertionPosition)
+                        programBlocks.hover(touchLocation, category: block.category, insertionHandler: insertionPosition)
                     }
                 }
             }

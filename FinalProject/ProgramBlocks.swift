@@ -37,10 +37,13 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
     func selectClosestDropZone(location: CGPoint,
                                dropZoneCategory: BlockCategory,
                                insertionHandler: InsertionPosition) {
+        let updatedX = location.x - self.position.x
+        let updatedY = location.y - self.position.y
+        let location = CGPoint(x: updatedX, y: updatedY)
         var closestDistance = CGFloat.max
         var closestDropZone = blocks[0].actionZones[0]
         trash.unfocus()
-        print("here")
+        print("set")
         for block in blocks {
             block.unfocus()
             let zones: [DropZone]
@@ -55,8 +58,10 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
             for zone in zones {
                 zone.displayNormal()
                 let frame = zone.calculateAccumulatedFrame()
-                let center = CGPoint(x: frame.midX, y: frame.midY)
-                let zonePoint = zone.convertPoint(center, toNode: self)
+                let center = CGPoint(x: frame.width/2, y: frame.height/2)
+                print("frame \(frame)")
+                print("center \(center)")
+                let zonePoint = self.convertPoint(center, fromNode: zone)
                 print(zonePoint)
                 let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
                     + pow((Float)(zonePoint.y - location.y), 2)))

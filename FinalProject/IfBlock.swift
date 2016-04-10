@@ -109,6 +109,8 @@ class IfBlock: CodeBlock {
     }
     
     override func flushBlocks() {
+        ifTrueBlock.flushBlocks()
+        elseBlock.flushBlocks()
         if ifTrueBlock.count > 0 || elseBlock.count > 0 {
             let nestedBlocksFrame = ifTrueBlock.calculateAccumulatedFrame()
             let elseBlockFrame = elseBlock.calculateAccumulatedFrame()

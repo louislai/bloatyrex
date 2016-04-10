@@ -18,7 +18,7 @@ class NestingZone: SKNode, ContainerBlockProtocol {
     
     var dropZones: [DropZone] {
         get {
-            return blocks.map { $0.dropZone }
+            return blocks.flatMap { $0.actionZones }
         }
     }
     
@@ -83,12 +83,13 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         }
     }
     
-    private func flushBlocks() {
+    func flushBlocks() {
         var yPos: CGFloat = 0
         let xPos: CGFloat = 0
         for (i, block) in blocks.enumerate() {
             block.blockPosition = i + 1
             block.position.x = xPos
+            block.flushBlocks()
             yPos -= block.calculateAccumulatedFrame().height
             block.position.y = yPos
         }
