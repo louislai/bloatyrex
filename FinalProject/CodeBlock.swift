@@ -10,6 +10,7 @@ import SpriteKit
 
 class CodeBlock: SKNode, MovableBlockProtocol {
     static let dropZoneSize: CGFloat = 10
+    let category = BlockCategory.Action
 
     private var containingBlockValue: ContainerBlockProtocol
     var containingBlock: ContainerBlockProtocol {

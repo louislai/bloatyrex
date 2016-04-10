@@ -110,6 +110,7 @@ class DropZone: SKNode {
         normal.hidden = true
         hover.hidden = true
         activated = false
+        block.position = CGPoint(x: 0, y: 0)
         self.addChild(block)
     }
     
@@ -118,6 +119,7 @@ class DropZone: SKNode {
         normal.hidden = true
         hover.hidden = true
         activated = false
+        block.position = CGPoint(x: 0, y: 0)
         self.addChild(block)
     }
     
@@ -135,6 +137,18 @@ class DropZone: SKNode {
             insertionPosition.zone = self
             insertionPosition.container = self.containingBlock
         }
+    }
+    
+    func removeBoolOp() {
+        normal.hidden = false
+        activated = true
+        boolOpBlock = nil
+    }
+    
+    func removeObject() {
+        normal.hidden = false
+        activated = true
+        objectBlock = nil
     }
     
     func getBlockPredicate() -> Predicate? {
@@ -169,12 +183,14 @@ class DropZone: SKNode {
         case .BoolOp:
             if let block = boolOpBlock {
                 if block.containsPoint(updatedLocation) {
+                    self.activated = true
                     return block.getBlock(updatedLocation)
                 }
             }
         case .Object:
             if let block = objectBlock {
                 if block.containsPoint(updatedLocation) {
+                    self.activated = true
                     return objectBlock!
                 }
             }

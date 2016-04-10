@@ -32,6 +32,9 @@ class TrashZone: DropZone {
 
     override func focus(insertionHandler: InsertionPosition) {
         insertionHandler.trash = true
+        insertionHandler.category = nil
+        insertionHandler.container = nil
+        insertionHandler.zone = nil
         self.displayHover()
     }
 

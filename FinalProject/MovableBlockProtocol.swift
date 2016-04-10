@@ -15,6 +15,8 @@ protocol MovableBlockProtocol: class {
     
     var blockPosition: Int { get }
     
+    var category: BlockCategory { get }
+    
     func deactivateDropZone()
     
     func activateDropZone()

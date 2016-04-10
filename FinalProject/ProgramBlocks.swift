@@ -53,6 +53,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
                 zones = block.objectDropZones
             }
             for zone in zones {
+                zone.displayNormal()
                 let frame = zone.calculateAccumulatedFrame()
                 let center = CGPoint(x: frame.midX, y: frame.midY)
                 let zonePoint = zone.convertPoint(center, toNode: self)

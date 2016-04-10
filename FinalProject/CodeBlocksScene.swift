@@ -146,7 +146,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     block.position.x += xMovement
                     block.position.y += yMovement
                     if programBlocks.containsPoint(touchLocation) {
-                        programBlocks.hover(updatedLocation, category: BlockCategory.Action, insertionHandler: insertionPosition)
+                        programBlocks.hover(updatedLocation, category: block.category, insertionHandler: insertionPosition)
                     }
                 }
             }
@@ -175,23 +175,23 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         insertionContainer.insertBlock(IfBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .Eyes:
                         if let zone = insertionPosition.zone {
-                            zone.insertBlock(SeeBlock(containingBlock: insertionContainer))
+                            zone.insertBlock(SeeBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Toilet:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ToiletBlock(containingBlock: insertionContainer))
+                            zone.insertObjectBlock(ToiletBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Hole:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(HoleBlock(containingBlock: insertionContainer))
+                            zone.insertObjectBlock(HoleBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Wall:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(WallBlock(containingBlock: insertionContainer))
+                            zone.insertObjectBlock(WallBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Wood:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(WoodBlock(containingBlock: insertionContainer))
+                            zone.insertObjectBlock(WoodBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     default:
                         break
@@ -205,21 +205,41 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 if let _ = block as? MainBlock {
 
                 } else {
-                    block.activateDropZone()
-                    programBlocks.endHover()
-                    block.containingBlock.removeBlockAtIndex(block.blockPosition)
-                    block.removeFromParent()
-                    if let container = insertionPosition.container {
-                        block.containingBlock = container
-                        if let position = insertionPosition.position {
-                            if block.containingBlock === container && position > block.blockPosition {
-                                insertionPosition.position = position - 1
+                    switch block.category {
+                    case .Action:
+                        block.activateDropZone()
+                        programBlocks.endHover()
+                        block.containingBlock.removeBlockAtIndex(block.blockPosition)
+                        block.removeFromParent()
+                        if let container = insertionPosition.container {
+                            block.containingBlock = container
+                            if let position = insertionPosition.position {
+                                if block.containingBlock === container && position > block.blockPosition {
+                                    insertionPosition.position = position - 1
+                                }
+                                if let codeBlock = block as? CodeBlock {
+                                    container.insertBlock(codeBlock, insertionPosition: insertionPosition)
+                                }
                             }
-                            if let codeBlock = block as? CodeBlock {
-                                container.insertBlock(codeBlock, insertionPosition: insertionPosition)
+                        }
+                    case .BoolOp:
+                        if let boolOpBlock = block as? BoolOpBlock {
+                            boolOpBlock.containingZone.removeBoolOp()
+                            boolOpBlock.removeFromParent()
+                            if let zone = insertionPosition.zone {
+                                zone.insertBlock(boolOpBlock)
+                            }
+                        }
+                    case .Object:
+                        if let objectBlock = block as? ObjectBlock {
+                            objectBlock.containingZone.removeObject()
+                            objectBlock.removeFromParent()
+                            if let zone = insertionPosition.zone {
+                                zone.insertObjectBlock(objectBlock)
                             }
                         }
                     }
+                    
                 }
             }
             movedBlock = nil

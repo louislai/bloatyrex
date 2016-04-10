@@ -12,6 +12,8 @@ class BoolOpBlock: SKNode, MovableBlockProtocol {
     
     private var containingBlockValue: ContainerBlockProtocol
     var blockPosition = 0
+    var containingZone: DropZone
+    let category = BlockCategory.BoolOp
     
     var containingBlock: ContainerBlockProtocol {
         get {
@@ -47,8 +49,9 @@ class BoolOpBlock: SKNode, MovableBlockProtocol {
         return self
     }
     
-    init(containingBlock: ContainerBlockProtocol) {
+    init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
         self.containingBlockValue = containingBlock
+        self.containingZone = containingZone
         super.init()
     }
     

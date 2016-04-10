@@ -11,6 +11,8 @@ import SpriteKit
 class ObjectBlock: SKNode, MovableBlockProtocol {
     private var containingBlockValue: ContainerBlockProtocol
     var blockPosition = 0
+    var containingZone: DropZone
+    let category = BlockCategory.Object
     
     var containingBlock: ContainerBlockProtocol {
         get {
@@ -26,7 +28,8 @@ class ObjectBlock: SKNode, MovableBlockProtocol {
         return MapUnitType.EmptySpace
     }
     
-    init(containingBlock: ContainerBlockProtocol) {
+    init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
+        self.containingZone = containingZone
         self.containingBlockValue = containingBlock
         super.init()
     }

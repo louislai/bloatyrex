@@ -34,14 +34,14 @@ class SeeBlock: BoolOpBlock {
         return self
     }
     
-    override init(containingBlock: ContainerBlockProtocol) {
+    override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
         blockBody = SKSpriteNode(imageNamed: "eyes")
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
         objectDropZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: blockBody.size.height),
                                   dropZoneCategory: BlockCategory.Object,
                                   containingBlock: containingBlock)
         objectDropZone.position = CGPoint(x: blockBody.size.width, y: 0)
-        super.init(containingBlock: containingBlock)
+        super.init(containingBlock: containingBlock, containingZone: containingZone)
         addChild(blockBody)
         addChild(objectDropZone)
     }
