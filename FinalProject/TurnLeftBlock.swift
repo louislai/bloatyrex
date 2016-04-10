@@ -11,11 +11,11 @@ import SpriteKit
 class TurnLeftBlock: CodeBlock {
     let blockBody: SKSpriteNode
 
-    override init() {
+    override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "turn-left-block")
         blockBody.position = CGPoint(x: blockBody.size.width / 2,
             y: blockBody.size.height / 2 + CodeBlock.dropZoneSize)
-        super.init()
+        super.init(containingBlock: containingBlock)
         self.addChild(blockBody)
         self.resizeDropZone()
     }

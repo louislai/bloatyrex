@@ -8,49 +8,109 @@
 
 import SpriteKit
 
-class ProgramBlocks: SKNode {
+enum BlockCategory {
+    case Action
+    case BoolOp
+    case Object
+}
+
+class ProgramBlocks: SKNode, ContainerBlockProtocol {
     private var blocks = [CodeBlock]()
     private let trash = TrashZone()
 
     override init() {
         super.init()
-        blocks.append(MainBlock())
-        trash.position = CGPoint(x: 300, y: -400)
+        blocks.append(MainBlock(containingBlock: self))
+        trash.position = CGPoint(x: 100, y: -400)
         self.addChild(trash)
         self.addChild(blocks[0])
     }
 
-    func hover(location: CGPoint, insertionHandler: InsertionPosition) {
-        let x = location.x - self.position.x
-        let y = location.y - self.position.y
-        let point = CGPoint(x: x, y: y)
+    func hover(location: CGPoint, category: BlockCategory, insertionHandler: InsertionPosition) {
 
         insertionHandler.position = nil
+        insertionHandler.container = nil
 
-        selectClosestDropZone(point, insertionHandler: insertionHandler)
+        selectClosestDropZone(location, dropZoneCategory: category, insertionHandler: insertionHandler)
+    }
+    
+    func selectClosestDropZone(location: CGPoint,
+                               dropZoneCategory: BlockCategory,
+                               insertionHandler: InsertionPosition) {
+        let updatedX = location.x - self.position.x
+        let updatedY = location.y - self.position.y
+        let location = CGPoint(x: updatedX, y: updatedY)
+        var closestDistance = CGFloat.max
+        var closestDropZone = blocks[0].actionZones[0]
+        trash.unfocus()
+        print("set")
+        for block in blocks {
+            block.unfocus()
+            let zones: [DropZone]
+            switch dropZoneCategory {
+            case .Action:
+                zones = block.actionZones
+            case .BoolOp:
+                zones = block.boolOpZones
+            case .Object:
+                zones = block.objectDropZones
+            }
+            for zone in zones {
+                zone.displayNormal()
+                let frame = zone.calculateAccumulatedFrame()
+                let center = CGPoint(x: frame.width/2, y: frame.height/2)
+                print("frame \(frame)")
+                print("center \(center)")
+                let zonePoint = self.convertPoint(center, fromNode: zone)
+                print(zonePoint)
+                let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
+                    + pow((Float)(zonePoint.y - location.y), 2)))
+                if distance < closestDistance {
+                    closestDistance = distance
+                    closestDropZone = zone
+                }
+            }
+        }
+        let zone = trash.dropZoneCenter
+        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) +
+            pow((Float)(zone.y - location.y), 2)))
+        insertionHandler.trash = false
+        if trashDistance < closestDistance {
+            trash.focus(insertionHandler)
+            insertionHandler.trash = true
+        } else {
+            closestDropZone.focus(insertionHandler)
+        }
     }
 
     func endHover() {
         for block in blocks {
             block.endHover()
+            for zone in block.boolOpZones {
+                zone.displayNormal()
+            }
+            for zone in block.objectDropZones {
+                zone.displayNormal()
+            }
         }
         trash.unfocus()
     }
 
-    func insertBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
-        if let position = insertionHandler.position {
+    func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition) {
+        if let position = insertionPosition.position {
             blocks.insert(block, atIndex: position)
             self.addChild(block)
             flushBlocks()
         }
     }
 
-    func getBlock(location: CGPoint) -> CodeBlock? {
+    func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
+        let correctedLocation = CGPoint(x: x, y: y)
         for block in blocks {
-            if block.containsPoint(CGPoint(x: x, y: y)) {
-                return block
+            if block.containsPoint(correctedLocation) {
+                return block.getBlock(correctedLocation)
             }
         }
         return nil
@@ -62,31 +122,14 @@ class ProgramBlocks: SKNode {
         flushBlocks()
     }
 
-    func selectClosestDropZone(location: CGPoint, insertionHandler: InsertionPosition) {
-        var closestDistance = CGFloat.max
-        var closestBlock = blocks[0]
-        trash.unfocus()
-        for block in blocks {
-            block.unfocus()
-            var zone = block.dropZoneCenter
-            zone.x += block.position.x
-            zone.y += block.position.y
-            let distance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) + pow((Float)(zone.y - location.y), 2)))
-            if distance < closestDistance {
-                closestDistance = distance
-                closestBlock = block
-            }
-        }
-        let zone = trash.dropZoneCenter
-        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) + pow((Float)(zone.y - location.y), 2)))
-        insertionHandler.trash = false
-        if trashDistance < closestDistance {
-            trash.focus(insertionHandler)
-        } else {
-            closestBlock.focus(insertionHandler)
-        }
+    func getCode() -> Program? {
+        return parseBlock(1)
     }
-
+    
+    func removeBlockAtIndex(index: Int) {
+        blocks.removeAtIndex(index)
+    }
+    
     func reorderBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
         if insertionHandler.trash {
             if let _ = block as? MainBlock {
@@ -106,10 +149,6 @@ class ProgramBlocks: SKNode {
         flushBlocks()
     }
 
-    func getCode() -> Program? {
-        return parseBlock(1)
-    }
-
     private func parseBlock(programCounter: Int) -> Program? {
         guard blocks.count > programCounter else {
             return nil
@@ -119,6 +158,10 @@ class ProgramBlocks: SKNode {
         switch blocks[programCounter].getBlockConstruct() {
         case .ActionConstruct(let action):
             block = Statement.ActionStatement(action)
+        case .LoopExpressionConstruct(let loopExpression):
+            block = Statement.LoopStatement(loopExpression)
+        case .ConditionalExpressionConstruct(let conditional):
+            block = Statement.ConditionalStatement(conditional)
         default:
             block = nil
         }
@@ -138,13 +181,14 @@ class ProgramBlocks: SKNode {
         }
     }
 
-    private func flushBlocks() {
+    func flushBlocks() {
         var yPos: CGFloat = blocks[0].position.y
         let xPos = blocks[0].position.x
         for (i, block) in blocks.enumerate() {
             if i != 0 {
                 block.blockPosition = i
                 block.position.x = xPos
+                block.flushBlocks()
                 yPos -= block.calculateAccumulatedFrame().height
                 block.position.y = yPos
             }
