@@ -11,7 +11,7 @@ import UIKit
 class PlayingViewController: UIViewController {
     var map: Map!
     var programSupplier: ProgramSupplier!
-    var programBlocksSupplier: ProgramBlocksSupplier!
+    var displayedProgramBlocksSupplier: ProgramBlocksSupplier!
     var codeBlocksDisplay: CodeBlocksViewController!
     @IBOutlet var winningScreen: UIView!
 
@@ -32,10 +32,11 @@ class PlayingViewController: UIViewController {
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             codeBlocksDisplay = destination
             programSupplier = destination
+            displayedProgramBlocksSupplier = destination
         } else if let destination = segue.destinationViewController as? ProgrammingViewController {
             destination.delegate = self
             destination.map = map.copy() as! Map
-            programBlocksSupplier = destination
+            destination.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
         }
     }
 
