@@ -22,14 +22,19 @@ class TrashZone: DropZone {
         trash.size.width = 100
         trash.size.height = 100
         let size = trash.calculateAccumulatedFrame()
-        super.init(size: CGSize(width: size.width, height: size.height))
+        super.init(size: CGSize(width: size.width, height: size.height),
+                   dropZoneCategory: BlockCategory.Action,
+                   containingBlock: TrashContainer())
         self.addChild(trash)
         trash.position.x = size.width/2
         trash.position.y = size.height/2
     }
 
-    func focus(insertionHandler: InsertionPosition) {
+    override func focus(insertionHandler: InsertionPosition) {
         insertionHandler.trash = true
+        insertionHandler.category = nil
+        insertionHandler.container = nil
+        insertionHandler.zone = nil
         self.displayHover()
     }
 
