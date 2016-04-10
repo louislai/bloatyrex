@@ -249,7 +249,7 @@
                         <viewControllerLayoutGuide type="top" id="y6P-tZ-mbM"/>
                         <viewControllerLayoutGuide type="bottom" id="j9f-Jz-r40"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="A0i-kf-Mqz">
+                    <view key="view" contentMode="scaleToFill" id="A0i-kf-Mqz" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -259,12 +259,6 @@
                                     <segue destination="BGt-w1-RuZ" kind="embed" id="R8G-45-ZSX"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1uW-eq-fLl">
-                                <rect key="frame" x="319" y="0.0" width="705" height="768"/>
-                                <connections>
-                                    <segue destination="r0Q-WW-r6m" kind="embed" id="gE0-cD-3Dc"/>
-                                </connections>
-                            </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DqC-bw-K81">
                                 <rect key="frame" x="248" y="702" width="51" height="46"/>
                                 <state key="normal" title="Button" image="zoom"/>
@@ -272,6 +266,12 @@
                                     <action selector="zoomButtonPressed:" destination="IvN-jd-ujU" eventType="touchUpInside" id="PzB-rD-CTf"/>
                                 </connections>
                             </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1uW-eq-fLl">
+                                <rect key="frame" x="319" y="0.0" width="705" height="768"/>
+                                <connections>
+                                    <segue destination="r0Q-WW-r6m" kind="embed" id="e2O-aw-h9Y"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -299,15 +299,15 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hth-aP-El8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Code Blocks View Controller-->
         <scene sceneID="aSV-pn-GlK">
             <objects>
-                <viewController id="r0Q-WW-r6m" sceneMemberID="viewController">
+                <viewController id="r0Q-WW-r6m" customClass="CodeBlocksViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngz-TM-eQn"/>
                         <viewControllerLayoutGuide type="bottom" id="gFq-lS-GQo"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0Lk-qT-FF7">
+                    <view key="view" contentMode="scaleToFill" id="0Lk-qT-FF7" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="705" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -315,6 +315,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9i3-aR-P3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1802.5" y="439"/>
         </scene>
     </scenes>
     <resources>

@@ -28,9 +28,10 @@ class PlayingViewController: UIViewController {
             destination.map = map
             destination.programSupplier = self
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
-            programSupplier = destination
+
         } else if let destination = segue.destinationViewController as? ProgrammingViewController {
             destination.map = map.copy() as! Map
+            programSupplier = destination
         }
     }
 
