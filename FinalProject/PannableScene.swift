@@ -49,6 +49,7 @@ class PannableScene: SKScene {
     private var horizontalPanDisabled: Bool
     private var verticalPanDisabled: Bool
     private var doubleTapDisabled: Bool
+    private var originalViewpointPosition = CGPoint()
 
     /**
     Initialise the scene with a given size, and optional scale and overlay z position.
@@ -79,6 +80,7 @@ class PannableScene: SKScene {
         self.addChild(viewpoint)
         self.camera = viewpoint
         viewpoint.addChild(overlay)
+        originalViewpointPosition = viewpoint.position
 
         // set up gestures
         let pinchRecognizer = UIPinchGestureRecognizer(target: self,
@@ -117,27 +119,65 @@ class PannableScene: SKScene {
             translation = CGPoint(x: translation.x, y: -translation.y)
             var horizontalDisplacement = translation.x
             var verticalDisplacement = translation.y
+            let contentFrame = content.calculateAccumulatedFrame()
+            let contentCenter = CGPoint(x: contentFrame.midX, y: contentFrame.midY)
 
             if horizontalPanDisabled {
                 horizontalDisplacement = 0
             } else if horizontalDisplacement > 0 {
-                let distanceToLeftBoundary = content.calculateAccumulatedFrame().width / 2 +
-                    viewpoint.position.x
-                horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
+                let leftBoundaryOfContent = contentCenter.x - contentFrame.width / 2
+                let viewpointDistanceToLeftBoundaryOfContent = viewpoint.position.x -
+                    leftBoundaryOfContent
+                let viewpointDistanceToLeftBoundary = viewpoint.position.x
+                var distanceToViewLeftmostContent = viewpointDistanceToLeftBoundaryOfContent -
+                    viewpointDistanceToLeftBoundary
+                distanceToViewLeftmostContent = max(distanceToViewLeftmostContent, 0)
+                var minimumAllowedHorizontalViewpointPosition = originalViewpointPosition.x -
+                    distanceToViewLeftmostContent
+                if distanceToViewLeftmostContent > 0 {
+                    minimumAllowedHorizontalViewpointPosition -= 50
+                }
+                let minimumAllowedHorizontalDisplacement =
+                    minimumAllowedHorizontalViewpointPosition - viewpoint.position.x
+                horizontalDisplacement = min(-minimumAllowedHorizontalDisplacement,
+                    horizontalDisplacement)
             } else if horizontalDisplacement < 0 {
-                let distanceToRightBoundary = content.calculateAccumulatedFrame().width / 2 -
+                let rightBoundaryOfContent = contentCenter.x + contentFrame.width / 2
+                let viewpointDistanceToRightBoundaryOfContent = rightBoundaryOfContent -
                     viewpoint.position.x
-                horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
+                let viewpointDistanceToRightBoundary = self.size.width - viewpoint.position.x
+                print("distance to right boundary: \(viewpointDistanceToRightBoundary)")
+                print("distance to right boundary of content: \(viewpointDistanceToRightBoundaryOfContent)")
+                print("viewpoint x position: \(viewpoint.position.x)")
+                var distanceToViewRightmostContent = viewpointDistanceToRightBoundaryOfContent -
+                viewpointDistanceToRightBoundary
+                distanceToViewRightmostContent = max(distanceToViewRightmostContent, 0)
+                var maximumAllowedHorizontalViewpointPosition = originalViewpointPosition.x +
+                distanceToViewRightmostContent
+                if distanceToViewRightmostContent > 0 {
+                    maximumAllowedHorizontalViewpointPosition += 50
+                }
+                var maximumAllowedHorizontalViewpointDisplacement =
+                    maximumAllowedHorizontalViewpointPosition - viewpoint.position.x
+                maximumAllowedHorizontalViewpointDisplacement =
+                    max(maximumAllowedHorizontalViewpointDisplacement, 0)
+                print("distance to view content right: \(distanceToViewRightmostContent)")
+                print("max allowed hor viewpoint pos: \(maximumAllowedHorizontalViewpointPosition)")
+                print("max allowed displacement: \(maximumAllowedHorizontalViewpointDisplacement)")
+                horizontalDisplacement = max(-maximumAllowedHorizontalViewpointDisplacement,
+                                             horizontalDisplacement)
+                print("resultant horizontal displacement: \(horizontalDisplacement)\n")
             }
             if verticalPanDisabled {
                 verticalDisplacement = 0
             } else if verticalDisplacement > 0 {
-                let distanceToBottomBoundaryOfContent = content.calculateAccumulatedFrame().height
+                let distanceToBottomBoundaryOfContent = contentFrame.height
                     - viewpoint.position.y
                 let distanceToBottomBoundary = self.size.height - viewpoint.position.y
                 print("distance to bottom boundary: \(distanceToBottomBoundary)")
                 print("distance to bottom boundary of content: \(distanceToBottomBoundaryOfContent)")
                 print("viewpoint y position: \(viewpoint.position.y)")
+                print("content size: \(content.frame.height)")
                 //distanceToBottomBoundary = min(distanceToBottomBoundary,
                 //                               distanceToBottomBoundaryOfContent)
                 //distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
@@ -157,10 +197,8 @@ class PannableScene: SKScene {
 
                 verticalDisplacement = min(-minimumAllowedVerticalViewpointDisplacement, verticalDisplacement)
             } else if verticalDisplacement < 0 {
-                let distanceToTopBoundaryOfContent = content.calculateAccumulatedFrame().height / 2
-                    - viewpoint.position.y + self.size.height - 100
                 var distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
-                distanceToTopBoundary = min(distanceToTopBoundary, distanceToTopBoundaryOfContent)
+
                 verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
             }
 
