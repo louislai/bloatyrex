@@ -58,8 +58,8 @@ class WhileBlock: CodeBlock {
     }
 
     override init(containingBlock: ContainerBlockProtocol) {
-        bottomBlock = SKSpriteNode(imageNamed: "wall")
-        topBlock = SKSpriteNode(imageNamed: "wall")
+        bottomBlock = SKSpriteNode(imageNamed: "while")
+        topBlock = SKSpriteNode(imageNamed: "endwhile")
         nestedDropZone = DropZone(size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
                                   dropZoneCategory: BlockCategory.Action,
                                   containingBlock: nestedBlocks)
