@@ -45,6 +45,7 @@ class PannableScene: SKScene {
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
     private var minimumScale: CGFloat
+    private var maximumScale: CGFloat
     private var isPanningFromOverlay = false
     private var horizontalPanDisabled: Bool
     private var verticalPanDisabled: Bool
@@ -65,6 +66,7 @@ class PannableScene: SKScene {
          disableDoubleTap: Bool = false) {
         initialScale = 1.0 / zoomLevel
         minimumScale = initialScale / zoomRangeFactor
+        maximumScale = initialScale * zoomRangeFactor
         horizontalPanDisabled = disableHorizontalPan
         verticalPanDisabled = disableVerticalPan
         doubleTapDisabled = disableDoubleTap
@@ -212,8 +214,8 @@ class PannableScene: SKScene {
                 var newScale = viewpoint.xScale * (1.0 / sender.scale)
                 if newScale < minimumScale {
                     newScale = minimumScale
-                } else if newScale > initialScale {
-                    newScale = initialScale
+                } else if newScale > maximumScale {
+                    newScale = maximumScale
                 }
                 viewpoint.setScale(newScale)
                 sender.scale = 1.0
