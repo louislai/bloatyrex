@@ -15,8 +15,8 @@ class PlayingViewController: UIViewController {
     var codeBlocksDisplay: CodeBlocksViewController!
     @IBOutlet var winningScreen: UIView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         registerObservers()
     }
 
