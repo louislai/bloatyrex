@@ -35,6 +35,7 @@ class PlayingMapScene: StaticMapScene {
 
     var timeOfLastMove: CFTimeInterval = 0.0
     let timePerMove: CFTimeInterval = 1.0
+    let isPlayingPresetMap: Bool
 
     var buttonSize: CGSize {
         return CGSize(
@@ -58,6 +59,11 @@ class PlayingMapScene: StaticMapScene {
 
     override init(size: CGSize, zoomLevel: CGFloat, map: Map) {
         self.movesLeft = 11
+        if let _ = map as? PresetMap {
+            self.isPlayingPresetMap = true
+        } else {
+            self.isPlayingPresetMap = false
+        }
         super.init(size: size, zoomLevel: zoomLevel, map: map)
     }
 
