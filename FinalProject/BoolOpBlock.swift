@@ -28,6 +28,10 @@ class BoolOpBlock: SKNode, MovableBlockProtocol {
     var objectZones: [DropZone] {
         return []
     }
+    
+    var boolOpZones: [DropZone] {
+        return []
+    }
 
     func activateDropZone() {
         return

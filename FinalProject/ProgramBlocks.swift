@@ -51,7 +51,6 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         var closestDistance = CGFloat.max
         var closestDropZone = blocks[0].actionZones[0]
         trash.unfocus()
-        print("set")
         for block in blocks {
             block.unfocus()
             let zones: [DropZone]
@@ -67,10 +66,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
                 zone.displayNormal()
                 let frame = zone.calculateAccumulatedFrame()
                 let center = CGPoint(x: frame.width/2, y: frame.height/2)
-                print("frame \(frame)")
-                print("center \(center)")
                 let zonePoint = self.convertPoint(center, fromNode: zone)
-                print(zonePoint)
                 let distance = (CGFloat)(sqrt(pow((Float)(zonePoint.x - location.x), 2)
                     + pow((Float)(zonePoint.y - location.y), 2)))
                 if distance < closestDistance {

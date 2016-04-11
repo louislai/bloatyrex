@@ -27,6 +27,16 @@ class DropZone: SKNode {
             }
         }
     }
+    
+    var boolOpZones: [DropZone] {
+        get {
+            if let block = boolOpBlock {
+                return block.boolOpZones
+            } else {
+                return []
+            }
+        }
+    }
 
     let cornerRadius: CGFloat = 2
     var blockPosition = 0
@@ -106,6 +116,9 @@ class DropZone: SKNode {
     }
 
     func insertBlock(block: BoolOpBlock) {
+        if let previousBlock = boolOpBlock {
+            previousBlock.removeFromParent()
+        }
         boolOpBlock = block
         normal.hidden = true
         hover.hidden = true
@@ -115,6 +128,9 @@ class DropZone: SKNode {
     }
 
     func insertObjectBlock(block: ObjectBlock) {
+        if let previousBlock = objectBlock {
+            previousBlock.removeFromParent()
+        }
         objectBlock = block
         normal.hidden = true
         hover.hidden = true

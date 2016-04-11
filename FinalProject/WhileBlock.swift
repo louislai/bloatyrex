@@ -27,7 +27,7 @@ class WhileBlock: CodeBlock {
 
     override var boolOpZones: [DropZone] {
         get {
-            let result = getNestedBoolOpZones() + [boolOpZone]
+            let result = getNestedBoolOpZones() + [boolOpZone] + boolOpZone.boolOpZones
             return result
         }
     }

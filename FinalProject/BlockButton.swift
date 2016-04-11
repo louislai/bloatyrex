@@ -20,6 +20,7 @@ enum BlockType {
     case Hole
     case Wood
     case If
+    case Not
 }
 
 class BlockButton: SKNode {

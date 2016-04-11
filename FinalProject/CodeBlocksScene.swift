@@ -26,6 +26,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.Wall, blockCategory: BlockCategory.Object)
     let woodButton = BlockButton(imageNamed: "wooden-block", blockType: BlockType.Wood, blockCategory: BlockCategory.Object)
     let ifButton = BlockButton(imageNamed: "trash", blockType: BlockType.If, blockCategory: BlockCategory.Action)
+    let notButton = BlockButton(imageNamed: "poo", blockType: BlockType.Not, blockCategory: BlockCategory.BoolOp)
     private var programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: MovableBlockProtocol?
@@ -65,6 +66,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             whileButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.1)
             ifButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
             eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
+            notButton.position = CGPoint(x: size.width * -0.2, y: 0)
             toiletButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.1)
             wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
             holeButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.2)
@@ -81,6 +83,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             addNodeToOverlay(eyesButton)
             addNodeToOverlay(turnRightButton)
             addNodeToOverlay(ifButton)
+            addNodeToOverlay(notButton)
             programBlocks.revealTrash()
         } else {
             programBlocks.hideTrash()
@@ -121,6 +124,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = eyesButton
             eyesButton.pickBlock(true)
             pressState = .AddingBlock(eyesButton.blockCategory)
+        } else if notButton.containsPoint(locationInOverlay) {
+            heldBlock = notButton
+            notButton.pickBlock(true)
+            pressState = .AddingBlock(notButton.blockCategory)
         } else if toiletButton.containsPoint(locationInOverlay) {
             heldBlock = toiletButton
             toiletButton.pickBlock(true)
@@ -207,6 +214,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     case .Eyes:
                         if let zone = insertionPosition.zone {
                             zone.insertBlock(SeeBlock(containingBlock: insertionContainer, containingZone: zone))
+                        }
+                    case .Not:
+                        if let zone = insertionPosition.zone {
+                            zone.insertBlock(NotBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Toilet:
                         if let zone = insertionPosition.zone {
