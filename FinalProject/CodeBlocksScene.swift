@@ -53,7 +53,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         }
         addNodeToContent(programBlocks)
     }
-    
+
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
@@ -270,7 +270,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                             }
                         }
                     }
-                    
+
                 }
             }
             movedBlock = nil

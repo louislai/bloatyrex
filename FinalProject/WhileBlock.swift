@@ -15,7 +15,7 @@ class WhileBlock: CodeBlock {
     let nestedDropZone: DropZone
     let bottomBlock: SKSpriteNode
     let boolOpZone: DropZone
-    
+
     override func getBlockConstruct() -> Construct {
         if let predicate = boolOpZone.getBlockPredicate() {
             if let program = nestedBlocks.parseBlock(0) {
@@ -24,20 +24,20 @@ class WhileBlock: CodeBlock {
         }
         return Construct.None
     }
-    
+
     override var boolOpZones: [DropZone] {
         get {
             let result = getNestedBoolOpZones() + [boolOpZone]
             return result
         }
     }
-    
+
     override var objectDropZones: [DropZone] {
         get {
             return boolOpZone.objectZones
         }
     }
-    
+
     override var actionZones: [DropZone] {
         get {
             if dropZoneActivated {
@@ -48,7 +48,7 @@ class WhileBlock: CodeBlock {
             }
         }
     }
-    
+
     private func getNestedBoolOpZones() -> [DropZone] {
         var zones = [DropZone]()
         for block in nestedBlocks.blocks {
@@ -56,7 +56,7 @@ class WhileBlock: CodeBlock {
         }
         return zones
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol) {
         bottomBlock = SKSpriteNode(imageNamed: "wall")
         topBlock = SKSpriteNode(imageNamed: "wall")
@@ -75,13 +75,13 @@ class WhileBlock: CodeBlock {
         flushBlocks()
         self.resizeDropZone()
     }
-    
+
     override func endHover() {
         super.endHover()
         self.unfocus()
         nestedBlocks.unfocus()
     }
-    
+
     override func flushBlocks() {
         nestedBlocks.flushBlocks()
         if nestedBlocks.count > 0 {
@@ -112,25 +112,25 @@ class WhileBlock: CodeBlock {
                 2 * CodeBlock.dropZoneSize)
         }
     }
-    
+
     override func activateDropZone() {
         super.activateDropZone()
         nestedDropZone.hidden = false
         nestedBlocks.activateDropZones()
     }
-    
+
     override func deactivateDropZone() {
         super.deactivateDropZone()
         nestedDropZone.hidden = true
         nestedBlocks.deactivateDropZones()
     }
-    
+
     override func unfocus() {
         super.unfocus()
         nestedDropZone.displayNormal()
         nestedBlocks.unfocus()
     }
-    
+
     override func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let xLocation = location.x - self.position.x
         let yLocation = location.y - self.position.y
@@ -143,7 +143,7 @@ class WhileBlock: CodeBlock {
             return self
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

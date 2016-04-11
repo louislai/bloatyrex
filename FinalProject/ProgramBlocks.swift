@@ -41,7 +41,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
 
         selectClosestDropZone(location, dropZoneCategory: category, insertionHandler: insertionHandler)
     }
-    
+
     func selectClosestDropZone(location: CGPoint,
                                dropZoneCategory: BlockCategory,
                                insertionHandler: InsertionPosition) {
@@ -133,11 +133,11 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
     func getCode() -> Program? {
         return parseBlock(1)
     }
-    
+
     func removeBlockAtIndex(index: Int) {
         blocks.removeAtIndex(index)
     }
-    
+
     func reorderBlock(block: CodeBlock, insertionHandler: InsertionPosition) {
         if insertionHandler.trash {
             if let _ = block as? MainBlock {

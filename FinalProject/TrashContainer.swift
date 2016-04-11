@@ -12,7 +12,7 @@ class TrashContainer: ContainerBlockProtocol {
     func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition) {
         return
     }
-    
+
     func removeBlockAtIndex(index: Int) {
         return
     }

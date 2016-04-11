@@ -11,11 +11,11 @@ import SpriteKit
 class SeeBlock: BoolOpBlock {
     let blockBody: SKSpriteNode
     let objectDropZone: DropZone
-    
+
     override var objectZones: [DropZone] {
         return [objectDropZone]
     }
-    
+
     override func getBlockPredicate() -> Predicate? {
         if let object = objectDropZone.getObject() {
             return Predicate.CompareObservation(Observation.LookForward, object)
@@ -23,7 +23,7 @@ class SeeBlock: BoolOpBlock {
             return nil
         }
     }
-    
+
     override func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let updatedX = location.x - self.position.x
         let updatedY = location.y - self.position.y
@@ -33,7 +33,7 @@ class SeeBlock: BoolOpBlock {
         }
         return self
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
         blockBody = SKSpriteNode(imageNamed: "eyes")
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
@@ -45,7 +45,7 @@ class SeeBlock: BoolOpBlock {
         addChild(blockBody)
         addChild(objectDropZone)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

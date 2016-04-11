@@ -28,7 +28,7 @@ class IfBlock: CodeBlock {
     let middleBlock: SKSpriteNode
     let bottomBlock: SKSpriteNode
     let boolOpZone: DropZone
-    
+
     override func getBlockConstruct() -> Construct {
         if let predicate = boolOpZone.getBlockPredicate() {
             if let ifProgram = ifTrueBlock.parseBlock(0) {
@@ -39,20 +39,20 @@ class IfBlock: CodeBlock {
         }
         return Construct.None
     }
-    
+
     override var boolOpZones: [DropZone] {
         get {
             let result = getNestedBoolOpZones() + [boolOpZone]
             return result
         }
     }
-    
+
     override var objectDropZones: [DropZone] {
         get {
             return boolOpZone.objectZones
         }
     }
-    
+
     override var actionZones: [DropZone] {
         get {
             if dropZoneActivated {
@@ -64,7 +64,7 @@ class IfBlock: CodeBlock {
             }
         }
     }
-    
+
     private func getNestedBoolOpZones() -> [DropZone] {
         var zones = [DropZone]()
         for block in ifTrueBlock.blocks {
@@ -72,7 +72,7 @@ class IfBlock: CodeBlock {
         }
         return zones
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol) {
         middleBlock = SKSpriteNode(imageNamed: "trash")
         topBlock = SKSpriteNode(imageNamed: "trash")
@@ -101,13 +101,13 @@ class IfBlock: CodeBlock {
         flushBlocks()
         self.resizeDropZone()
     }
-    
+
     override func endHover() {
         super.endHover()
         self.unfocus()
         ifTrueBlock.unfocus()
     }
-    
+
     override func flushBlocks() {
         ifTrueBlock.flushBlocks()
         elseBlock.flushBlocks()
@@ -116,7 +116,7 @@ class IfBlock: CodeBlock {
             let elseBlockFrame = elseBlock.calculateAccumulatedFrame()
             ifTrueBlock.position.x = nestingDepth
             elseBlock.position.x = nestingDepth
-            
+
             topBlock.position = CGPoint(x: topBlock.size.width / 2,
                                         y: 5 * topBlock.size.height / 2 +
                                             3 * CodeBlock.dropZoneSize + nestedBlocksFrame.height +
@@ -126,17 +126,17 @@ class IfBlock: CodeBlock {
                                             2 * CodeBlock.dropZoneSize + elseBlockFrame.height)
             bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
                                            y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
-            
+
             boolOpZone.position = CGPoint(x: topBlock.size.width,
                                           y: 2 * topBlock.size.height +
                                             3 * CodeBlock.dropZoneSize + nestedBlocksFrame.height +
                                             elseBlockFrame.height)
-            
+
             ifTrueDropZone.position = CGPoint(x: nestingDepth, y: 2 * topBlock.size.height +
                 2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height + elseBlockFrame.height)
             ifTrueBlock.position.y = 2 * topBlock.size.height + nestedBlocksFrame.height +
                 2 * CodeBlock.dropZoneSize + elseBlockFrame.height
-            
+
             elseDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
                 CodeBlock.dropZoneSize + elseBlockFrame.height)
             elseBlock.position.y = topBlock.size.height + elseBlockFrame.height +
@@ -161,7 +161,7 @@ class IfBlock: CodeBlock {
                 2 * CodeBlock.dropZoneSize)
         }
     }
-    
+
     override func activateDropZone() {
         super.activateDropZone()
         ifTrueDropZone.hidden = false
@@ -169,7 +169,7 @@ class IfBlock: CodeBlock {
         elseDropZone.hidden = false
         elseBlock.activateDropZones()
     }
-    
+
     override func deactivateDropZone() {
         super.deactivateDropZone()
         ifTrueDropZone.hidden = true
@@ -177,7 +177,7 @@ class IfBlock: CodeBlock {
         elseDropZone.hidden = true
         elseBlock.deactivateDropZones()
     }
-    
+
     override func unfocus() {
         super.unfocus()
         ifTrueDropZone.displayNormal()
@@ -185,7 +185,7 @@ class IfBlock: CodeBlock {
         elseDropZone.displayNormal()
         elseBlock.unfocus()
     }
-    
+
     override func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let xLocation = location.x - self.position.x
         let yLocation = location.y - self.position.y
@@ -200,7 +200,7 @@ class IfBlock: CodeBlock {
             return self
         }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

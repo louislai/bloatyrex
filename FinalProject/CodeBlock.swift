@@ -17,32 +17,32 @@ class CodeBlock: SKNode, MovableBlockProtocol {
         get {
             return containingBlockValue
         }
-        
+
         set(newBlock) {
             containingBlockValue = newBlock
             dropZone.containingBlock = newBlock
         }
     }
-    
+
     var boolOpZones: [DropZone] {
         get {
             return []
         }
     }
-    
+
     var objectDropZones: [DropZone] {
         get {
             return []
         }
     }
-    
+
     var dropZone: DropZone
     private var blockPositionValue = 0
     var blockPosition: Int {
         get {
             return blockPositionValue
         }
-        
+
         set(newPosition) {
             dropZone.blockPosition = newPosition
             blockPositionValue = newPosition
@@ -111,11 +111,11 @@ class CodeBlock: SKNode, MovableBlockProtocol {
         dropZone.blockPosition = self.blockPosition
         self.addChild(dropZone)
     }
-    
+
     func flushBlocks() {
         return
     }
-    
+
     func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         return self
     }

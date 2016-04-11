@@ -15,13 +15,13 @@ class NestingZone: SKNode, ContainerBlockProtocol {
             return blocks.count
         }
     }
-    
+
     var dropZones: [DropZone] {
         get {
             return blocks.flatMap { $0.actionZones }
         }
     }
-    
+
     func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition) {
         if let position = insertionPosition.position {
             blocks.insert(block, atIndex: position - 1)
@@ -30,17 +30,17 @@ class NestingZone: SKNode, ContainerBlockProtocol {
             print()
         }
     }
-    
+
     func removeBlockAtIndex(index: Int) {
         blocks.removeAtIndex(index - 1)
     }
-    
+
     func unfocus() {
         for block in blocks {
             block.unfocus()
         }
     }
-    
+
     func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
@@ -52,12 +52,12 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         }
         return nil
     }
-    
+
     func parseBlock(programCounter: Int) -> Program? {
         guard blocks.count > programCounter else {
             return nil
         }
-        
+
         let block: Statement?
         switch blocks[programCounter].getBlockConstruct() {
         case .ActionConstruct(let action):
@@ -67,7 +67,7 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         default:
             block = nil
         }
-        
+
         if let statement = block {
             if blocks.count > programCounter + 1 {
                 if let nextBlock = parseBlock(programCounter + 1) {
@@ -82,7 +82,7 @@ class NestingZone: SKNode, ContainerBlockProtocol {
             return nil
         }
     }
-    
+
     func flushBlocks() {
         var yPos: CGFloat = 0
         let xPos: CGFloat = 0
@@ -94,13 +94,13 @@ class NestingZone: SKNode, ContainerBlockProtocol {
             block.position.y = yPos
         }
     }
-    
+
     func activateDropZones() {
         for block in blocks {
             block.activateDropZone()
         }
     }
-    
+
     func deactivateDropZones() {
         for block in blocks {
             block.deactivateDropZone()

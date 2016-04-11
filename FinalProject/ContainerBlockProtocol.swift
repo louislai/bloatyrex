@@ -10,6 +10,6 @@ import Foundation
 
 protocol ContainerBlockProtocol: class {
     func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition)
-    
+
     func removeBlockAtIndex(index: Int)
 }

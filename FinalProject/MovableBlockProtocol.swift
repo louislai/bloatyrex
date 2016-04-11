@@ -10,16 +10,16 @@ import SpriteKit
 
 protocol MovableBlockProtocol: class {
     var position: CGPoint { get set }
-    
+
     var containingBlock: ContainerBlockProtocol { get set }
-    
+
     var blockPosition: Int { get }
-    
+
     var category: BlockCategory { get }
-    
+
     func deactivateDropZone()
-    
+
     func activateDropZone()
-    
+
     func removeFromParent()
 }
