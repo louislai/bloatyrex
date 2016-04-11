@@ -10,6 +10,8 @@ import UIKit
 
 class PlayingViewController: UIViewController {
     var map: Map!
+
+
     var programSupplier: ProgramSupplier!
     @IBOutlet var winningScreen: UIView!
 
@@ -56,6 +58,17 @@ class PlayingViewController: UIViewController {
 
     @IBAction func backButtonPressed(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
+    }
+
+    @IBAction func replayButtonTapped(sender: UIButton) {
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameReset, object: self)
+    }
+
+    @IBAction func nextStageTapped(sender: UIButton) {
+    }
+
+    @IBAction func menuButtonTapped(sender: UIButton) {
+        navigationController?.popToRootViewControllerAnimated(true)
     }
 
     private func registerObservers() {

@@ -45,6 +45,7 @@
 		BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C41C941134007F56F0 /* LanguageDelegate.swift */; };
 		BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* AgentNode.swift */; };
 		BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C81C941459007F56F0 /* MapBlock.swift */; };
+		BF7F3C9D1CBBA2BF004530F5 /* Yoshi-win.png in Resources */ = {isa = PBXBuildFile; fileRef = BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */; };
 		BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */; };
 		BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */; };
 		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
@@ -127,6 +128,7 @@
 		BF5339C41C941134007F56F0 /* LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageDelegate.swift; path = FinalProject/LanguageDelegate.swift; sourceTree = "<group>"; };
 		BF5339C61C941155007F56F0 /* AgentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNode.swift; sourceTree = "<group>"; };
 		BF5339C81C941459007F56F0 /* MapBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBlock.swift; sourceTree = "<group>"; };
+		BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yoshi-win.png"; sourceTree = "<group>"; };
 		BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
+				BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */,
 				BF640D781CA815E800FC454F /* ReusableComponents */,
 				BF49FA501CA61ACF00546F43 /* Constants.swift */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,
@@ -471,6 +474,7 @@
 				3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */,
 				3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */,
 				3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */,
+				BF7F3C9D1CBBA2BF004530F5 /* Yoshi-win.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

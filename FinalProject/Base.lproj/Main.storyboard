@@ -193,12 +193,45 @@
                             <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LHP-Ns-e2j" userLabel="EndGame">
                                 <rect key="frame" x="559" y="0.0" width="465" height="768"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You win!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfF-Ht-neX">
-                                        <rect key="frame" x="118" y="312" width="293" height="168"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Yoshi is relieved!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfF-Ht-neX">
+                                        <rect key="frame" x="47" y="239" width="370" height="168"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Yoshi-win.png" translatesAutoresizingMaskIntoConstraints="NO" id="IwH-H7-KCM">
+                                        <rect key="frame" x="87" y="8" width="291" height="267"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="6Jd-d9-ese">
+                                        <rect key="frame" x="139" y="360" width="51" height="47"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="2xb-3c-4ps">
+                                        <rect key="frame" x="199" y="360" width="51" height="47"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="2Et-WE-4m2">
+                                        <rect key="frame" x="259" y="360" width="51" height="47"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="miD-Cr-tpZ">
+                                        <rect key="frame" x="163" y="517" width="123" height="30"/>
+                                        <state key="normal" title="Replay This Stage"/>
+                                        <connections>
+                                            <action selector="replayButtonTapped:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="CeZ-LD-MrA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4BQ-P3-Luf">
+                                        <rect key="frame" x="186" y="571" width="76" height="30"/>
+                                        <state key="normal" title="Next Stage"/>
+                                        <connections>
+                                            <action selector="nextStageTapped:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="Twc-EF-vUV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWq-I9-rnB">
+                                        <rect key="frame" x="177" y="627" width="94" height="30"/>
+                                        <state key="normal" title="Back to Menu"/>
+                                        <connections>
+                                            <action selector="menuButtonTapped:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="6hD-Ji-pvO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -318,7 +351,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Yoshi-win.png" width="703" height="795"/>
         <image name="back" width="512" height="512"/>
+        <image name="unfilled-star" width="122" height="118"/>
         <image name="zoom" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
