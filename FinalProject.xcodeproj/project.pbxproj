@@ -36,6 +36,7 @@
 		B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */; };
 		B01BF8D41CA1B31100D02FCA /* LevelSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */; };
 		B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */; };
+		BF145B8B1CBAA3EC00BF39D6 /* PresetMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF49FA511CA61ACF00546F43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* Constants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
@@ -117,6 +118,7 @@
 		B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesArchive.swift; sourceTree = "<group>"; };
 		B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewController.swift; sourceTree = "<group>"; };
 		B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorPageViewController.swift; sourceTree = "<group>"; };
+		BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetMap.swift; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF49FA501CA61ACF00546F43 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			children = (
 				B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */,
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
+				BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */,
 				BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
 				BF5339C81C941459007F56F0 /* MapBlock.swift */,
@@ -513,6 +516,7 @@
 				BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */,
 				BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */,
 				1DB4B08F1C9913C00010F727 /* BlockButton.swift in Sources */,
+				BF145B8B1CBAA3EC00BF39D6 /* PresetMap.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
 				BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */,
