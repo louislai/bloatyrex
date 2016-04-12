@@ -17,7 +17,6 @@ class PlayingMapViewController: UIViewController {
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
-        registerObservers()
 
         print(view.bounds.size)
         // Configure the view
@@ -29,6 +28,11 @@ class PlayingMapViewController: UIViewController {
 
         // Present the scene.
         skView.presentScene(newScene())
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        registerObservers()
     }
 
     func newScene() -> PlayingMapScene {

@@ -12,6 +12,8 @@ import SpriteKit
 class CodeBlocksViewController: UIViewController {
 
     var scene: CodeBlocksScene!
+    var programBlocksToLoad: ProgramBlocks?
+    var editEnabled: Bool!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -21,7 +23,12 @@ class CodeBlocksViewController: UIViewController {
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .ResizeFill
+        scene.editEnabled = editEnabled
         skView.presentScene(scene)
+
+        if let programBlocksToLoad = programBlocksToLoad {
+            scene.setProgramBlocks(programBlocksToLoad)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,5 +41,11 @@ class CodeBlocksViewController: UIViewController {
 extension CodeBlocksViewController: ProgramSupplier {
     func retrieveProgram() -> Program? {
         return scene.retrieveProgram()
+    }
+}
+
+extension CodeBlocksViewController: ProgramBlocksSupplier {
+    func retrieveProgramBlocks() -> ProgramBlocks {
+        return scene.getProgramBlocks()
     }
 }

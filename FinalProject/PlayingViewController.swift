@@ -13,10 +13,12 @@ class PlayingViewController: UIViewController {
 
 
     var programSupplier: ProgramSupplier!
+    var displayedProgramBlocksSupplier: ProgramBlocksSupplier!
+    var codeBlocksDisplay: CodeBlocksViewController!
     @IBOutlet var winningScreen: UIView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         registerObservers()
     }
 
@@ -30,9 +32,14 @@ class PlayingViewController: UIViewController {
             destination.map = map
             destination.programSupplier = self
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
+            destination.editEnabled = false
+            codeBlocksDisplay = destination
             programSupplier = destination
+            displayedProgramBlocksSupplier = destination
         } else if let destination = segue.destinationViewController as? ProgrammingViewController {
+            destination.delegate = self
             destination.map = map.copy() as! Map
+            destination.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
         }
     }
 
@@ -88,5 +95,15 @@ class PlayingViewController: UIViewController {
 extension PlayingViewController: ProgramSupplier {
     func retrieveProgram() -> Program? {
         return programSupplier.retrieveProgram()
+    }
+}
+
+// MARK: - FinishedEditingProgramDelegate
+extension PlayingViewController:FinishedEditingProgramDelegate {
+    func finishedEditing(controller: ProgrammingViewController) {
+        let programBlocksToDisplay = controller.storedProgramBlocks
+        programBlocksToDisplay.hideTrash()
+        controller.dismissViewControllerAnimated(true, completion: nil)
+        codeBlocksDisplay.scene.setProgramBlocks(programBlocksToDisplay)
     }
 }

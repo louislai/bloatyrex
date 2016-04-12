@@ -35,6 +35,7 @@ indirect enum Predicate {
     case Conjunction(Predicate, Predicate)
     case Disjunction(Predicate, Predicate)
     case CompareObservation(Observation, MapUnitType)
+    case Safe()
 }
 
 enum Instructions {

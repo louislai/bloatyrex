@@ -9,15 +9,31 @@
 import UIKit
 
 class ProgrammingViewController: UIViewController {
+    var delegate: FinishedEditingProgramDelegate!
     var map: Map!
+    var programBlocksSupplier: ProgramBlocksSupplier!
+    var storedProgramBlocks: ProgramBlocks!
 
     @IBAction func zoomButtonPressed(sender: UIButton) {
-        dismissViewControllerAnimated(false, completion: nil)
+        storedProgramBlocks = programBlocksSupplier.retrieveProgramBlocks()
+        programBlocksSupplier = nil
+        delegate.finishedEditing(self)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? ThumbnailPlayingMapViewController {
             destination.map = map
+        } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
+            destination.editEnabled = true
+            storedProgramBlocks.revealTrash()
+            destination.programBlocksToLoad = storedProgramBlocks
+            programBlocksSupplier = destination
         }
+    }
+}
+
+extension ProgrammingViewController: ProgramBlocksSupplier {
+    func retrieveProgramBlocks() -> ProgramBlocks {
+        return storedProgramBlocks
     }
 }

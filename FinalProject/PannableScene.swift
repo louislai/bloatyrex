@@ -45,10 +45,12 @@ class PannableScene: SKScene {
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
     private var minimumScale: CGFloat
+    private var maximumScale: CGFloat
     private var isPanningFromOverlay = false
     private var horizontalPanDisabled: Bool
     private var verticalPanDisabled: Bool
     private var doubleTapDisabled: Bool
+    private var originalViewpointPosition = CGPoint()
 
     /**
     Initialise the scene with a given size, and optional scale and overlay z position.
@@ -64,6 +66,7 @@ class PannableScene: SKScene {
          disableDoubleTap: Bool = false) {
         initialScale = 1.0 / zoomLevel
         minimumScale = initialScale / zoomRangeFactor
+        maximumScale = initialScale * zoomRangeFactor
         horizontalPanDisabled = disableHorizontalPan
         verticalPanDisabled = disableVerticalPan
         doubleTapDisabled = disableDoubleTap
@@ -79,6 +82,7 @@ class PannableScene: SKScene {
         self.addChild(viewpoint)
         self.camera = viewpoint
         viewpoint.addChild(overlay)
+        originalViewpointPosition = viewpoint.position
 
         // set up gestures
         let pinchRecognizer = UIPinchGestureRecognizer(target: self,
@@ -117,22 +121,74 @@ class PannableScene: SKScene {
             translation = CGPoint(x: translation.x, y: -translation.y)
             var horizontalDisplacement = translation.x
             var verticalDisplacement = translation.y
+            let contentFrame = content.calculateAccumulatedFrame()
+            let contentCenter = CGPoint(x: contentFrame.midX, y: contentFrame.midY)
 
+            // calculate the horizontal and vertical amount the viewpoint should move based on
+            // the pan movement and the size of the content
             if horizontalPanDisabled {
                 horizontalDisplacement = 0
             } else if horizontalDisplacement > 0 {
-                let distanceToLeftBoundary = self.size.width / 2 + viewpoint.position.x
-                horizontalDisplacement = min(distanceToLeftBoundary, horizontalDisplacement)
+                let leftBoundaryOfContent = contentCenter.x - contentFrame.width / 2
+                let viewpointDistanceToLeftBoundaryOfContent = viewpoint.position.x -
+                    leftBoundaryOfContent
+                let viewpointDistanceToLeftBoundary = viewpoint.position.x
+                var distanceToViewLeftmostContent = viewpointDistanceToLeftBoundaryOfContent -
+                    viewpointDistanceToLeftBoundary
+                distanceToViewLeftmostContent = max(distanceToViewLeftmostContent, 0)
+
+                // leftmost position of viewpoint allowed so as to not pan out of visible content
+                var minimumAllowedHorizontalViewpointPosition = originalViewpointPosition.x -
+                    distanceToViewLeftmostContent
+                if distanceToViewLeftmostContent > 0 {
+                    minimumAllowedHorizontalViewpointPosition -= 50
+                }
+                let minimumAllowedHorizontalDisplacement =
+                    minimumAllowedHorizontalViewpointPosition - viewpoint.position.x
+                horizontalDisplacement = min(-minimumAllowedHorizontalDisplacement,
+                    horizontalDisplacement)
             } else if horizontalDisplacement < 0 {
-                let distanceToRightBoundary = self.size.width / 2 - viewpoint.position.x
-                horizontalDisplacement = -min(distanceToRightBoundary, -horizontalDisplacement)
+                let rightBoundaryOfContent = contentCenter.x + contentFrame.width / 2
+                let viewpointDistanceToRightBoundaryOfContent = rightBoundaryOfContent -
+                    viewpoint.position.x
+                let viewpointDistanceToRightBoundary = self.size.width - viewpoint.position.x
+                var distanceToViewRightmostContent = viewpointDistanceToRightBoundaryOfContent -
+                viewpointDistanceToRightBoundary
+                distanceToViewRightmostContent = max(distanceToViewRightmostContent, 0)
+
+                // rightmost position of viewpoint allowed so as to not pan out of visible content
+                var maximumAllowedHorizontalViewpointPosition = originalViewpointPosition.x +
+                distanceToViewRightmostContent
+                if distanceToViewRightmostContent > 0 {
+                    maximumAllowedHorizontalViewpointPosition += 50
+                }
+                var maximumAllowedHorizontalViewpointDisplacement =
+                    maximumAllowedHorizontalViewpointPosition - viewpoint.position.x
+                maximumAllowedHorizontalViewpointDisplacement =
+                    max(maximumAllowedHorizontalViewpointDisplacement, 0)
+                horizontalDisplacement = max(-maximumAllowedHorizontalViewpointDisplacement,
+                                             horizontalDisplacement)
             }
             if verticalPanDisabled {
                 verticalDisplacement = 0
             } else if verticalDisplacement > 0 {
-                var distanceToBottomBoundary = self.size.height / 2 + viewpoint.position.y
-                distanceToBottomBoundary = max(distanceToBottomBoundary, 0)
-                verticalDisplacement = min(distanceToBottomBoundary, verticalDisplacement)
+                let distanceToBottomBoundaryOfContent = contentFrame.height
+                    - viewpoint.position.y
+                let distanceToBottomBoundary = self.size.height - viewpoint.position.y
+                var distanceToViewContentBottom = distanceToBottomBoundaryOfContent -
+                    distanceToBottomBoundary
+                distanceToViewContentBottom = max(distanceToViewContentBottom, 0)
+
+                // topmost position of viewpoint allowed so as to not pan out of visible content
+                var minimumAllowedVerticalViewpointPosition = originalViewpointPosition.y -
+                    distanceToViewContentBottom
+                if distanceToViewContentBottom > 0 {
+                    minimumAllowedVerticalViewpointPosition -= 50
+                }
+                let minimumAllowedVerticalViewpointDisplacement =
+                    minimumAllowedVerticalViewpointPosition - viewpoint.position.y
+
+                verticalDisplacement = min(-minimumAllowedVerticalViewpointDisplacement, verticalDisplacement)
             } else if verticalDisplacement < 0 {
                 let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
                 verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
@@ -158,8 +214,8 @@ class PannableScene: SKScene {
                 var newScale = viewpoint.xScale * (1.0 / sender.scale)
                 if newScale < minimumScale {
                     newScale = minimumScale
-                } else if newScale > initialScale {
-                    newScale = initialScale
+                } else if newScale > maximumScale {
+                    newScale = maximumScale
                 }
                 viewpoint.setScale(newScale)
                 sender.scale = 1.0
@@ -191,12 +247,19 @@ class PannableScene: SKScene {
                 } else {
                     verticalZoomLocation = min(verticalZoomLocation, self.size.height / 2)
                 }
-                let boundedZoomLocation = CGPoint(x: horizontalZoomLocation, y: verticalZoomLocation)
+                let boundedZoomLocation = CGPoint(x: horizontalZoomLocation,
+                                                  y: verticalZoomLocation)
                 viewpoint.position = boundedZoomLocation
                 var newScale = viewpoint.xScale * 0.5
 
                 // restrict the maximum zoom
                 newScale = max(newScale, minimumScale)
+
+                // zoom out if already at maximum zoom
+                if viewpoint.xScale == minimumScale {
+                    newScale = initialScale
+                }
+
                 viewpoint.setScale(newScale)
             }
         }

@@ -13,19 +13,31 @@ enum BlockType {
     case Forward
     case TurnLeft
     case TurnRight
+    case While
+    case Eyes
+    case Toilet
+    case Wall
+    case Hole
+    case Wood
+    case If
+    case Not
 }
 
 class BlockButton: SKNode {
     let button: SKSpriteNode
     let block: SKSpriteNode
     let blockType: BlockType
+    let blockCategory: BlockCategory
     var selected = false
 
-    init(imageNamed: String, blockType: BlockType) {
+    init(imageNamed: String, blockType: BlockType, blockCategory: BlockCategory) {
         button = SKSpriteNode(imageNamed: imageNamed)
         block = SKSpriteNode(imageNamed: imageNamed)
+        button.size = CGSize(width: 64, height: 64)
+        block.size = CGSize(width: 64, height: 64)
         block.hidden = true
         self.blockType = blockType
+        self.blockCategory = blockCategory
         super.init()
         self.addChild(button)
         self.addChild(block)
