@@ -16,6 +16,15 @@ class PlayingViewController: UIViewController {
     var displayedProgramBlocksSupplier: ProgramBlocksSupplier!
     var codeBlocksDisplay: CodeBlocksViewController!
     @IBOutlet var winningScreen: UIView!
+    @IBOutlet var starSlots: [UIImageView]!
+
+    @IBOutlet var firstStar: UIImageView!
+    @IBOutlet var secondStar: UIImageView!
+    @IBOutlet var thirdStar: UIImageView!
+
+    var stars: [UIImageView] {
+        return [firstStar, secondStar, thirdStar]
+    }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,7 +52,7 @@ class PlayingViewController: UIViewController {
         }
     }
 
-    func notifyGameWon() {
+    func notifyGameWon(notification: NSNotification) {
         winningScreen.frame = CGRect(
         x: view.bounds.width,
         y: 0,
@@ -55,6 +64,19 @@ class PlayingViewController: UIViewController {
         UIView.animateWithDuration(0.5, animations: { _ in
             self.winningScreen.transform = CGAffineTransformMakeTranslation(-self.winningScreen.bounds.width, 0)
         })
+
+        // Handle rating
+        let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
+        if isPlayingPresetMap {
+            showStarSlots()
+            let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
+            let toAppearStars = stars[0..<rating]
+            let _ = toAppearStars.map {
+                $0.hidden = false
+            }
+        } else {
+            hideStarSlots()
+        }
     }
 
     func resetGameScene() {
@@ -81,7 +103,7 @@ class PlayingViewController: UIViewController {
     private func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: #selector(PlayingViewController.notifyGameWon),
+            selector: #selector(PlayingViewController.notifyGameWon(_:)),
             name: GlobalConstants.Notification.gameWon,
             object: nil)
         NSNotificationCenter.defaultCenter().addObserver(
@@ -89,6 +111,14 @@ class PlayingViewController: UIViewController {
             selector: #selector(PlayingViewController.resetGameScene),
             name: GlobalConstants.Notification.gameReset,
             object: nil)
+    }
+
+    private func hideStarSlots() {
+        let _ = starSlots.map { $0.hidden = true }
+    }
+
+    private func showStarSlots() {
+        let _ = starSlots.map { $0.hidden = false }
     }
 }
 

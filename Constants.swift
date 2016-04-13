@@ -29,6 +29,8 @@ class GlobalConstants {
         static let gameReset = "reset"
         static let gameResetAndRun = "resetAndRun"
         static let gameWon = "won"
+        static let gameWonInfoIsPlayingPresetMap = "isPlayingPresetMap"
+        static let gameWonInfoRating = "gameRating"
     }
 
     static let filesArchive = FilesArchive()

@@ -205,8 +205,14 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="6Jd-d9-ese">
                                         <rect key="frame" x="139" y="360" width="51" height="47"/>
                                     </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="filled-star" translatesAutoresizingMaskIntoConstraints="NO" id="SCI-Nt-13l">
+                                        <rect key="frame" x="139" y="360" width="51" height="47"/>
+                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="2xb-3c-4ps">
                                         <rect key="frame" x="199" y="360" width="51" height="47"/>
+                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="filled-star" translatesAutoresizingMaskIntoConstraints="NO" id="CgO-yY-O2k">
+                                        <rect key="frame" x="198" y="360" width="51" height="47"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="2Et-WE-4m2">
                                         <rect key="frame" x="259" y="360" width="51" height="47"/>
@@ -232,6 +238,9 @@
                                             <action selector="menuButtonTapped:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="6hD-Ji-pvO"/>
                                         </connections>
                                     </button>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="filled-star" translatesAutoresizingMaskIntoConstraints="NO" id="MJI-vm-bus">
+                                        <rect key="frame" x="258" y="360" width="51" height="47"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -248,7 +257,11 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="firstStar" destination="SCI-Nt-13l" id="dBN-dH-QTY"/>
+                        <outlet property="secondStar" destination="CgO-yY-O2k" id="5JU-5R-vyS"/>
+                        <outlet property="thirdStar" destination="MJI-vm-bus" id="zdk-V1-YjI"/>
                         <outlet property="winningScreen" destination="LHP-Ns-e2j" id="Wrx-c7-MSB"/>
+                        <outletCollection property="starSlots" destination="6Jd-d9-ese" collectionClass="NSMutableArray" id="wFK-ny-4A9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYt-ss-aNI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,6 +367,7 @@
     <resources>
         <image name="Yoshi-win.png" width="703" height="795"/>
         <image name="back" width="512" height="512"/>
+        <image name="filled-star" width="119" height="115"/>
         <image name="unfilled-star" width="122" height="118"/>
         <image name="zoom" width="512" height="512"/>
     </resources>

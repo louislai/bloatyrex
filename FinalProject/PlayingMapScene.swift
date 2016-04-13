@@ -195,13 +195,22 @@ class PlayingMapScene: StaticMapScene {
 
     private func handleWinning() {
         // Calculate score if map is a presetMap
+        var info = [String: AnyObject]()
+        info[GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] = isPlayingPresetMap
         if isPlayingPresetMap {
             let criteria = [ScoreCriterion.MovesLeft(movesLeft)]
             let score = scorer.criteriaToScore(criteria)
-            let rating = (mapNode.map as! PresetMap).scoresForRatings
+            let rating = (mapNode.map as! PresetMap).getRatingForScore(score)
+            info[GlobalConstants.Notification.gameWonInfoRating] = rating
         }
 
-        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameWon, object: self)
+        NSNotificationCenter
+            .defaultCenter()
+            .postNotificationName(
+                GlobalConstants.Notification.gameWon,
+                object: self,
+                userInfo: info
+            )
     }
 
     private func handleLosing() {
