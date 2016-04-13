@@ -9,12 +9,13 @@
 import Foundation
 
 class PresetMap: Map {
-    let numberOfStars: Int
-    var scoresForRatings: [Int]
+    private let numberOfStars: Int
+    // Invariant: This is sorted in ascending order
+    private var scoresForRatings: [Int]
 
     init(numberOfRows: Int, numberOfColumns: Int, numberOfStars: Int) {
         self.numberOfStars = numberOfStars
-        self.scoresForRatings = [Int](count: numberOfStars, repeatedValue: 0)
+        self.scoresForRatings = [Int](count: numberOfStars+1, repeatedValue: 0)
         super.init(numberOfRows: numberOfRows, numberOfColumns: numberOfColumns)
     }
 
@@ -26,6 +27,8 @@ class PresetMap: Map {
     ///
     /// - parameter scores: a list of scores to assigned. The list's size should be numberOfStars.
     ///     All scores should be >= 0
+    ///
+    /// This also auto add a 0 to the front of the list to represent 0 rating
     func assignScoresForRatings(scores: [Int]) {
         guard scores.count == numberOfStars else {
             return
@@ -34,8 +37,20 @@ class PresetMap: Map {
         guard scores.filter({$0 >= 0}).count == scores.count else {
             return
         }
-
-        let sortedScores = scores.sort()
+        var sortedScores = scores.sort()
+        sortedScores.insert(0, atIndex: 0)
         scoresForRatings = sortedScores
+    }
+
+    /// Return rating if score is valid (>= 0) else return -1
+    func getRatingForScore(score: Int) -> Int {
+        guard score >= 0 else {
+            return -1
+        }
+        var currentRating = numberOfStars
+        while scoresForRatings[currentRating] > score {
+            currentRating -= 1
+        }
+        return currentRating
     }
 }

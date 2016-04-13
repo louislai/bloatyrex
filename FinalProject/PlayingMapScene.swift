@@ -36,6 +36,7 @@ class PlayingMapScene: StaticMapScene {
     var timeOfLastMove: CFTimeInterval = 0.0
     let timePerMove: CFTimeInterval = 1.0
     let isPlayingPresetMap: Bool
+    let scorer: Scorer = DefaultGameScorer()
 
     var buttonSize: CGSize {
         return CGSize(
@@ -88,9 +89,9 @@ class PlayingMapScene: StaticMapScene {
         if let gameWon = gameWon {
             pause()
             if gameWon {
-                NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameWon, object: self)
+                handleWinning()
             } else {
-                addRetryText()
+                handleLosing()
             }
         }
     }
@@ -190,6 +191,21 @@ class PlayingMapScene: StaticMapScene {
                 ])
         )
         arrowNode.runAction(showHideAction)
+    }
+
+    private func handleWinning() {
+        // Calculate score if map is a presetMap
+        if isPlayingPresetMap {
+            let criteria = [ScoreCriterion.MovesLeft(movesLeft)]
+            let score = scorer.criteriaToScore(criteria)
+            let rating = (mapNode.map as! PresetMap).scoresForRatings
+        }
+
+        NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameWon, object: self)
+    }
+
+    private func handleLosing() {
+        addRetryText()
     }
 
     private func moveActiveAgents() {

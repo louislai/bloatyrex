@@ -1,5 +1,5 @@
 //
-//  ScoreConverter.swift
+//  MovesLeftCriterion.swift
 //  FinalProject
 //
 //  Created by louis on 13/4/16.
@@ -8,6 +8,3 @@
 
 import Foundation
 
-protocol Scorer {
-    func criteriaToScore(criteria: [ScoreCriterion]) -> Int
-}

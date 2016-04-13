@@ -8,12 +8,16 @@
 
 import Foundation
 
-protocol ScoreCriterion {
-    var value: Int { get }
-    var type: ScoreCriterionType { get }
-}
+enum ScoreCriterion {
+    case MovesLeft(Int)
+    case ProgramLength(Int)
 
-enum ScoreCriterionType: Int {
-    case MovesLeft
-    case ProgramLength
+    func getValue() -> Int {
+        switch self {
+        case .MovesLeft(let value):
+            return value
+        case .ProgramLength(let value):
+            return value
+        }
+    }
 }
