@@ -67,7 +67,6 @@
 		BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */; };
 		BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */; };
 		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
-		BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */; };
 		BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B21C948C9A00DAE175 /* WallNode.swift */; };
 		BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B61C948CB500DAE175 /* GoalNode.swift */; };
 		BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B81C952E6300DAE175 /* Observation.swift */; };
@@ -168,7 +167,6 @@
 		BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
-		BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SamplePrograms.swift; path = FinalProject/SamplePrograms.swift; sourceTree = "<group>"; };
 		BF8FA5B21C948C9A00DAE175 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		BF8FA5B61C948CB500DAE175 /* GoalNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalNode.swift; sourceTree = "<group>"; };
 		BF8FA5B81C952E6300DAE175 /* Observation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
@@ -234,7 +232,6 @@
 				BF640D781CA815E800FC454F /* ReusableComponents */,
 				BF49FA501CA61ACF00546F43 /* Constants.swift */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,
-				BF8FA5B01C94863800DAE175 /* SamplePrograms.swift */,
 				3D1592681CBACD10009E8559 /* Delegates */,
 				3DF230A01C8F0617003420C0 /* FinalProject */,
 				3DF230B51C8F0617003420C0 /* FinalProjectTests */,
@@ -605,7 +602,6 @@
 				BFFB1A401CAC03AE00C746CD /* StaticMapScene.swift in Sources */,
 				1D69B6C81CB29E4500C1FA04 /* TrashContainer.swift in Sources */,
 				BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */,
-				BF8FA5B11C94863800DAE175 /* SamplePrograms.swift in Sources */,
 				1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */,
 				1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */,
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
