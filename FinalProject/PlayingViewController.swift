@@ -70,6 +70,7 @@ class PlayingViewController: UIViewController {
         if isPlayingPresetMap {
             showStarSlots()
             let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
+            hideStars()
             let toAppearStars = stars[0..<rating]
             let _ = toAppearStars.map {
                 $0.hidden = false
@@ -119,6 +120,10 @@ class PlayingViewController: UIViewController {
 
     private func showStarSlots() {
         let _ = starSlots.map { $0.hidden = false }
+    }
+
+    private func hideStars() {
+        let _ = stars.map { $0.hidden = true }
     }
 
     private func mapToPresetMap(map: Map) -> PresetMap {
