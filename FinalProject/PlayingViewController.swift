@@ -21,6 +21,7 @@ class PlayingViewController: UIViewController {
     @IBOutlet var firstStar: UIImageView!
     @IBOutlet var secondStar: UIImageView!
     @IBOutlet var thirdStar: UIImageView!
+    let animationDelay: NSTimeInterval = 0.5
 
     var stars: [UIImageView] {
         return [firstStar, secondStar, thirdStar]
@@ -68,21 +69,39 @@ class PlayingViewController: UIViewController {
                 width: self.winningScreen.bounds.width,
                 height: self.winningScreen.bounds.height
             )
+            }, completion: { finished in
+                // Handle rating
+                if finished {
+                    let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
+                    if isPlayingPresetMap {
+                        self.showStarSlots()
+                        let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
+                        let toAppearStars = self.stars[0..<rating]
+                        for (index, star) in toAppearStars.enumerate() {
+                            let delay = Int64(index) * Int64(self.animationDelay) * Int64(NSEC_PER_SEC)
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
+                                star.hidden = false
+                                UIView.animateKeyframesWithDuration(
+                                    self.animationDelay, delay: 0.0,
+                                    options: UIViewKeyframeAnimationOptions.AllowUserInteraction,
+                                    animations: {
+                                        star.transform = CGAffineTransformRotate(star.transform, CGFloat(M_PI))
+                                    }, completion: { finished in
+                                        UIView.animateKeyframesWithDuration(
+                                            self.animationDelay, delay: 0.0,
+                                            options: UIViewKeyframeAnimationOptions.AllowUserInteraction,
+                                            animations: {
+                                                star.transform = CGAffineTransformRotate(star.transform, CGFloat(M_PI))
+                                        }, completion: nil)
+                                })
+                            })
+                        }
+                    }
+                }
         })
 
-        // Handle rating
-        let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
-        if isPlayingPresetMap {
-            showStarSlots()
-            let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
-            hideStars()
-            let toAppearStars = stars[0..<rating]
-            let _ = toAppearStars.map {
-                $0.hidden = false
-            }
-        } else {
-            hideStarSlots()
-        }
+        hideStarSlots()
+        hideStars()
     }
 
     func resetGameScene() {
@@ -121,6 +140,11 @@ class PlayingViewController: UIViewController {
             self,
             selector: #selector(PlayingViewController.resetGameScene),
             name: GlobalConstants.Notification.gameReset,
+            object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector:  #selector(PlayingViewController.resetGameScene),
+            name: GlobalConstants.Notification.gameResetAndRun,
             object: nil)
     }
 
