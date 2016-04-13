@@ -27,7 +27,7 @@ class DropZone: SKNode {
             }
         }
     }
-    
+
     var boolOpZones: [DropZone] {
         get {
             if let block = boolOpBlock {

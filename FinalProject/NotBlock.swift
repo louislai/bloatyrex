@@ -11,15 +11,15 @@ import SpriteKit
 class NotBlock: BoolOpBlock {
     let blockBody: SKSpriteNode
     let boolOpZone: DropZone
-    
+
     override var boolOpZones: [DropZone] {
         return [boolOpZone] + boolOpZone.boolOpZones
     }
-    
+
     override var objectZones: [DropZone] {
         return boolOpZone.objectZones
     }
-    
+
     override func getBlockPredicate() -> Predicate? {
         if let predicate = boolOpZone.getBlockPredicate() {
             return Predicate.Negation(predicate)
@@ -27,7 +27,7 @@ class NotBlock: BoolOpBlock {
             return nil
         }
     }
-    
+
     override func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let updatedX = location.x - self.position.x
         let updatedY = location.y - self.position.y
@@ -37,7 +37,7 @@ class NotBlock: BoolOpBlock {
         }
         return self
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
         blockBody = SKSpriteNode(imageNamed: "poo")
         blockBody.size = CGSize(width: 64, height: 64)
@@ -50,9 +50,8 @@ class NotBlock: BoolOpBlock {
         addChild(blockBody)
         addChild(boolOpZone)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
