@@ -62,6 +62,8 @@
 		BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* AgentNode.swift */; };
 		BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C81C941459007F56F0 /* MapBlock.swift */; };
 		BF7F3C9D1CBBA2BF004530F5 /* Yoshi-win.png in Resources */ = {isa = PBXBuildFile; fileRef = BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */; };
+		BF7F3C9F1CBDD702004530F5 /* ScoreConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3C9E1CBDD702004530F5 /* ScoreConverter.swift */; };
+		BF7F3CA11CBDD86F004530F5 /* ScoreCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */; };
 		BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */; };
 		BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */; };
 		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
@@ -161,6 +163,8 @@
 		BF5339C61C941155007F56F0 /* AgentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNode.swift; sourceTree = "<group>"; };
 		BF5339C81C941459007F56F0 /* MapBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBlock.swift; sourceTree = "<group>"; };
 		BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yoshi-win.png"; sourceTree = "<group>"; };
+		BF7F3C9E1CBDD702004530F5 /* ScoreConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreConverter.swift; sourceTree = "<group>"; };
+		BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreCriterion.swift; sourceTree = "<group>"; };
 		BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
@@ -406,6 +410,8 @@
 				1DB4B0841C951E250010F727 /* AgentProtocol.swift */,
 				BFD365D61CA25BAD00956CE1 /* ProgramSupplier.swift */,
 				3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */,
+				BF7F3C9E1CBDD702004530F5 /* ScoreConverter.swift */,
+				BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -595,6 +601,7 @@
 				BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */,
 				1D69B6D21CB3B24000C1FA04 /* SeeBlock.swift in Sources */,
 				B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */,
+				BF7F3C9F1CBDD702004530F5 /* ScoreConverter.swift in Sources */,
 				BFFB1A401CAC03AE00C746CD /* StaticMapScene.swift in Sources */,
 				1D69B6C81CB29E4500C1FA04 /* TrashContainer.swift in Sources */,
 				BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */,
@@ -628,6 +635,7 @@
 				1D69B6DA1CB5592600C1FA04 /* ToiletBlock.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
 				1DB4B0911C991F260010F727 /* ProgramBlocks.swift in Sources */,
+				BF7F3CA11CBDD86F004530F5 /* ScoreCriterion.swift in Sources */,
 				BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */,
 				3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */,
 				1D69B6DC1CB6A0BE00C1FA04 /* WallBlock.swift in Sources */,
