@@ -70,7 +70,7 @@ class PlayingViewController: UIViewController {
                 height: self.winningScreen.bounds.height
             )
             }, completion: { finished in
-                // Handle rating
+//                // Handle rating
                 if finished {
                     let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
                     if isPlayingPresetMap {
@@ -78,22 +78,20 @@ class PlayingViewController: UIViewController {
                         let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
                         let toAppearStars = self.stars[0..<rating]
                         for (index, star) in toAppearStars.enumerate() {
-                            let delay = Int64(index) * Int64(self.animationDelay) * Int64(NSEC_PER_SEC)
+                            let delay = Int64(index) * Int64(self.animationDelay) * Int64(NSEC_PER_SEC) * 2
                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
                                 star.hidden = false
-                                UIView.animateKeyframesWithDuration(
-                                    self.animationDelay, delay: 0.0,
-                                    options: UIViewKeyframeAnimationOptions.AllowUserInteraction,
-                                    animations: {
-                                        star.transform = CGAffineTransformRotate(star.transform, CGFloat(M_PI))
-                                    }, completion: { finished in
-                                        UIView.animateKeyframesWithDuration(
-                                            self.animationDelay, delay: 0.0,
-                                            options: UIViewKeyframeAnimationOptions.AllowUserInteraction,
-                                            animations: {
-                                                star.transform = CGAffineTransformRotate(star.transform, CGFloat(M_PI))
-                                        }, completion: nil)
+                                UIView.animateWithDuration(self.animationDelay, animations: { Void in
+                                    star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
                                 })
+                                UIView.animateWithDuration(
+                                    self.animationDelay,
+                                    delay: self.animationDelay / 2.0,
+                                    options: UIViewAnimationOptions.CurveEaseIn,
+                                    animations: { Void in
+                                        star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 2))
+                                    },
+                                    completion: nil)
                             })
                         }
                     }
