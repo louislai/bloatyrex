@@ -9,7 +9,7 @@
 import Foundation
 
 class Map: NSObject, NSCoding {
-    private var grid: [[MapUnitNode]]
+    var grid: [[MapUnitNode]]
     let numberOfRows: Int
     let numberOfColumns: Int
 

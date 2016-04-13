@@ -65,7 +65,6 @@
 		BF7F3C9F1CBDD702004530F5 /* Scorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3C9E1CBDD702004530F5 /* Scorer.swift */; };
 		BF7F3CA11CBDD86F004530F5 /* ScoreCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */; };
 		BF7F3CA31CBDDAB6004530F5 /* DefaultGameScorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3CA21CBDDAB6004530F5 /* DefaultGameScorer.swift */; };
-		BF7F3CA61CBDDEFF004530F5 /* MovesLeftCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3CA51CBDDEFF004530F5 /* MovesLeftCriterion.swift */; };
 		BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */; };
 		BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */; };
 		BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5AC1C947C5100DAE175 /* Direction.swift */; };
@@ -167,7 +166,6 @@
 		BF7F3C9E1CBDD702004530F5 /* Scorer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scorer.swift; sourceTree = "<group>"; };
 		BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreCriterion.swift; sourceTree = "<group>"; };
 		BF7F3CA21CBDDAB6004530F5 /* DefaultGameScorer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultGameScorer.swift; sourceTree = "<group>"; };
-		BF7F3CA51CBDDEFF004530F5 /* MovesLeftCriterion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovesLeftCriterion.swift; sourceTree = "<group>"; };
 		BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
@@ -330,7 +328,6 @@
 		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
-				BF7F3CA41CBDDEDA004530F5 /* ScoreCriterion */,
 				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,
@@ -388,14 +385,6 @@
 				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
 			);
 			name = ReusableComponents;
-			sourceTree = "<group>";
-		};
-		BF7F3CA41CBDDEDA004530F5 /* ScoreCriterion */ = {
-			isa = PBXGroup;
-			children = (
-				BF7F3CA51CBDDEFF004530F5 /* MovesLeftCriterion.swift */,
-			);
-			name = ScoreCriterion;
 			sourceTree = "<group>";
 		};
 		BF8E12A71C99AA8400B210C3 /* TitleScene */ = {
@@ -630,7 +619,6 @@
 				BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */,
 				3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */,
 				BFFB1A3E1CABB78F00C746CD /* MapNode.swift in Sources */,
-				BF7F3CA61CBDDEFF004530F5 /* MovesLeftCriterion.swift in Sources */,
 				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
 				1D69B6CA1CB2AA9200C1FA04 /* NestingZone.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,

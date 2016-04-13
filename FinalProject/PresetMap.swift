@@ -20,7 +20,26 @@ class PresetMap: Map {
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        self.numberOfStars = aDecoder.decodeIntegerForKey("numberOfStars")
+        self.scoresForRatings = aDecoder.decodeObjectForKey("scoresForRatings") as! [Int]
+        super.init(coder: aDecoder)
+    }
+
+    override func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeInteger(numberOfStars, forKey: "numberOfStars")
+        aCoder.encodeObject(scoresForRatings, forKey: "scoresForRatings")
+        super.encodeWithCoder(aCoder)
+    }
+
+    override func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = PresetMap(numberOfRows: numberOfRows, numberOfColumns: numberOfColumns, numberOfStars: numberOfStars)
+        for row in 0..<numberOfRows {
+            for column in 0..<numberOfColumns {
+                copy.grid[row][column] = grid[row][column].copy() as! MapUnitNode
+            }
+        }
+        copy.scoresForRatings = scoresForRatings
+        return copy
     }
 
     /// Assign the scores for different ratings
