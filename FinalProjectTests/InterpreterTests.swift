@@ -15,7 +15,7 @@ class InterpreterTests: XCTestCase {
         let program = Program.SingleStatement(Statement.ActionStatement(Action.Forward))
         let interpreter = Interpreter(program: program)
         let map = Map(numberOfRows: 2, numberOfColumns: 2)
-        map.setMapUnitAt(MapUnit.Wall, row: 1, column: 1)
+        map.setMapUnitAt(WallNode(), row: 1, column: 1)
         let agent = DummyAgent()
         var outputActions = [Action]()
         while let action = interpreter.nextAction(map, agent: agent) {
@@ -31,7 +31,7 @@ class InterpreterTests: XCTestCase {
                     Program.MultipleStatement(Statement.ActionStatement(Action.NoAction), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight))))))
         let interpreter = Interpreter(program: program)
         let map = Map(numberOfRows: 2, numberOfColumns: 2)
-        map.setMapUnitAt(MapUnit.Wall, row: 0, column: 1)
+        map.setMapUnitAt(WallNode(), row: 0, column: 1)
         let agent = DummyAgent()
         var outputActions = [Action]()
         while let action = interpreter.nextAction(map, agent: agent) {
@@ -41,10 +41,10 @@ class InterpreterTests: XCTestCase {
     }
 
     func testSimpleConditional() {
-        let program = Program.MultipleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.Wall), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))), Program.SingleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnit.EmptySpace), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward))))))
+        let program = Program.MultipleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnitType.Wall), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))), Program.SingleStatement(Statement.ConditionalStatement(ConditionalExpression.IfThenElseExpression(Predicate.CompareObservation(Observation.LookForward, MapUnitType.EmptySpace), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight)), Program.SingleStatement(Statement.ActionStatement(Action.Forward))))))
         let interpreter = Interpreter(program: program)
         let map = Map(numberOfRows: 2, numberOfColumns: 2)
-        map.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
+        map.setMapUnitAt(WallNode(), row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         while let action = interpreter.nextAction(map, agent: agent) {
@@ -54,11 +54,11 @@ class InterpreterTests: XCTestCase {
     }
 
     func testSimpleWhile() {
-        let program = Program.MultipleStatement(Statement.LoopStatement(LoopExpression.While(Predicate.CompareObservation(Observation.LookForward, MapUnit.Wall), Program.MultipleStatement(Statement.ActionStatement(Action.RotateLeft), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight))))), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))
+        let program = Program.MultipleStatement(Statement.LoopStatement(LoopExpression.While(Predicate.CompareObservation(Observation.LookForward, MapUnitType.Wall), Program.MultipleStatement(Statement.ActionStatement(Action.RotateLeft), Program.SingleStatement(Statement.ActionStatement(Action.RotateRight))))), Program.SingleStatement(Statement.ActionStatement(Action.Forward)))
         let interpreter = Interpreter(program: program)
         let map1 = Map(numberOfRows: 2, numberOfColumns: 2)
         let map2 = Map(numberOfRows: 2, numberOfColumns: 2)
-        map1.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
+        map1.setMapUnitAt(WallNode(), row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         for _ in 0..<4 {
@@ -73,11 +73,11 @@ class InterpreterTests: XCTestCase {
         let program = Program.MultipleStatement(
             .LoopStatement(
                 .While(
-                    .Negation(.CompareObservation(.LookForward, MapUnit.Goal)),
+                    .Negation(.CompareObservation(.LookForward, MapUnitType.Goal)),
                     Program.MultipleStatement(
                         .LoopStatement(
                             .While(
-                                .Negation(.CompareObservation(.LookForward, MapUnit.Wall)),
+                                .Negation(.CompareObservation(.LookForward, MapUnitType.Wall)),
                                 Program.SingleStatement(
                                     .ActionStatement(.Forward)
                                 )
@@ -97,9 +97,9 @@ class InterpreterTests: XCTestCase {
         let interpreter = Interpreter(program: program)
         let map1 = Map(numberOfRows: 2, numberOfColumns: 2)
         let map2 = Map(numberOfRows: 2, numberOfColumns: 2)
-        map2.setMapUnitAt(MapUnit.Wall, row: 1, column: 0)
+        map2.setMapUnitAt(WallNode(), row: 1, column: 0)
         let map3 = Map(numberOfRows: 2, numberOfColumns: 2)
-        map3.setMapUnitAt(MapUnit.Goal, row: 1, column: 0)
+        map3.setMapUnitAt(GoalNode(), row: 1, column: 0)
         let agent = DummyAgent()
         var outputActions = [Action]()
         for _ in 0..<4 {
