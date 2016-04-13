@@ -54,15 +54,20 @@ class PlayingViewController: UIViewController {
 
     func notifyGameWon(notification: NSNotification) {
         winningScreen.frame = CGRect(
-        x: view.bounds.width,
-        y: 0,
-        width: winningScreen.bounds.width,
-        height: winningScreen.bounds.height
+            x: view.bounds.width,
+            y: 0,
+            width: winningScreen.bounds.width,
+            height: winningScreen.bounds.height
         )
         winningScreen.hidden = false
         winningScreen.backgroundColor = UIColor.cyanColor()
         UIView.animateWithDuration(0.5, animations: { _ in
-            self.winningScreen.transform = CGAffineTransformMakeTranslation(-self.winningScreen.bounds.width, 0)
+            self.winningScreen.frame = CGRect(
+                x: self.view.bounds.width-self.winningScreen.bounds.width,
+                y: 0,
+                width: self.winningScreen.bounds.width,
+                height: self.winningScreen.bounds.height
+            )
         })
 
         // Handle rating
@@ -82,7 +87,12 @@ class PlayingViewController: UIViewController {
 
     func resetGameScene() {
         UIView.animateWithDuration(0.5, animations: { _ in
-            self.winningScreen.transform = CGAffineTransformMakeTranslation(self.winningScreen.bounds.width, 0)
+            self.winningScreen.frame = CGRect(
+                x: self.view.bounds.width,
+                y: 0,
+                width: self.winningScreen.bounds.width,
+                height: self.winningScreen.bounds.height
+            )
         })
     }
 
