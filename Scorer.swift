@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol ScoreConverter {
+protocol Scorer {
     func criteriaToScore(criteria: [ScoreCriterion]) -> Int
 }
 
 // Default implementation
-extension ScoreConverter {
+extension Scorer {
     func criteriaToScore(criteria: [ScoreCriterion]) -> Int {
         return criteria.reduce(0) { $0 + $1.value }
     }
