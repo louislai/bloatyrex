@@ -23,6 +23,14 @@ class AgentNode: MapUnitNode {
 
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
+        setOrientationTo(Direction(rawValue: aDecoder.decodeIntegerForKey("orientation"))!)
+        self.numberOfMoves = aDecoder.decodeIntegerForKey("moves") 
+    }
+
+    override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
+        aCoder.encodeInteger(orientation.rawValue, forKey: "orientation")
+        aCoder.encodeInteger(numberOfMoves, forKey: "moves")
     }
 
     /// Return true if nextAction causes the agent to reach the goal
