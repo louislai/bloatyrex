@@ -205,7 +205,7 @@ class AgentNode: MapUnitNode {
             x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0 - widthCorrection,
             y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0 - widthCorrection
         )
-        let agentMoveToContactPointAction = SKAction.moveTo(
+        let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
             duration: timePerMoveMovement * 0.5
         )
@@ -213,11 +213,13 @@ class AgentNode: MapUnitNode {
             x: contactPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
             y: contactPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
         )
-        let agentPushAction = SKAction.moveTo(
-            nextContactPoint,
-            duration: timePerMoveMovement
+        let agentPushAction = getMoveToAction(
+            nextContactPoint
         )
-        let agentRetreatAction = SKAction.moveTo(agentTargetPoint, duration: timePerMoveMovement * 0.5)
+        let agentRetreatAction = getMoveToAction(
+            agentTargetPoint,
+            duration: timePerMoveMovement * 0.5
+        )
         let allAgentActions = SKAction.sequence(
             [
                 agentMoveToContactPointAction,
@@ -342,8 +344,8 @@ class AgentNode: MapUnitNode {
         return (row: nextRow, column: nextColumn, unit: nextUnit!)
     }
 
-    private func getMoveToAction(toPoint: CGPoint) -> SKAction {
-        let moveAction = SKAction.moveTo(toPoint, duration: timePerMoveMovement)
+    private func getMoveToAction(toPoint: CGPoint, duration: NSTimeInterval = 0.6) -> SKAction {
+        let moveAction = SKAction.moveTo(toPoint, duration: duration)
         var movementTextures: [SKTexture]
         switch direction {
         case .Up: movementTextures = walkingUpTextures
@@ -355,7 +357,7 @@ class AgentNode: MapUnitNode {
             SKAction.animateWithTextures(
                 movementTextures,
                 timePerFrame: timePerFrame),
-            count: 3
+            count: Int(duration / 2 / timePerFrame)
         )
         let currentTexture = texture
         let actionSequence = SKAction.sequence([
