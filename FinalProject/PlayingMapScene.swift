@@ -26,7 +26,7 @@ struct PlayingMapSceneConstants {
 
 class PlayingMapScene: StaticMapScene {
     var running = false
-    var movesLeft: Int
+    var movesLeft = 0
     weak var programSupplier: ProgramSupplier!
     var programRetrieved = false
     var gameWon: Bool?
@@ -59,7 +59,6 @@ class PlayingMapScene: StaticMapScene {
 
 
     override init(size: CGSize, zoomLevel: CGFloat, map: Map) {
-        self.movesLeft = 30
         if let _ = map as? PresetMap {
             self.isPlayingPresetMap = true
         } else {
@@ -99,6 +98,9 @@ class PlayingMapScene: StaticMapScene {
     override func setup() {
         super.setup()
         setupButtons()
+
+        // Since only 1 agent set movesLeft to the agent's movesLeft
+        movesLeft = mapNode.activeAgentNodes[0].numberOfMoves
     }
 
     func toggleRun() {
