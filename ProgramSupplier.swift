@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ProgramSupplier {
+protocol ProgramSupplier: class {
     func retrieveProgram() -> Program?
 }

@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ProgramBlocksSupplier {
+protocol ProgramBlocksSupplier: class {
     func retrieveProgramBlocks() -> ProgramBlocks
 }

@@ -27,7 +27,7 @@ struct PlayingMapSceneConstants {
 class PlayingMapScene: StaticMapScene {
     var running = false
     var movesLeft: Int
-    var programSupplier: ProgramSupplier!
+    weak var programSupplier: ProgramSupplier!
     var programRetrieved = false
     var gameWon: Bool?
     var playButton: SKButton!

@@ -12,9 +12,9 @@ class PlayingViewController: UIViewController {
     var map: Map!
 
 
-    var programSupplier: ProgramSupplier!
-    var displayedProgramBlocksSupplier: ProgramBlocksSupplier!
-    var codeBlocksDisplay: CodeBlocksViewController!
+    weak var programSupplier: ProgramSupplier!
+    weak var displayedProgramBlocksSupplier: ProgramBlocksSupplier!
+    weak var codeBlocksDisplay: CodeBlocksViewController!
     @IBOutlet var winningScreen: UIView!
     @IBOutlet var starSlots: [UIImageView]!
 

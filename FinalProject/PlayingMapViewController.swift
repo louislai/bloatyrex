@@ -13,7 +13,7 @@ class PlayingMapViewController: UIViewController {
 
     var map: Map!
     var scene: PlayingMapScene!
-    var programSupplier: ProgramSupplier!
+    weak var programSupplier: ProgramSupplier!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
