@@ -58,7 +58,7 @@ class BlockButton: SKNode {
         block.hidden = true
         block.position = CGPoint(x: 0, y: 0)
     }
-    
+
     func moveBlock(displacement: CGPoint) {
         block.position.x += displacement.x
         block.position.y += displacement.y

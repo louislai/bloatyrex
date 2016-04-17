@@ -135,7 +135,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = woodButton
             pressState = .AddingBlock(woodButton.blockCategory)
         }
-        
+
         heldBlock?.pickBlock(true, scale: scale)
 
         if programBlocks.containsPoint(locationInContent) {
