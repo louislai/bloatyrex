@@ -58,9 +58,9 @@ class TextureManager {
     static let monsterUpTexture = SKTexture(
         rect: CGRect(
             x: 0.0,
-            y: 217.0/499.0,
+            y: 167.0/439.0,
             width: 48.0/712.0,
-            height: 47.0/499.0
+            height: 47.0/449.0
             ),
         inTexture: TextureManager.retrieveTexture("monster")
     )
