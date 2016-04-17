@@ -65,7 +65,7 @@ extension PackageSelectorViewController {
     }
 }
 
-// MARK:UICollectionViewDelegateFlowLayout
+// MARK: UICollectionViewDelegateFlowLayout
 extension PackageSelectorViewController : UICollectionViewDelegateFlowLayout {
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
@@ -74,5 +74,16 @@ extension PackageSelectorViewController : UICollectionViewDelegateFlowLayout {
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return sectionInsets
+    }
+}
+
+// MARK: UICollectionViewDelegate
+extension PackageSelectorViewController {
+    override func collectionView(collectionView: UICollectionView,
+        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
+        if let packageCell = cell as? PackageCell {
+            print(packageCell.packageTitle.text)
+        }
     }
 }
