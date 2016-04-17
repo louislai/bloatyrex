@@ -27,11 +27,13 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let woodButton = BlockButton(imageNamed: "wooden-block", blockType: BlockType.Wood, blockCategory: BlockCategory.Object)
     let ifButton = BlockButton(imageNamed: "trash", blockType: BlockType.If, blockCategory: BlockCategory.Action)
     let notButton = BlockButton(imageNamed: "poo", blockType: BlockType.Not, blockCategory: BlockCategory.BoolOp)
+    let trashZone = TrashZone()
     private var programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
     var movedBlock: MovableBlockProtocol?
     var pressState = PressState.Idle
     var editEnabled = false
+    var programBlockFrame: CGRect?
 
     let insertionPosition = InsertionPosition()
 
@@ -58,7 +60,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
-
         if editEnabled {
             upButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.3)
             turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
@@ -84,9 +85,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             addNodeToOverlay(turnRightButton)
             addNodeToOverlay(ifButton)
             addNodeToOverlay(notButton)
-            programBlocks.revealTrash()
-        } else {
-            programBlocks.hideTrash()
+            addNodeToOverlay(trashZone)
         }
         programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height * 0.9)
         addNodeToContent(programBlocks)
@@ -152,6 +151,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 block.deactivateDropZone()
                 pressState = .MovingBlock
             }
+            programBlockFrame = programBlocks.calculateAccumulatedFrame()
         }
     }
 
@@ -164,6 +164,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         let previousLocation = touch.previousLocationInNode(self)
         let xMovement = touchLocation.x - previousLocation.x
         let yMovement = touchLocation.y - previousLocation.y
+        trashZone.unfocus()
+        programBlocks.endHover()
 
         switch pressState {
         case .AddingBlock(let category):
@@ -171,17 +173,23 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
                     programBlocks.hover(touchLocation, category: category, insertionHandler: insertionPosition)
+                } else {
+                    trashZone.focus(insertionPosition)
                 }
             }
         case .MovingBlock:
-            if let block = movedBlock {
+            if let block = movedBlock, frame = programBlockFrame {
                 if let _ = block as? MainBlock {
                     programBlocks.shift(CGPoint(x: xMovement, y: yMovement))
                 } else {
                     block.position.x += xMovement
                     block.position.y += yMovement
-                    if programBlocks.containsPoint(touchLocation) {
+                    if frame.contains(touchLocation) {
+                        print("wat")
                         programBlocks.hover(touchLocation, category: block.category, insertionHandler: insertionPosition)
+                    } else {
+                        print("woot")
+                        trashZone.focus(insertionPosition)
                     }
                 }
             }
@@ -194,6 +202,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         if !editEnabled {
             return
         }
+        trashZone.unfocus()
         switch pressState {
         case .AddingBlock:
             if let block = heldBlock {

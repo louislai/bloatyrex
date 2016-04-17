@@ -16,22 +16,11 @@ enum BlockCategory {
 
 class ProgramBlocks: SKNode, ContainerBlockProtocol {
     private var blocks = [CodeBlock]()
-    private let trash = TrashZone()
 
     override init() {
         super.init()
         blocks.append(MainBlock(containingBlock: self))
-        trash.position = CGPoint(x: 100, y: -400)
-        self.addChild(trash)
         self.addChild(blocks[0])
-    }
-
-    func hideTrash() {
-        trash.alpha = 0
-    }
-
-    func revealTrash() {
-        trash.alpha = 1
     }
 
     func hover(location: CGPoint, category: BlockCategory, insertionHandler: InsertionPosition) {
@@ -50,7 +39,6 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         let location = CGPoint(x: updatedX, y: updatedY)
         var closestDistance = CGFloat.max
         var closestDropZone = blocks[0].actionZones[0]
-        trash.unfocus()
         for block in blocks {
             block.unfocus()
             let zones: [DropZone]
@@ -75,16 +63,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
                 }
             }
         }
-        let zone = trash.dropZoneCenter
-        let trashDistance = (CGFloat)(sqrt(pow((Float)(zone.x - location.x), 2) +
-            pow((Float)(zone.y - location.y), 2)))
-        insertionHandler.trash = false
-        if trashDistance < closestDistance {
-            trash.focus(insertionHandler)
-            insertionHandler.trash = true
-        } else {
-            closestDropZone.focus(insertionHandler)
-        }
+        closestDropZone.focus(insertionHandler)
     }
 
     func endHover() {
@@ -97,7 +76,6 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
                 zone.displayNormal()
             }
         }
-        trash.unfocus()
     }
 
     func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition) {

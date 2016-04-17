@@ -19,8 +19,8 @@ class TrashZone: DropZone {
 
     init() {
         let trash = SKSpriteNode(imageNamed: "trash-container")
-        trash.size.width = 100
-        trash.size.height = 100
+        trash.size.width = 64
+        trash.size.height = 64
         let size = trash.calculateAccumulatedFrame()
         super.init(size: CGSize(width: size.width, height: size.height),
                    dropZoneCategory: BlockCategory.Action,
