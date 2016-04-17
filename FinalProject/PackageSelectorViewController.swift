@@ -9,19 +9,26 @@
 import Foundation
 import UIKit
 
+struct PackageSelectorConstants {
+    static let cellWidth: CGFloat = 300.0
+    static let cellHeight: CGFloat = 400.0
+}
+
 class PackageSelectorViewController: UICollectionViewController {
     private let reuseIdentifier = "packageCell"
-    private let packageNames = ["hi", "fish", "hi", "fish", "hi", "fish", "hi", "fish", "hi"]
-    private let thumbnailSize: CGFloat = 300.0
-    private let sectionInsets = UIEdgeInsets(top: 180, left: 400.0, bottom: 10.0, right: 5.0)
+    private let packageNames = ["The Basics", "Loops", "hi", "fish", "hi", "fish", "hi", "fish", "hi"]
+    private let sectionInsets = UIEdgeInsets(top: 180,
+        left: (GlobalConstants.Dimension.screenWidth - PackageSelectorConstants.cellWidth) / 2,
+        bottom: 150.0, right: 5.0)
+    private var cellWidth = PackageSelectorConstants.cellWidth
+    private var cellHeight = PackageSelectorConstants.cellHeight
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if let layout = self.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.itemSize = CGSize(width: GlobalConstants.Dimension.screenWidth / 3,
-                                     height: GlobalConstants.Dimension.screenWidth / 3)
             layout.scrollDirection = .Horizontal
-            layout.minimumLineSpacing = 200
+            layout.minimumLineSpacing = GlobalConstants.Dimension.screenWidth / 2 -
+                PackageSelectorConstants.cellWidth
         }
     }
 
@@ -45,8 +52,15 @@ extension PackageSelectorViewController {
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier,
                        forIndexPath: indexPath) as! PackageCell
-        let fullSizedImage = UIImage(named: "eyes")
+        let fullSizedImage = UIImage(named: "Yoshi-win")
         cell.imageView.image = fullSizedImage
+        cell.packageTitle.text = packageNames[indexPath.item]
+        cell.packageTitle.textColor = UIColor.whiteColor()
+        cell.packageTitle.font = UIFont(name: GlobalConstants.Font.standardFontName, size: 38)
+        cell.progressIndicator.text = "0/10"
+        cell.progressIndicator.textColor = UIColor.whiteColor()
+        cell.progressIndicator.font = UIFont(name: GlobalConstants.Font.standardFontName, size: 38)
+        cell.backgroundColor = UIColor.darkGrayColor()
         return cell
     }
 }
@@ -55,7 +69,7 @@ extension PackageSelectorViewController {
 extension PackageSelectorViewController : UICollectionViewDelegateFlowLayout {
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: thumbnailSize, height: thumbnailSize)
+        return CGSize(width: cellWidth, height: cellHeight)
     }
 
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {

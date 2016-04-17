@@ -41,20 +41,35 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="packageCell" id="lYt-H1-fiF" customClass="PackageCell" customModule="FinalProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="240" height="128"/>
+                                <rect key="frame" x="0.0" y="64" width="300" height="400"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i6B-mI-fQ4">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <rect key="frame" x="0.0" y="50" width="300" height="300"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PackageTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-ME-Efw">
+                                            <rect key="frame" x="0.0" y="8" width="300" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NB-HK-UZy">
+                                            <rect key="frame" x="0.0" y="354" width="300" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <size key="customSize" width="300" height="400"/>
                                 <connections>
                                     <outlet property="imageView" destination="i6B-mI-fQ4" id="Xay-pq-RML"/>
+                                    <outlet property="packageTitle" destination="FP0-ME-Efw" id="weq-V0-XOJ"/>
+                                    <outlet property="progressIndicator" destination="9NB-HK-UZy" id="Ceo-Js-xHa"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

@@ -11,4 +11,6 @@ import UIKit
 
 class PackageCell : UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var packageTitle: UILabel!
+    @IBOutlet weak var progressIndicator: UILabel!
 }
