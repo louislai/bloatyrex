@@ -102,7 +102,6 @@ class PlayingMapScene: StaticMapScene {
     override func setup() {
         super.setup()
         setupButtons()
-
         // Display moves left
         if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
