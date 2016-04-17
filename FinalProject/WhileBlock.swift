@@ -57,7 +57,7 @@ class WhileBlock: CodeBlock {
         }
         return zones
     }
-    
+
     private func getNestedObjectZones() -> [DropZone] {
         var zones = [DropZone]()
         for block in nestedBlocks.blocks {

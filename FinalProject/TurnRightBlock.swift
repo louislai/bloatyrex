@@ -11,7 +11,7 @@ import SpriteKit
 class TurnRightBlock: CodeBlock, HighlightableBlockProtocol {
     let blockBody: SKSpriteNode
     var highlightLayer: SKShapeNode?
-    
+
     func highlight() {
         unhighlight()
         let frame = blockBody.calculateAccumulatedFrame()
@@ -23,7 +23,7 @@ class TurnRightBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(newLayer)
         highlightLayer = newLayer
     }
-    
+
     func unhighlight() {
         if let layer = highlightLayer {
             layer.removeFromParent()

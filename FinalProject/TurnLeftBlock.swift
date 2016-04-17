@@ -23,13 +23,13 @@ class TurnLeftBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(newLayer)
         highlightLayer = newLayer
     }
-    
+
     func unhighlight() {
         if let layer = highlightLayer {
             layer.removeFromParent()
         }
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "turn-left-block")
         blockBody.position = CGPoint(x: blockBody.size.width / 2,
