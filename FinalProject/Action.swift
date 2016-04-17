@@ -10,8 +10,8 @@ import Foundation
 
 enum Action {
     case NoAction
-    case Forward
-    case RotateLeft
-    case RotateRight
-    case Jump
+    case Forward(HighlightableBlockProtocol?)
+    case RotateLeft(HighlightableBlockProtocol?)
+    case RotateRight(HighlightableBlockProtocol?)
+    case Jump(HighlightableBlockProtocol?)
 }
