@@ -44,6 +44,7 @@ class PannableScene: SKScene {
     var overlay = SKNode()
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
+    private var currentScale: CGFloat
     private var minimumScale: CGFloat
     private var maximumScale: CGFloat
     private var isPanningFromOverlay = false
@@ -70,6 +71,7 @@ class PannableScene: SKScene {
         horizontalPanDisabled = disableHorizontalPan
         verticalPanDisabled = disableVerticalPan
         doubleTapDisabled = disableDoubleTap
+        currentScale = initialScale
         super.init(size: size)
         viewpoint.setScale(initialScale)
         overlay.zPosition = overlayZPosition
@@ -217,6 +219,7 @@ class PannableScene: SKScene {
                 } else if newScale > maximumScale {
                     newScale = maximumScale
                 }
+                currentScale = newScale
                 viewpoint.setScale(newScale)
                 sender.scale = 1.0
             }
@@ -259,7 +262,7 @@ class PannableScene: SKScene {
                 if viewpoint.xScale == minimumScale {
                     newScale = initialScale
                 }
-
+                currentScale = newScale
                 viewpoint.setScale(newScale)
             }
         }
@@ -279,6 +282,13 @@ class PannableScene: SKScene {
     */
     func addNodeToOverlay(node: SKNode) {
         overlay.addChild(node)
+    }
+
+    /**
+        Returns the current scale of the viewpoint.
+    */
+    func getScale() -> CGFloat {
+        return currentScale
     }
 
     // Moves the viewpoint by a given X and Y value.
