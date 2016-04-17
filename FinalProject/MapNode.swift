@@ -13,7 +13,6 @@ class MapNode: SKNode {
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
-    var originalMovesLeft = 30
     private var numberOfRows: Int {
         return map.numberOfRows
     }
