@@ -283,6 +283,10 @@ extension LevelDesigningMapScene {
                 updateCurrentItemSelected(.Hole, nodeName: name)
             case "Wooden Block":
                 updateCurrentItemSelected(.WoodenBlock, nodeName: name)
+            case "Monster":
+                updateCurrentItemSelected(.Monster, nodeName: name)
+            case "Door":
+                updateCurrentItemSelected(.Door, nodeName: name)
             case "Add Top", "Remove Top", "Add Bottom", "Remove Bottom",
                 "Add Left", "Remove Left", "Add Right", "Remove Right":
                 updateGrid(name)
@@ -508,9 +512,11 @@ extension LevelDesigningMapScene {
                         MapUnitType.Goal.texture,
                         MapUnitType.Wall.texture,
                         MapUnitType.Hole.texture,
-                        MapUnitType.WoodenBlock.texture
+                        MapUnitType.WoodenBlock.texture,
+                        MapUnitType.Monster.texture,
+                        MapUnitType.Door.texture
         ]
-        let textureNames = ["Agent", "Block", "Toilet", "Wall", "Hole", "Wooden Block"]
+        let textureNames = ["Agent", "Block", "Toilet", "Wall", "Hole", "Wooden Block", "Monster", "Door"]
         for position in 0..<textures.count {
             let spriteNode = SKSpriteNode(texture: textures[position])
             spriteNode.size = blockSize
