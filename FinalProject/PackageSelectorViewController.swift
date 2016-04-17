@@ -11,7 +11,7 @@ import UIKit
 
 class PackageSelectorViewController: UICollectionViewController {
     private let reuseIdentifier = "packageCell"
-    private let packageNames = ["hi", "fish", "hi", "fish", "hi", "fish", "hi", "fish", "hi", "fish"]
+    private let packageNames = ["hi", "fish", "hi", "fish", "hi", "fish", "hi", "fish", "hi"]
     private let thumbnailSize: CGFloat = 300.0
     private let sectionInsets = UIEdgeInsets(top: 180, left: 400.0, bottom: 10.0, right: 5.0)
 
@@ -36,12 +36,15 @@ extension PackageSelectorViewController {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView,
+        numberOfItemsInSection section: Int) -> Int {
         return packageNames.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PackageCell
+    override func collectionView(collectionView: UICollectionView,
+        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier,
+                       forIndexPath: indexPath) as! PackageCell
         let fullSizedImage = UIImage(named: "eyes")
         cell.imageView.image = fullSizedImage
         return cell
