@@ -13,6 +13,7 @@ class MapNode: SKNode {
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
+    var originalMovesLeft = 0
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -85,6 +86,8 @@ class MapNode: SKNode {
                         sprite.row = row
                         sprite.column = column
                         activeAgentNodes.append(sprite)
+                        // This is fine since only 1 agent
+                        originalMovesLeft = sprite.numberOfMoves
                     }
                     unitsLayer.addChild(sprite)
                 }

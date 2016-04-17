@@ -24,7 +24,7 @@ class AgentNode: MapUnitNode {
     required convenience init?(coder aDecoder: NSCoder) {
         self.init()
         setOrientationTo(Direction(rawValue: aDecoder.decodeIntegerForKey("orientation"))!)
-        self.numberOfMoves = aDecoder.decodeIntegerForKey("moves") 
+        self.numberOfMoves = aDecoder.decodeIntegerForKey("moves")
     }
 
     override func encodeWithCoder(aCoder: NSCoder) {
