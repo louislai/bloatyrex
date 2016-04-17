@@ -14,7 +14,7 @@ class AgentNode: MapUnitNode {
     var row: Int!
     var column: Int!
     var delegate: LanguageDelegate?
-    var numberOfMoves = 11
+    var numberOfMoves = 30
     let timePerMoveMovement: NSTimeInterval = 0.5
 
     required init(type: MapUnitType = .Agent) {

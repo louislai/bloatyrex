@@ -27,7 +27,6 @@ class NestingZone: SKNode, ContainerBlockProtocol {
             blocks.insert(block, atIndex: position - 1)
             self.addChild(block)
             flushBlocks()
-            print()
         }
     }
 
@@ -64,6 +63,8 @@ class NestingZone: SKNode, ContainerBlockProtocol {
             block = Statement.ActionStatement(action)
         case .LoopExpressionConstruct(let loopExpression):
             block = Statement.LoopStatement(loopExpression)
+        case .ConditionalExpressionConstruct(let conditionalExpression):
+            block = Statement.ConditionalStatement(conditionalExpression)
         default:
             block = nil
         }

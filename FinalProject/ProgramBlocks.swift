@@ -105,7 +105,11 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
     }
 
     func getCode() -> Program? {
-        return parseBlock(1)
+        if let code = parseBlock(1) {
+            return code
+        }
+        print("boom")
+        return nil
     }
 
     func removeBlockAtIndex(index: Int) {

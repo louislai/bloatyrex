@@ -34,7 +34,8 @@ class WhileBlock: CodeBlock {
 
     override var objectDropZones: [DropZone] {
         get {
-            return boolOpZone.objectZones
+            let result = getNestedObjectZones() + boolOpZone.objectZones
+            return result
         }
     }
 
@@ -53,6 +54,14 @@ class WhileBlock: CodeBlock {
         var zones = [DropZone]()
         for block in nestedBlocks.blocks {
             zones.appendContentsOf(block.boolOpZones)
+        }
+        return zones
+    }
+    
+    private func getNestedObjectZones() -> [DropZone] {
+        var zones = [DropZone]()
+        for block in nestedBlocks.blocks {
+            zones.appendContentsOf(block.objectDropZones)
         }
         return zones
     }

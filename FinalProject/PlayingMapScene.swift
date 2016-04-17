@@ -59,7 +59,7 @@ class PlayingMapScene: StaticMapScene {
 
 
     override init(size: CGSize, zoomLevel: CGFloat, map: Map) {
-        self.movesLeft = 11
+        self.movesLeft = 30
         if let _ = map as? PresetMap {
             self.isPlayingPresetMap = true
         } else {
