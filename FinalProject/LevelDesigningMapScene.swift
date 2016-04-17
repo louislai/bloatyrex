@@ -146,12 +146,12 @@ class LevelDesigningMapScene: SKScene {
         let blockNode = mapUnitType.nodeClass.init()
         setBlock(blockNode, row: row, column: column)
     }
-    
+
     func setBlock(mapUnitNode: MapUnitNode, row: Int, column: Int) {
         let blockNode = mapUnitNode
         // Update model
         map.setMapUnitAt(blockNode, row: row, column: column)
-        
+
         // Update view
         blockNode.size = blockSize
         blockNode.position = pointFor(row, column: column)
@@ -162,7 +162,7 @@ class LevelDesigningMapScene: SKScene {
         if agentNode != nil {
             print("Agent: (Moves: \(agentNode.numberOfMoves)) (Row: \(agentRow)) (Column: \(agentColumn))")
         }
-        
+
         //printGrid()
     }
 
@@ -436,7 +436,7 @@ extension LevelDesigningMapScene {
             }
         }
         addBlocks()
-        
+
         /*
         if updateDirection[0] == "Remove" {
             agentNode = mapCopy.retrieveMapUnitAt(agentRow, column: agentColumn) as! AgentNode
@@ -465,7 +465,7 @@ extension LevelDesigningMapScene {
                 break
             }
         } */
-        
+
         updateArrows()
     }
 
@@ -687,40 +687,40 @@ extension LevelDesigningMapScene {
             updateNumberOfMovesLabel()
         }
     }
-    
+
     func updateAgent(numberOfMoves: Int, row: Int, column: Int) {
         agentNode.assignNumberOfMoves(numberOfMoves)
         agentRow = row
         agentColumn = column
 
         setBlock(agentNode, row: row, column: column)
-        
+
         if numberOfMovesLabel != nil {
             updateNumberOfMovesLabel()
         }
     }
-    
+
     func addAgentSettings() {
         // Update view
         let agent = SKSpriteNode(texture: MapUnitType.Agent.texture)
         agent.position = CGPoint(x: -20, y: 0)
-        
+
         numberOfMovesLabel = SKLabelNode(text: "\(agentNode.numberOfMoves)")
         numberOfMovesLabel.position = CGPoint(x: 20, y: 0)
         numberOfMovesLabel.fontColor = UIColor.blackColor()
         numberOfMovesLabel.horizontalAlignmentMode = .Center
         numberOfMovesLabel.verticalAlignmentMode = .Center
-        
+
         let incrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("increase"))
         incrementButton.name = "Increase Move"
         incrementButton.size = CGSize(width: 10, height: 10)
         incrementButton.position = CGPoint(x: 20, y: 20)
-        
+
         let decrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("decrease"))
         decrementButton.name = "Decrease Move"
         decrementButton.size = CGSize(width: 10, height: 10)
         decrementButton.position = CGPoint(x: 20, y: -20)
-        
+
         let background = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: 100, height: 60))
         background.position = CGPoint(x: -225, y: 300)
         background.addChild(agent)
@@ -729,19 +729,19 @@ extension LevelDesigningMapScene {
         background.addChild(decrementButton)
         addChild(background)
     }
-    
+
     func increaseNumberOfMoves() {
         agentNode.assignNumberOfMoves(agentNode.numberOfMoves + 1)
         updateNumberOfMovesLabel()
     }
-    
+
     func decreaseNumberOfMoves() {
         if agentNode.numberOfMoves > 1 {
             agentNode.assignNumberOfMoves(agentNode.numberOfMoves - 1)
         }
         updateNumberOfMovesLabel()
     }
-    
+
     func updateNumberOfMovesLabel() {
         numberOfMovesLabel.text = "\(agentNode.numberOfMoves)"
     }
