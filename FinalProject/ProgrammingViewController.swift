@@ -9,7 +9,7 @@
 import UIKit
 
 class ProgrammingViewController: UIViewController {
-    var delegate: FinishedEditingProgramDelegate!
+    weak var delegate: FinishedEditingProgramDelegate!
     var map: Map!
     var programBlocksSupplier: ProgramBlocksSupplier!
     var storedProgramBlocks: ProgramBlocks!

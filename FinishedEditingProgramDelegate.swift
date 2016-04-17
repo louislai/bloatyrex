@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FinishedEditingProgramDelegate {
+protocol FinishedEditingProgramDelegate: class {
     /// Handles when the user has finished editing the program
     func finishedEditing(controller: ProgrammingViewController)
 }
