@@ -65,6 +65,7 @@ class PlayingMapScene: StaticMapScene {
             self.isPlayingPresetMap = false
         }
         super.init(size: size, zoomLevel: zoomLevel, map: map)
+        self.movesLeft = mapNode.originalMovesLeft
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -98,9 +99,6 @@ class PlayingMapScene: StaticMapScene {
     override func setup() {
         super.setup()
         setupButtons()
-
-        // Since only 1 agent set movesLeft to the agent's movesLeft
-        movesLeft = mapNode.activeAgentNodes[0].numberOfMoves
     }
 
     func toggleRun() {
