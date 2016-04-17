@@ -120,7 +120,7 @@ class AgentNode: MapUnitNode {
                 SKAction.animateWithTextures(
                 walkingUpTextures,
                 timePerFrame: timePerFrame),
-                count: 10
+                count: 5
             )
             let currentTexture = texture
             let actionSequence = SKAction.sequence([
