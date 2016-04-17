@@ -8,8 +8,27 @@
 
 import SpriteKit
 
-class TurnRightBlock: CodeBlock {
+class TurnRightBlock: CodeBlock, HighlightableBlockProtocol {
     let blockBody: SKSpriteNode
+    var highlightLayer: SKShapeNode?
+    
+    func highlight() {
+        unhighlight()
+        let frame = blockBody.calculateAccumulatedFrame()
+        let newLayer = SKShapeNode(rect: CGRect(x: 0, y: CodeBlock.dropZoneSize, width: frame.width, height: frame.height),
+                                   cornerRadius: 0)
+        newLayer.fillColor = UIColor.yellowColor()
+        newLayer.alpha = 0.3
+        newLayer.zPosition = 3
+        self.addChild(newLayer)
+        highlightLayer = newLayer
+    }
+    
+    func unhighlight() {
+        if let layer = highlightLayer {
+            layer.removeFromParent()
+        }
+    }
 
     override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "turn-right-block")
@@ -21,7 +40,7 @@ class TurnRightBlock: CodeBlock {
     }
 
     override func getBlockConstruct() -> Construct {
-        return Construct.ActionConstruct(Action.RotateRight)
+        return Construct.ActionConstruct(Action.RotateRight(self))
     }
 
     required init?(coder aDecoder: NSCoder) {

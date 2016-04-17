@@ -11,6 +11,7 @@ import Foundation
 class Interpreter {
     var instructions = [Instructions]()
     var programCounter = 0
+    var previousAction: Action?
 
     init(program: Program) {
         self.instructions = compileProgram(program)
@@ -18,11 +19,38 @@ class Interpreter {
     }
 
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
+        if let action = previousAction {
+            switch action {
+            case .Forward(let block):
+                block?.unhighlight()
+            case .Jump(let block):
+                block?.unhighlight()
+            case .RotateLeft(let block):
+                block?.unhighlight()
+            case .RotateRight(let block):
+                block?.unhighlight()
+            default:
+                break
+            }
+        }
         switch instructions[programCounter] {
         case .Done:
             return nil
         case .ActionInstruction(let action):
             programCounter += 1
+            previousAction = action
+            switch action {
+            case .Forward(let block):
+                block?.highlight()
+            case .Jump(let block):
+                block?.highlight()
+            case .RotateLeft(let block):
+                block?.highlight()
+            case .RotateRight(let block):
+                block?.highlight()
+            default:
+                break
+            }
             return action
         case .Jump(let displacement):
             programCounter += displacement

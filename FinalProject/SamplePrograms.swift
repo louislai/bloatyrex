@@ -10,27 +10,27 @@ import Foundation
 
 struct Sample {
     static let sampleProgram = Program.MultipleStatement(
-        Statement.ActionStatement(Action.Forward),
+        Statement.ActionStatement(Action.Forward(nil)),
         Program.MultipleStatement(
-            Statement.ActionStatement(Action.RotateRight),
+            Statement.ActionStatement(Action.RotateRight(nil)),
             Program.MultipleStatement(
-                Statement.ActionStatement(Action.Forward),
+                Statement.ActionStatement(Action.Forward(nil)),
                 Program.MultipleStatement(
-                    Statement.ActionStatement(Action.Forward),
+                    Statement.ActionStatement(Action.Forward(nil)),
                     Program.MultipleStatement(
-                        Statement.ActionStatement(Action.Forward),
+                        Statement.ActionStatement(Action.Forward(nil)),
                         Program.MultipleStatement(
-                            Statement.ActionStatement(Action.Forward),
+                            Statement.ActionStatement(Action.Forward(nil)),
                             Program.MultipleStatement(
-                                Statement.ActionStatement(Action.Forward),
+                                Statement.ActionStatement(Action.Forward(nil)),
                                 Program.MultipleStatement(
-                                    Statement.ActionStatement(Action.Forward),
+                                    Statement.ActionStatement(Action.Forward(nil)),
                                     Program.MultipleStatement(
-                                        Statement.ActionStatement(Action.Forward),
+                                        Statement.ActionStatement(Action.Forward(nil)),
                                         Program.MultipleStatement(
-                                            Statement.ActionStatement(Action.RotateRight),
+                                            Statement.ActionStatement(Action.RotateRight(nil)),
                                             Program.SingleStatement(
-                                                Statement.ActionStatement(Action.Forward)
+                                                Statement.ActionStatement(Action.Forward(nil))
                                             )
                                         )
                                     )
@@ -44,25 +44,25 @@ struct Sample {
     )
 
     static let sampleProgram2 = Program.MultipleStatement(
-            Statement.ActionStatement(Action.RotateRight),
+            Statement.ActionStatement(Action.RotateRight(nil)),
             Program.MultipleStatement(
-                Statement.ActionStatement(Action.Forward),
+                Statement.ActionStatement(Action.Forward(nil)),
                 Program.MultipleStatement(
-                    Statement.ActionStatement(Action.Forward),
+                    Statement.ActionStatement(Action.Forward(nil)),
                     Program.MultipleStatement(
-                        Statement.ActionStatement(Action.Forward),
+                        Statement.ActionStatement(Action.Forward(nil)),
                         Program.MultipleStatement(
-                            Statement.ActionStatement(Action.Forward),
+                            Statement.ActionStatement(Action.Forward(nil)),
                             Program.MultipleStatement(
-                                Statement.ActionStatement(Action.Forward),
+                                Statement.ActionStatement(Action.Forward(nil)),
                                 Program.MultipleStatement(
-                                    Statement.ActionStatement(Action.Forward),
+                                    Statement.ActionStatement(Action.Forward(nil)),
                                     Program.MultipleStatement(
-                                        Statement.ActionStatement(Action.Forward),
+                                        Statement.ActionStatement(Action.Forward(nil)),
                                         Program.MultipleStatement(
-                                            Statement.ActionStatement(Action.RotateRight),
+                                            Statement.ActionStatement(Action.RotateRight(nil)),
                                             Program.SingleStatement(
-                                                Statement.ActionStatement(Action.Forward)
+                                                Statement.ActionStatement(Action.Forward(nil))
                                             )
                                         )
                                     )
@@ -83,18 +83,18 @@ struct Sample {
                         .While(
                             .Negation(.CompareObservation(.LookForward, MapUnitType.Wall)),
                             Program.SingleStatement(
-                                .ActionStatement(.Forward)
+                                .ActionStatement(.Forward(nil))
                             )
                         )
                     ),
                     Program.SingleStatement(
-                        Statement.ActionStatement(Action.RotateRight)
+                        Statement.ActionStatement(Action.RotateRight(nil))
                     )
                 )
             )
         ),
         Program.SingleStatement(
-            Statement.ActionStatement(Action.Forward)
+            Statement.ActionStatement(Action.Forward(nil))
         )
     )
 }
