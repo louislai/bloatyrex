@@ -109,6 +109,7 @@ class PannableScene: SKScene {
     during initialization.
     */
     func handlePan(sender: UIPanGestureRecognizer) {
+        sender.cancelsTouchesInView = false
         if sender.state == .Began {
             var touchLocation = sender.locationInView(sender.view!)
             touchLocation = self.convertPointFromView(touchLocation)

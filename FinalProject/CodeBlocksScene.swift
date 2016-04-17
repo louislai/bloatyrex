@@ -56,6 +56,14 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         }
         addNodeToContent(programBlocks)
     }
+    
+    private func resetTouches() {
+        programBlocks.endHover()
+        trashZone.unfocus()
+        if let block = heldBlock {
+            block.pickBlock(false)
+        }
+    }
 
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -93,6 +101,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if touches.count > 1 {
+            resetTouches()
+        }
         if !editEnabled {
             return
         }
@@ -186,10 +197,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     block.position.x += xMovement
                     block.position.y += yMovement
                     if frame.contains(touchLocation) {
-                        print("wat")
                         programBlocks.hover(touchLocation, category: block.category, insertionHandler: insertionPosition)
                     } else {
-                        print("woot")
                         trashZone.focus(insertionPosition)
                     }
                 }
@@ -200,6 +209,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if touches.count > 1 {
+            resetTouches()
+        }
         if !editEnabled {
             return
         }
