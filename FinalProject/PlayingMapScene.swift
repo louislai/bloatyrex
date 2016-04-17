@@ -76,8 +76,12 @@ class PlayingMapScene: StaticMapScene {
         if currentTime - timeOfLastMove < timePerMove {
             return
         }
-        if movesLeft == 0 || mapNode.activeAgentNodes.isEmpty {
+        if mapNode.activeAgentNodes.isEmpty {
             running = false
+            return
+        }
+        if running && movesLeft == 0 {
+            handleLosing()
             return
         }
         if !running {
@@ -87,7 +91,6 @@ class PlayingMapScene: StaticMapScene {
         decrementMovesLeft()
         timeOfLastMove = currentTime
         if let gameWon = gameWon {
-            pause()
             if gameWon {
                 handleWinning()
             } else {
@@ -99,6 +102,12 @@ class PlayingMapScene: StaticMapScene {
     override func setup() {
         super.setup()
         setupButtons()
+
+        // Display moves left
+        if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
+            as? SKLabelNode {
+            node.text = "Moves left: \(movesLeft)"
+        }
     }
 
     func toggleRun() {
@@ -194,6 +203,7 @@ class PlayingMapScene: StaticMapScene {
     }
 
     private func handleWinning() {
+        pause()
         // Calculate score if map is a presetMap
         var info = [String: AnyObject]()
         info[GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] = isPlayingPresetMap
@@ -214,6 +224,7 @@ class PlayingMapScene: StaticMapScene {
     }
 
     private func handleLosing() {
+        pause()
         addRetryText()
     }
 

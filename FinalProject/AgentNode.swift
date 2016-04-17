@@ -16,6 +16,27 @@ class AgentNode: MapUnitNode {
     var delegate: LanguageDelegate?
     var numberOfMoves = 30
     let timePerMoveMovement: NSTimeInterval = 0.5
+    let timePerFrame: NSTimeInterval = 0.05
+    let walkingUpTextures = [
+        SKTexture(
+            rect: CGRect(
+                x: 22.0/521.0,
+                y: 48.0/175.0,
+                width: 21.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        ),
+        SKTexture(
+            rect: CGRect(
+                x: 64.0/521.0,
+                y: 48.0/175.0,
+                width: 21.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        )
+    ]
 
     required init(type: MapUnitType = .Agent) {
         super.init(type: .Agent)
@@ -95,7 +116,21 @@ class AgentNode: MapUnitNode {
             // Move sprite
             let targetPoint = mapNode.pointFor(row, column: column)
             let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
-            runAction(moveAction)
+            let changeTextureAction = SKAction.repeatAction(
+                SKAction.animateWithTextures(
+                walkingUpTextures,
+                timePerFrame: timePerFrame),
+                count: 10
+            )
+            let currentTexture = texture
+            let actionSequence = SKAction.sequence([
+                SKAction.group([moveAction, changeTextureAction]),
+                SKAction.setTexture(currentTexture!)
+                ]
+            )
+            runAction(
+                actionSequence
+            )
 
             if nextUnit.type == .Goal {
                 return true
