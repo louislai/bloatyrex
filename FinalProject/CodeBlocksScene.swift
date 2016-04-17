@@ -72,6 +72,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
             holeButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.2)
             woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
+            trashZone.position = CGPoint(x: size.width * 0.15, y: size.height * -0.45)
             turnLeftButton.zPosition = 10
             upButton.zPosition = 10
             addNodeToOverlay(toiletButton)
