@@ -55,4 +55,13 @@ class TextureManager {
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
+    static let monsterUpTexture = SKTexture(
+        rect: CGRect(
+            x: 0.0,
+            y: 217.0/499.0,
+            width: 48.0/712.0,
+            height: 47.0/499.0
+            ),
+        inTexture: TextureManager.retrieveTexture("monster")
+    )
 }
