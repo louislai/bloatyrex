@@ -15,8 +15,8 @@ class AgentNode: MapUnitNode {
     var column: Int!
     var delegate: LanguageDelegate?
     var numberOfMoves = 30
-    let timePerMoveMovement: NSTimeInterval = 0.5
-    let timePerFrame: NSTimeInterval = 0.05
+    let timePerMoveMovement: NSTimeInterval = 0.6
+    let timePerFrame: NSTimeInterval = 0.1
     let walkingUpTextures = [
         SKTexture(
             rect: CGRect(
@@ -31,6 +31,66 @@ class AgentNode: MapUnitNode {
             rect: CGRect(
                 x: 64.0/521.0,
                 y: 48.0/175.0,
+                width: 21.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        )
+    ]
+    let walkingRightTextures = [
+        SKTexture(
+            rect: CGRect(
+                x: 149.0/521.0,
+                y: 87.0/175.0,
+                width: 25.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        ),
+        SKTexture(
+            rect: CGRect(
+                x: 203.0/521.0,
+                y: 87.0/175.0,
+                width: 25.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        )
+    ]
+    let walkingLeftTextures = [
+        SKTexture(
+            rect: CGRect(
+                x: 148.0/521.0,
+                y: 45.0/175.0,
+                width: 25.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        ),
+        SKTexture(
+            rect: CGRect(
+                x: 202.0/521.0,
+                y: 45.0/175.0,
+                width: 25.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        )
+    ]
+    let walkingDownTextures = [
+        SKTexture(
+            rect: CGRect(
+                x: 22.0/521.0,
+                y: 88.0/175.0,
+                width: 21.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        ),
+        SKTexture(
+            rect: CGRect(
+                x: 64.0/521.0,
+                y: 88.0/175.0,
                 width: 21.0/521.0,
                 height: 39.0/175.0
             ),
@@ -115,22 +175,7 @@ class AgentNode: MapUnitNode {
 
             // Move sprite
             let targetPoint = mapNode.pointFor(row, column: column)
-            let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
-            let changeTextureAction = SKAction.repeatAction(
-                SKAction.animateWithTextures(
-                walkingUpTextures,
-                timePerFrame: timePerFrame),
-                count: 5
-            )
-            let currentTexture = texture
-            let actionSequence = SKAction.sequence([
-                SKAction.group([moveAction, changeTextureAction]),
-                SKAction.setTexture(currentTexture!)
-                ]
-            )
-            runAction(
-                actionSequence
-            )
+            runAction(getMoveToAction(targetPoint))
 
             if nextUnit.type == .Goal {
                 return true
@@ -295,6 +340,30 @@ class AgentNode: MapUnitNode {
             return nil
         }
         return (row: nextRow, column: nextColumn, unit: nextUnit!)
+    }
+
+    private func getMoveToAction(toPoint: CGPoint) -> SKAction {
+        let moveAction = SKAction.moveTo(toPoint, duration: timePerMoveMovement)
+        var movementTextures: [SKTexture]
+        switch direction {
+        case .Up: movementTextures = walkingUpTextures
+        case .Right: movementTextures = walkingRightTextures
+        case .Down: movementTextures = walkingDownTextures
+        case .Left: movementTextures = walkingLeftTextures
+        }
+        let changeTextureAction = SKAction.repeatAction(
+            SKAction.animateWithTextures(
+                movementTextures,
+                timePerFrame: timePerFrame),
+            count: 3
+        )
+        let currentTexture = texture
+        let actionSequence = SKAction.sequence([
+            SKAction.group([moveAction, changeTextureAction]),
+            SKAction.setTexture(currentTexture!)
+            ]
+        )
+        return actionSequence
     }
 
     private func isReachableUnit(unit: MapUnitNode?) -> Bool {
