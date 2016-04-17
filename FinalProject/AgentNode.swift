@@ -113,6 +113,10 @@ class AgentNode: MapUnitNode {
         aCoder.encodeInteger(orientation.rawValue, forKey: "orientation")
         aCoder.encodeInteger(numberOfMoves, forKey: "moves")
     }
+    
+    func assignNumberOfMoves(numberOfMoves: Int) {
+        self.numberOfMoves = numberOfMoves
+    }
 
     /// Return true if nextAction causes the agent to reach the goal
     /// Return false if program terminates while not reaching the goal

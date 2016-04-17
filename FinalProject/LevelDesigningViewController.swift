@@ -14,6 +14,9 @@ class LevelDesigningViewController: UIViewController {
     var scene: LevelDesigningMapScene!
     var map = Map(numberOfRows: DesigningMapConstants.Dimension.defaultNumberOfRows,
                   numberOfColumns: DesigningMapConstants.Dimension.defaultNumberOfColumns)
+    var agentNode = AgentNode(type: MapUnitType.Agent)
+    var agentRow = 0
+    var agentColumn = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +33,9 @@ class LevelDesigningViewController: UIViewController {
 
         // Load the map
         scene.map = map
+        scene.agentNode = agentNode
+        scene.agentRow = agentRow
+        scene.agentColumn = agentColumn
         scene.levelDesigningViewController = self
         scene.setup()
 

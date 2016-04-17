@@ -66,6 +66,18 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             if previousViewController is LevelDesigningViewController {
                 let levelDesigningViewController = previousViewController as! LevelDesigningViewController
                 levelDesigningViewController.map = loadedMap
+                for row in 0...loadedMap.numberOfRows {
+                    for column in 0...loadedMap.numberOfColumns {
+                        if let node = loadedMap.retrieveMapUnitAt(row, column: column) {
+                            if node.type == MapUnitType.Agent {
+                                levelDesigningViewController.agentNode = node as! AgentNode
+                                levelDesigningViewController.agentRow = row
+                                levelDesigningViewController.agentColumn = column
+                                break
+                            }
+                        }
+                    }
+                }
                 levelDesigningViewController.viewDidLoad()
             } else if previousViewController is TitleViewController {
                 /// load selected level to play

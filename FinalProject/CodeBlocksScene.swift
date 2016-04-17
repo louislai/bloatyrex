@@ -135,6 +135,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = woodButton
             pressState = .AddingBlock(woodButton.blockCategory)
         }
+        
+        heldBlock?.pickBlock(true, scale: scale)
 
         heldBlock?.pickBlock(true, scale: scale)
 

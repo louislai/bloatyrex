@@ -808,6 +808,7 @@
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex3;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -822,6 +823,7 @@
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex3;
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
