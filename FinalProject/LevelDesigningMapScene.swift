@@ -259,16 +259,14 @@ extension LevelDesigningMapScene {
         let row = rowFor(scenePoint)
         let column = columnFor(scenePoint)
         if isValidRowAndColumn(row, column: column) {
-            if currentMapUnitTypeSelected == MapUnitType.Agent {
-                if map.retrieveMapUnitAt(row, column: column)!.isKindOfClass(AgentNode) &&
-                    sender.isKindOfClass(UITapGestureRecognizer) {
-                    rotateAgent()
-                } else {
-                    setBlock(.EmptySpace, row: agentRow, column: agentColumn)
-                    agentRow = row
-                    agentColumn = column
-                    setBlock(agentNode, row: row, column: column)
-                }
+            if sender.isKindOfClass(UITapGestureRecognizer) &&
+                map.retrieveMapUnitAt(row, column: column)!.isKindOfClass(AgentNode) {
+                rotateAgent()
+            } else if currentMapUnitTypeSelected == MapUnitType.Agent {
+                setBlock(.EmptySpace, row: agentRow, column: agentColumn)
+                agentRow = row
+                agentColumn = column
+                setBlock(agentNode, row: row, column: column)
             } else if agentRow != row || agentColumn != column {
                 setBlock(mapUnitType, row: row, column: column)
             }
