@@ -23,14 +23,30 @@ struct DesigningMapConstants {
         static let shiftLeft = CGFloat(-200)
         static let shiftUp = CGFloat(30)
 
-        static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
-        static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
-                                        y: actionButtonY)
-        static let testLevelButton = CGPoint(x: -100, y: actionButtonY)
-        static let saveButton = CGPoint(x: 0, y: actionButtonY)
-        static let loadButton = CGPoint(x: 100, y: actionButtonY)
-        static let resetButton = CGPoint(x: GlobalConstants.Dimension.screenWidth/2 - 40,
-                                         y: actionButtonY)
+        struct Action {
+            static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
+            static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
+                                            y: actionButtonY)
+            static let testLevelButton = CGPoint(x: -100, y: actionButtonY)
+            static let saveButton = CGPoint(x: 0, y: actionButtonY)
+            static let loadButton = CGPoint(x: 100, y: actionButtonY)
+            static let resetButton = CGPoint(x: GlobalConstants.Dimension.screenWidth/2 - 40,
+                                             y: actionButtonY)
+        }
+        
+        struct AgentSetting {
+            static let agent = CGPoint(x: -25, y: 0)
+            static let numberOfMovesLabel = CGPoint(x: 20, y: 0)
+            static let incrementButton = CGPoint(x: 20, y: 35)
+            static let decrementButton = CGPoint(x: 20, y: -35)
+            static let background = CGPoint(x: -225, y: 300)
+        }
+    }
+    struct Size {
+        struct AgentSetting {
+            static let button = CGSize(width: 30, height: 30)
+            static let background = CGSize(width: 100, height: 100)
+        }
     }
 }
 
@@ -555,15 +571,15 @@ extension LevelDesigningMapScene {
 extension LevelDesigningMapScene {
     func addActions() {
         addActionButton("back", name: "Back",
-                        position: DesigningMapConstants.Position.backButton)
+                        position: DesigningMapConstants.Position.Action.backButton)
         addActionButton("save", name: "Save",
-                        position: DesigningMapConstants.Position.saveButton)
+                        position: DesigningMapConstants.Position.Action.saveButton)
         addActionButton("open-folder", name: "Load",
-                        position: DesigningMapConstants.Position.loadButton)
+                        position: DesigningMapConstants.Position.Action.loadButton)
         addActionButton("play", name: "Play",
-                        position: DesigningMapConstants.Position.testLevelButton)
+                        position: DesigningMapConstants.Position.Action.testLevelButton)
         addActionButton("reset", name: "Reset",
-                        position: DesigningMapConstants.Position.resetButton)
+                        position: DesigningMapConstants.Position.Action.resetButton)
     }
 
     func addActionButton(imageNamed: String, name: String, position: CGPoint) {
@@ -692,7 +708,11 @@ extension LevelDesigningMapScene {
         // If agent does not exist, create one
         if agentNode == nil {
             agentNode = AgentNode(type: MapUnitType.Agent)
-            updateAgent(10, orientation: Direction.Up, row: 0, column: 0)
+            let defaultNumberOfMoves = 10
+            let defaultAgentRow = 0
+            let defaultAgentColumn = 0
+            updateAgent(defaultNumberOfMoves, orientation: Direction.Up,
+                        row: defaultAgentRow, column: defaultAgentColumn)
         } else {
             updateAgent(agentNode.numberOfMoves, orientation: agentNode.orientation,
                         row: agentRow, column: agentColumn)
@@ -737,26 +757,27 @@ extension LevelDesigningMapScene {
     func addAgentSettings() {
         // Update view
         let agent = SKSpriteNode(texture: TextureManager.agentDownTexture, size: blockSize)
-        agent.position = CGPoint(x: -25, y: 0)
+        agent.position = DesigningMapConstants.Position.AgentSetting.agent
 
         numberOfMovesLabel = SKLabelNode(text: "\(agentNode.numberOfMoves)")
-        numberOfMovesLabel.position = CGPoint(x: 20, y: 0)
+        numberOfMovesLabel.position = DesigningMapConstants.Position.AgentSetting.numberOfMovesLabel
         numberOfMovesLabel.fontColor = UIColor.blackColor()
         numberOfMovesLabel.horizontalAlignmentMode = .Center
         numberOfMovesLabel.verticalAlignmentMode = .Center
 
         let incrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("increase"))
         incrementButton.name = "Increase Move"
-        incrementButton.size = CGSize(width: 30, height: 30)
-        incrementButton.position = CGPoint(x: 20, y: 35)
+        incrementButton.size = DesigningMapConstants.Size.AgentSetting.button
+        incrementButton.position = DesigningMapConstants.Position.AgentSetting.incrementButton
 
         let decrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("decrease"))
         decrementButton.name = "Decrease Move"
-        decrementButton.size = CGSize(width: 30, height: 30)
-        decrementButton.position = CGPoint(x: 20, y: -35)
+        decrementButton.size = DesigningMapConstants.Size.AgentSetting.button
+        decrementButton.position = DesigningMapConstants.Position.AgentSetting.decrementButton
 
-        let background = SKSpriteNode(color: UIColor.lightGrayColor(), size: CGSize(width: 100, height: 100))
-        background.position = CGPoint(x: -225, y: 300)
+        let background = SKSpriteNode(color: UIColor.lightGrayColor(),
+                                      size: DesigningMapConstants.Size.AgentSetting.background)
+        background.position = DesigningMapConstants.Position.AgentSetting.background
         background.addChild(agent)
         background.addChild(numberOfMovesLabel)
         background.addChild(incrementButton)
