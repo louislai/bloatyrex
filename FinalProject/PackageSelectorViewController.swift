@@ -31,6 +31,7 @@ class PackageSelectorViewController: UICollectionViewController {
             layout.minimumLineSpacing = GlobalConstants.Dimension.screenWidth / 2 -
                 PackageSelectorConstants.cellWidth
         }
+        self.collectionView!.backgroundColor = UIColor.whiteColor()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
