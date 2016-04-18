@@ -240,19 +240,15 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLy-WU-ahl">
                                 <rect key="frame" x="957" y="697" width="37" height="41"/>
                                 <state key="normal" title="Button" image="zoom"/>
+                                <connections>
+                                    <action selector="programmingViewTapped:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="6BY-H0-TbV"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKj-uN-s3O">
                                 <rect key="frame" x="26" y="688" width="59" height="60"/>
                                 <state key="normal" title="Button" image="back"/>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="839-ri-ME9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWX-hf-5AA">
-                                <rect key="frame" x="952" y="644" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="programmingViewTapped:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="Zc6-Yo-t9U"/>
                                 </connections>
                             </button>
                         </subviews>
