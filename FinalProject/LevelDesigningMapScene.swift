@@ -12,16 +12,26 @@ import Darwin
 struct DesigningMapConstants {
     struct Dimension {
         static let minNumberOfRows = 1
-        static let maxNumberOfRows = 8
-        static let defaultNumberOfRows = 6
         static let minNumberOfColumns = 1
+        
+        static let maxNumberOfRows = 8
         static let maxNumberOfColumns = 8
+        
+        static let defaultNumberOfRows = 6
         static let defaultNumberOfColumns = 6
+        
+        static let paletteNumberOfRows = 4
+        static let paletteNumberOfColumns = 8
     }
     struct Position {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
         static let shiftLeft = CGFloat(-200)
         static let shiftUp = CGFloat(30)
+        
+        struct Palette {
+            static let layer = CGPoint(x: 250, y: 150)
+            static let label = CGPoint(x: 250, y: 280)
+        }
 
         struct Action {
             static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
@@ -46,6 +56,14 @@ struct DesigningMapConstants {
         struct AgentSetting {
             static let button = CGSize(width: 30, height: 30)
             static let background = CGSize(width: 100, height: 100)
+        }
+        
+        struct Palette {
+            static let cell = CGSize(width: 50, height: 50)
+        }
+        
+        struct Action {
+            static let button = CGSize(width: 60, height: 60)
         }
     }
 }
@@ -95,9 +113,7 @@ class LevelDesigningMapScene: SKScene {
         addChild(blocksLayer)
         addChild(unitsLayer)
 
-        let palettePosition = CGPoint(x: 0, y: -768/2 + 20 + 95)
-        paletteLayer.position = palettePosition
-        addChild(paletteLayer)
+        setPaletteLayerPosition()
 
         addArrows()
         addPalette()
@@ -526,10 +542,27 @@ extension LevelDesigningMapScene {
 
 // This portion handles the palette.
 extension LevelDesigningMapScene {
+    func setPaletteLayerPosition() {
+        paletteLayer.position = DesigningMapConstants.Position.Palette.layer
+        addChild(paletteLayer)
+        
+        let paletteLabel = SKLabelNode(text: "MAP COMPONENTS")
+        paletteLabel.fontName = GlobalConstants.Font.defaultName + "-Bold"
+        paletteLabel.fontColor = GlobalConstants.Font.defaultGreen
+        paletteLabel.position = DesigningMapConstants.Position.Palette.label
+        addChild(paletteLabel)
+    }
+    
     func addPalette() {
-        let paletteBackgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        let paletteNumberOfRows = DesigningMapConstants.Dimension.paletteNumberOfRows
+        let paletteNumberOfColumns = DesigningMapConstants.Dimension.paletteNumberOfColumns
+        let paletteCellWidth: CGFloat = DesigningMapConstants.Size.Palette.cell.width
+        let paletteCellHeight: CGFloat = DesigningMapConstants.Size.Palette.cell.height
+        let paletteBackgroundSize = CGSize(width: CGFloat(paletteNumberOfColumns) * paletteCellWidth,
+                                           height: CGFloat(paletteNumberOfRows) * paletteCellHeight)
+        let paletteBackgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.3)
         paletteNode = SKSpriteNode(color: paletteBackgroundColor,
-                                   size: CGSize(width: 1024, height: 50))
+                                   size: paletteBackgroundSize)
         paletteLayer.addChild(paletteNode)
 
         let textures = [MapUnitType.Agent.texture,
@@ -539,13 +572,15 @@ extension LevelDesigningMapScene {
                         MapUnitType.Hole.texture,
                         MapUnitType.WoodenBlock.texture,
                         MapUnitType.Monster.texture,
-                        MapUnitType.Door.texture
-        ]
+                        MapUnitType.Door.texture]
         let textureNames = ["Agent", "Block", "Toilet", "Wall", "Hole", "Wooden Block", "Monster", "Door"]
         for position in 0..<textures.count {
+            let row = position / paletteNumberOfColumns
+            let column = position % paletteNumberOfColumns
             let spriteNode = SKSpriteNode(texture: textures[position])
             spriteNode.size = blockSize
-            spriteNode.position = CGPoint(x: -1024/2 + 25 + 50 * CGFloat(position), y: 0)
+            spriteNode.position = CGPoint(x: -175 + paletteCellWidth * CGFloat(column),
+                                          y: 75 - paletteCellHeight * CGFloat(row))
             spriteNode.name = textureNames[position]
             paletteNode.addChild(spriteNode)
         }
@@ -583,7 +618,7 @@ extension LevelDesigningMapScene {
     func addActionButton(imageNamed: String, name: String, position: CGPoint) {
         let action = SKSpriteNode(texture: TextureManager.retrieveTexture(imageNamed))
         action.name = name
-        action.size = CGSize(width: 60.0, height: 60.0)
+        action.size = DesigningMapConstants.Size.Action.button
         action.position = position
         addChild(action)
     }
@@ -759,6 +794,7 @@ extension LevelDesigningMapScene {
 
         numberOfMovesLabel = SKLabelNode(text: "\(agentNode.numberOfMoves)")
         numberOfMovesLabel.position = DesigningMapConstants.Position.AgentSetting.numberOfMovesLabel
+        numberOfMovesLabel.fontName = GlobalConstants.Font.defaultName
         numberOfMovesLabel.fontColor = UIColor.blackColor()
         numberOfMovesLabel.horizontalAlignmentMode = .Center
         numberOfMovesLabel.verticalAlignmentMode = .Center
@@ -773,7 +809,7 @@ extension LevelDesigningMapScene {
         decrementButton.size = DesigningMapConstants.Size.AgentSetting.button
         decrementButton.position = DesigningMapConstants.Position.AgentSetting.decrementButton
 
-        let background = SKSpriteNode(color: UIColor.lightGrayColor(),
+        let background = SKSpriteNode(color: UIColor.grayColor().colorWithAlphaComponent(0.3),
                                       size: DesigningMapConstants.Size.AgentSetting.background)
         background.position = DesigningMapConstants.Position.AgentSetting.background
         background.addChild(agent)
