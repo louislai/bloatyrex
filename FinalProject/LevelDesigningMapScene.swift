@@ -149,6 +149,7 @@ class LevelDesigningMapScene: SKScene {
 
     func setBlock(mapUnitNode: MapUnitNode, row: Int, column: Int) {
         let blockNode = mapUnitNode
+        
         // Update model
         map.setMapUnitAt(blockNode, row: row, column: column)
 
@@ -243,10 +244,15 @@ extension LevelDesigningMapScene {
         let column = columnFor(scenePoint)
         if isValidRowAndColumn(row, column: column) {
             if currentMapUnitTypeSelected == MapUnitType.Agent {
-                setBlock(.EmptySpace, row: agentRow, column: agentColumn)
-                agentRow = row
-                agentColumn = column
-                setBlock(agentNode, row: row, column: column)
+                if map.retrieveMapUnitAt(row, column: column)!.isKindOfClass(AgentNode) &&
+                    sender.isKindOfClass(UITapGestureRecognizer) {
+                    rotateAgent()
+                } else {
+                    setBlock(.EmptySpace, row: agentRow, column: agentColumn)
+                    agentRow = row
+                    agentColumn = column
+                    setBlock(agentNode, row: row, column: column)
+                }
             } else if agentRow != row || agentColumn != column {
                 setBlock(mapUnitType, row: row, column: column)
             }
@@ -686,15 +692,17 @@ extension LevelDesigningMapScene {
         // If agent does not exist, create one
         if agentNode == nil {
             agentNode = AgentNode(type: MapUnitType.Agent)
-            updateAgent(10, row: 0, column: 0)
+            updateAgent(10, orientation: Direction.Up, row: 0, column: 0)
         } else {
-            updateAgent(agentNode.numberOfMoves, row: agentRow, column: agentColumn)
+            updateAgent(agentNode.numberOfMoves, orientation: agentNode.orientation,
+                        row: agentRow, column: agentColumn)
             updateNumberOfMovesLabel()
         }
     }
 
-    func updateAgent(numberOfMoves: Int, row: Int, column: Int) {
+    func updateAgent(numberOfMoves: Int, orientation: Direction, row: Int, column: Int) {
         agentNode.assignNumberOfMoves(numberOfMoves)
+        agentNode.setOrientationTo(orientation)
         agentRow = row
         agentColumn = column
 
@@ -703,6 +711,27 @@ extension LevelDesigningMapScene {
         if numberOfMovesLabel != nil {
             updateNumberOfMovesLabel()
         }
+    }
+    
+    func rotateAgent() {
+        var newDirection = Direction.Up
+        switch agentNode.orientation {
+        case Direction.Up:
+            newDirection = Direction.Right
+        case Direction.Right:
+            newDirection = Direction.Down
+        case Direction.Down:
+            newDirection = Direction.Left
+        case Direction.Left:
+            newDirection = Direction.Up
+        }
+        // Update model
+        updateAgent(agentNode.numberOfMoves, orientation: newDirection,
+                    row: agentRow, column: agentColumn)
+        
+        // Update view
+        //let blockNode = SKSpriteNode(texture: newTexture, size: blockSize)
+        setBlock(agentNode, row: agentRow, column: agentColumn)
     }
 
     func addAgentSettings() {
