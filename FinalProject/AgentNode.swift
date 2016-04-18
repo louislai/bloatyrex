@@ -126,17 +126,15 @@ class AgentNode: MapUnitNode {
             return false
         }
         if let nextAction = delegate.nextAction(mapNode.map, agent: self) {
-            print(nextAction)
+            guard mapNode.isRowAndColumnSafeFromMonster(row, column: column) else {
+                return false
+            }
             switch nextAction {
-            case .NoAction:
-                return nil
+            case .NoAction: return nil
             case .RotateLeft:
-//                setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
-//                return nil
-                return chooseButton(0)
+                return setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
             case .RotateRight:
-                setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
-                return nil
+                return setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
             case .Forward:
                 return moveForward()
             case .Jump:
@@ -149,7 +147,7 @@ class AgentNode: MapUnitNode {
         }
     }
 
-    func setOrientationTo(direction: Direction) {
+    func setOrientationTo(direction: Direction) -> Bool? {
         orientation = direction
         switch orientation {
         case .Up:
@@ -161,6 +159,7 @@ class AgentNode: MapUnitNode {
         case .Left:
             texture = TextureManager.agentLeftTexture
         }
+        return nil
     }
 
     func runWinningAnimation() {
@@ -192,31 +191,37 @@ class AgentNode: MapUnitNode {
         runAction(sequence)
     }
 
-    private func nextPosition(step: Int = 1) -> (row: Int, column: Int, unit: MapUnitNode)? {
+    func nextRowAndColumn(steps: Int) -> (row: Int, column: Int)? {
         var nextRow: Int = row
         var nextColumn: Int = column
         switch orientation {
         case .Up:
-            guard row < mapNode.map.numberOfRows-step else {
+            guard row < mapNode.map.numberOfRows-steps else {
                 return nil
             }
-            nextRow += step
+            nextRow += steps
         case .Right:
-            guard column < mapNode.map.numberOfColumns-step else {
+            guard column < mapNode.map.numberOfColumns-steps else {
                 return nil
             }
-            nextColumn += step
+            nextColumn += steps
         case .Down:
-            guard row-step >= 0 else {
+            guard row-steps >= 0 else {
                 return nil
             }
-            nextRow -= step
+            nextRow -= steps
         case .Left:
-            guard column-step >= 0 else {
+            guard column-steps >= 0 else {
                 return nil
             }
-            nextColumn -= step
+            nextColumn -= steps
+        }
+        return (row: nextRow, column: nextColumn)
+    }
 
+    private func nextPosition(steps: Int = 1) -> (row: Int, column: Int, unit: MapUnitNode)? {
+        guard let (nextRow, nextColumn) = nextRowAndColumn(steps) else {
+            return nil
         }
         let nextUnit = mapNode.map.retrieveMapUnitAt(nextRow, column: nextColumn)
         return (row: nextRow, column: nextColumn, unit: nextUnit!)

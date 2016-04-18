@@ -9,8 +9,9 @@
 import SpriteKit
 
 class MonsterNode: MapUnitNode {
-    var frequencyMin = 3
-    var frequencyMax = 5
+    var frequencyMin = 2
+    var frequencyMax = 2
+    var turnsUntilAwake = 0
 
     required init(type: MapUnitType = .Hole) {
         super.init(type: .Monster)
@@ -33,5 +34,27 @@ class MonsterNode: MapUnitNode {
         copy.frequencyMin = frequencyMin
         copy.frequencyMax = frequencyMax
         return copy
+    }
+
+    func randomizeTurnsUntilAwake() {
+        turnsUntilAwake = Int(arc4random_uniform(UInt32(frequencyMax-frequencyMin)))
+            + frequencyMin
+    }
+
+    func isAwake() -> Bool {
+        return turnsUntilAwake <= 0
+    }
+
+    /// Carry out this turn's action
+    /// Return true if monster is awake this turns
+    /// Return false otherwise
+    func nextAction() -> Bool {
+        if isAwake() {
+            randomizeTurnsUntilAwake()
+            return true
+        } else {
+            turnsUntilAwake -= 1
+            return false
+        }
     }
 }
