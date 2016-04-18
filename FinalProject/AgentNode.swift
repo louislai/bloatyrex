@@ -126,28 +126,28 @@ class AgentNode: MapUnitNode {
             return false
         }
         if let nextAction = delegate.nextAction(mapNode.map, agent: self) {
-            print(nextAction)
+            guard mapNode.isRowAndColumnSafeFromMonster(row, column: column) else {
+                return false
+            }
             switch nextAction {
-            case .NoAction:
-                return nil
+            case .NoAction: return nil
             case .RotateLeft:
-                setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
-                return nil
+                return setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
             case .RotateRight:
-                setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
-                return nil
+                return setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
             case .Forward:
                 return moveForward()
             case .Jump:
                 return jump()
-            default: return nil
+            case .ChooseButton(let buttonNumber, _):
+                return chooseButton(buttonNumber)
             }
         } else {
             return false
         }
     }
 
-    func setOrientationTo(direction: Direction) {
+    func setOrientationTo(direction: Direction) -> Bool? {
         orientation = direction
         switch orientation {
         case .Up:
@@ -159,8 +159,181 @@ class AgentNode: MapUnitNode {
         case .Left:
             texture = TextureManager.agentLeftTexture
         }
+        return nil
     }
 
+    func runWinningAnimation() {
+        let textures = [
+            TextureManager.agentUpTexture, TextureManager.agentRightTexture, TextureManager.agentDownTexture, TextureManager.agentLeftTexture
+        ]
+        let rotationAction = SKAction.repeatAction(
+            SKAction.animateWithTextures(textures, timePerFrame: 0.1), count: 5
+        )
+        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
+        let group = SKAction.group([rotationAction, scaleDownAction])
+        let sequence = SKAction.sequence([
+            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
+        )
+        runAction(sequence)
+    }
+
+    func runLosingAnimation() {
+        let textureAction = SKAction.setTexture(TextureManager.retrieveTexture("poo"))
+        let leftWiggle = SKAction.rotateByAngle(CGFloat(M_PI/8.0), duration: 0.25)
+        let rightWiggle = leftWiggle.reversedAction()
+        let fullWiggle = SKAction.repeatAction(
+            SKAction.sequence([leftWiggle, rightWiggle]), count: 4)
+        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
+        let group = SKAction.group([textureAction, scaleDownAction, fullWiggle])
+        let sequence = SKAction.sequence([
+            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
+        )
+        runAction(sequence)
+    }
+
+    func nextRowAndColumn(steps: Int) -> (row: Int, column: Int)? {
+        var nextRow: Int = row
+        var nextColumn: Int = column
+        switch orientation {
+        case .Up:
+            guard row < mapNode.map.numberOfRows-steps else {
+                return nil
+            }
+            nextRow += steps
+        case .Right:
+            guard column < mapNode.map.numberOfColumns-steps else {
+                return nil
+            }
+            nextColumn += steps
+        case .Down:
+            guard row-steps >= 0 else {
+                return nil
+            }
+            nextRow -= steps
+        case .Left:
+            guard column-steps >= 0 else {
+                return nil
+            }
+            nextColumn -= steps
+        }
+        return (row: nextRow, column: nextColumn)
+    }
+
+    private func nextPosition(steps: Int = 1) -> (row: Int, column: Int, unit: MapUnitNode)? {
+        guard let (nextRow, nextColumn) = nextRowAndColumn(steps) else {
+            return nil
+        }
+        let nextUnit = mapNode.map.retrieveMapUnitAt(nextRow, column: nextColumn)
+        return (row: nextRow, column: nextColumn, unit: nextUnit!)
+    }
+
+    private func getMoveToAction(toPoint: CGPoint, duration: NSTimeInterval = 0.6) -> SKAction {
+        let moveAction = SKAction.moveTo(toPoint, duration: duration)
+        var movementTextures: [SKTexture]
+        switch direction {
+        case .Up: movementTextures = walkingUpTextures
+        case .Right: movementTextures = walkingRightTextures
+        case .Down: movementTextures = walkingDownTextures
+        case .Left: movementTextures = walkingLeftTextures
+        }
+        let changeTextureAction = SKAction.repeatAction(
+            SKAction.animateWithTextures(
+                movementTextures,
+                timePerFrame: timePerFrame),
+            count: Int(duration / 2 / timePerFrame)
+        )
+        let currentTexture = texture
+        let actionSequence = SKAction.sequence([
+            SKAction.group([moveAction, changeTextureAction]),
+            SKAction.setTexture(currentTexture!)
+            ]
+        )
+        return actionSequence
+    }
+
+    private func nextEdgePoint(steps: Int = 1) -> CGPoint? {
+        guard let (nextRow, nextColumn, _) = nextPosition(steps) else {
+            return nil
+        }
+        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
+        let agentCurrentPoint = mapNode.pointFor(row, column: column)
+        let contactPoint = CGPoint(
+            x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
+            y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
+        )
+        return contactPoint
+    }
+
+    private func isReachableUnit(unit: MapUnitNode?) -> Bool {
+        guard let unit = unit else {
+            return false
+        }
+        let invalidTypes: [MapUnitType] = [.Agent, .Wall, .Hole, .Door, .Monster]
+        return !invalidTypes.contains(unit.type)
+    }
+    
+    override func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = self.dynamicType.init()
+        copy.assignNumberOfMoves(numberOfMoves)
+        copy.setOrientationTo(direction)
+        return copy
+    }
+}
+
+// MARK: Jump action
+extension AgentNode {
+    /// Return true if jump causes the agent to reach the goal
+    /// Return nil if undecided
+    func jump() -> Bool? {
+        guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
+            return nil
+        }
+        guard let contactPoint = nextEdgePoint() else {
+            return nil
+        }
+        let agentMoveToContactPointAction = getMoveToAction(
+            contactPoint,
+            duration: timePerMoveMovement * 0.5
+        )
+        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
+            where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
+                let failureAction = getMoveToAction(
+                    mapNode.pointFor(row, column: column),
+                    duration: timePerMoveMovement * 0.5
+                )
+                let failureSequence = SKAction.sequence([
+                    agentMoveToContactPointAction,
+                    failureAction
+                    ])
+                runAction(failureSequence)
+                return nil
+        }
+
+        mapNode.map.clearMapUnitAt(row, column: column)
+        row = nextNextRow
+        column = nextNextColumn
+
+        // Move sprite
+        let targetPoint = mapNode.pointFor(row, column: column)
+        let jumpAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
+        let jumpSequence = SKAction.sequence(
+            [
+                agentMoveToContactPointAction,
+                jumpAction
+            ]
+        )
+        runAction(jumpSequence)
+
+        if nextNextUnit.type == .Goal {
+            return true
+        }
+        mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
+        return nil
+    }
+}
+
+// MARK: Move forward action
+extension AgentNode {
     /// Return true if moveForward causes the agent to reach the goal
     /// Return false if moveForward causes the agent to lose
     /// Return nil if undecided
@@ -191,7 +364,10 @@ class AgentNode: MapUnitNode {
         }
         return nil
     }
+}
 
+// MARK: Push action
+extension AgentNode {
     /// Return true if push causes the agent to reach the goal
     /// Return nil if undecided
     func push() -> Bool? {
@@ -252,176 +428,24 @@ class AgentNode: MapUnitNode {
         mapNode.map.setMapUnitAt(self, row: row, column: column)
         return nil
     }
+}
 
-    /// Return true if jump causes the agent to reach the goal
-    /// Return nil if undecided
-    func jump() -> Bool? {
+// MARK: Choose button action
+extension AgentNode {
+    /// Return nil if choosing causes the door to be unlocked, or invalid action
+    /// Return false if choosing causes the toilet to explode and lose
+    func chooseButton(buttonNumber: Int) -> Bool? {
         guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
             return nil
         }
-        guard let contactPoint = nextEdgePoint() else {
+        guard let door = nextUnit as? DoorNode else {
             return nil
         }
-        let agentMoveToContactPointAction = getMoveToAction(
-            contactPoint,
-            duration: timePerMoveMovement * 0.5
-        )
-        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
-            where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
-                let failureAction = getMoveToAction(
-                    mapNode.pointFor(row, column: column),
-                    duration: timePerMoveMovement * 0.5
-                )
-                let failureSequence = SKAction.sequence([
-                    agentMoveToContactPointAction,
-                    failureAction
-                    ])
-                runAction(failureSequence)
-                return nil
-        }
-
-        mapNode.map.clearMapUnitAt(row, column: column)
-        row = nextNextRow
-        column = nextNextColumn
-
-        // Move sprite
-        let targetPoint = mapNode.pointFor(row, column: column)
-        let jumpAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
-        let jumpSequence = SKAction.sequence(
-            [
-                agentMoveToContactPointAction,
-                jumpAction
-            ]
-        )
-        runAction(jumpSequence)
-
-        if nextNextUnit.type == .Goal {
-            return true
-        }
-        mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
-        return nil
-    }
-
-    func runWinningAnimation() {
-        let textures = [
-            TextureManager.agentUpTexture, TextureManager.agentRightTexture, TextureManager.agentDownTexture, TextureManager.agentLeftTexture
-        ]
-        let rotationAction = SKAction.repeatAction(
-            SKAction.animateWithTextures(textures, timePerFrame: 0.1), count: 5
-        )
-        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
-        let group = SKAction.group([rotationAction, scaleDownAction])
-        let sequence = SKAction.sequence([
-            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
-        )
-        runAction(sequence)
-    }
-
-    func runLosingAnimation() {
-        let textureAction = SKAction.setTexture(TextureManager.retrieveTexture("poo"))
-        let leftWiggle = SKAction.rotateByAngle(CGFloat(M_PI/8.0), duration: 0.25)
-        let rightWiggle = leftWiggle.reversedAction()
-        let fullWiggle = SKAction.repeatAction(
-            SKAction.sequence([leftWiggle, rightWiggle]), count: 4)
-        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
-        let group = SKAction.group([textureAction, scaleDownAction, fullWiggle])
-        let sequence = SKAction.sequence([
-            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
-        )
-        runAction(sequence)
-    }
-
-    private func nextPosition(step: Int = 1) -> (row: Int, column: Int, unit: MapUnitNode)? {
-        var nextRow: Int = row
-        var nextColumn: Int = column
-        switch orientation {
-        case .Up:
-            guard row < mapNode.map.numberOfRows-step else {
-                return nil
-            }
-            nextRow += step
-        case .Right:
-            guard column < mapNode.map.numberOfColumns-step else {
-                return nil
-            }
-            nextColumn += step
-        case .Down:
-            guard row-step >= 0 else {
-                return nil
-            }
-            nextRow -= step
-        case .Left:
-            guard column-step >= 0 else {
-                return nil
-            }
-            nextColumn -= step
-
-        }
-        let nextUnit = mapNode.map.retrieveMapUnitAt(nextRow, column: nextColumn)
-        return (row: nextRow, column: nextColumn, unit: nextUnit!)
-    }
-
-    private func getMoveToAction(toPoint: CGPoint, duration: NSTimeInterval = 0.6) -> SKAction {
-        let moveAction = SKAction.moveTo(toPoint, duration: duration)
-        var movementTextures: [SKTexture]
-        switch direction {
-        case .Up: movementTextures = walkingUpTextures
-        case .Right: movementTextures = walkingRightTextures
-        case .Down: movementTextures = walkingDownTextures
-        case .Left: movementTextures = walkingLeftTextures
-        }
-        let changeTextureAction = SKAction.repeatAction(
-            SKAction.animateWithTextures(
-                movementTextures,
-                timePerFrame: timePerFrame),
-            count: Int(duration / 2 / timePerFrame)
-        )
-        let currentTexture = texture
-        let actionSequence = SKAction.sequence([
-            SKAction.group([moveAction, changeTextureAction]),
-            SKAction.setTexture(currentTexture!)
-            ]
-        )
-        return actionSequence
-    }
-
-    private func nextEdgePoint(steps: Int = 1) -> CGPoint? {
-        guard let (nextRow, nextColumn, _) = nextPosition(steps) else {
+        if door.correctDoor == buttonNumber {
+            mapNode.map.clearMapUnitAt(nextRow, column: nextColumn)
             return nil
-        }
-        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
-        let agentCurrentPoint = mapNode.pointFor(row, column: column)
-        let contactPoint = CGPoint(
-            x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
-            y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
-        )
-        return contactPoint
-    }
-
-    private func isReachableUnit(unit: MapUnitNode?) -> Bool {
-        guard let unit = unit else {
+        } else {
             return false
         }
-        let invalidTypes: [MapUnitType] = [.Agent, .Wall, .Hole, .Door, .Monster]
-        return !invalidTypes.contains(unit.type)
-    }
-    
-    override func copyWithZone(zone: NSZone) -> AnyObject {
-        let copy = self.dynamicType.init()
-        copy.assignNumberOfMoves(numberOfMoves)
-        copy.setOrientationTo(direction)
-        return copy
-    }
-}
-
-extension AgentNode: AgentProtocol {
-    var xPosition: Int {
-        return column
-    }
-    var yPosition: Int {
-        return row
-    }
-    var direction: Direction {
-        return orientation
     }
 }

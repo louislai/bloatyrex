@@ -88,6 +88,7 @@ class PlayingMapScene: StaticMapScene {
             return
         }
         moveActiveAgents()
+        moveMonsters()
         decrementMovesLeft()
         timeOfLastMove = currentTime
         if let gameWon = gameWon {
@@ -257,6 +258,12 @@ class PlayingMapScene: StaticMapScene {
             gameWon = false
         }
         mapNode.activeAgentNodes = nextActiveAgentNodes
+    }
+
+    private func moveMonsters() {
+        for monster in mapNode.monsterNodes {
+            monster.nextAction()
+        }
     }
 
     private func decrementMovesLeft() {
