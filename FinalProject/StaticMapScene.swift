@@ -38,8 +38,10 @@ class StaticMapScene: PannableScene {
 
     func setupHud() {
         // 1
-        let movesLeftLabel = SKLabelNode(text: "Moves Left: ")
+        let movesLeftLabel = SKLabelNode(text: "MOVES LEFT: ")
         movesLeftLabel.name = StaticMapSceneConstants.NodeNames.movesLeftLabel
+        movesLeftLabel.fontName = GlobalConstants.Font.defaultName
+        movesLeftLabel.fontColor = GlobalConstants.Font.defaultGreen
 
         let layerPosition = CGPoint(
             x: 0,
@@ -47,7 +49,7 @@ class StaticMapScene: PannableScene {
         )
         // 2
         movesLeftLabel.fontColor = SKColor.blueColor()
-        movesLeftLabel.text = String(format: "Moves Left: %d", mapNode.originalMovesLeft)
+        movesLeftLabel.text = String(format: "MOVES LEFT: %d", mapNode.originalMovesLeft)
 
         // 3
         movesLeftLabel.position = layerPosition

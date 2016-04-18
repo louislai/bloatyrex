@@ -108,7 +108,7 @@ class PlayingMapScene: StaticMapScene {
         self.movesLeft = mapNode.originalMovesLeft
         if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
-            node.text = "Moves left: \(movesLeft)"
+            node.text = "MOVES LEFT: \(movesLeft)"
         }
     }
 
@@ -187,6 +187,7 @@ class PlayingMapScene: StaticMapScene {
 
         let retryText = SKLabelNode(text: "Rewind to retry")
         retryText.fontColor = UIColor.redColor()
+        retryText.fontName = GlobalConstants.Font.defaultName
         retryText.position = CGPoint(
             x: arrowNode.position.x,
             y: arrowNode.position.y + buttonSize.height*1.1
@@ -277,7 +278,7 @@ class PlayingMapScene: StaticMapScene {
         movesLeft -= 1
         if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
-            node.text = "Moves left: \(movesLeft)"
+            node.text = "MOVES LEFT: \(movesLeft)"
         }
     }
 }
