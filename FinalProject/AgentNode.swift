@@ -97,6 +97,46 @@ class AgentNode: MapUnitNode {
             inTexture: TextureManager.retrieveTexture("agent")
         )
     ]
+    let winningTextures = [
+        SKTexture(
+            rect: CGRect(
+                x: 417.0/521.0,
+                y: 47.0/175.0,
+                width: 29.0/521.0,
+                height: 40.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        ),
+        SKTexture(
+            rect: CGRect(
+                x: 484.0/521.0,
+                y: 47.0/175.0,
+                width: 29.0/521.0,
+                height: 40.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        )
+    ]
+    let losingTextures = [
+        SKTexture(
+            rect: CGRect(
+                x: 270.0/521.0,
+                y: 47.0/175.0,
+                width: 29.0/521.0,
+                height: 40.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        ),
+        SKTexture(
+            rect: CGRect(
+                x: 271.0/521.0,
+                y: 87.0/175.0,
+                width: 25.0/521.0,
+                height: 39.0/175.0
+            ),
+            inTexture: TextureManager.retrieveTexture("agent")
+        )
+    ]
 
     required init(type: MapUnitType = .Agent) {
         super.init(type: .Agent)
@@ -164,35 +204,24 @@ class AgentNode: MapUnitNode {
     }
 
     func runWinningAnimation() {
-        let textures = [
-            TextureManager.agentUpTexture, TextureManager.agentRightTexture, TextureManager.agentDownTexture, TextureManager.agentLeftTexture
-        ]
-        let rotationAction = SKAction.repeatAction(
-            SKAction.animateWithTextures(textures, timePerFrame: 0.1), count: 5
+        let happyAction = SKAction.animateWithTextures(
+            winningTextures,
+            timePerFrame: timePerFrame
         )
-        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
-        let group = SKAction.group([rotationAction, scaleDownAction])
-        let sequence = SKAction.sequence([
-            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
-        )
-        runAction(sequence)
+        let happyActionForever = SKAction.repeatActionForever(happyAction)
+        runAction(happyActionForever)
     }
 
     func runLosingAnimation() {
         guard !exploded else {
             return
         }
-        let textureAction = SKAction.setTexture(TextureManager.retrieveTexture("poo"))
-        let leftWiggle = SKAction.rotateByAngle(CGFloat(M_PI/8.0), duration: 0.25)
-        let rightWiggle = leftWiggle.reversedAction()
-        let fullWiggle = SKAction.repeatAction(
-            SKAction.sequence([leftWiggle, rightWiggle]), count: 4)
-        let scaleDownAction = SKAction.scaleBy(0, duration: 2)
-        let group = SKAction.group([textureAction, scaleDownAction, fullWiggle])
-        let sequence = SKAction.sequence([
-            SKAction.waitForDuration(timePerMoveMovement), group, SKAction.removeFromParent()]
+        let panicAction = SKAction.animateWithTextures(
+            losingTextures,
+            timePerFrame: timePerMoveMovement
         )
-        runAction(sequence)
+        let panicActionForever = SKAction.repeatActionForever(panicAction)
+        runAction(panicActionForever)
     }
 
     func nextRowAndColumn(steps: Int) -> (row: Int, column: Int)? {
