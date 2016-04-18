@@ -37,7 +37,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         return filesArchive.getFileNames()
     }
     var filtered: [String] = []
-
+    var package: String?
     var navigationBar: UINavigationBar!
 
     // MARK: - View Lifecycle

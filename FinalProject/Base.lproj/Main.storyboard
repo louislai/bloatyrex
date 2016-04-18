@@ -70,6 +70,7 @@
                                     <outlet property="imageView" destination="i6B-mI-fQ4" id="Xay-pq-RML"/>
                                     <outlet property="packageTitle" destination="FP0-ME-Efw" id="weq-V0-XOJ"/>
                                     <outlet property="progressIndicator" destination="9NB-HK-UZy" id="Ceo-Js-xHa"/>
+                                    <segue destination="KiG-n3-lml" kind="show" id="Mc7-b2-AZO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

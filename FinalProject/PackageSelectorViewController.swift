@@ -22,6 +22,7 @@ class PackageSelectorViewController: UICollectionViewController {
         bottom: 150.0, right: 5.0)
     private var cellWidth = PackageSelectorConstants.cellWidth
     private var cellHeight = PackageSelectorConstants.cellHeight
+    private var selectedPackageTitle: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,12 @@ class PackageSelectorViewController: UICollectionViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
+        if let destination = segue.destinationViewController as? LevelSelectorPageViewController {
+            destination.currentStoryboard = self.storyboard
+            destination.previousViewController = self
+            destination.numberOfItemsPerPage = 15
+            destination.package = selectedPackageTitle
+        }
     }
 }
 
@@ -83,7 +89,8 @@ extension PackageSelectorViewController {
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         if let packageCell = cell as? PackageCell {
-            print(packageCell.packageTitle.text)
+            selectedPackageTitle = packageCell.packageTitle.text
+            print(selectedPackageTitle)
         }
     }
 }
