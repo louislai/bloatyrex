@@ -8,12 +8,20 @@
 
 import SpriteKit
 
+struct MonsterNodeConstants {
+    static let deadZoneNodeName = "deadZone"
+}
+
 class MonsterNode: MapUnitNode {
     var frequencyMin = 2
     var frequencyMax = 2
     var turnsUntilAwake = 0
     var zzzOn = false
     let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture("zzz"))
+    var row: Int!
+    var column: Int!
+    weak var mapNode: MapNode!
+    var deadZoneNodes = [SKSpriteNode]()
     let timePerAnimation: NSTimeInterval = 0.15
 
     required init(type: MapUnitType = .Hole) {
@@ -84,10 +92,12 @@ class MonsterNode: MapUnitNode {
         zzzNode.removeAllActions()
         zzzNode.removeFromParent()
         zzzOn = false
+        showDeadZones()
     }
 
     func setSleeping() {
         texture = TextureManager.monsterSleepingTexture
+        hideDeadZones()
         zzzNode.zPosition = GlobalConstants.zPosition.front
         if !zzzOn {
             let bWidth = GlobalConstants.Dimension.blockWidth
@@ -119,5 +129,43 @@ class MonsterNode: MapUnitNode {
             zzzNode.runAction(actionSequence)
             zzzOn = true
         }
+    }
+
+    private func showDeadZones() {
+        let blueprintDeadZone = SKSpriteNode(texture: TextureManager.retrieveTexture("skull"))
+        blueprintDeadZone.zPosition = GlobalConstants.zPosition.back
+        blueprintDeadZone.size = mapNode.blockSize
+        blueprintDeadZone.name = MonsterNodeConstants.deadZoneNodeName
+        if row + 1 <= mapNode.map.numberOfRows {
+            let copy = blueprintDeadZone.copy() as! SKSpriteNode
+            copy.position = mapNode.pointFor(row+1, column: column)
+            mapNode.unitsLayer.addChild(copy)
+            deadZoneNodes.append(copy)
+        }
+        if row - 1 >= 0 {
+            let copy = blueprintDeadZone.copy() as! SKSpriteNode
+            copy.position = mapNode.pointFor(row-1, column: column)
+            mapNode.unitsLayer.addChild(copy)
+            deadZoneNodes.append(copy)
+        }
+        if column + 1 <= mapNode.map.numberOfColumns {
+            let copy = blueprintDeadZone.copy() as! SKSpriteNode
+            copy.position = mapNode.pointFor(row, column: column+1)
+            mapNode.unitsLayer.addChild(copy)
+            deadZoneNodes.append(copy)
+        }
+        if column - 1 >= 0 {
+            let copy = blueprintDeadZone.copy() as! SKSpriteNode
+            copy.position = mapNode.pointFor(row, column: column-1)
+            mapNode.unitsLayer.addChild(copy)
+            deadZoneNodes.append(copy)
+        }
+    }
+
+    private func hideDeadZones() {
+        for node in deadZoneNodes {
+            node.removeFromParent()
+        }
+        deadZoneNodes.removeAll()
     }
 }

@@ -791,7 +791,7 @@ extension LevelDesigningMapScene {
         //let blockNode = SKSpriteNode(texture: newTexture, size: blockSize)
         setBlock(agentNode, row: agentRow, column: agentColumn)
     }
-    
+
     func resetAgent() {
         agentNode = nil
         addAgent()

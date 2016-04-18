@@ -88,6 +88,9 @@ class MapNode: SKNode {
                     } else if let door = unit as? DoorNode {
                         door.randomizeDoor()
                     } else if let monster = unit as? MonsterNode {
+                        monster.row = row
+                        monster.column = column
+                        monster.mapNode = self
                         monster.randomizeTurnsUntilAwake()
                         monsterNodes.append(monster)
                     } else if let goal = unit as? GoalNode {
