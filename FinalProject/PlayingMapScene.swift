@@ -87,7 +87,6 @@ class PlayingMapScene: StaticMapScene {
         if !running {
             return
         }
-        print(mapNode.monsterNodes[0].turnsUntilAwake)
         moveActiveAgents()
         moveMonsters()
         decrementMovesLeft()

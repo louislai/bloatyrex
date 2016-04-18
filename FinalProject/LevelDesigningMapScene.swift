@@ -43,7 +43,7 @@ struct DesigningMapConstants {
             static let resetButton = CGPoint(x: GlobalConstants.Dimension.screenWidth/2 - 40,
                                              y: actionButtonY)
         }
-        
+
         struct AgentSetting {
             static let agent = CGPoint(x: -25, y: 0)
             static let numberOfMovesLabel = CGPoint(x: 20, y: 0)
@@ -178,7 +178,7 @@ class LevelDesigningMapScene: SKScene {
 
     func setBlock(mapUnitNode: MapUnitNode, row: Int, column: Int) {
         let blockNode = mapUnitNode
-        
+
         // Update model
         map.setMapUnitAt(blockNode, row: row, column: column)
 
@@ -507,7 +507,7 @@ extension LevelDesigningMapScene {
             )
         )
     }
-    
+
     func updateAgentPosition(action: String, previousMap: Map) {
         let updateDirection = action.componentsSeparatedByString(" ")
         agentNode = previousMap.retrieveMapUnitAt(agentRow, column: agentColumn) as! AgentNode
@@ -770,7 +770,7 @@ extension LevelDesigningMapScene {
             updateNumberOfMovesLabel()
         }
     }
-    
+
     func rotateAgent() {
         var newDirection = Direction.Up
         switch agentNode.orientation {
@@ -786,7 +786,7 @@ extension LevelDesigningMapScene {
         // Update model
         updateAgent(agentNode.numberOfMoves, orientation: newDirection,
                     row: agentRow, column: agentColumn)
-        
+
         // Update view
         //let blockNode = SKSpriteNode(texture: newTexture, size: blockSize)
         setBlock(agentNode, row: agentRow, column: agentColumn)

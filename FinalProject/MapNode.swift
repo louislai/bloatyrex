@@ -73,15 +73,10 @@ class MapNode: SKNode {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
                     where unit.type != .EmptySpace {
-                    let sprite = unit
-                    if unit.type == .Agent {
-                        sprite.texture = TextureManager.agentUpTexture
-                    }
-
-                    sprite.position = pointFor(row, column: column)
-                    sprite.size = blockSize
-                    sprite.zPosition = GlobalConstants.zPosition.back
-                    if let agent = sprite as? AgentNode {
+                    unit.position = pointFor(row, column: column)
+                    unit.size = blockSize
+                    unit.zPosition = GlobalConstants.zPosition.back
+                    if let agent = unit as? AgentNode {
                         agent.zPosition = GlobalConstants.zPosition.front
                         agent.mapNode = self
                         agent.row = row
@@ -89,13 +84,13 @@ class MapNode: SKNode {
                         activeAgentNodes.append(agent)
                         // This is fine since only 1 agent
                         originalMovesLeft = agent.numberOfMoves
-                    } else if let door = sprite as? DoorNode {
+                    } else if let door = unit as? DoorNode {
                         door.randomizeDoor()
-                    } else if let monster = sprite as? MonsterNode {
+                    } else if let monster = unit as? MonsterNode {
                         monster.randomizeTurnsUntilAwake()
                         monsterNodes.append(monster)
                     }
-                    unitsLayer.addChild(sprite)
+                    unitsLayer.addChild(unit)
                 }
             }
         }
