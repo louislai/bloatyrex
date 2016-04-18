@@ -131,8 +131,9 @@ class AgentNode: MapUnitNode {
             case .NoAction:
                 return nil
             case .RotateLeft:
-                setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
-                return nil
+//                setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
+//                return nil
+                return chooseButton(0)
             case .RotateRight:
                 setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
                 return nil
@@ -140,7 +141,8 @@ class AgentNode: MapUnitNode {
                 return moveForward()
             case .Jump:
                 return jump()
-            default: return nil
+            case .ChooseButton(let buttonNumber, _):
+                return chooseButton(buttonNumber)
             }
         } else {
             return false
@@ -159,147 +161,6 @@ class AgentNode: MapUnitNode {
         case .Left:
             texture = TextureManager.agentLeftTexture
         }
-    }
-
-    /// Return true if moveForward causes the agent to reach the goal
-    /// Return false if moveForward causes the agent to lose
-    /// Return nil if undecided
-    func moveForward() -> Bool? {
-        if let (nextRow, nextColumn, nextUnit) = nextPosition() {
-            // Branch off to push method if nextUnit is a wooden block
-            if nextUnit.type == .WoodenBlock {
-                return push()
-            }
-            guard isReachableUnit(nextUnit) else {
-                return nil
-            }
-
-            mapNode.map.clearMapUnitAt(row, column: column)
-
-
-            row = nextRow
-            column = nextColumn
-
-            // Move sprite
-            let targetPoint = mapNode.pointFor(row, column: column)
-            runAction(getMoveToAction(targetPoint))
-
-            if nextUnit.type == .Goal {
-                return true
-            }
-            mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
-        }
-        return nil
-    }
-
-    /// Return true if push causes the agent to reach the goal
-    /// Return nil if undecided
-    func push() -> Bool? {
-        guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
-            return nil
-        }
-        guard let contactPoint = nextEdgePoint() else {
-            return nil
-        }
-        let agentMoveToContactPointAction = getMoveToAction(
-            contactPoint,
-            duration: timePerMoveMovement * 0.5
-        )
-        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2),
-            nextContactPoint = nextEdgePoint(2)
-            where nextNextUnit.type == .EmptySpace && nextUnit.type == .WoodenBlock else {
-                let failureAction = getMoveToAction(
-                    mapNode.pointFor(row, column: column),
-                    duration: timePerMoveMovement * 0.5
-                )
-                let failureSequence = SKAction.sequence([
-                    agentMoveToContactPointAction,
-                    failureAction
-                    ])
-                runAction(failureSequence)
-                return nil
-        }
-        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
-        let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
-        let agentPushAction = getMoveToAction(nextContactPoint)
-        let agentRetreatAction = getMoveToAction(
-            agentTargetPoint,
-            duration: timePerMoveMovement * 0.5
-        )
-        let allAgentActions = SKAction.sequence(
-            [
-                agentMoveToContactPointAction,
-                agentPushAction,
-                agentRetreatAction
-            ]
-        )
-
-        let blockPushAction = SKAction.moveTo(woodenBlockTargetPoint, duration: timePerMoveMovement)
-        let allBlockActions = SKAction.sequence(
-            [
-                SKAction.waitForDuration(timePerMoveMovement*0.5),
-                blockPushAction
-            ]
-        )
-        runAction(allAgentActions)
-        nextUnit.runAction(allBlockActions)
-
-        // Change map
-        mapNode.map.clearMapUnitAt(row, column: column)
-        mapNode.map.setMapUnitAt(nextUnit, row: nextNextRow, column: nextNextColumn)
-        row = nextRow
-        column = nextColumn
-        mapNode.map.setMapUnitAt(self, row: row, column: column)
-        return nil
-    }
-
-    /// Return true if jump causes the agent to reach the goal
-    /// Return nil if undecided
-    func jump() -> Bool? {
-        guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
-            return nil
-        }
-        guard let contactPoint = nextEdgePoint() else {
-            return nil
-        }
-        let agentMoveToContactPointAction = getMoveToAction(
-            contactPoint,
-            duration: timePerMoveMovement * 0.5
-        )
-        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
-            where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
-                let failureAction = getMoveToAction(
-                    mapNode.pointFor(row, column: column),
-                    duration: timePerMoveMovement * 0.5
-                )
-                let failureSequence = SKAction.sequence([
-                    agentMoveToContactPointAction,
-                    failureAction
-                    ])
-                runAction(failureSequence)
-                return nil
-        }
-
-        mapNode.map.clearMapUnitAt(row, column: column)
-        row = nextNextRow
-        column = nextNextColumn
-
-        // Move sprite
-        let targetPoint = mapNode.pointFor(row, column: column)
-        let jumpAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
-        let jumpSequence = SKAction.sequence(
-            [
-                agentMoveToContactPointAction,
-                jumpAction
-            ]
-        )
-        runAction(jumpSequence)
-
-        if nextNextUnit.type == .Goal {
-            return true
-        }
-        mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
-        return nil
     }
 
     func runWinningAnimation() {
@@ -414,14 +275,172 @@ class AgentNode: MapUnitNode {
     }
 }
 
-extension AgentNode: AgentProtocol {
-    var xPosition: Int {
-        return column
+// MARK: Jump action
+extension AgentNode {
+    /// Return true if jump causes the agent to reach the goal
+    /// Return nil if undecided
+    func jump() -> Bool? {
+        guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
+            return nil
+        }
+        guard let contactPoint = nextEdgePoint() else {
+            return nil
+        }
+        let agentMoveToContactPointAction = getMoveToAction(
+            contactPoint,
+            duration: timePerMoveMovement * 0.5
+        )
+        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
+            where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
+                let failureAction = getMoveToAction(
+                    mapNode.pointFor(row, column: column),
+                    duration: timePerMoveMovement * 0.5
+                )
+                let failureSequence = SKAction.sequence([
+                    agentMoveToContactPointAction,
+                    failureAction
+                    ])
+                runAction(failureSequence)
+                return nil
+        }
+
+        mapNode.map.clearMapUnitAt(row, column: column)
+        row = nextNextRow
+        column = nextNextColumn
+
+        // Move sprite
+        let targetPoint = mapNode.pointFor(row, column: column)
+        let jumpAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
+        let jumpSequence = SKAction.sequence(
+            [
+                agentMoveToContactPointAction,
+                jumpAction
+            ]
+        )
+        runAction(jumpSequence)
+
+        if nextNextUnit.type == .Goal {
+            return true
+        }
+        mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
+        return nil
     }
-    var yPosition: Int {
-        return row
+}
+
+// MARK: Move forward action
+extension AgentNode {
+    /// Return true if moveForward causes the agent to reach the goal
+    /// Return false if moveForward causes the agent to lose
+    /// Return nil if undecided
+    func moveForward() -> Bool? {
+        if let (nextRow, nextColumn, nextUnit) = nextPosition() {
+            // Branch off to push method if nextUnit is a wooden block
+            if nextUnit.type == .WoodenBlock {
+                return push()
+            }
+            guard isReachableUnit(nextUnit) else {
+                return nil
+            }
+
+            mapNode.map.clearMapUnitAt(row, column: column)
+
+
+            row = nextRow
+            column = nextColumn
+
+            // Move sprite
+            let targetPoint = mapNode.pointFor(row, column: column)
+            runAction(getMoveToAction(targetPoint))
+
+            if nextUnit.type == .Goal {
+                return true
+            }
+            mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
+        }
+        return nil
     }
-    var direction: Direction {
-        return orientation
+}
+
+// MARK: Push action
+extension AgentNode {
+    /// Return true if push causes the agent to reach the goal
+    /// Return nil if undecided
+    func push() -> Bool? {
+        guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
+            return nil
+        }
+        guard let contactPoint = nextEdgePoint() else {
+            return nil
+        }
+        let agentMoveToContactPointAction = getMoveToAction(
+            contactPoint,
+            duration: timePerMoveMovement * 0.5
+        )
+        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2),
+            nextContactPoint = nextEdgePoint(2)
+            where nextNextUnit.type == .EmptySpace && nextUnit.type == .WoodenBlock else {
+                let failureAction = getMoveToAction(
+                    mapNode.pointFor(row, column: column),
+                    duration: timePerMoveMovement * 0.5
+                )
+                let failureSequence = SKAction.sequence([
+                    agentMoveToContactPointAction,
+                    failureAction
+                    ])
+                runAction(failureSequence)
+                return nil
+        }
+        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
+        let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
+        let agentPushAction = getMoveToAction(nextContactPoint)
+        let agentRetreatAction = getMoveToAction(
+            agentTargetPoint,
+            duration: timePerMoveMovement * 0.5
+        )
+        let allAgentActions = SKAction.sequence(
+            [
+                agentMoveToContactPointAction,
+                agentPushAction,
+                agentRetreatAction
+            ]
+        )
+
+        let blockPushAction = SKAction.moveTo(woodenBlockTargetPoint, duration: timePerMoveMovement)
+        let allBlockActions = SKAction.sequence(
+            [
+                SKAction.waitForDuration(timePerMoveMovement*0.5),
+                blockPushAction
+            ]
+        )
+        runAction(allAgentActions)
+        nextUnit.runAction(allBlockActions)
+
+        // Change map
+        mapNode.map.clearMapUnitAt(row, column: column)
+        mapNode.map.setMapUnitAt(nextUnit, row: nextNextRow, column: nextNextColumn)
+        row = nextRow
+        column = nextColumn
+        mapNode.map.setMapUnitAt(self, row: row, column: column)
+        return nil
+    }
+}
+
+// MARK: Choose button action
+extension AgentNode {
+    /// Return nil if choosing causes the door to be unlocked, or invalid action
+    /// Return false if choosing causes the toilet to explode and lose
+    func chooseButton(buttonNumber: Int) -> Bool? {
+        guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
+            return nil
+        }
+        guard let door = nextUnit as? DoorNode else {
+            return nil
+        }
+        if door.correctDoor == buttonNumber {
+            mapNode.map.clearMapUnitAt(nextRow, column: nextColumn)
+            return nil
+        } else {
+            return false
+        }
     }
 }
