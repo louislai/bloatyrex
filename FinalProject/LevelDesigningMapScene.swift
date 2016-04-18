@@ -66,6 +66,11 @@ struct DesigningMapConstants {
             static let button = CGSize(width: 60, height: 60)
         }
     }
+    struct Alpha {
+        static let opaque: CGFloat = 1
+        static let translucent: CGFloat = 0.3
+    }
+    static let defaultGray = UIColor.grayColor().colorWithAlphaComponent(Alpha.translucent)
 }
 
 class LevelDesigningMapScene: SKScene {
@@ -162,15 +167,7 @@ class LevelDesigningMapScene: SKScene {
     }
 
     func removeBlocks() {
-        var blocksToRemove = [SKNode]()
-        for row in 0..<numberOfRows {
-            for column in 0..<numberOfColumns {
-                let blockNode = grid[row][column]
-                blockNode.texture = nil
-                blocksToRemove.append(blockNode)
-            }
-        }
-        self.removeChildrenInArray(blocksToRemove)
+        blocksLayer.removeAllChildren()
     }
 
     // Set block at a given row and column with a given image
@@ -189,10 +186,27 @@ class LevelDesigningMapScene: SKScene {
         blockNode.size = blockSize
         blockNode.position = pointFor(row, column: column)
         grid[row][column] = blockNode
-        let node = blocksLayer.nodeAtPoint(pointFor(row, column: column))
-        blocksLayer.removeChildrenInArray([node])
-        blocksLayer.addChild(blockNode)
-
+        let nodes = blocksLayer.nodesAtPoint(pointFor(row, column: column)) as! [MapUnitNode]
+        var containsEmptySpace = false
+        for node in nodes {
+            if node.type != MapUnitType.EmptySpace ||
+                (node.type == MapUnitType.EmptySpace && containsEmptySpace) {
+                blocksLayer.removeChildrenInArray([node])
+            } else {
+                containsEmptySpace = true
+            }
+        }
+        if nodes.isEmpty {
+            let emptyBlockNode = MapUnitNode(type: MapUnitType.EmptySpace)
+            emptyBlockNode.size = blockSize
+            emptyBlockNode.position = pointFor(row, column: column)
+            blocksLayer.addChild(emptyBlockNode)
+        }
+        if blockNode.type != MapUnitType.EmptySpace {
+            blockNode.alpha = DesigningMapConstants.Alpha.opaque
+            blockNode.zPosition = GlobalConstants.zPosition.front
+            blocksLayer.addChild(blockNode)
+        }
         //printGrid()
     }
 
@@ -476,15 +490,7 @@ extension LevelDesigningMapScene {
     func removeBlocks(action: String) {
         let updateDirection = action.componentsSeparatedByString(" ")
         if updateDirection[0] == "Remove" {
-            var childrenToRemove = [SKSpriteNode]()
-            for row in 0..<numberOfRows {
-                for column in 0..<numberOfColumns {
-                    let blockNode = grid[row][column]
-                    blockNode.texture = nil
-                    childrenToRemove.append(blockNode)
-                }
-            }
-            removeChildrenInArray(childrenToRemove)
+            blocksLayer.removeAllChildren()
         }
     }
 
@@ -560,7 +566,7 @@ extension LevelDesigningMapScene {
         let paletteCellHeight: CGFloat = DesigningMapConstants.Size.Palette.cell.height
         let paletteBackgroundSize = CGSize(width: CGFloat(paletteNumberOfColumns) * paletteCellWidth,
                                            height: CGFloat(paletteNumberOfRows) * paletteCellHeight)
-        let paletteBackgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.3)
+        let paletteBackgroundColor = DesigningMapConstants.defaultGray
         paletteNode = SKSpriteNode(color: paletteBackgroundColor,
                                    size: paletteBackgroundSize)
         paletteLayer.addChild(paletteNode)
@@ -592,9 +598,9 @@ extension LevelDesigningMapScene {
         // Update View
         for node in paletteNode.children {
             if node.name == nodeName {
-                node.alpha = 1
+                node.alpha = DesigningMapConstants.Alpha.opaque
             } else {
-                node.alpha = 0.3
+                node.alpha = DesigningMapConstants.Alpha.translucent
             }
         }
     }
@@ -711,9 +717,6 @@ extension LevelDesigningMapScene {
             handler: { (action: UIAlertAction!) in
                 let newMap = Map(numberOfRows: DesigningMapConstants.Dimension.defaultNumberOfRows,
                     numberOfColumns: DesigningMapConstants.Dimension.defaultNumberOfColumns)
-                self.agentNode = nil
-                self.addAgent()
-                newMap.setMapUnitAt(self.agentNode, row: self.agentRow, column: self.agentColumn)
                 self.resetMap(newMap)
             }))
         resetAlert.addAction(UIAlertAction(
@@ -733,6 +736,7 @@ extension LevelDesigningMapScene {
         setGrid()
         addBlocks()
         updateArrows()
+        resetAgent()
     }
 }
 
@@ -741,7 +745,7 @@ extension LevelDesigningMapScene {
         // If agent does not exist, create one
         if agentNode == nil {
             agentNode = AgentNode(type: MapUnitType.Agent)
-            let defaultNumberOfMoves = 10
+            let defaultNumberOfMoves = 30
             let defaultAgentRow = 0
             let defaultAgentColumn = 0
             updateAgent(defaultNumberOfMoves, orientation: Direction.Up,
@@ -786,6 +790,12 @@ extension LevelDesigningMapScene {
         //let blockNode = SKSpriteNode(texture: newTexture, size: blockSize)
         setBlock(agentNode, row: agentRow, column: agentColumn)
     }
+    
+    func resetAgent() {
+        agentNode = nil
+        addAgent()
+        setBlock(agentNode, row: self.agentRow, column: self.agentColumn)
+    }
 
     func addAgentSettings() {
         // Update view
@@ -809,7 +819,7 @@ extension LevelDesigningMapScene {
         decrementButton.size = DesigningMapConstants.Size.AgentSetting.button
         decrementButton.position = DesigningMapConstants.Position.AgentSetting.decrementButton
 
-        let background = SKSpriteNode(color: UIColor.grayColor().colorWithAlphaComponent(0.3),
+        let background = SKSpriteNode(color: DesigningMapConstants.defaultGray,
                                       size: DesigningMapConstants.Size.AgentSetting.background)
         background.position = DesigningMapConstants.Position.AgentSetting.background
         background.addChild(agent)
