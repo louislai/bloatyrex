@@ -162,7 +162,7 @@
         <!--Playing View Controller-->
         <scene sceneID="hvY-5o-oeT">
             <objects>
-                <viewController id="Wpj-nb-g8C" customClass="PlayingViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayingViewController" id="Wpj-nb-g8C" customClass="PlayingViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6BH-lP-HXe"/>
                         <viewControllerLayoutGuide type="bottom" id="WCh-VB-bQz"/>
@@ -240,9 +240,6 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLy-WU-ahl">
                                 <rect key="frame" x="957" y="697" width="37" height="41"/>
                                 <state key="normal" title="Button" image="zoom"/>
-                                <connections>
-                                    <segue destination="IvN-jd-ujU" kind="show" id="T0N-76-221"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKj-uN-s3O">
                                 <rect key="frame" x="26" y="688" width="59" height="60"/>
@@ -309,7 +306,7 @@
                                 <rect key="frame" x="248" y="702" width="51" height="46"/>
                                 <state key="normal" title="Button" image="zoom"/>
                                 <connections>
-                                    <segue destination="Wpj-nb-g8C" kind="show" id="VQX-xR-oAv"/>
+                                    <action selector="playingViewButtonPressed:" destination="IvN-jd-ujU" eventType="touchUpInside" id="LWZ-qo-A2W"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1uW-eq-fLl">
@@ -337,7 +334,7 @@
                         <viewControllerLayoutGuide type="bottom" id="stt-Jf-bxN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bth-qv-TzO" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -373,6 +370,6 @@
         <image name="zoom" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VQX-xR-oAv"/>
+        <segue reference="p0G-XZ-8kD"/>
     </inferredMetricsTieBreakers>
 </document>

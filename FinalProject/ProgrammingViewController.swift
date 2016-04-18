@@ -14,6 +14,17 @@ class ProgrammingViewController: UIViewController {
     var programBlocksSupplier: ProgramBlocksSupplier!
     var storedProgramBlocks: ProgramBlocks!
 
+    @IBAction func playingViewButtonPressed(sender: AnyObject) {
+        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayingViewController")
+        let playingViewController = viewController as! PlayingViewController
+        playingViewController.map = map
+        playingViewController.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()
+        navigationController?.pushViewController(playingViewController, animated: false)
+        var viewControllersOnStack = (navigationController?.viewControllers)!
+        viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
+        navigationController?.viewControllers = viewControllersOnStack
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         print(navigationController?.viewControllers)
@@ -26,12 +37,6 @@ class ProgrammingViewController: UIViewController {
             destination.editEnabled = true
             destination.programBlocksToLoad = storedProgramBlocks
             programBlocksSupplier = destination
-        } else if let destination = segue.destinationViewController as? PlayingViewController {
-            destination.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()
-            destination.map = map
-            programBlocksSupplier = nil
-            print(navigationController)
-            navigationController?.popViewControllerAnimated(false)
         }
     }
 }

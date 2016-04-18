@@ -61,10 +61,6 @@ class PlayingViewController: UIViewController {
             if let programBlocksToDisplay = programBlocksToDisplay {
                 destination.programBlocksToLoad = programBlocksToDisplay
             }
-        } else if let destination = segue.destinationViewController as? ProgrammingViewController {
-            destination.map = map.copy() as! Map
-            destination.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
-            navigationController?.popViewControllerAnimated(false)
         }
     }
 
