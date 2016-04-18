@@ -13,6 +13,8 @@ class MonsterNode: MapUnitNode {
     var frequencyMax = 2
     var turnsUntilAwake = 0
 
+
+
     required init(type: MapUnitType = .Hole) {
         super.init(type: .Monster)
     }
@@ -45,16 +47,28 @@ class MonsterNode: MapUnitNode {
         return turnsUntilAwake <= 0
     }
 
+    func setOrientation(orientation: Direction) {
+        xScale = 1
+        switch orientation {
+        case .Up:
+            texture = TextureManager.monsterUpTexture
+        case .Down:
+            texture = TextureManager.monsterDownTexture
+        case .Left:
+            xScale = -1
+            fallthrough
+        case .Right:
+            texture = TextureManager.monsterRightTexture
+        }
+    }
+
     /// Carry out this turn's action
     /// Return true if monster is awake this turns
     /// Return false otherwise
-    func nextAction() -> Bool {
+    func nextAction() {
         if isAwake() {
             randomizeTurnsUntilAwake()
-            return true
-        } else {
-            turnsUntilAwake -= 1
-            return false
         }
+        turnsUntilAwake -= 1
     }
 }

@@ -80,6 +80,7 @@ class MapNode: SKNode {
 
                     sprite.position = pointFor(row, column: column)
                     sprite.size = blockSize
+                    sprite.zPosition = GlobalConstants.zPosition.back
                     if let agent = sprite as? AgentNode {
                         agent.zPosition = GlobalConstants.zPosition.front
                         agent.mapNode = self
@@ -104,19 +105,23 @@ class MapNode: SKNode {
     func isRowAndColumnSafeFromMonster(row: Int, column: Int) -> Bool {
         if let monster = map.retrieveMapUnitAt(row+1, column: column) as? MonsterNode
             where monster.isAwake() {
-            return false
+                monster.setOrientation(.Down)
+                return false
         }
         if let monster = map.retrieveMapUnitAt(row-1, column: column) as? MonsterNode
             where monster.isAwake() {
-            return false
+                monster.setOrientation(.Up)
+                return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column+1) as? MonsterNode
             where monster.isAwake() {
-            return false
+                monster.setOrientation(.Left)
+                return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column-1) as? MonsterNode
             where monster.isAwake() {
-            return false
+                monster.setOrientation(.Right)
+                return false
         }
         return true
     }

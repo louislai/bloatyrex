@@ -26,7 +26,7 @@ enum MapUnitType: Int {
             TextureManager.retrieveTexture("toilet"),
             TextureManager.retrieveTexture("hole"),
             TextureManager.retrieveTexture("wooden-block"),
-            TextureManager.monsterUpTexture,
+            TextureManager.monsterDownTexture,
             TextureManager.retrieveTexture("buttons-unknown")
         ]
         return textures[rawValue]
