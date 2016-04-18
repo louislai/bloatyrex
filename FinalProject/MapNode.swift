@@ -14,6 +14,7 @@ class MapNode: SKNode {
     let unitsLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
     var monsterNodes = [MonsterNode]()
+    var goalNodes = [GoalNode]()
     var originalMovesLeft = 0
     private var numberOfRows: Int {
         return map.numberOfRows
@@ -89,6 +90,8 @@ class MapNode: SKNode {
                     } else if let monster = unit as? MonsterNode {
                         monster.randomizeTurnsUntilAwake()
                         monsterNodes.append(monster)
+                    } else if let goal = unit as? GoalNode {
+                        goalNodes.append(goal)
                     }
                     unitsLayer.addChild(unit)
                 }

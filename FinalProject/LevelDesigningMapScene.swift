@@ -13,13 +13,13 @@ struct DesigningMapConstants {
     struct Dimension {
         static let minNumberOfRows = 1
         static let minNumberOfColumns = 1
-        
+
         static let maxNumberOfRows = 8
         static let maxNumberOfColumns = 8
-        
+
         static let defaultNumberOfRows = 6
         static let defaultNumberOfColumns = 6
-        
+
         static let paletteNumberOfRows = 4
         static let paletteNumberOfColumns = 8
     }
@@ -27,7 +27,7 @@ struct DesigningMapConstants {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
         static let shiftLeft = CGFloat(-200)
         static let shiftUp = CGFloat(30)
-        
+
         struct Palette {
             static let layer = CGPoint(x: 250, y: 150)
             static let label = CGPoint(x: 250, y: 280)
@@ -57,11 +57,11 @@ struct DesigningMapConstants {
             static let button = CGSize(width: 30, height: 30)
             static let background = CGSize(width: 100, height: 100)
         }
-        
+
         struct Palette {
             static let cell = CGSize(width: 50, height: 50)
         }
-        
+
         struct Action {
             static let button = CGSize(width: 60, height: 60)
         }
@@ -551,14 +551,14 @@ extension LevelDesigningMapScene {
     func setPaletteLayerPosition() {
         paletteLayer.position = DesigningMapConstants.Position.Palette.layer
         addChild(paletteLayer)
-        
+
         let paletteLabel = SKLabelNode(text: "MAP COMPONENTS")
         paletteLabel.fontName = GlobalConstants.Font.defaultName + "-Bold"
         paletteLabel.fontColor = GlobalConstants.Font.defaultGreen
         paletteLabel.position = DesigningMapConstants.Position.Palette.label
         addChild(paletteLabel)
     }
-    
+
     func addPalette() {
         let paletteNumberOfRows = DesigningMapConstants.Dimension.paletteNumberOfRows
         let paletteNumberOfColumns = DesigningMapConstants.Dimension.paletteNumberOfColumns

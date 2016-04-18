@@ -127,6 +127,7 @@ class AgentNode: MapUnitNode {
         }
         if let nextAction = delegate.nextAction(mapNode.map, agent: self) {
             guard mapNode.isRowAndColumnSafeFromMonster(row, column: column) else {
+                runExplodingAnimation()
                 return false
             }
             switch nextAction {
@@ -178,6 +179,9 @@ class AgentNode: MapUnitNode {
     }
 
     func runLosingAnimation() {
+        guard !exploded else {
+            return
+        }
         let textureAction = SKAction.setTexture(TextureManager.retrieveTexture("poo"))
         let leftWiggle = SKAction.rotateByAngle(CGFloat(M_PI/8.0), duration: 0.25)
         let rightWiggle = leftWiggle.reversedAction()
@@ -443,8 +447,12 @@ extension AgentNode {
         }
         if door.correctDoor == buttonNumber {
             mapNode.map.clearMapUnitAt(nextRow, column: nextColumn)
+            door.runExplodingAnimation()
             return nil
         } else {
+            for goal in mapNode.goalNodes {
+                goal.runExplodingAnimation()
+            }
             return false
         }
     }

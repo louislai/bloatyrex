@@ -33,7 +33,7 @@ class GlobalConstants {
         static let gameWonInfoIsPlayingPresetMap = "isPlayingPresetMap"
         static let gameWonInfoRating = "gameRating"
     }
-    
+
     struct Font {
         static let defaultName = "ChalkboardSE"
         static let defaultGreen = SKColor(red: 0, green: 0.5, blue: 0, alpha: 1)
