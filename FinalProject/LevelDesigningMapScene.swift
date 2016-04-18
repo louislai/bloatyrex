@@ -748,14 +748,14 @@ extension LevelDesigningMapScene {
         let incrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("increase"))
         incrementButton.name = "Increase Move"
         incrementButton.size = CGSize(width: 30, height: 30)
-        incrementButton.position = CGPoint(x: 20, y: 40)
+        incrementButton.position = CGPoint(x: 20, y: 35)
 
         let decrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("decrease"))
         decrementButton.name = "Decrease Move"
         decrementButton.size = CGSize(width: 30, height: 30)
-        decrementButton.position = CGPoint(x: 20, y: -40)
+        decrementButton.position = CGPoint(x: 20, y: -35)
 
-        let background = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 100, height: 100))
+        let background = SKSpriteNode(color: UIColor.lightGrayColor(), size: CGSize(width: 100, height: 100))
         background.position = CGPoint(x: -225, y: 300)
         background.addChild(agent)
         background.addChild(numberOfMovesLabel)
