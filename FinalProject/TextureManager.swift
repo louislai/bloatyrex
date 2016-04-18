@@ -84,8 +84,8 @@ class TextureManager {
     )
     static let monsterSleepingTexture = SKTexture(
         rect: CGRect(
-            x: 213.0/712.0,
-            y: 331.0/449.0,
+            x: 370.0/712.0,
+            y: 167.0/449.0,
             width: 48.0/712.0,
             height: 47.0/449.0
         ),

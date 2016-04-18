@@ -70,5 +70,16 @@ class MonsterNode: MapUnitNode {
             randomizeTurnsUntilAwake()
         }
         turnsUntilAwake -= 1
+        if isAwake() {
+            setAwake()
+        }
+    }
+
+    func setAwake() {
+        texture = TextureManager.monsterDownTexture
+    }
+
+    func setSleeping() {
+        texture = TextureManager.monsterSleepingTexture
     }
 }

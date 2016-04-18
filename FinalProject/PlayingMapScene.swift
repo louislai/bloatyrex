@@ -87,6 +87,7 @@ class PlayingMapScene: StaticMapScene {
         if !running {
             return
         }
+        makeMonstersSleep()
         moveActiveAgents()
         moveMonsters()
         decrementMovesLeft()
@@ -263,6 +264,12 @@ class PlayingMapScene: StaticMapScene {
     private func moveMonsters() {
         for monster in mapNode.monsterNodes {
             monster.nextAction()
+        }
+    }
+
+    private func makeMonstersSleep() {
+        for monster in mapNode.monsterNodes {
+            monster.setSleeping()
         }
     }
 
