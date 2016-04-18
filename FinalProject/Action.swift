@@ -14,4 +14,5 @@ enum Action {
     case RotateLeft(HighlightableBlockProtocol?)
     case RotateRight(HighlightableBlockProtocol?)
     case Jump(HighlightableBlockProtocol?)
+    case ChooseButton(Int, HighlightableBlockProtocol?)
 }

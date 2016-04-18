@@ -88,6 +88,8 @@ class MapNode: SKNode {
                         activeAgentNodes.append(sprite)
                         // This is fine since only 1 agent
                         originalMovesLeft = sprite.numberOfMoves
+                    } else if let sprite = sprite as? DoorNode {
+                        sprite.randomizeDoor()
                     }
                     unitsLayer.addChild(sprite)
                 }

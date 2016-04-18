@@ -140,6 +140,7 @@ class AgentNode: MapUnitNode {
                 return moveForward()
             case .Jump:
                 return jump()
+            default: return nil
             }
         } else {
             return false
@@ -385,7 +386,7 @@ class AgentNode: MapUnitNode {
     }
 
     private func nextEdgePoint(steps: Int = 1) -> CGPoint? {
-        guard let (nextRow, nextColumn, nextUnit) = nextPosition(steps) else {
+        guard let (nextRow, nextColumn, _) = nextPosition(steps) else {
             return nil
         }
         let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
