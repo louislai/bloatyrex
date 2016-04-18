@@ -28,7 +28,7 @@ class MonsterNode: MapUnitNode {
         aCoder.encodeInteger(frequencyMin, forKey: "fmin")
         aCoder.encodeInteger(frequencyMax, forKey: "fmax")
     }
-    
+
     override func copyWithZone(zone: NSZone) -> AnyObject {
         let copy = self.dynamicType.init()
         copy.frequencyMin = frequencyMin
