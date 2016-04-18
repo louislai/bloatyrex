@@ -405,6 +405,13 @@ class AgentNode: MapUnitNode {
         let invalidTypes: [MapUnitType] = [.Agent, .Wall, .Hole, .Door, .Monster]
         return !invalidTypes.contains(unit.type)
     }
+    
+    override func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = self.dynamicType.init()
+        copy.assignNumberOfMoves(numberOfMoves)
+        copy.setOrientationTo(direction)
+        return copy
+    }
 }
 
 extension AgentNode: AgentProtocol {

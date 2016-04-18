@@ -9,8 +9,8 @@
 import SpriteKit
 
 class MonsterNode: MapUnitNode {
-    var frequencyMin = 0
-    var frequencyMax = 0
+    var frequencyMin = 3
+    var frequencyMax = 5
 
     required init(type: MapUnitType = .Hole) {
         super.init(type: .Monster)
@@ -26,5 +26,12 @@ class MonsterNode: MapUnitNode {
         super.encodeWithCoder(aCoder)
         aCoder.encodeInteger(frequencyMin, forKey: "fmin")
         aCoder.encodeInteger(frequencyMax, forKey: "fmax")
+    }
+    
+    override func copyWithZone(zone: NSZone) -> AnyObject {
+        let copy = self.dynamicType.init()
+        copy.frequencyMin = frequencyMin
+        copy.frequencyMax = frequencyMax
+        return copy
     }
 }
