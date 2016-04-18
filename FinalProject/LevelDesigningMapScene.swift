@@ -746,9 +746,10 @@ extension LevelDesigningMapScene {
         if agentNode == nil {
             agentNode = AgentNode(type: MapUnitType.Agent)
             let defaultNumberOfMoves = 30
+            let defaultOrientation = Direction.Up
             let defaultAgentRow = 0
             let defaultAgentColumn = 0
-            updateAgent(defaultNumberOfMoves, orientation: Direction.Up,
+            updateAgent(defaultNumberOfMoves, orientation: defaultOrientation,
                         row: defaultAgentRow, column: defaultAgentColumn)
         } else {
             updateAgent(agentNode.numberOfMoves, orientation: agentNode.orientation,
