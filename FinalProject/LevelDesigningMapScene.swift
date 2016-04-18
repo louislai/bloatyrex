@@ -652,8 +652,9 @@ extension LevelDesigningMapScene {
     }
 
     func loadAction() {
-        let levelSelectorPageViewController = LevelSelectorPageViewController()
-        levelSelectorPageViewController.currentStoryboard = levelDesigningViewController!.storyboard
+        let viewController = levelDesigningViewController!.storyboard?.instantiateViewControllerWithIdentifier(
+            "LevelSelectorOuterPageViewController")
+        let levelSelectorPageViewController = viewController as! LevelSelectorPageViewController
         levelSelectorPageViewController.previousViewController = levelDesigningViewController
         levelSelectorPageViewController.numberOfItemsPerPage =
             DesigningMapConstants.DefaultValue.Action.numberOfItemsPerPage

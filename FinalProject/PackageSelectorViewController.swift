@@ -35,7 +35,6 @@ class PackageSelectorViewController: UICollectionViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? LevelSelectorPageViewController {
-            destination.currentStoryboard = self.storyboard
             destination.previousViewController = self
             destination.numberOfItemsPerPage = 15
             destination.package = selectedPackageTitle
@@ -62,10 +61,10 @@ extension PackageSelectorViewController {
         cell.imageView.image = fullSizedImage
         cell.packageTitle.text = packageNames[indexPath.item]
         cell.packageTitle.textColor = UIColor.whiteColor()
-        cell.packageTitle.font = UIFont(name: GlobalConstants.Font.standardFontName, size: 38)
+        cell.packageTitle.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
         cell.progressIndicator.text = "0/10"
         cell.progressIndicator.textColor = UIColor.whiteColor()
-        cell.progressIndicator.font = UIFont(name: GlobalConstants.Font.standardFontName, size: 38)
+        cell.progressIndicator.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
         cell.backgroundColor = UIColor.darkGrayColor()
         return cell
     }
@@ -90,7 +89,6 @@ extension PackageSelectorViewController {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         if let packageCell = cell as? PackageCell {
             selectedPackageTitle = packageCell.packageTitle.text
-            print(selectedPackageTitle)
         }
     }
 }

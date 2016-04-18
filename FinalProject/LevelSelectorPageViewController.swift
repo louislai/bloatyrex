@@ -29,7 +29,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         }
     }
     private var pageViewController: UIPageViewController?
-    var currentStoryboard: UIStoryboard?
     var previousViewController: UIViewController?
     var searchBar: UISearchBar!
     var searchActive: Bool = false
@@ -70,7 +69,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
 
     private func createPageViewController() {
-        let pageController = self.currentStoryboard!.instantiateViewControllerWithIdentifier(
+        let pageController = self.storyboard!.instantiateViewControllerWithIdentifier(
             "LevelSelectorPageViewController") as! UIPageViewController
         pageController.dataSource = self
         pageController.view.frame = CGRect(x: 0, y: 60, width: 1024, height: 708)
@@ -137,7 +136,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     private func getItemController(itemIndex: Int) -> LevelSelectorViewController? {
 
         if itemIndex < totalNumberOfPages {
-            let pageItemController = self.currentStoryboard!.instantiateViewControllerWithIdentifier(
+            let pageItemController = self.storyboard!.instantiateViewControllerWithIdentifier(
                 "LevelSelectorViewController") as! LevelSelectorViewController
             pageItemController.pageIndex = itemIndex
             let remainder = totalNumberOfItems % numberOfItemsPerPage!
@@ -226,6 +225,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
 
     func goBack() {
-        pageViewController!.dismissViewControllerAnimated(true, completion: nil)
+        navigationController?.popViewControllerAnimated(true)
     }
 }

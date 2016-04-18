@@ -79,13 +79,13 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
                     }
                 }
                 levelDesigningViewController.viewDidLoad()
-            } else if previousViewController is TitleViewController {
+                navigationController?.popViewControllerAnimated(true)
+            } else if previousViewController is PackageSelectorViewController {
                 /// load selected level to play
                 self.loadedMap = loadedMap
                 performSegueWithIdentifier("loadLevelToPlay", sender: self)
             }
         }
-        dismissViewControllerAnimated(true, completion: nil)
     }
 
     func collectionView(collectionView: UICollectionView,
