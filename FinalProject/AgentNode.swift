@@ -169,7 +169,9 @@ class AgentNode: MapUnitNode {
             if nextUnit.type == .WoodenBlock {
                 return push()
             }
-
+            guard isReachableUnit(nextUnit) else {
+                return nil
+            }
 
             mapNode.map.clearMapUnitAt(row, column: column)
 
@@ -192,34 +194,33 @@ class AgentNode: MapUnitNode {
     /// Return true if push causes the agent to reach the goal
     /// Return nil if undecided
     func push() -> Bool? {
-        let widthCorrection: CGFloat = 0.0
         guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
             return nil
         }
-        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2) else {
+        guard let contactPoint = nextEdgePoint() else {
             return nil
         }
-        guard nextNextUnit.type == .EmptySpace else {
-            return nil
-        }
-        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
-        let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
-        let agentCurrentPoint = mapNode.pointFor(row, column: column)
-        let contactPoint = CGPoint(
-            x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0 - widthCorrection,
-            y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0 - widthCorrection
-        )
         let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
             duration: timePerMoveMovement * 0.5
         )
-        let nextContactPoint = CGPoint(
-            x: contactPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
-            y: contactPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
-        )
-        let agentPushAction = getMoveToAction(
-            nextContactPoint
-        )
+        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2),
+            nextContactPoint = nextEdgePoint(2)
+            where nextNextUnit.type == .EmptySpace && nextUnit.type == .WoodenBlock else {
+                let failureAction = getMoveToAction(
+                    mapNode.pointFor(row, column: column),
+                    duration: timePerMoveMovement * 0.5
+                )
+                let failureSequence = SKAction.sequence([
+                    agentMoveToContactPointAction,
+                    failureAction
+                    ])
+                runAction(failureSequence)
+                return nil
+        }
+        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
+        let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
+        let agentPushAction = getMoveToAction(nextContactPoint)
         let agentRetreatAction = getMoveToAction(
             agentTargetPoint,
             duration: timePerMoveMovement * 0.5
@@ -257,26 +258,41 @@ class AgentNode: MapUnitNode {
         guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
             return nil
         }
-        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2) else {
+        guard let contactPoint = nextEdgePoint() else {
             return nil
         }
-        guard nextUnit.type == .Hole else {
-            return nil
-        }
-        guard isReachableUnit(nextNextUnit) else {
-            return nil
+        let agentMoveToContactPointAction = getMoveToAction(
+            contactPoint,
+            duration: timePerMoveMovement * 0.5
+        )
+        guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
+            where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
+                let failureAction = getMoveToAction(
+                    mapNode.pointFor(row, column: column),
+                    duration: timePerMoveMovement * 0.5
+                )
+                let failureSequence = SKAction.sequence([
+                    agentMoveToContactPointAction,
+                    failureAction
+                    ])
+                runAction(failureSequence)
+                return nil
         }
 
         mapNode.map.clearMapUnitAt(row, column: column)
-
-
         row = nextNextRow
         column = nextNextColumn
 
         // Move sprite
         let targetPoint = mapNode.pointFor(row, column: column)
-        let moveAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement*2.0)
-        runAction(moveAction)
+        let jumpAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
+        let jumpSequence = SKAction.sequence(
+            [
+                agentMoveToContactPointAction,
+                jumpAction
+            ]
+        )
+        runAction(jumpSequence)
 
         if nextNextUnit.type == .Goal {
             return true
@@ -341,10 +357,6 @@ class AgentNode: MapUnitNode {
 
         }
         let nextUnit = mapNode.map.retrieveMapUnitAt(nextRow, column: nextColumn)
-
-        guard isReachableUnit(nextUnit) else {
-            return nil
-        }
         return (row: nextRow, column: nextColumn, unit: nextUnit!)
     }
 
@@ -370,6 +382,19 @@ class AgentNode: MapUnitNode {
             ]
         )
         return actionSequence
+    }
+
+    private func nextEdgePoint(steps: Int = 1) -> CGPoint? {
+        guard let (nextRow, nextColumn, nextUnit) = nextPosition(steps) else {
+            return nil
+        }
+        let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
+        let agentCurrentPoint = mapNode.pointFor(row, column: column)
+        let contactPoint = CGPoint(
+            x: agentCurrentPoint.x + (agentTargetPoint.x - agentCurrentPoint.x) / 2.0,
+            y: agentCurrentPoint.y + (agentTargetPoint.y - agentCurrentPoint.y) / 2.0
+        )
+        return contactPoint
     }
 
     private func isReachableUnit(unit: MapUnitNode?) -> Bool {
