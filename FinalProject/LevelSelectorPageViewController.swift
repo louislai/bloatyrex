@@ -225,6 +225,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
 
     func goBack() {
-        navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }

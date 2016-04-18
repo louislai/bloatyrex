@@ -79,7 +79,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
                     }
                 }
                 levelDesigningViewController.viewDidLoad()
-                navigationController?.popViewControllerAnimated(true)
+                dismissViewControllerAnimated(true, completion: nil)
             } else if previousViewController is PackageSelectorViewController {
                 /// load selected level to play
                 self.loadedMap = loadedMap
