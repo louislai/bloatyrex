@@ -14,10 +14,9 @@ class ProgrammingViewController: UIViewController {
     var programBlocksSupplier: ProgramBlocksSupplier!
     var storedProgramBlocks: ProgramBlocks!
 
-    @IBAction func zoomButtonPressed(sender: UIButton) {
-        storedProgramBlocks = programBlocksSupplier.retrieveProgramBlocks()
-        programBlocksSupplier = nil
-        delegate.finishedEditing(self)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print(navigationController?.viewControllers)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -27,6 +26,12 @@ class ProgrammingViewController: UIViewController {
             destination.editEnabled = true
             destination.programBlocksToLoad = storedProgramBlocks
             programBlocksSupplier = destination
+        } else if let destination = segue.destinationViewController as? PlayingViewController {
+            destination.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()
+            destination.map = map
+            programBlocksSupplier = nil
+            print(navigationController)
+            navigationController?.popViewControllerAnimated(false)
         }
     }
 }

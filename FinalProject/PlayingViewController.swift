@@ -11,10 +11,21 @@ import UIKit
 class PlayingViewController: UIViewController {
     var map: Map!
 
+    @IBAction func programmingViewTapped(sender: AnyObject) {
+        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgrammingViewController")
+        let programmingViewController = viewController as! ProgrammingViewController
+        programmingViewController.map = map.copy() as! Map
+        programmingViewController.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
+        navigationController?.pushViewController(programmingViewController, animated: false)
+        var viewControllersOnStack = (navigationController?.viewControllers)!
+        viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
+        navigationController?.viewControllers = viewControllersOnStack
+    }
 
     weak var programSupplier: ProgramSupplier!
     weak var displayedProgramBlocksSupplier: ProgramBlocksSupplier!
     weak var codeBlocksDisplay: CodeBlocksViewController!
+    var programBlocksToDisplay: ProgramBlocks?
     @IBOutlet var winningScreen: UIView!
     @IBOutlet var starSlots: [UIImageView]!
 
@@ -29,6 +40,7 @@ class PlayingViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        print(navigationController?.viewControllers)
         registerObservers()
     }
 
@@ -46,10 +58,13 @@ class PlayingViewController: UIViewController {
             codeBlocksDisplay = destination
             programSupplier = destination
             displayedProgramBlocksSupplier = destination
+            if let programBlocksToDisplay = programBlocksToDisplay {
+                destination.programBlocksToLoad = programBlocksToDisplay
+            }
         } else if let destination = segue.destinationViewController as? ProgrammingViewController {
-            destination.delegate = self
             destination.map = map.copy() as! Map
             destination.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
+            navigationController?.popViewControllerAnimated(false)
         }
     }
 
@@ -169,14 +184,5 @@ class PlayingViewController: UIViewController {
 extension PlayingViewController: ProgramSupplier {
     func retrieveProgram() -> Program? {
         return programSupplier.retrieveProgram()
-    }
-}
-
-// MARK: - FinishedEditingProgramDelegate
-extension PlayingViewController:FinishedEditingProgramDelegate {
-    func finishedEditing(controller: ProgrammingViewController) {
-        let programBlocksToDisplay = controller.storedProgramBlocks
-        controller.dismissViewControllerAnimated(true, completion: nil)
-        codeBlocksDisplay.scene.setProgramBlocks(programBlocksToDisplay)
     }
 }
