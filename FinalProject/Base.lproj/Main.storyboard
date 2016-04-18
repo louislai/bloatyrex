@@ -70,7 +70,7 @@
                                     <outlet property="imageView" destination="i6B-mI-fQ4" id="Xay-pq-RML"/>
                                     <outlet property="packageTitle" destination="FP0-ME-Efw" id="weq-V0-XOJ"/>
                                     <outlet property="progressIndicator" destination="9NB-HK-UZy" id="Ceo-Js-xHa"/>
-                                    <segue destination="KiG-n3-lml" kind="show" id="Mc7-b2-AZO"/>
+                                    <segue destination="KiG-n3-lml" kind="show" animates="NO" id="Mc7-b2-AZO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -87,7 +87,7 @@
         <!--Level Selector Page View Controller-->
         <scene sceneID="rSA-Fq-nEy">
             <objects>
-                <viewController id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelSelectorOuterPageViewController" id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ekL-E4-vG9"/>
                         <viewControllerLayoutGuide type="bottom" id="3h9-r7-dLW"/>
@@ -107,11 +107,11 @@
         <!--Page View Controller-->
         <scene sceneID="cdl-ir-dbv">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6da-S5-kex" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pageViewController storyboardIdentifier="LevelSelectorPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="IXo-bX-TRX" sceneMemberID="viewController">
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                 </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6da-S5-kex" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3850" y="1654"/>
         </scene>
@@ -425,24 +425,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9i3-aR-P3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1802.5" y="439"/>
-        </scene>
-        <!--Level Selector Page View Controller-->
-        <scene sceneID="XcQ-gT-1sf">
-            <objects>
-                <viewController storyboardIdentifier="LevelSelectorOuterPageViewController" id="3Ad-8Z-Whk" customClass="LevelSelectorPageViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2pw-RP-RPX"/>
-                        <viewControllerLayoutGuide type="bottom" id="ebU-Sr-9dq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vGF-3V-Sep">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mvO-kK-re2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3750" y="2490"/>
         </scene>
     </scenes>
     <resources>
