@@ -21,7 +21,7 @@ enum MapUnitType: Int {
     var texture: SKTexture {
         let textures = [
             TextureManager.retrieveTexture("space"),
-            TextureManager.agentUpTexture,
+            TextureManager.agentDownTexture,
             TextureManager.retrieveTexture("wall"),
             TextureManager.retrieveTexture("toilet"),
             TextureManager.retrieveTexture("hole"),

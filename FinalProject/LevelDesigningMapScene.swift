@@ -21,7 +21,7 @@ struct DesigningMapConstants {
     struct Position {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
         static let shiftLeft = CGFloat(-200)
-        static let shiftUp = CGFloat(75)
+        static let shiftUp = CGFloat(30)
 
         static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
         static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
@@ -736,8 +736,8 @@ extension LevelDesigningMapScene {
 
     func addAgentSettings() {
         // Update view
-        let agent = SKSpriteNode(texture: MapUnitType.Agent.texture)
-        agent.position = CGPoint(x: -20, y: 0)
+        let agent = SKSpriteNode(texture: TextureManager.agentDownTexture, size: blockSize)
+        agent.position = CGPoint(x: -25, y: 0)
 
         numberOfMovesLabel = SKLabelNode(text: "\(agentNode.numberOfMoves)")
         numberOfMovesLabel.position = CGPoint(x: 20, y: 0)
@@ -747,15 +747,15 @@ extension LevelDesigningMapScene {
 
         let incrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("increase"))
         incrementButton.name = "Increase Move"
-        incrementButton.size = CGSize(width: 10, height: 10)
-        incrementButton.position = CGPoint(x: 20, y: 20)
+        incrementButton.size = CGSize(width: 30, height: 30)
+        incrementButton.position = CGPoint(x: 20, y: 40)
 
         let decrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("decrease"))
         decrementButton.name = "Decrease Move"
-        decrementButton.size = CGSize(width: 10, height: 10)
-        decrementButton.position = CGPoint(x: 20, y: -20)
+        decrementButton.size = CGSize(width: 30, height: 30)
+        decrementButton.position = CGPoint(x: 20, y: -40)
 
-        let background = SKSpriteNode(color: UIColor.greenColor(), size: CGSize(width: 100, height: 60))
+        let background = SKSpriteNode(color: UIColor.yellowColor(), size: CGSize(width: 100, height: 100))
         background.position = CGPoint(x: -225, y: 300)
         background.addChild(agent)
         background.addChild(numberOfMovesLabel)
