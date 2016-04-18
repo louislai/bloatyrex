@@ -159,9 +159,6 @@ class LevelDesigningMapScene: SKScene {
         let node = blocksLayer.nodeAtPoint(pointFor(row, column: column))
         blocksLayer.removeChildrenInArray([node])
         blocksLayer.addChild(blockNode)
-        if agentNode != nil {
-            print("Agent: (Moves: \(agentNode.numberOfMoves)) (Row: \(agentRow)) (Column: \(agentColumn))")
-        }
 
         //printGrid()
     }
@@ -436,36 +433,7 @@ extension LevelDesigningMapScene {
             }
         }
         addBlocks()
-
-        /*
-        if updateDirection[0] == "Remove" {
-            agentNode = mapCopy.retrieveMapUnitAt(agentRow, column: agentColumn) as! AgentNode
-            switch updateDirection[1] {
-            case "Bottom":
-                if agentRow == 0 {
-                    setBlock(agentNode, row: agentRow, column: agentColumn)
-                }
-            case "Left":
-                if agentColumn == 0 {
-                    setBlock(agentNode, row: agentRow, column: agentColumn)
-                }
-            default:
-                break
-            }
-        } else {
-            agentNode = mapCopy.retrieveMapUnitAt(agentRow, column: agentColumn) as! AgentNode
-            switch updateDirection[1] {
-            case "Bottom":
-                agentRow = Int(agentRow) + 1
-                setBlock(agentNode, row: agentRow, column: agentColumn)
-            case "Left":
-                agentColumn = Int(agentColumn) + 1
-                setBlock(agentNode, row: agentRow, column: agentColumn)
-            default:
-                break
-            }
-        } */
-
+        updateAgentPosition(action, previousMap: mapCopy)
         updateArrows()
     }
 
@@ -496,6 +464,43 @@ extension LevelDesigningMapScene {
                 repeatedValue: SKSpriteNode()
             )
         )
+    }
+    
+    func updateAgentPosition(action: String, previousMap: Map) {
+        let updateDirection = action.componentsSeparatedByString(" ")
+        agentNode = previousMap.retrieveMapUnitAt(agentRow, column: agentColumn) as! AgentNode
+        if updateDirection[0] == "Remove" {
+            switch updateDirection[1] {
+            case "Top":
+                if agentRow == previousMap.numberOfRows - 1 {
+                    agentRow = Int(agentRow) - 1
+                }
+            case "Bottom":
+                if agentRow != 0 {
+                    agentRow = Int(agentRow) - 1
+                }
+                case "Left":
+                    if agentColumn != 0 {
+                        agentColumn = Int(agentColumn) - 1
+                }
+            case "Right":
+                if agentColumn == previousMap.numberOfColumns - 1 {
+                    agentColumn = Int(agentColumn) - 1
+                }
+            default:
+                break
+            }
+        } else {
+            switch updateDirection[1] {
+            case "Bottom":
+                agentRow = Int(agentRow) + 1
+            case "Left":
+                agentColumn = Int(agentColumn) + 1
+            default:
+                break
+            }
+        }
+        setBlock(agentNode, row: agentRow, column: agentColumn)
     }
 }
 
