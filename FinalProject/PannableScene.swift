@@ -109,6 +109,16 @@ class PannableScene: SKScene {
     }
 
     /**
+    Sets the scale of the viewpoint. The given scale will be adjusted if it is beyond the bounds
+    of the minimum and maximum scale values.
+    */
+    func setViewpointScale(scale: CGFloat) {
+        var boundedScale = min(scale, maximumScale)
+        boundedScale = max(boundedScale, minimumScale)
+        viewpoint.setScale(boundedScale)
+    }
+
+    /**
     Sets the minimum scale of the viewpoint. The minimum scale should be smaller than or equal to
     the initial and maximum scales.
     */

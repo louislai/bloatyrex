@@ -16,6 +16,10 @@ class PlayingViewController: UIViewController {
         let programmingViewController = viewController as! ProgrammingViewController
         programmingViewController.map = map.copy() as! Map
         programmingViewController.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
+        scaleToDisplay = codeBlocksDisplay.retrieveScale()
+        if let scaleToDisplay = scaleToDisplay {
+            programmingViewController.scaleToDisplay = scaleToDisplay
+        }
         navigationController?.pushViewController(programmingViewController, animated: false)
         var viewControllersOnStack = (navigationController?.viewControllers)!
         viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
@@ -33,6 +37,7 @@ class PlayingViewController: UIViewController {
     @IBOutlet var secondStar: UIImageView!
     @IBOutlet var thirdStar: UIImageView!
     let animationDelay: NSTimeInterval = 0.5
+    var scaleToDisplay: CGFloat?
 
     var stars: [UIImageView] {
         return [firstStar, secondStar, thirdStar]
@@ -59,6 +64,9 @@ class PlayingViewController: UIViewController {
             displayedProgramBlocksSupplier = destination
             if let programBlocksToDisplay = programBlocksToDisplay {
                 destination.programBlocksToLoad = programBlocksToDisplay
+            }
+            if let scaleToDisplay = scaleToDisplay {
+                destination.scaleToDisplay = scaleToDisplay
             }
         }
     }

@@ -14,6 +14,7 @@ class CodeBlocksViewController: UIViewController {
     var scene: CodeBlocksScene!
     var programBlocksToLoad: ProgramBlocks?
     var editEnabled: Bool!
+    var scaleToDisplay: CGFloat!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -26,6 +27,9 @@ class CodeBlocksViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .ResizeFill
         scene.editEnabled = editEnabled
+        if let scaleToDisplay = scaleToDisplay {
+            scene.setViewpointScale(scaleToDisplay)
+        }
         skView.presentScene(scene)
 
         if let programBlocksToLoad = programBlocksToLoad {
@@ -49,5 +53,11 @@ extension CodeBlocksViewController: ProgramSupplier {
 extension CodeBlocksViewController: ProgramBlocksSupplier {
     func retrieveProgramBlocks() -> ProgramBlocks {
         return scene.getProgramBlocks()
+    }
+}
+
+extension CodeBlocksViewController: CodeBlocksScaleSupplier {
+    func retrieveScale() -> CGFloat {
+        return scene.getScale()
     }
 }
