@@ -12,26 +12,65 @@ import Darwin
 struct DesigningMapConstants {
     struct Dimension {
         static let minNumberOfRows = 1
-        static let maxNumberOfRows = 8
-        static let defaultNumberOfRows = 6
         static let minNumberOfColumns = 1
+
+        static let maxNumberOfRows = 8
         static let maxNumberOfColumns = 8
+
+        static let defaultNumberOfRows = 6
         static let defaultNumberOfColumns = 6
+
+        static let paletteNumberOfRows = 4
+        static let paletteNumberOfColumns = 8
     }
     struct Position {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
         static let shiftLeft = CGFloat(-200)
-        static let shiftUp = CGFloat(100)
+        static let shiftUp = CGFloat(30)
 
-        static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
-        static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
-                                        y: actionButtonY)
-        static let testLevelButton = CGPoint(x: -100, y: actionButtonY)
-        static let saveButton = CGPoint(x: 0, y: actionButtonY)
-        static let loadButton = CGPoint(x: 100, y: actionButtonY)
-        static let resetButton = CGPoint(x: GlobalConstants.Dimension.screenWidth/2 - 40,
-                                         y: actionButtonY)
+        struct Palette {
+            static let layer = CGPoint(x: 250, y: 150)
+            static let label = CGPoint(x: 250, y: 280)
+        }
+
+        struct Action {
+            static let actionButtonY = -GlobalConstants.Dimension.screenHeight/2 + 40
+            static let backButton = CGPoint(x: -GlobalConstants.Dimension.screenWidth/2 + 40,
+                                            y: actionButtonY)
+            static let testLevelButton = CGPoint(x: -100, y: actionButtonY)
+            static let saveButton = CGPoint(x: 0, y: actionButtonY)
+            static let loadButton = CGPoint(x: 100, y: actionButtonY)
+            static let resetButton = CGPoint(x: GlobalConstants.Dimension.screenWidth/2 - 40,
+                                             y: actionButtonY)
+        }
+
+        struct AgentSetting {
+            static let agent = CGPoint(x: -25, y: 0)
+            static let numberOfMovesLabel = CGPoint(x: 20, y: 0)
+            static let incrementButton = CGPoint(x: 20, y: 35)
+            static let decrementButton = CGPoint(x: 20, y: -35)
+            static let background = CGPoint(x: -225, y: 300)
+        }
     }
+    struct Size {
+        struct AgentSetting {
+            static let button = CGSize(width: 30, height: 30)
+            static let background = CGSize(width: 100, height: 100)
+        }
+
+        struct Palette {
+            static let cell = CGSize(width: 50, height: 50)
+        }
+
+        struct Action {
+            static let button = CGSize(width: 60, height: 60)
+        }
+    }
+    struct Alpha {
+        static let opaque: CGFloat = 1
+        static let translucent: CGFloat = 0.3
+    }
+    static let defaultGray = UIColor.grayColor().colorWithAlphaComponent(Alpha.translucent)
 }
 
 class LevelDesigningMapScene: SKScene {
@@ -57,6 +96,10 @@ class LevelDesigningMapScene: SKScene {
     var paletteNode: SKSpriteNode!
     var currentMapUnitTypeSelected = MapUnitType.EmptySpace
     var arrowSprites: [String: SKSpriteNode]!
+    var agentNode: AgentNode!
+    var agentRow: Int!
+    var agentColumn: Int!
+    var numberOfMovesLabel: SKLabelNode!
 
     override init(size: CGSize) {
         super.init(size: size)
@@ -75,15 +118,15 @@ class LevelDesigningMapScene: SKScene {
         addChild(blocksLayer)
         addChild(unitsLayer)
 
-        let palettePosition = CGPoint(x: 0, y: -768/2 + 20 + 95)
-        paletteLayer.position = palettePosition
-        addChild(paletteLayer)
+        setPaletteLayerPosition()
 
         addArrows()
         addPalette()
         addActions()
         addBlocks()
         addBorders()
+        addAgentSettings()
+        addAgent()
     }
 
     func setGrid() {
@@ -124,20 +167,18 @@ class LevelDesigningMapScene: SKScene {
     }
 
     func removeBlocks() {
-        var blocksToRemove = [SKNode]()
-        for row in 0..<numberOfRows {
-            for column in 0..<numberOfColumns {
-                let blockNode = grid[row][column]
-                blockNode.texture = nil
-                blocksToRemove.append(blockNode)
-            }
-        }
-        self.removeChildrenInArray(blocksToRemove)
+        blocksLayer.removeAllChildren()
     }
 
     // Set block at a given row and column with a given image
-    func setBlock(mapUnit: MapUnitType, row: Int, column: Int) {
-        let blockNode = mapUnit.nodeClass.init()
+    func setBlock(mapUnitType: MapUnitType, row: Int, column: Int) {
+        let blockNode = mapUnitType.nodeClass.init()
+        setBlock(blockNode, row: row, column: column)
+    }
+
+    func setBlock(mapUnitNode: MapUnitNode, row: Int, column: Int) {
+        let blockNode = mapUnitNode
+
         // Update model
         map.setMapUnitAt(blockNode, row: row, column: column)
 
@@ -145,12 +186,28 @@ class LevelDesigningMapScene: SKScene {
         blockNode.size = blockSize
         blockNode.position = pointFor(row, column: column)
         grid[row][column] = blockNode
-        let node = blocksLayer.nodeAtPoint(pointFor(row, column: column))
-        blocksLayer.removeChildrenInArray([node])
-        blocksLayer.addChild(blockNode)
-
-        // Checker
-        // printGrid()
+        let nodes = blocksLayer.nodesAtPoint(pointFor(row, column: column)) as! [MapUnitNode]
+        var containsEmptySpace = false
+        for node in nodes {
+            if node.type != MapUnitType.EmptySpace ||
+                (node.type == MapUnitType.EmptySpace && containsEmptySpace) {
+                blocksLayer.removeChildrenInArray([node])
+            } else {
+                containsEmptySpace = true
+            }
+        }
+        if nodes.isEmpty {
+            let emptyBlockNode = MapUnitNode(type: MapUnitType.EmptySpace)
+            emptyBlockNode.size = blockSize
+            emptyBlockNode.position = pointFor(row, column: column)
+            blocksLayer.addChild(emptyBlockNode)
+        }
+        if blockNode.type != MapUnitType.EmptySpace {
+            blockNode.alpha = DesigningMapConstants.Alpha.opaque
+            blockNode.zPosition = GlobalConstants.zPosition.front
+            blocksLayer.addChild(blockNode)
+        }
+        //printGrid()
     }
 
     // Convert a row, column pair into a CGPoint relative to unitsLayer
@@ -182,14 +239,31 @@ class LevelDesigningMapScene: SKScene {
 
     // Prints the grid for checking purposes
     func printGrid() {
-//        for row in (0..<map.numberOfRows).reverse() {
-//            var string = ""
-//            for column in 0..<map.numberOfColumns {
-//                string += String(map.retrieveMapUnitAt(row, column: column)!.rawValue) + " "
-//            }
-//            print(string)
-//        }
-//        print("=====")
+        for row in (0..<map.numberOfRows).reverse() {
+            var string = ""
+            for column in 0..<map.numberOfColumns {
+                var rawString: String!
+                switch map.retrieveMapUnitAt(row, column: column)!.type {
+                case MapUnitType.Agent:
+                    rawString = "A"
+                case MapUnitType.EmptySpace:
+                    rawString = "-"
+                case MapUnitType.Goal:
+                    rawString = "T"
+                case MapUnitType.Hole:
+                    rawString = "H"
+                case MapUnitType.Wall:
+                    rawString = "W"
+                case MapUnitType.WoodenBlock:
+                    rawString = "B"
+                default:
+                    rawString = "?"
+                }
+                string += rawString + " "
+            }
+            print(string)
+        }
+        print("=====")
     }
 }
 
@@ -215,7 +289,17 @@ extension LevelDesigningMapScene {
         let row = rowFor(scenePoint)
         let column = columnFor(scenePoint)
         if isValidRowAndColumn(row, column: column) {
-            setBlock(mapUnitType, row: row, column: column)
+            if sender.isKindOfClass(UITapGestureRecognizer) &&
+                map.retrieveMapUnitAt(row, column: column)!.isKindOfClass(AgentNode) {
+                rotateAgent()
+            } else if currentMapUnitTypeSelected == MapUnitType.Agent {
+                setBlock(.EmptySpace, row: agentRow, column: agentColumn)
+                agentRow = row
+                agentColumn = column
+                setBlock(agentNode, row: row, column: column)
+            } else if agentRow != row || agentColumn != column {
+                setBlock(mapUnitType, row: row, column: column)
+            }
         }
     }
 
@@ -246,9 +330,17 @@ extension LevelDesigningMapScene {
                 updateCurrentItemSelected(.Hole, nodeName: name)
             case "Wooden Block":
                 updateCurrentItemSelected(.WoodenBlock, nodeName: name)
+            case "Monster":
+                updateCurrentItemSelected(.Monster, nodeName: name)
+            case "Door":
+                updateCurrentItemSelected(.Door, nodeName: name)
             case "Add Top", "Remove Top", "Add Bottom", "Remove Bottom",
                 "Add Left", "Remove Left", "Add Right", "Remove Right":
                 updateGrid(name)
+            case "Increase Move":
+                increaseNumberOfMoves()
+            case "Decrease Move":
+                decreaseNumberOfMoves()
             default:
                 handleGesture(sender, mapUnitType: currentMapUnitTypeSelected)
             }
@@ -391,21 +483,14 @@ extension LevelDesigningMapScene {
             }
         }
         addBlocks()
+        updateAgentPosition(action, previousMap: mapCopy)
         updateArrows()
     }
 
     func removeBlocks(action: String) {
         let updateDirection = action.componentsSeparatedByString(" ")
         if updateDirection[0] == "Remove" {
-            var childrenToRemove = [SKSpriteNode]()
-            for row in 0..<numberOfRows {
-                for column in 0..<numberOfColumns {
-                    let blockNode = grid[row][column]
-                    blockNode.texture = nil
-                    childrenToRemove.append(blockNode)
-                }
-            }
-            removeChildrenInArray(childrenToRemove)
+            blocksLayer.removeAllChildren()
         }
     }
 
@@ -422,14 +507,68 @@ extension LevelDesigningMapScene {
             )
         )
     }
+
+    func updateAgentPosition(action: String, previousMap: Map) {
+        let updateDirection = action.componentsSeparatedByString(" ")
+        agentNode = previousMap.retrieveMapUnitAt(agentRow, column: agentColumn) as! AgentNode
+        if updateDirection[0] == "Remove" {
+            switch updateDirection[1] {
+            case "Top":
+                if agentRow == previousMap.numberOfRows - 1 {
+                    agentRow = Int(agentRow) - 1
+                }
+            case "Bottom":
+                if agentRow != 0 {
+                    agentRow = Int(agentRow) - 1
+                }
+                case "Left":
+                    if agentColumn != 0 {
+                        agentColumn = Int(agentColumn) - 1
+                }
+            case "Right":
+                if agentColumn == previousMap.numberOfColumns - 1 {
+                    agentColumn = Int(agentColumn) - 1
+                }
+            default:
+                break
+            }
+        } else {
+            switch updateDirection[1] {
+            case "Bottom":
+                agentRow = Int(agentRow) + 1
+            case "Left":
+                agentColumn = Int(agentColumn) + 1
+            default:
+                break
+            }
+        }
+        setBlock(agentNode, row: agentRow, column: agentColumn)
+    }
 }
 
 // This portion handles the palette.
 extension LevelDesigningMapScene {
+    func setPaletteLayerPosition() {
+        paletteLayer.position = DesigningMapConstants.Position.Palette.layer
+        addChild(paletteLayer)
+
+        let paletteLabel = SKLabelNode(text: "MAP COMPONENTS")
+        paletteLabel.fontName = GlobalConstants.Font.defaultName + "-Bold"
+        paletteLabel.fontColor = GlobalConstants.Font.defaultGreen
+        paletteLabel.position = DesigningMapConstants.Position.Palette.label
+        addChild(paletteLabel)
+    }
+
     func addPalette() {
-        let paletteBackgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
+        let paletteNumberOfRows = DesigningMapConstants.Dimension.paletteNumberOfRows
+        let paletteNumberOfColumns = DesigningMapConstants.Dimension.paletteNumberOfColumns
+        let paletteCellWidth: CGFloat = DesigningMapConstants.Size.Palette.cell.width
+        let paletteCellHeight: CGFloat = DesigningMapConstants.Size.Palette.cell.height
+        let paletteBackgroundSize = CGSize(width: CGFloat(paletteNumberOfColumns) * paletteCellWidth,
+                                           height: CGFloat(paletteNumberOfRows) * paletteCellHeight)
+        let paletteBackgroundColor = DesigningMapConstants.defaultGray
         paletteNode = SKSpriteNode(color: paletteBackgroundColor,
-                                   size: CGSize(width: 1024, height: 50))
+                                   size: paletteBackgroundSize)
         paletteLayer.addChild(paletteNode)
 
         let textures = [MapUnitType.Agent.texture,
@@ -437,13 +576,17 @@ extension LevelDesigningMapScene {
                         MapUnitType.Goal.texture,
                         MapUnitType.Wall.texture,
                         MapUnitType.Hole.texture,
-                        MapUnitType.WoodenBlock.texture
-        ]
-        let textureNames = ["Agent", "Block", "Toilet", "Wall", "Hole", "Wooden Block"]
+                        MapUnitType.WoodenBlock.texture,
+                        MapUnitType.Monster.texture,
+                        MapUnitType.Door.texture]
+        let textureNames = ["Agent", "Block", "Toilet", "Wall", "Hole", "Wooden Block", "Monster", "Door"]
         for position in 0..<textures.count {
+            let row = position / paletteNumberOfColumns
+            let column = position % paletteNumberOfColumns
             let spriteNode = SKSpriteNode(texture: textures[position])
             spriteNode.size = blockSize
-            spriteNode.position = CGPoint(x: -1024/2 + 25 + 50 * CGFloat(position), y: 0)
+            spriteNode.position = CGPoint(x: -175 + paletteCellWidth * CGFloat(column),
+                                          y: 75 - paletteCellHeight * CGFloat(row))
             spriteNode.name = textureNames[position]
             paletteNode.addChild(spriteNode)
         }
@@ -455,9 +598,9 @@ extension LevelDesigningMapScene {
         // Update View
         for node in paletteNode.children {
             if node.name == nodeName {
-                node.alpha = 1
+                node.alpha = DesigningMapConstants.Alpha.opaque
             } else {
-                node.alpha = 0.3
+                node.alpha = DesigningMapConstants.Alpha.translucent
             }
         }
     }
@@ -467,21 +610,21 @@ extension LevelDesigningMapScene {
 extension LevelDesigningMapScene {
     func addActions() {
         addActionButton("back", name: "Back",
-                        position: DesigningMapConstants.Position.backButton)
+                        position: DesigningMapConstants.Position.Action.backButton)
         addActionButton("save", name: "Save",
-                        position: DesigningMapConstants.Position.saveButton)
+                        position: DesigningMapConstants.Position.Action.saveButton)
         addActionButton("open-folder", name: "Load",
-                        position: DesigningMapConstants.Position.loadButton)
+                        position: DesigningMapConstants.Position.Action.loadButton)
         addActionButton("play", name: "Play",
-                        position: DesigningMapConstants.Position.testLevelButton)
+                        position: DesigningMapConstants.Position.Action.testLevelButton)
         addActionButton("reset", name: "Reset",
-                        position: DesigningMapConstants.Position.resetButton)
+                        position: DesigningMapConstants.Position.Action.resetButton)
     }
 
     func addActionButton(imageNamed: String, name: String, position: CGPoint) {
         let action = SKSpriteNode(texture: TextureManager.retrieveTexture(imageNamed))
         action.name = name
-        action.size = CGSize(width: 60.0, height: 60.0)
+        action.size = DesigningMapConstants.Size.Action.button
         action.position = position
         addChild(action)
     }
@@ -572,9 +715,9 @@ extension LevelDesigningMapScene {
             title: "Ok",
             style: .Default,
             handler: { (action: UIAlertAction!) in
-                self.resetMap(
-                    Map(numberOfRows: DesigningMapConstants.Dimension.defaultNumberOfRows,
-                        numberOfColumns: DesigningMapConstants.Dimension.defaultNumberOfColumns))
+                let newMap = Map(numberOfRows: DesigningMapConstants.Dimension.defaultNumberOfRows,
+                    numberOfColumns: DesigningMapConstants.Dimension.defaultNumberOfColumns)
+                self.resetMap(newMap)
             }))
         resetAlert.addAction(UIAlertAction(
             title: "Cancel",
@@ -593,6 +736,114 @@ extension LevelDesigningMapScene {
         setGrid()
         addBlocks()
         updateArrows()
+        resetAgent()
+    }
+}
+
+extension LevelDesigningMapScene {
+    func addAgent() {
+        // If agent does not exist, create one
+        if agentNode == nil {
+            agentNode = AgentNode(type: MapUnitType.Agent)
+            let defaultNumberOfMoves = 30
+            let defaultOrientation = Direction.Up
+            let defaultAgentRow = 0
+            let defaultAgentColumn = 0
+            updateAgent(defaultNumberOfMoves, orientation: defaultOrientation,
+                        row: defaultAgentRow, column: defaultAgentColumn)
+        } else {
+            updateAgent(agentNode.numberOfMoves, orientation: agentNode.orientation,
+                        row: agentRow, column: agentColumn)
+            updateNumberOfMovesLabel()
+        }
+    }
+
+    func updateAgent(numberOfMoves: Int, orientation: Direction, row: Int, column: Int) {
+        agentNode.assignNumberOfMoves(numberOfMoves)
+        agentNode.setOrientationTo(orientation)
+        agentRow = row
+        agentColumn = column
+
+        setBlock(agentNode, row: row, column: column)
+
+        if numberOfMovesLabel != nil {
+            updateNumberOfMovesLabel()
+        }
+    }
+
+    func rotateAgent() {
+        var newDirection = Direction.Up
+        switch agentNode.orientation {
+        case Direction.Up:
+            newDirection = Direction.Right
+        case Direction.Right:
+            newDirection = Direction.Down
+        case Direction.Down:
+            newDirection = Direction.Left
+        case Direction.Left:
+            newDirection = Direction.Up
+        }
+        // Update model
+        updateAgent(agentNode.numberOfMoves, orientation: newDirection,
+                    row: agentRow, column: agentColumn)
+
+        // Update view
+        //let blockNode = SKSpriteNode(texture: newTexture, size: blockSize)
+        setBlock(agentNode, row: agentRow, column: agentColumn)
+    }
+
+    func resetAgent() {
+        agentNode = nil
+        addAgent()
+        setBlock(agentNode, row: self.agentRow, column: self.agentColumn)
+    }
+
+    func addAgentSettings() {
+        // Update view
+        let agent = SKSpriteNode(texture: TextureManager.agentDownTexture, size: blockSize)
+        agent.position = DesigningMapConstants.Position.AgentSetting.agent
+
+        numberOfMovesLabel = SKLabelNode(text: "\(agentNode.numberOfMoves)")
+        numberOfMovesLabel.position = DesigningMapConstants.Position.AgentSetting.numberOfMovesLabel
+        numberOfMovesLabel.fontName = GlobalConstants.Font.defaultName
+        numberOfMovesLabel.fontColor = UIColor.blackColor()
+        numberOfMovesLabel.horizontalAlignmentMode = .Center
+        numberOfMovesLabel.verticalAlignmentMode = .Center
+
+        let incrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("increase"))
+        incrementButton.name = "Increase Move"
+        incrementButton.size = DesigningMapConstants.Size.AgentSetting.button
+        incrementButton.position = DesigningMapConstants.Position.AgentSetting.incrementButton
+
+        let decrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("decrease"))
+        decrementButton.name = "Decrease Move"
+        decrementButton.size = DesigningMapConstants.Size.AgentSetting.button
+        decrementButton.position = DesigningMapConstants.Position.AgentSetting.decrementButton
+
+        let background = SKSpriteNode(color: DesigningMapConstants.defaultGray,
+                                      size: DesigningMapConstants.Size.AgentSetting.background)
+        background.position = DesigningMapConstants.Position.AgentSetting.background
+        background.addChild(agent)
+        background.addChild(numberOfMovesLabel)
+        background.addChild(incrementButton)
+        background.addChild(decrementButton)
+        addChild(background)
+    }
+
+    func increaseNumberOfMoves() {
+        agentNode.assignNumberOfMoves(agentNode.numberOfMoves + 1)
+        updateNumberOfMovesLabel()
+    }
+
+    func decreaseNumberOfMoves() {
+        if agentNode.numberOfMoves > 1 {
+            agentNode.assignNumberOfMoves(agentNode.numberOfMoves - 1)
+        }
+        updateNumberOfMovesLabel()
+    }
+
+    func updateNumberOfMovesLabel() {
+        numberOfMovesLabel.text = "\(agentNode.numberOfMoves)"
     }
 }
 

@@ -10,6 +10,7 @@ import SpriteKit
 
 class MapUnitNode: SKSpriteNode {
     let type: MapUnitType
+    var exploded = false
 
     required init(type: MapUnitType = .EmptySpace) {
         self.type = type
@@ -23,5 +24,12 @@ class MapUnitNode: SKSpriteNode {
 
     override func copyWithZone(zone: NSZone) -> AnyObject {
         return type.nodeClass.init(type: type)
+    }
+
+    func runExplodingAnimation() {
+        texture = nil
+        let deathEmitter = SKEmitterNode(fileNamed: "Spark.sks")
+        addChild(deathEmitter!)
+        exploded = true
     }
 }

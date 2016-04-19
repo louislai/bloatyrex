@@ -26,7 +26,7 @@ struct PlayingMapSceneConstants {
 
 class PlayingMapScene: StaticMapScene {
     var running = false
-    var movesLeft: Int
+    var movesLeft = 0
     weak var programSupplier: ProgramSupplier!
     var programRetrieved = false
     var gameWon: Bool?
@@ -59,13 +59,13 @@ class PlayingMapScene: StaticMapScene {
 
 
     override init(size: CGSize, zoomLevel: CGFloat, map: Map) {
-        self.movesLeft = 30
         if let _ = map as? PresetMap {
             self.isPlayingPresetMap = true
         } else {
             self.isPlayingPresetMap = false
         }
         super.init(size: size, zoomLevel: zoomLevel, map: map)
+        self.movesLeft = mapNode.originalMovesLeft
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -76,18 +76,23 @@ class PlayingMapScene: StaticMapScene {
         if currentTime - timeOfLastMove < timePerMove {
             return
         }
-        if movesLeft == 0 || mapNode.activeAgentNodes.isEmpty {
+        if mapNode.activeAgentNodes.isEmpty {
             running = false
+            return
+        }
+        if running && movesLeft == 0 {
+            handleLosing()
             return
         }
         if !running {
             return
         }
+        makeMonstersSleep()
         moveActiveAgents()
+        moveMonsters()
         decrementMovesLeft()
         timeOfLastMove = currentTime
         if let gameWon = gameWon {
-            pause()
             if gameWon {
                 handleWinning()
             } else {
@@ -99,6 +104,12 @@ class PlayingMapScene: StaticMapScene {
     override func setup() {
         super.setup()
         setupButtons()
+        // Display moves left
+        self.movesLeft = mapNode.originalMovesLeft
+        if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
+            as? SKLabelNode {
+            node.text = "MOVES LEFT: \(movesLeft)"
+        }
     }
 
     func toggleRun() {
@@ -176,6 +187,7 @@ class PlayingMapScene: StaticMapScene {
 
         let retryText = SKLabelNode(text: "Rewind to retry")
         retryText.fontColor = UIColor.redColor()
+        retryText.fontName = GlobalConstants.Font.defaultName
         retryText.position = CGPoint(
             x: arrowNode.position.x,
             y: arrowNode.position.y + buttonSize.height*1.1
@@ -194,6 +206,7 @@ class PlayingMapScene: StaticMapScene {
     }
 
     private func handleWinning() {
+        pause()
         // Calculate score if map is a presetMap
         var info = [String: AnyObject]()
         info[GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] = isPlayingPresetMap
@@ -214,6 +227,7 @@ class PlayingMapScene: StaticMapScene {
     }
 
     private func handleLosing() {
+        pause()
         addRetryText()
     }
 
@@ -248,11 +262,23 @@ class PlayingMapScene: StaticMapScene {
         mapNode.activeAgentNodes = nextActiveAgentNodes
     }
 
+    private func moveMonsters() {
+        for monster in mapNode.monsterNodes {
+            monster.nextAction()
+        }
+    }
+
+    private func makeMonstersSleep() {
+        for monster in mapNode.monsterNodes {
+            monster.setSleeping()
+        }
+    }
+
     private func decrementMovesLeft() {
         movesLeft -= 1
         if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
-            node.text = "Moves left: \(movesLeft)"
+            node.text = "MOVES LEFT: \(movesLeft)"
         }
     }
 }

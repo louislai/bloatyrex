@@ -43,14 +43,20 @@ class BlockButton: SKNode {
         self.addChild(block)
     }
 
-    func pickBlock(selected: Bool) {
+    func pickBlock(selected: Bool, scale: CGFloat) {
         self.selected = selected
         if selected {
             block.hidden = false
+            block.setScale(scale)
         } else {
             block.hidden = true
             block.position = CGPoint(x: 0, y: 0)
         }
+    }
+
+    func dropBlock() {
+        block.hidden = true
+        block.position = CGPoint(x: 0, y: 0)
     }
 
     func moveBlock(displacement: CGPoint) {

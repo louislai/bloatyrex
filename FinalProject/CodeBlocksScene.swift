@@ -110,52 +110,46 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         let touch = touches.first! as UITouch
         let locationInOverlay = touch.locationInNode(overlay)
         let locationInContent = touch.locationInNode(content)
+        let scale = 1/getScale()
 
         if upButton.containsPoint(locationInOverlay) {
             heldBlock = upButton
-            upButton.pickBlock(true)
             pressState = .AddingBlock(upButton.blockCategory)
         } else if turnLeftButton.containsPoint(locationInOverlay) {
             heldBlock = turnLeftButton
-            turnLeftButton.pickBlock(true)
             pressState = .AddingBlock(turnLeftButton.blockCategory)
         } else if turnRightButton.containsPoint(locationInOverlay) {
             heldBlock = turnRightButton
-            turnRightButton.pickBlock(true)
             pressState = .AddingBlock(turnRightButton.blockCategory)
         } else if whileButton.containsPoint(locationInOverlay) {
             heldBlock = whileButton
-            whileButton.pickBlock(true)
             pressState = .AddingBlock(whileButton.blockCategory)
         } else if ifButton.containsPoint(locationInOverlay) {
             heldBlock = ifButton
-            ifButton.pickBlock(true)
             pressState = .AddingBlock(ifButton.blockCategory)
         } else if eyesButton.containsPoint(locationInOverlay) {
             heldBlock = eyesButton
-            eyesButton.pickBlock(true)
             pressState = .AddingBlock(eyesButton.blockCategory)
         } else if notButton.containsPoint(locationInOverlay) {
             heldBlock = notButton
-            notButton.pickBlock(true)
             pressState = .AddingBlock(notButton.blockCategory)
         } else if toiletButton.containsPoint(locationInOverlay) {
             heldBlock = toiletButton
-            toiletButton.pickBlock(true)
             pressState = .AddingBlock(toiletButton.blockCategory)
         } else if wallButton.containsPoint(locationInOverlay) {
             heldBlock = wallButton
-            wallButton.pickBlock(true)
             pressState = .AddingBlock(wallButton.blockCategory)
         } else if holeButton.containsPoint(locationInOverlay) {
             heldBlock = holeButton
-            holeButton.pickBlock(true)
             pressState = .AddingBlock(holeButton.blockCategory)
         } else if woodButton.containsPoint(locationInOverlay) {
             heldBlock = woodButton
-            woodButton.pickBlock(true)
             pressState = .AddingBlock(woodButton.blockCategory)
         }
+
+        heldBlock?.pickBlock(true, scale: scale)
+
+        heldBlock?.pickBlock(true, scale: scale)
 
         if programBlocks.containsPoint(locationInContent) {
             movedBlock = programBlocks.getBlock(locationInContent)
@@ -174,8 +168,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         let touch = touches.first! as UITouch
         let touchLocation = touch.locationInNode(self)
         let previousLocation = touch.previousLocationInNode(self)
-        let xMovement = touchLocation.x - previousLocation.x
-        let yMovement = touchLocation.y - previousLocation.y
+        let xMovement = (touchLocation.x - previousLocation.x) * (1/getScale())
+        let yMovement = (touchLocation.y - previousLocation.y) * (1/getScale())
         trashZone.unfocus()
         programBlocks.endHover()
 
@@ -219,7 +213,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         switch pressState {
         case .AddingBlock:
             if let block = heldBlock {
-                block.pickBlock(false)
+                block.dropBlock()
                 programBlocks.endHover()
                 if let insertionContainer = insertionPosition.container {
                     switch block.blockType {

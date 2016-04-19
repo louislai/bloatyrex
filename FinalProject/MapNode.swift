@@ -13,7 +13,9 @@ class MapNode: SKNode {
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
-    var originalMovesLeft = 30
+    var monsterNodes = [MonsterNode]()
+    var goalNodes = [GoalNode]()
+    var originalMovesLeft = 0
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -72,25 +74,57 @@ class MapNode: SKNode {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
                     where unit.type != .EmptySpace {
-                    let sprite = unit
-                    if unit.type == .Agent {
-                        sprite.texture = TextureManager.agentUpTexture
+                    unit.position = pointFor(row, column: column)
+                    unit.size = blockSize
+                    unit.zPosition = GlobalConstants.zPosition.back
+                    if let agent = unit as? AgentNode {
+                        agent.zPosition = GlobalConstants.zPosition.front
+                        agent.mapNode = self
+                        agent.row = row
+                        agent.column = column
+                        activeAgentNodes.append(agent)
+                        // This is fine since only 1 agent
+                        originalMovesLeft = agent.numberOfMoves
+                    } else if let door = unit as? DoorNode {
+                        door.randomizeDoor()
+                    } else if let monster = unit as? MonsterNode {
+                        monster.row = row
+                        monster.column = column
+                        monster.mapNode = self
+                        monster.randomizeTurnsUntilAwake()
+                        monsterNodes.append(monster)
+                    } else if let goal = unit as? GoalNode {
+                        goalNodes.append(goal)
                     }
-
-                    sprite.position = pointFor(row, column: column)
-                    sprite.size = blockSize
-                    sprite.zPosition = GlobalConstants.zPosition.back
-                    if let sprite = sprite as? AgentNode {
-                        sprite.zPosition = GlobalConstants.zPosition.front
-                        sprite.mapNode = self
-                        sprite.row = row
-                        sprite.column = column
-                        activeAgentNodes.append(sprite)
-                    }
-                    unitsLayer.addChild(sprite)
+                    unitsLayer.addChild(unit)
                 }
             }
         }
+    }
+
+
+    func isRowAndColumnSafeFromMonster(row: Int, column: Int) -> Bool {
+        if let monster = map.retrieveMapUnitAt(row+1, column: column) as? MonsterNode
+            where monster.isAwake() {
+                monster.setOrientation(.Down)
+                return false
+        }
+        if let monster = map.retrieveMapUnitAt(row-1, column: column) as? MonsterNode
+            where monster.isAwake() {
+                monster.setOrientation(.Up)
+                return false
+        }
+        if let monster = map.retrieveMapUnitAt(row, column: column+1) as? MonsterNode
+            where monster.isAwake() {
+                monster.setOrientation(.Left)
+                return false
+        }
+        if let monster = map.retrieveMapUnitAt(row, column: column-1) as? MonsterNode
+            where monster.isAwake() {
+                monster.setOrientation(.Right)
+                return false
+        }
+        return true
     }
 
     // Convert a row, column pair into a CGPoint relative

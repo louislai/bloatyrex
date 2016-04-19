@@ -55,4 +55,40 @@ class TextureManager {
         ),
         inTexture: TextureManager.retrieveTexture("agent")
     )
+    static let monsterDownTexture = SKTexture(
+        rect: CGRect(
+            x: 0.0,
+            y: 167.0/449.0,
+            width: 48.0/712.0,
+            height: 47.0/449.0
+            ),
+        inTexture: TextureManager.retrieveTexture("monster")
+    )
+    static let monsterUpTexture = SKTexture(
+        rect: CGRect(
+            x: 0.0,
+            y: 227.0/449.0,
+            width: 48.0/712.0,
+            height: 47.0/449.0
+        ),
+        inTexture: TextureManager.retrieveTexture("monster")
+    )
+    static let monsterRightTexture = SKTexture(
+        rect: CGRect(
+            x: 8.0/712.0,
+            y: 331.0/449.0,
+            width: 48.0/712.0,
+            height: 47.0/449.0
+        ),
+        inTexture: TextureManager.retrieveTexture("monster")
+    )
+    static let monsterSleepingTexture = SKTexture(
+        rect: CGRect(
+            x: 370.0/712.0,
+            y: 167.0/449.0,
+            width: 48.0/712.0,
+            height: 47.0/449.0
+        ),
+        inTexture: TextureManager.retrieveTexture("monster")
+    )
 }

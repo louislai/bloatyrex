@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SpriteKit
 
 class GlobalConstants {
     struct SegueIdentifier {
@@ -31,6 +32,11 @@ class GlobalConstants {
         static let gameWon = "won"
         static let gameWonInfoIsPlayingPresetMap = "isPlayingPresetMap"
         static let gameWonInfoRating = "gameRating"
+    }
+
+    struct Font {
+        static let defaultName = "ChalkboardSE"
+        static let defaultGreen = SKColor(red: 0, green: 0.5, blue: 0, alpha: 1)
     }
 
     static let filesArchive = FilesArchive()
