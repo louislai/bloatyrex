@@ -48,6 +48,8 @@ struct PannableSceneConstants {
 class PannableScene: SKScene {
     var content = SKNode()
     var overlay = SKNode()
+    var verticalPanBuffer = PannableSceneConstants.defaultVerticalPanBuffer
+    var horizontalPanBuffer = PannableSceneConstants.defaultHorizontalPanBuffer
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
     private var currentScale: CGFloat
@@ -58,8 +60,6 @@ class PannableScene: SKScene {
     private var verticalPanDisabled: Bool
     private var doubleTapDisabled: Bool
     private var originalViewpointPosition = CGPoint()
-    private var verticalPanBuffer = PannableSceneConstants.defaultVerticalPanBuffer
-    private var horizontalPanBuffer = PannableSceneConstants.defaultHorizontalPanBuffer
 
     /**
     Initialise the scene with a given size, and optional scale and overlay z position.
