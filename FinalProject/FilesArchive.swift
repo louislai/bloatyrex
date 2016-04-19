@@ -46,9 +46,11 @@ class FilesArchive: NSObject {
             }
         }
         let packageMapFiles = filesInDirectory.filter { ($0 as NSString).pathExtension == "map" }
-        let packageMapFileNames = packageMapFiles.map {
-            ($0 as NSString).stringByDeletingPathExtension
-        }.sort()
+        var packageMapFileNameNumbers = packageMapFiles.map {
+            Int(($0 as NSString).stringByDeletingPathExtension)!
+        }
+        packageMapFileNameNumbers.sortInPlace()
+        let packageMapFileNames = packageMapFileNameNumbers.map { "\($0)" }
         return packageMapFileNames
     }
 
