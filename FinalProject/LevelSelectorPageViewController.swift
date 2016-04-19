@@ -30,14 +30,14 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
     private var pageViewController: UIPageViewController?
     var previousViewController: UIViewController?
-    var searchBar: UISearchBar!
+    var searchBar: UISearchBar?
     var searchActive: Bool = false
     var data: [String] {
         return filesArchive.getFileNames()
     }
     var filtered: [String] = []
     var package: String?
-    var navigationBar: UINavigationBar!
+    var navigationBar: UINavigationBar?
 
     // MARK: - View Lifecycle
 
@@ -46,23 +46,27 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         createPageViewController()
         setupPageControl()
 
-        searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 1024, height: 60))
-        searchBar.placeholder = "Search for file name..."
-        view.addSubview(searchBar)
-        searchBar.delegate = self
+        if previousViewController is LevelDesigningViewController {
+            searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 1024, height: 60))
+            searchBar?.placeholder = "Search for file name..."
+            view.addSubview(searchBar!)
+            searchBar?.delegate = self
 
-        navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 60, width: 1024, height: 50))
-        navigationBar.backgroundColor = UIColor.whiteColor()
-        resetNavigationBar()
-        self.view.addSubview(navigationBar)
+            navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 60, width: 1024, height: 50))
+            navigationBar?.backgroundColor = UIColor.whiteColor()
+            resetNavigationBar()
+            self.view.addSubview(navigationBar!)
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if filtered.count == 0 && (searchBar.text?.isEmpty)! {
-            searchActive = false
-        } else {
-            searchActive = true
+        if previousViewController is LevelDesigningViewController {
+            if filtered.count == 0 && (searchBar?.text?.isEmpty)! {
+                searchActive = false
+            } else {
+                searchActive = true
+            }
         }
         resetViewControllers()
         setupPageControl()
@@ -221,7 +225,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         navigationItem.leftBarButtonItems = [backButton]
         navigationItem.rightBarButtonItem = nil
 
-        navigationBar.items = [navigationItem]
+        navigationBar?.items = [navigationItem]
     }
 
     func goBack() {

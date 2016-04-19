@@ -17,7 +17,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     private let filesArchive = FilesArchive()
     var loadedMap: Map! = nil
     private let reuseIdentifier = "LevelCellIdentifier"
-    private let sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
+    private var sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,21 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
+
+        if previousViewController is PackageSelectorViewController {
+            sectionInsets = UIEdgeInsets(top: 20.0, left: 10.0, bottom: 100.0, right: 10.0)
+            let backButtonImage = UIImage(named: "back") as UIImage?
+            let backButton = UIButton(type: UIButtonType.Custom) as UIButton
+            backButton.frame = CGRectMake(10, 590, 70, 70)
+            backButton.setImage(backButtonImage, forState: .Normal)
+            backButton.addTarget(self, action: Selector("backButtonAction:"),
+                forControlEvents: .TouchUpInside)
+            collectionView.addSubview(backButton)
+        }
+    }
+
+    func backButtonAction(sender: UIButton!) {
+        navigationController?.popViewControllerAnimated(true)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -54,6 +69,9 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         cell.textLabel.textColor = UIColor.whiteColor()
         cell.textLabel.font = UIFont(name: "Courier", size: 18)
         cell.backgroundColor = UIColor.darkGrayColor()
+        if previousViewController is LevelDesigningViewController {
+            cell.addGesturesToContentView()
+        }
         return cell
     }
 
@@ -113,8 +131,6 @@ class LevelCell: UICollectionViewCell {
         textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width, height: labelHeight))
         textLabel.textAlignment = .Center
         contentView.addSubview(textLabel)
-
-        addGesturesToContentView()
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -203,17 +219,17 @@ class LevelCell: UICollectionViewCell {
 
     // Mark: - Search Bar
 
-    var searchBar: UISearchBar {
+    var searchBar: UISearchBar? {
         return levelSelectorPageViewController.searchBar
     }
 
     func resetSearchBar() {
-        searchBar.text = ""
+        searchBar?.text = ""
     }
 
     // MARK: - Navigation Bar
 
-    var navigationBar: UINavigationBar {
+    var navigationBar: UINavigationBar? {
         return levelSelectorPageViewController.navigationBar
     }
 
@@ -238,10 +254,10 @@ class LevelCell: UICollectionViewCell {
     }
 
     func setNavigationBar(fileName: String) {
-        let navigationItem = navigationBar.items!.first!
+        let navigationItem = navigationBar!.items!.first!
         navigationItem.title = fileName
         navigationItem.leftBarButtonItems = [backButton, renameButton]
         navigationItem.rightBarButtonItem = deleteButton
-        navigationBar.items = [navigationItem]
+        navigationBar?.items = [navigationItem]
     }
 }
