@@ -39,6 +39,12 @@ import SpriteKit
 ///  Since PannableScene overrides didMoveToView, subclasses of PannableScene should call the super
 ///  didMoveToView method in order to get PannableScenes functionality.
 ///
+
+struct PannableSceneConstants {
+    static let verticalPanBuffer: CGFloat = 100.0
+    static let horizontalPanBuffer: CGFloat = 50.0
+}
+
 class PannableScene: SKScene {
     var content = SKNode()
     var overlay = SKNode()
@@ -174,7 +180,8 @@ class PannableScene: SKScene {
                 var minimumAllowedHorizontalViewpointPosition = originalViewpointPosition.x -
                     distanceToViewLeftmostContent
                 if distanceToViewLeftmostContent > 0 {
-                    minimumAllowedHorizontalViewpointPosition -= 50
+                    minimumAllowedHorizontalViewpointPosition -=
+                        PannableSceneConstants.horizontalPanBuffer
                 }
                 let minimumAllowedHorizontalDisplacement =
                     minimumAllowedHorizontalViewpointPosition - viewpoint.position.x
@@ -193,7 +200,8 @@ class PannableScene: SKScene {
                 var maximumAllowedHorizontalViewpointPosition = originalViewpointPosition.x +
                 distanceToViewRightmostContent
                 if distanceToViewRightmostContent > 0 {
-                    maximumAllowedHorizontalViewpointPosition += 50
+                    maximumAllowedHorizontalViewpointPosition +=
+                        PannableSceneConstants.horizontalPanBuffer
                 }
                 var maximumAllowedHorizontalViewpointDisplacement =
                     maximumAllowedHorizontalViewpointPosition - viewpoint.position.x
@@ -216,7 +224,8 @@ class PannableScene: SKScene {
                 var minimumAllowedVerticalViewpointPosition = originalViewpointPosition.y -
                     distanceToViewContentBottom
                 if distanceToViewContentBottom > 0 {
-                    minimumAllowedVerticalViewpointPosition -= 50
+                    minimumAllowedVerticalViewpointPosition -=
+                        PannableSceneConstants.verticalPanBuffer
                 }
                 let minimumAllowedVerticalViewpointDisplacement =
                     minimumAllowedVerticalViewpointPosition - viewpoint.position.y
