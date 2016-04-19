@@ -15,7 +15,6 @@ class ThumbnailPlayingMapViewController: UIViewController {
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
         view.backgroundColor = UIColor.blueColor()
-        print(view.bounds.size)
         // Configure the view
         setUpScene()
     }
@@ -30,7 +29,7 @@ class ThumbnailPlayingMapViewController: UIViewController {
         skView.ignoresSiblingOrder = true
 
         // Present the scene.
-        let scene = StaticMapScene(size: view.bounds.size, zoomLevel: 1, map: map)
+        let scene = StaticMapScene(size: view.bounds.size, zoomLevel: 0.6, map: map)
         scene.setup()
         skView.presentScene(scene)
     }

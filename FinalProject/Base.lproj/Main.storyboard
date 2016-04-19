@@ -8,7 +8,7 @@
         <!--Playing Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PlayingMapViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PlayingMapViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,7 +29,7 @@
         <!--Level Selector Page View Controller-->
         <scene sceneID="rSA-Fq-nEy">
             <objects>
-                <viewController id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ekL-E4-vG9"/>
                         <viewControllerLayoutGuide type="bottom" id="3h9-r7-dLW"/>
@@ -60,7 +60,7 @@
         <!--Level Selector View Controller-->
         <scene sceneID="z1t-zm-ueA">
             <objects>
-                <viewController storyboardIdentifier="LevelSelectorViewController" id="684-If-7hZ" customClass="LevelSelectorViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelSelectorViewController" id="684-If-7hZ" customClass="LevelSelectorViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hWk-Jh-vJW"/>
                         <viewControllerLayoutGuide type="bottom" id="HyE-ZU-Rax"/>
@@ -83,7 +83,7 @@
         <!--Title View Controller-->
         <scene sceneID="uQN-19-PCy">
             <objects>
-                <viewController id="oeZ-eg-we5" customClass="TitleViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oeZ-eg-we5" customClass="TitleViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Yjl-YT-ZzJ"/>
                         <viewControllerLayoutGuide type="bottom" id="uae-ro-45Q"/>
@@ -120,7 +120,7 @@
         <!--Level Designing View Controller-->
         <scene sceneID="b55-Kr-jMs">
             <objects>
-                <viewController id="E7z-cA-Cz9" customClass="LevelDesigningViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="E7z-cA-Cz9" customClass="LevelDesigningViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sFk-tb-8CI"/>
                         <viewControllerLayoutGuide type="bottom" id="dXL-A3-OZr"/>
@@ -162,7 +162,7 @@
         <!--Playing View Controller-->
         <scene sceneID="hvY-5o-oeT">
             <objects>
-                <viewController storyboardIdentifier="PlayingViewController" id="Wpj-nb-g8C" customClass="PlayingViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayingViewController" id="Wpj-nb-g8C" customClass="PlayingViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6BH-lP-HXe"/>
                         <viewControllerLayoutGuide type="bottom" id="WCh-VB-bQz"/>
@@ -271,7 +271,7 @@
         <!--Code Blocks View Controller-->
         <scene sceneID="LZ7-kb-J9p">
             <objects>
-                <viewController id="DoE-e0-Afa" customClass="CodeBlocksViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DoE-e0-Afa" customClass="CodeBlocksViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bPq-Go-zmj"/>
                         <viewControllerLayoutGuide type="bottom" id="Jpg-mR-fnA"/>
@@ -290,7 +290,7 @@
         <!--Programming View Controller-->
         <scene sceneID="7PE-xW-v1W">
             <objects>
-                <viewController storyboardIdentifier="ProgrammingViewController" id="IvN-jd-ujU" customClass="ProgrammingViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgrammingViewController" id="IvN-jd-ujU" customClass="ProgrammingViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y6P-tZ-mbM"/>
                         <viewControllerLayoutGuide type="bottom" id="j9f-Jz-r40"/>
@@ -331,7 +331,7 @@
         <!--Thumbnail Playing Map View Controller-->
         <scene sceneID="20f-jf-KS7">
             <objects>
-                <viewController id="BGt-w1-RuZ" customClass="ThumbnailPlayingMapViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BGt-w1-RuZ" customClass="ThumbnailPlayingMapViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PDl-Wi-lLG"/>
                         <viewControllerLayoutGuide type="bottom" id="stt-Jf-bxN"/>
@@ -349,7 +349,7 @@
         <!--Code Blocks View Controller-->
         <scene sceneID="aSV-pn-GlK">
             <objects>
-                <viewController id="r0Q-WW-r6m" customClass="CodeBlocksViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="r0Q-WW-r6m" customClass="CodeBlocksViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngz-TM-eQn"/>
                         <viewControllerLayoutGuide type="bottom" id="gFq-lS-GQo"/>
