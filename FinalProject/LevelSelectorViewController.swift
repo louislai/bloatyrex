@@ -35,7 +35,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
 
             // add title
-            let title = UILabel(frame: CGRectMake(0, 0, 1024, 50))
+            let title = UILabel(frame: CGRectMake(0, 0, 1024, 80))
             title.textAlignment = .Center
             title.text = previousController.selectedPackageTitle
             title.textColor = GlobalConstants.Font.defaultGreen
