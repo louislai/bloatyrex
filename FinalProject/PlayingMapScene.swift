@@ -195,7 +195,7 @@ class PlayingMapScene: StaticMapScene {
         retryText.fontColor = UIColor.redColor()
         retryText.fontName = GlobalConstants.Font.defaultNameBold
         retryText.position = CGPoint(
-            x: arrowNode.position.x,
+            x: arrowNode.position.x-arrowNode.frame.size.width/4.0,
             y: arrowNode.position.y + buttonSize.height*1.1
         )
         addNodeToOverlay(retryText)

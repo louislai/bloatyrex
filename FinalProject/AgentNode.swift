@@ -483,7 +483,8 @@ extension AgentNode {
         guard let door = nextUnit as? DoorNode else {
             return nil
         }
-        if door.correctDoor == .DoorLeft && buttonNumber == 0 {
+        if door.correctDoor == .DoorLeft && buttonNumber == 0 ||
+            door.correctDoor == .DoorRight && buttonNumber == 1 {
             mapNode.map.clearMapUnitAt(nextRow, column: nextColumn)
             door.runExplodingAnimation()
             return nil

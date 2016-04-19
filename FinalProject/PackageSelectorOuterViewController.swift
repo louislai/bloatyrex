@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class PackageSelectorOuterViewController: UIViewController {
-    
+
     @IBAction func backButtonPressed(sender: AnyObject) {
         self.navigationController?.popViewControllerAnimated(true)
     }
