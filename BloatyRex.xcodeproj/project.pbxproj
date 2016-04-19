@@ -143,17 +143,17 @@
 		3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramBlocksSupplier.swift; sourceTree = "<group>"; };
 		3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedEditingProgramDelegate.swift; sourceTree = "<group>"; };
 		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PannableScene.swift; path = FinalProject/PannableScene.swift; sourceTree = "<group>"; };
-		3DF2309E1C8F0617003420C0 /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DF2309E1C8F0617003420C0 /* BloatyRex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloatyRex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingMapViewController.swift; sourceTree = "<group>"; };
 		3DF230A61C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3DF230A81C8F0617003420C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DF230AB1C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DF230AD1C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3DF230B21C8F0617003420C0 /* FinalProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DF230B21C8F0617003420C0 /* BloatyRex.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BloatyRex.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectTests.swift; sourceTree = "<group>"; };
 		3DF230B81C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3DF230BD1C8F0617003420C0 /* FinalProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FinalProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DF230BD1C8F0617003420C0 /* BloatyRex.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BloatyRex.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -262,9 +262,9 @@
 		3DF2309F1C8F0617003420C0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3DF2309E1C8F0617003420C0 /* FinalProject.app */,
-				3DF230B21C8F0617003420C0 /* FinalProjectTests.xctest */,
-				3DF230BD1C8F0617003420C0 /* FinalProjectUITests.xctest */,
+				3DF2309E1C8F0617003420C0 /* BloatyRex.app */,
+				3DF230B21C8F0617003420C0 /* BloatyRex.xctest */,
+				3DF230BD1C8F0617003420C0 /* BloatyRex.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -449,9 +449,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3DF2309D1C8F0617003420C0 /* FinalProject */ = {
+		3DF2309D1C8F0617003420C0 /* BloatyRex */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DF230C61C8F0617003420C0 /* Build configuration list for PBXNativeTarget "FinalProject" */;
+			buildConfigurationList = 3DF230C61C8F0617003420C0 /* Build configuration list for PBXNativeTarget "BloatyRex" */;
 			buildPhases = (
 				3DF2309A1C8F0617003420C0 /* Sources */,
 				3DF2309B1C8F0617003420C0 /* Frameworks */,
@@ -462,14 +462,14 @@
 			);
 			dependencies = (
 			);
-			name = FinalProject;
+			name = BloatyRex;
 			productName = FinalProject;
-			productReference = 3DF2309E1C8F0617003420C0 /* FinalProject.app */;
+			productReference = 3DF2309E1C8F0617003420C0 /* BloatyRex.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3DF230B11C8F0617003420C0 /* FinalProjectTests */ = {
+		3DF230B11C8F0617003420C0 /* BloatyRexTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DF230C91C8F0617003420C0 /* Build configuration list for PBXNativeTarget "FinalProjectTests" */;
+			buildConfigurationList = 3DF230C91C8F0617003420C0 /* Build configuration list for PBXNativeTarget "BloatyRexTests" */;
 			buildPhases = (
 				3DF230AE1C8F0617003420C0 /* Sources */,
 				3DF230AF1C8F0617003420C0 /* Frameworks */,
@@ -480,14 +480,14 @@
 			dependencies = (
 				3DF230B41C8F0617003420C0 /* PBXTargetDependency */,
 			);
-			name = FinalProjectTests;
+			name = BloatyRexTests;
 			productName = FinalProjectTests;
-			productReference = 3DF230B21C8F0617003420C0 /* FinalProjectTests.xctest */;
+			productReference = 3DF230B21C8F0617003420C0 /* BloatyRex.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		3DF230BC1C8F0617003420C0 /* FinalProjectUITests */ = {
+		3DF230BC1C8F0617003420C0 /* BloatyRexUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DF230CC1C8F0617003420C0 /* Build configuration list for PBXNativeTarget "FinalProjectUITests" */;
+			buildConfigurationList = 3DF230CC1C8F0617003420C0 /* Build configuration list for PBXNativeTarget "BloatyRexUITests" */;
 			buildPhases = (
 				3DF230B91C8F0617003420C0 /* Sources */,
 				3DF230BA1C8F0617003420C0 /* Frameworks */,
@@ -498,9 +498,9 @@
 			dependencies = (
 				3DF230BF1C8F0617003420C0 /* PBXTargetDependency */,
 			);
-			name = FinalProjectUITests;
+			name = BloatyRexUITests;
 			productName = FinalProjectUITests;
-			productReference = 3DF230BD1C8F0617003420C0 /* FinalProjectUITests.xctest */;
+			productReference = 3DF230BD1C8F0617003420C0 /* BloatyRex.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -515,7 +515,7 @@
 				TargetAttributes = {
 					3DF2309D1C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = PN9P87ZSY5;
+						DevelopmentTeam = XC99LK63YN;
 					};
 					3DF230B11C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
@@ -529,7 +529,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3DF230991C8F0617003420C0 /* Build configuration list for PBXProject "FinalProject" */;
+			buildConfigurationList = 3DF230991C8F0617003420C0 /* Build configuration list for PBXProject "BloatyRex" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -542,9 +542,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3DF2309D1C8F0617003420C0 /* FinalProject */,
-				3DF230B11C8F0617003420C0 /* FinalProjectTests */,
-				3DF230BC1C8F0617003420C0 /* FinalProjectUITests */,
+				3DF2309D1C8F0617003420C0 /* BloatyRex */,
+				3DF230B11C8F0617003420C0 /* BloatyRexTests */,
+				3DF230BC1C8F0617003420C0 /* BloatyRexUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -698,12 +698,12 @@
 /* Begin PBXTargetDependency section */
 		3DF230B41C8F0617003420C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3DF2309D1C8F0617003420C0 /* FinalProject */;
+			target = 3DF2309D1C8F0617003420C0 /* BloatyRex */;
 			targetProxy = 3DF230B31C8F0617003420C0 /* PBXContainerItemProxy */;
 		};
 		3DF230BF1C8F0617003420C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3DF2309D1C8F0617003420C0 /* FinalProject */;
+			target = 3DF2309D1C8F0617003420C0 /* BloatyRex */;
 			targetProxy = 3DF230BE1C8F0617003420C0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -819,8 +819,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex4;
+				PRODUCT_NAME = BloatyRex;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -833,8 +833,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FinalProject/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.toiletrex4;
+				PRODUCT_NAME = BloatyRex;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -846,8 +846,8 @@
 				INFOPLIST_FILE = FinalProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.FinalProjectTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalProject.app/FinalProject";
+				PRODUCT_NAME = BloatyRex;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BloatyRex.app/BloatyRex";
 			};
 			name = Debug;
 		};
@@ -858,8 +858,8 @@
 				INFOPLIST_FILE = FinalProjectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.FinalProjectTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FinalProject.app/FinalProject";
+				PRODUCT_NAME = BloatyRex;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BloatyRex.app/BloatyRex";
 			};
 			name = Release;
 		};
@@ -869,7 +869,7 @@
 				INFOPLIST_FILE = FinalProjectUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.FinalProjectUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BloatyRex;
 				TEST_TARGET_NAME = FinalProject;
 				USES_XCTRUNNER = YES;
 			};
@@ -881,7 +881,7 @@
 				INFOPLIST_FILE = FinalProjectUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nus.cs3217.2016Group6.FinalProjectUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BloatyRex;
 				TEST_TARGET_NAME = FinalProject;
 				USES_XCTRUNNER = YES;
 			};
@@ -890,7 +890,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3DF230991C8F0617003420C0 /* Build configuration list for PBXProject "FinalProject" */ = {
+		3DF230991C8F0617003420C0 /* Build configuration list for PBXProject "BloatyRex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DF230C41C8F0617003420C0 /* Debug */,
@@ -899,7 +899,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DF230C61C8F0617003420C0 /* Build configuration list for PBXNativeTarget "FinalProject" */ = {
+		3DF230C61C8F0617003420C0 /* Build configuration list for PBXNativeTarget "BloatyRex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DF230C71C8F0617003420C0 /* Debug */,
@@ -908,7 +908,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DF230C91C8F0617003420C0 /* Build configuration list for PBXNativeTarget "FinalProjectTests" */ = {
+		3DF230C91C8F0617003420C0 /* Build configuration list for PBXNativeTarget "BloatyRexTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DF230CA1C8F0617003420C0 /* Debug */,
@@ -917,7 +917,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DF230CC1C8F0617003420C0 /* Build configuration list for PBXNativeTarget "FinalProjectUITests" */ = {
+		3DF230CC1C8F0617003420C0 /* Build configuration list for PBXNativeTarget "BloatyRexUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3DF230CD1C8F0617003420C0 /* Debug */,

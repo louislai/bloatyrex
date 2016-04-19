@@ -123,7 +123,7 @@ class LevelDesigningMapScene: SKScene {
         addChild(unitsLayer)
 
         setPaletteLayerPosition()
-        
+
         createAllMapUnitNodes()
 
         addArrows()
@@ -161,7 +161,7 @@ class LevelDesigningMapScene: SKScene {
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
     }
-    
+
     func createAllMapUnitNodes() {
         let allMapUnitTypes = [MapUnitType.Agent,
                                MapUnitType.Goal,
