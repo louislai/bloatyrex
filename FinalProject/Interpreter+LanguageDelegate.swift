@@ -9,7 +9,4 @@
 import Foundation
 
 extension Interpreter: LanguageDelegate {
-    func resetInterpreter() {
-        self.removeHighlight()
-    }
 }

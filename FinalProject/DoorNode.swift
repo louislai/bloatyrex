@@ -13,7 +13,6 @@ struct DoorNodeConstants {
 }
 
 class DoorNode: MapUnitNode {
-    var correctDoor: MapUnitType = .DoorLeft
     required init(type: MapUnitType = .WoodenBlock) {
         super.init(type: .Door)
     }
@@ -28,10 +27,10 @@ class DoorNode: MapUnitNode {
         )
         if doorValue == 0 {
             texture = TextureManager.retrieveTexture("buttons-left")
-            correctDoor = .DoorLeft
+            type = .DoorLeft
         } else {
             texture = TextureManager.retrieveTexture("buttons-right")
-            correctDoor = .DoorRight
+            type = .DoorRight
         }
     }
 }

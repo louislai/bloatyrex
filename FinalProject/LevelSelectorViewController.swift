@@ -35,7 +35,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
 
             // add title
-            let title = UILabel(frame: CGRectMake(0, 0, 1024, 80))
+            let title = UILabel(frame: CGRect(x: 0, y: 0, width: 1024, height: 80))
             title.textAlignment = .Center
             title.text = previousController.selectedPackageTitle
             title.textColor = GlobalConstants.Font.defaultGreen
@@ -45,7 +45,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             // add back button
             let backButtonImage = UIImage(named: "back") as UIImage?
             let backButton = UIButton(type: UIButtonType.Custom) as UIButton
-            backButton.frame = CGRectMake(20, 590, 73, 73)
+            backButton.frame = CGRect(x: 20, y: 590, width: 73, height: 73)
             backButton.setImage(backButtonImage, forState: .Normal)
             backButton.addTarget(self,
                 action: #selector(LevelSelectorViewController.backButtonAction(_:)),
