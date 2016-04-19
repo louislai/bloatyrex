@@ -195,6 +195,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 block.deactivateDropZone()
                 pressState = .MovingBlock
             }
+            
             programBlockFrame = programBlocks.calculateAccumulatedFrame()
         }
     }
@@ -206,14 +207,16 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         let touch = touches.first! as UITouch
         let touchLocation = touch.locationInNode(self)
         let previousLocation = touch.previousLocationInNode(self)
-        let xMovement = (touchLocation.x - previousLocation.x) * (1/getScale())
-        let yMovement = (touchLocation.y - previousLocation.y) * (1/getScale())
+        var xMovement = (touchLocation.x - previousLocation.x)
+        var yMovement = (touchLocation.y - previousLocation.y)
         trashZone.unfocus()
         programBlocks.endHover()
 
         switch pressState {
         case .AddingBlock(let category):
             if let block = heldBlock {
+                xMovement *= (1/getScale())
+                yMovement *= (1/getScale())
                 block.moveBlock(CGPoint(x: xMovement, y: yMovement))
                 if programBlocks.containsPoint(touchLocation) {
                     programBlocks.hover(touchLocation, category: category, insertionHandler: insertionPosition)
