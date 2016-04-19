@@ -261,6 +261,7 @@ class AgentNode: MapUnitNode {
     }
 
     private func getMoveToAction(toPoint: CGPoint, duration: NSTimeInterval = 0.6) -> SKAction {
+        let currentTexture = texture
         let moveAction = SKAction.moveTo(toPoint, duration: duration)
         var movementTextures: [SKTexture]
         switch direction {
@@ -275,7 +276,6 @@ class AgentNode: MapUnitNode {
                 timePerFrame: timePerFrame),
             count: Int(duration / 2 / timePerFrame)
         )
-        let currentTexture = texture
         let actionSequence = SKAction.sequence([
             SKAction.group([moveAction, changeTextureAction]),
             SKAction.setTexture(currentTexture!)
