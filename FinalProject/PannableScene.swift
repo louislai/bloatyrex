@@ -41,8 +41,8 @@ import SpriteKit
 ///
 
 struct PannableSceneConstants {
-    static let verticalPanBuffer: CGFloat = 260.0
-    static let horizontalPanBuffer: CGFloat = 50.0
+    static let defaultVerticalPanBuffer: CGFloat = 260.0
+    static let defaultHorizontalPanBuffer: CGFloat = 50.0
 }
 
 class PannableScene: SKScene {
@@ -58,6 +58,8 @@ class PannableScene: SKScene {
     private var verticalPanDisabled: Bool
     private var doubleTapDisabled: Bool
     private var originalViewpointPosition = CGPoint()
+    private var verticalPanBuffer = PannableSceneConstants.defaultVerticalPanBuffer
+    private var horizontalPanBuffer = PannableSceneConstants.defaultHorizontalPanBuffer
 
     /**
     Initialise the scene with a given size, and optional scale and overlay z position.
