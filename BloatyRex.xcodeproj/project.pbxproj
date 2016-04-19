@@ -57,6 +57,7 @@
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
 		3DF230B71C8F0617003420C0 /* FinalProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */; };
 		3DF230C21C8F0617003420C0 /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */; };
+		3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */; };
 		B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */; };
 		B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */; };
 		B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */; };
@@ -175,6 +176,7 @@
 		3DF230BD1C8F0617003420C0 /* BloatyRex.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BloatyRex.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorOuterViewController.swift; sourceTree = "<group>"; };
 		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningViewController.swift; sourceTree = "<group>"; };
 		B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesArchive.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 		3D15926B1CC32AA4009E8559 /* PackageSelector */ = {
 			isa = PBXGroup;
 			children = (
+				3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */,
 				3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */,
 				3D15926E1CC32F72009E8559 /* PackageCell.swift */,
 			);
@@ -719,6 +722,7 @@
 				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
 				1D69B6E01CB6A1D900C1FA04 /* WoodBlock.swift in Sources */,
+				3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */,
 				1D69B6E61CBB896200C1FA04 /* NotBlock.swift in Sources */,
 				1D409C6A1CC5EEA6002E6B02 /* PressRedBlock.swift in Sources */,
 				1DB4B08B1C97FD940010F727 /* CodeBlocksScene.swift in Sources */,

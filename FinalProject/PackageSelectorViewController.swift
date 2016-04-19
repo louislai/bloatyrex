@@ -17,7 +17,7 @@ struct PackageSelectorConstants {
 class PackageSelectorViewController: UICollectionViewController {
     private let reuseIdentifier = "packageCell"
     private let packageNames = ["The Basics", "Loops", "hi", "fish", "hi", "fish", "hi", "fish", "hi"]
-    private let sectionInsets = UIEdgeInsets(top: 180,
+    private let sectionInsets = UIEdgeInsets(top: 80,
         left: (GlobalConstants.Dimension.screenWidth - PackageSelectorConstants.cellWidth) / 2,
         bottom: 150.0, right: 5.0)
     private var cellWidth = PackageSelectorConstants.cellWidth
