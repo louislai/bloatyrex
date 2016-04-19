@@ -32,7 +32,7 @@ struct DesigningMapConstants {
         static let defaultNumberOfColumns = 6
 
         static let paletteNumberOfRows = 3
-        static let paletteNumberOfColumns = 8
+        static let paletteNumberOfColumns = 7
     }
     struct Position {
         static let anchor = CGPoint(x: 0.5, y: 0.5)
@@ -40,9 +40,9 @@ struct DesigningMapConstants {
         static let shiftUp = CGFloat(0)
 
         struct Palette {
-            static let layer = CGPoint(x: 250, y: 150)
-            static let label = CGPoint(x: 250, y: 250)
-            static let summary = CGPoint(x: 250, y: -20)
+            static let layer = CGPoint(x: 270, y: 150)
+            static let label = CGPoint(x: 270, y: 250)
+            static let summary = CGPoint(x: 270, y: -20)
         }
 
         struct Action {
@@ -76,7 +76,7 @@ struct DesigningMapConstants {
             static let cell = CGSize(width: 50, height: 50)
             static let background = CGSize(width: CGFloat(Dimension.paletteNumberOfColumns) * cell.width,
                                            height: CGFloat(Dimension.paletteNumberOfRows) * cell.height)
-            static let summary = CGSize(width: 400, height: 120)
+            static let summary = CGSize(width: 350, height: 105)
         }
 
         struct Action {
