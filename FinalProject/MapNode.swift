@@ -83,6 +83,7 @@ class MapNode: SKNode {
                         agent.row = row
                         agent.column = column
                         activeAgentNodes.append(agent)
+                        agent.resetInterpreter()
                         // This is fine since only 1 agent
                         originalMovesLeft = agent.numberOfMoves
                     } else if let door = unit as? DoorNode {

@@ -17,6 +17,25 @@ class Interpreter {
         self.instructions = compileProgram(program)
         self.instructions.append(.Done)
     }
+    
+    func removeHighlight() {
+        if let action = previousAction {
+            switch action {
+            case .Forward(let block):
+                block?.unhighlight()
+            case .Jump(let block):
+                block?.unhighlight()
+            case .RotateLeft(let block):
+                block?.unhighlight()
+            case .RotateRight(let block):
+                block?.unhighlight()
+            case .NoAction(let block):
+                block?.unhighlight()
+            case .ChooseButton(_, let block):
+                block?.unhighlight()
+            }
+        }
+    }
 
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
         if let action = previousAction {

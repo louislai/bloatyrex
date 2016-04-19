@@ -110,7 +110,6 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         if let code = parseBlock(1) {
             return code
         }
-        print("boom")
         return nil
     }
 
