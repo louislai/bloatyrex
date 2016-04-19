@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D409C661CC5EE58002E6B02 /* WaitBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C651CC5EE58002E6B02 /* WaitBlock.swift */; };
+		1D409C681CC5EE89002E6B02 /* JumpBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C671CC5EE89002E6B02 /* JumpBlock.swift */; };
+		1D409C6A1CC5EEA6002E6B02 /* PressRedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */; };
+		1D409C6C1CC5EEE6002E6B02 /* PressBlueBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */; };
 		1D69B6C61CB2998B00C1FA04 /* ContainerBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */; };
 		1D69B6C81CB29E4500C1FA04 /* TrashContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */; };
 		1D69B6CA1CB2AA9200C1FA04 /* NestingZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */; };
@@ -109,6 +113,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D409C651CC5EE58002E6B02 /* WaitBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitBlock.swift; sourceTree = "<group>"; };
+		1D409C671CC5EE89002E6B02 /* JumpBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpBlock.swift; sourceTree = "<group>"; };
+		1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressRedBlock.swift; sourceTree = "<group>"; };
+		1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressBlueBlock.swift; sourceTree = "<group>"; };
 		1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerBlockProtocol.swift; sourceTree = "<group>"; };
 		1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrashContainer.swift; sourceTree = "<group>"; };
 		1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestingZone.swift; sourceTree = "<group>"; };
@@ -382,6 +390,10 @@
 				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
 				1DB4B0921C991FC30010F727 /* CodeBlock.swift */,
 				1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */,
+				1D409C651CC5EE58002E6B02 /* WaitBlock.swift */,
+				1D409C671CC5EE89002E6B02 /* JumpBlock.swift */,
+				1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */,
+				1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */,
 				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
 				1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */,
 				1DB4B0941C9920480010F727 /* MainBlock.swift */,
@@ -651,8 +663,11 @@
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */,
 				1D69B6D81CB5583600C1FA04 /* ObjectBlock.swift in Sources */,
+				1D409C6C1CC5EEE6002E6B02 /* PressBlueBlock.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1D69B6DE1CB6A15C00C1FA04 /* HoleBlock.swift in Sources */,
+				1D409C681CC5EE89002E6B02 /* JumpBlock.swift in Sources */,
+				1D409C661CC5EE58002E6B02 /* WaitBlock.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
 				1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */,
 				1DB4B08D1C99073F0010F727 /* DropZone.swift in Sources */,
@@ -671,6 +686,7 @@
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
 				1D69B6E01CB6A1D900C1FA04 /* WoodBlock.swift in Sources */,
 				1D69B6E61CBB896200C1FA04 /* NotBlock.swift in Sources */,
+				1D409C6A1CC5EEA6002E6B02 /* PressRedBlock.swift in Sources */,
 				1DB4B08B1C97FD940010F727 /* CodeBlocksScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

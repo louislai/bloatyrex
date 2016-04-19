@@ -19,6 +19,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward, blockCategory: BlockCategory.Action)
     let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft, blockCategory: BlockCategory.Action)
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight, blockCategory: BlockCategory.Action)
+    let waitButton = BlockButton(imageNamed: "wait-block", blockType: BlockType.Wait, blockCategory: BlockCategory.Action)
+    let jumpButton = BlockButton(imageNamed: "jump-block", blockType: BlockType.Jump, blockCategory: BlockCategory.Action)
+    let pressRedButton = BlockButton(imageNamed: "press-red-block", blockType: BlockType.PressRed, blockCategory: BlockCategory.Action)
+    let pressBlueButton = BlockButton(imageNamed: "press-blue-block", blockType: BlockType.PressRed, blockCategory: BlockCategory.Action)
     let whileButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While, blockCategory: BlockCategory.Action)
     let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes, blockCategory: BlockCategory.BoolOp)
     let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet, blockCategory: BlockCategory.Object)
@@ -50,9 +54,9 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         programBlocks = blocks
         programBlocks.removeFromParent()
         if editEnabled {
-            programBlocks.position = CGPoint(x: size.width * 0.6, y: size.height * 0.9)
+            programBlocks.position = CGPoint(x: size.width * 0.4, y: size.height * 0.9)
         } else {
-            programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height * 0.9)
+            programBlocks.position = CGPoint(x: size.width * 0.1, y: size.height * 0.9)
         }
         addNodeToContent(programBlocks)
     }
@@ -69,11 +73,15 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
         if editEnabled {
-            upButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.3)
-            turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
-            turnRightButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
-            whileButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.1)
-            ifButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
+            upButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.4)
+            turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
+            turnRightButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.4)
+            waitButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.3)
+            jumpButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
+            pressBlueButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.2)
+            pressRedButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
+            whileButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
+            ifButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.1)
             eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
             notButton.position = CGPoint(x: size.width * -0.2, y: 0)
             toiletButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.1)
@@ -95,6 +103,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             addNodeToOverlay(ifButton)
             addNodeToOverlay(notButton)
             addNodeToOverlay(trashZone)
+            addNodeToOverlay(waitButton)
+            addNodeToOverlay(jumpButton)
+            addNodeToOverlay(pressRedButton)
+            addNodeToOverlay(pressBlueButton)
         }
         programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height * 0.9)
         addNodeToContent(programBlocks)
@@ -145,6 +157,18 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         } else if woodButton.containsPoint(locationInOverlay) {
             heldBlock = woodButton
             pressState = .AddingBlock(woodButton.blockCategory)
+        } else if waitButton.containsPoint(locationInOverlay) {
+            heldBlock = waitButton
+            pressState = .AddingBlock(waitButton.blockCategory)
+        } else if jumpButton.containsPoint(locationInOverlay) {
+            heldBlock = jumpButton
+            pressState = .AddingBlock(jumpButton.blockCategory)
+        } else if pressRedButton.containsPoint(locationInOverlay) {
+            heldBlock = pressRedButton
+            pressState = .AddingBlock(pressRedButton.blockCategory)
+        } else if pressBlueButton.containsPoint(locationInOverlay) {
+            heldBlock = pressBlueButton
+            pressState = .AddingBlock(pressBlueButton.blockCategory)
         }
 
         heldBlock?.pickBlock(true, scale: scale)
@@ -223,6 +247,14 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         insertionContainer.insertBlock(TurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .TurnRight:
                         insertionContainer.insertBlock(TurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .Wait:
+                        insertionContainer.insertBlock(WaitBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .Jump:
+                        insertionContainer.insertBlock(JumpBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .PressRed:
+                        insertionContainer.insertBlock(PressRedBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                    case .PressBlue:
+                        insertionContainer.insertBlock(PressBlueBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .While:
                         insertionContainer.insertBlock(WhileBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .If:
