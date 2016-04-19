@@ -135,7 +135,7 @@ class LevelDesigningMapScene: SKScene {
         addChild(unitsLayer)
 
         setPaletteLayerPosition()
-        
+
         createAllMapUnitNodes()
 
         addArrows()
@@ -173,7 +173,7 @@ class LevelDesigningMapScene: SKScene {
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
     }
-    
+
     func createAllMapUnitNodes() {
         let allMapUnitTypes = [MapUnitType.Agent,
                                MapUnitType.Goal,
@@ -589,7 +589,7 @@ extension LevelDesigningMapScene {
         addChild(paletteLayer)
 
         let paletteLabel = SKLabelNode(text: "MAP COMPONENTS")
-        paletteLabel.fontName = GlobalConstants.Font.defaultName + "-Bold"
+        paletteLabel.fontName = GlobalConstants.Font.defaultNameBold
         paletteLabel.fontColor = GlobalConstants.Font.defaultGreen
         paletteLabel.position = DesigningMapConstants.Position.Palette.label
         addChild(paletteLabel)
@@ -611,7 +611,7 @@ extension LevelDesigningMapScene {
         let eraserName = "Eraser"
         addPaletteSprite(eraserPosition, spriteNode: eraserTexture, name: eraserName)
     }
-    
+
     func addPaletteSprite(position: Int, spriteNode: SKSpriteNode, name: String) {
         let row = position / DesigningMapConstants.Dimension.paletteNumberOfColumns
         let column = position % DesigningMapConstants.Dimension.paletteNumberOfColumns

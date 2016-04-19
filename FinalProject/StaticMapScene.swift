@@ -40,15 +40,13 @@ class StaticMapScene: PannableScene {
         // 1
         let movesLeftLabel = SKLabelNode(text: "MOVES LEFT: ")
         movesLeftLabel.name = StaticMapSceneConstants.NodeNames.movesLeftLabel
-        movesLeftLabel.fontName = GlobalConstants.Font.defaultName
+        movesLeftLabel.fontName = GlobalConstants.Font.defaultNameBold
         movesLeftLabel.fontColor = GlobalConstants.Font.defaultGreen
 
         let layerPosition = CGPoint(
             x: 0,
             y: 300.0
         )
-        // 2
-        movesLeftLabel.fontColor = SKColor.blueColor()
         movesLeftLabel.text = String(format: "MOVES LEFT: %d", mapNode.originalMovesLeft)
 
         // 3

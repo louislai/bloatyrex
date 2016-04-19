@@ -17,8 +17,8 @@ class GlobalConstants {
     struct Dimension {
         static let screenWidth = CGFloat(1024)
         static let screenHeight = CGFloat(768)
-        static let blockWidth = CGFloat(40)
-        static let blockHeight = CGFloat(40)
+        static let blockWidth = CGFloat(50)
+        static let blockHeight = CGFloat(50)
     }
 
     struct zPosition {
@@ -36,6 +36,7 @@ class GlobalConstants {
 
     struct Font {
         static let defaultName = "ChalkboardSE"
+        static let defaultNameBold = "ChalkboardSE-Bold"
         static let defaultGreen = SKColor(red: 0, green: 0.5, blue: 0, alpha: 1)
     }
 

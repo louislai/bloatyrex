@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,7 +8,7 @@
         <!--Playing Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PlayingMapViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PlayingMapViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -29,7 +29,7 @@
         <!--Level Selector Page View Controller-->
         <scene sceneID="rSA-Fq-nEy">
             <objects>
-                <viewController id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ekL-E4-vG9"/>
                         <viewControllerLayoutGuide type="bottom" id="3h9-r7-dLW"/>
@@ -60,7 +60,7 @@
         <!--Level Selector View Controller-->
         <scene sceneID="z1t-zm-ueA">
             <objects>
-                <viewController storyboardIdentifier="LevelSelectorViewController" id="684-If-7hZ" customClass="LevelSelectorViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelSelectorViewController" id="684-If-7hZ" customClass="LevelSelectorViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hWk-Jh-vJW"/>
                         <viewControllerLayoutGuide type="bottom" id="HyE-ZU-Rax"/>
@@ -83,7 +83,7 @@
         <!--Title View Controller-->
         <scene sceneID="uQN-19-PCy">
             <objects>
-                <viewController id="oeZ-eg-we5" customClass="TitleViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oeZ-eg-we5" customClass="TitleViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Yjl-YT-ZzJ"/>
                         <viewControllerLayoutGuide type="bottom" id="uae-ro-45Q"/>
@@ -94,16 +94,20 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-6c-KJW">
                                 <rect key="frame" x="368" y="458" width="288" height="98"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="DESIGN LEVEL"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="35"/>
+                                <state key="normal" title="DESIGN">
+                                    <color key="titleColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="E7z-cA-Cz9" kind="show" id="zWI-AD-rre"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBV-6B-4Sf">
                                 <rect key="frame" x="368" y="273" width="288" height="98"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="LEVEL SELECT"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="35"/>
+                                <state key="normal" title="PLAY">
+                                    <color key="titleColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="KiG-n3-lml" kind="show" id="LGY-AL-6yF"/>
                                 </connections>
@@ -120,7 +124,7 @@
         <!--Level Designing View Controller-->
         <scene sceneID="b55-Kr-jMs">
             <objects>
-                <viewController id="E7z-cA-Cz9" customClass="LevelDesigningViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="E7z-cA-Cz9" customClass="LevelDesigningViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sFk-tb-8CI"/>
                         <viewControllerLayoutGuide type="bottom" id="dXL-A3-OZr"/>
@@ -162,7 +166,7 @@
         <!--Playing View Controller-->
         <scene sceneID="hvY-5o-oeT">
             <objects>
-                <viewController storyboardIdentifier="PlayingViewController" id="Wpj-nb-g8C" customClass="PlayingViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayingViewController" id="Wpj-nb-g8C" customClass="PlayingViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6BH-lP-HXe"/>
                         <viewControllerLayoutGuide type="bottom" id="WCh-VB-bQz"/>
@@ -271,7 +275,7 @@
         <!--Code Blocks View Controller-->
         <scene sceneID="LZ7-kb-J9p">
             <objects>
-                <viewController id="DoE-e0-Afa" customClass="CodeBlocksViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="DoE-e0-Afa" customClass="CodeBlocksViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bPq-Go-zmj"/>
                         <viewControllerLayoutGuide type="bottom" id="Jpg-mR-fnA"/>
@@ -290,7 +294,7 @@
         <!--Programming View Controller-->
         <scene sceneID="7PE-xW-v1W">
             <objects>
-                <viewController storyboardIdentifier="ProgrammingViewController" id="IvN-jd-ujU" customClass="ProgrammingViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgrammingViewController" id="IvN-jd-ujU" customClass="ProgrammingViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y6P-tZ-mbM"/>
                         <viewControllerLayoutGuide type="bottom" id="j9f-Jz-r40"/>
@@ -331,7 +335,7 @@
         <!--Thumbnail Playing Map View Controller-->
         <scene sceneID="20f-jf-KS7">
             <objects>
-                <viewController id="BGt-w1-RuZ" customClass="ThumbnailPlayingMapViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BGt-w1-RuZ" customClass="ThumbnailPlayingMapViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PDl-Wi-lLG"/>
                         <viewControllerLayoutGuide type="bottom" id="stt-Jf-bxN"/>
@@ -349,7 +353,7 @@
         <!--Code Blocks View Controller-->
         <scene sceneID="aSV-pn-GlK">
             <objects>
-                <viewController id="r0Q-WW-r6m" customClass="CodeBlocksViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="r0Q-WW-r6m" customClass="CodeBlocksViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngz-TM-eQn"/>
                         <viewControllerLayoutGuide type="bottom" id="gFq-lS-GQo"/>
@@ -373,6 +377,6 @@
         <image name="zoom" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="p0G-XZ-8kD"/>
+        <segue reference="JCV-Rq-O91"/>
     </inferredMetricsTieBreakers>
 </document>
