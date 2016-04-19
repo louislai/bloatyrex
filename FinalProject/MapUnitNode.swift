@@ -11,6 +11,9 @@ import SpriteKit
 class MapUnitNode: SKSpriteNode {
     var type: MapUnitType
     var exploded = false
+    var row: Int!
+    var column: Int!
+    var mapNode: MapNode!
 
     required init(type: MapUnitType = .EmptySpace) {
         self.type = type
@@ -31,5 +34,6 @@ class MapUnitNode: SKSpriteNode {
         let deathEmitter = SKEmitterNode(fileNamed: "Spark.sks")
         addChild(deathEmitter!)
         exploded = true
+        mapNode.map.clearMapUnitAt(row, column: column)
     }
 }

@@ -78,21 +78,19 @@ class MapNode: SKNode {
                     unit.position = pointFor(row, column: column)
                     unit.size = blockSize
                     unit.zPosition = GlobalConstants.zPosition.back
+                    unit.mapNode = self
+                    unit.row = row
+                    unit.column = column
                     if let agent = unit as? AgentNode {
                         agent.zPosition = GlobalConstants.zPosition.front
-                        agent.mapNode = self
-                        agent.row = row
-                        agent.column = column
                         activeAgentNodes.append(agent)
                         // This is fine since only 1 agent
                         originalMovesLeft = agent.numberOfMoves
                     } else if let door = unit as? DoorNode {
                         doorNodes.append(door)
                     } else if let monster = unit as? MonsterNode {
-                        monster.row = row
-                        monster.column = column
-                        monster.mapNode = self
                         monster.initializeTurnsUntilAwake()
+                        monster.setSleeping()
                         monsterNodes.append(monster)
                     } else if let goal = unit as? GoalNode {
                         goalNodes.append(goal)
@@ -104,24 +102,24 @@ class MapNode: SKNode {
     }
 
 
-    func isRowAndColumnSafeFromMonster(row: Int, column: Int, steps: Int = 0) -> Bool {
+    func isRowAndColumnSafeFromMonster(row: Int, column: Int) -> Bool {
         if let monster = map.retrieveMapUnitAt(row+1, column: column) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Down)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row-1, column: column) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Up)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column+1) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Left)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column-1) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Right)
                 return false
         }

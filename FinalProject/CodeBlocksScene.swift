@@ -195,7 +195,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 block.deactivateDropZone()
                 pressState = .MovingBlock
             }
-            
+
             programBlockFrame = programBlocks.calculateAccumulatedFrame()
         }
     }
