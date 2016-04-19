@@ -9,7 +9,7 @@
 import SpriteKit
 
 class MapUnitNode: SKSpriteNode {
-    let type: MapUnitType
+    var type: MapUnitType
     var exploded = false
 
     required init(type: MapUnitType = .EmptySpace) {
