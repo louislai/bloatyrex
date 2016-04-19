@@ -17,7 +17,9 @@ class CodeBlocksViewController: UIViewController {
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
-        scene = CodeBlocksScene(size: view.bounds.size)
+        scene = CodeBlocksScene(size: view.bounds.size, initialZoomLevel: 0.7)
+        scene.setMaximumScale(2)
+        scene.setMinimumScale(0.5)
         let skView = view as! SKView
         skView.showsFPS = true
         skView.showsNodeCount = true
