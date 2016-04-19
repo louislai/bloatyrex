@@ -10,6 +10,18 @@ import SpriteKit
 import Darwin
 
 struct DesigningMapConstants {
+    struct DefaultValue {
+        struct Agent {
+            static let numberOfMoves = 30
+            static let orientation = Direction.Up
+            static let numberOfRows = 0
+            static let numberOfColumns = 0
+        }
+        struct Action {
+            static let numberOfItemsPerPage = 15
+            static let maximumNumberOfCharacters = 30
+        }
+    }
     struct Dimension {
         static let minNumberOfRows = 1
         static let minNumberOfColumns = 1
@@ -604,8 +616,12 @@ extension LevelDesigningMapScene {
         let row = position / DesigningMapConstants.Dimension.paletteNumberOfColumns
         let column = position % DesigningMapConstants.Dimension.paletteNumberOfColumns
         spriteNode.size = blockSize
-        spriteNode.position = CGPoint(x: -175 + DesigningMapConstants.Size.Palette.cell.width * CGFloat(column),
-                                      y: 75 - DesigningMapConstants.Size.Palette.cell.height * CGFloat(row))
+        let offsetX = -DesigningMapConstants.Size.Palette.background.width/2 +
+            DesigningMapConstants.Size.Palette.cell.width/2
+        let offsetY = DesigningMapConstants.Size.Palette.background.height/2 -
+            DesigningMapConstants.Size.Palette.cell.height/2
+        spriteNode.position = CGPoint(x: offsetX + DesigningMapConstants.Size.Palette.cell.width * CGFloat(column),
+                                      y: offsetY - DesigningMapConstants.Size.Palette.cell.height * CGFloat(row))
         spriteNode.name = name
         paletteNode.addChild(spriteNode)
     }
@@ -659,7 +675,6 @@ extension LevelDesigningMapScene {
     func saveAction() {
         var name: UITextField?
         var savedSuccessfully = false
-        let maximumNumberOfCharacters = 30
         let saveAlert = UIAlertController(
             title: "Save",
             message: "Name this level!",
@@ -672,7 +687,8 @@ extension LevelDesigningMapScene {
             title: "OK",
             style: .Default,
             handler: { (action: UIAlertAction!) in
-                if name!.text!.characters.count <= maximumNumberOfCharacters {
+                if name!.text!.characters.count <=
+                    DesigningMapConstants.DefaultValue.Action.maximumNumberOfCharacters {
                     savedSuccessfully = GlobalConstants.filesArchive.saveToFile(
                         self.map,
                         name: name!.text!)
@@ -717,7 +733,8 @@ extension LevelDesigningMapScene {
         let levelSelectorPageViewController = LevelSelectorPageViewController()
         levelSelectorPageViewController.currentStoryboard = levelDesigningViewController!.storyboard
         levelSelectorPageViewController.previousViewController = levelDesigningViewController
-        levelSelectorPageViewController.numberOfItemsPerPage = 15
+        levelSelectorPageViewController.numberOfItemsPerPage =
+            DesigningMapConstants.DefaultValue.Action.numberOfItemsPerPage
         levelDesigningViewController!.presentViewController(
             levelSelectorPageViewController,
             animated: true,
@@ -763,12 +780,10 @@ extension LevelDesigningMapScene {
         // If agent does not exist, create one
         if agentNode == nil {
             agentNode = AgentNode(type: MapUnitType.Agent)
-            let defaultNumberOfMoves = 30
-            let defaultOrientation = Direction.Up
-            let defaultAgentRow = 0
-            let defaultAgentColumn = 0
-            updateAgent(defaultNumberOfMoves, orientation: defaultOrientation,
-                        row: defaultAgentRow, column: defaultAgentColumn)
+            updateAgent(DesigningMapConstants.DefaultValue.Agent.numberOfMoves,
+                        orientation: DesigningMapConstants.DefaultValue.Agent.orientation,
+                        row: DesigningMapConstants.DefaultValue.Agent.numberOfRows,
+                        column: DesigningMapConstants.DefaultValue.Agent.numberOfColumns)
         } else {
             updateAgent(agentNode.numberOfMoves, orientation: agentNode.orientation,
                         row: agentRow, column: agentColumn)
@@ -877,7 +892,7 @@ extension LevelDesigningMapScene {
         let dottedLine = SKSpriteNode(texture: TextureManager.retrieveTexture("dotted-line"))
         dottedLine.zPosition = GlobalConstants.zPosition.back
         dottedLine.size = CGSize(width: CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
-            * GlobalConstants.Dimension.blockWidth, height: dottedLine.size.height)
+            * GlobalConstants.Dimension.blockWidth, height: dottedLine.size.height/3)
 
         if edgeName == "Left" || edgeName == "Right" {
             let rotate = SKAction.rotateByAngle(CGFloat(M_PI_2), duration: NSTimeInterval(0))
@@ -887,9 +902,9 @@ extension LevelDesigningMapScene {
         var positionX = -GlobalConstants.Dimension.blockWidth/2 + DesigningMapConstants.Position.shiftLeft
         var positionY = -GlobalConstants.Dimension.blockHeight/2 + DesigningMapConstants.Position.shiftUp
         let offsetX = CGFloat(DesigningMapConstants.Dimension.maxNumberOfColumns)
-            * GlobalConstants.Dimension.blockWidth / 2 - 20
+            * GlobalConstants.Dimension.blockWidth / 2 - GlobalConstants.Dimension.blockWidth / 2
         let offsetY = CGFloat(DesigningMapConstants.Dimension.maxNumberOfRows)
-            * GlobalConstants.Dimension.blockHeight / 2 - 20
+            * GlobalConstants.Dimension.blockHeight / 2 - GlobalConstants.Dimension.blockHeight / 2
         switch edgeName {
         case "Top":
             positionY = offsetY + DesigningMapConstants.Position.shiftUp
