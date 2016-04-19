@@ -40,7 +40,6 @@ class PlayingViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print(navigationController?.viewControllers)
         registerObservers()
     }
 
