@@ -60,6 +60,8 @@ struct DesigningMapConstants {
 
         struct Palette {
             static let cell = CGSize(width: 50, height: 50)
+            static let background = CGSize(width: CGFloat(Dimension.paletteNumberOfColumns) * cell.width,
+                                           height: CGFloat(Dimension.paletteNumberOfRows) * cell.height)
         }
 
         struct Action {
@@ -100,6 +102,8 @@ class LevelDesigningMapScene: SKScene {
     var agentRow: Int!
     var agentColumn: Int!
     var numberOfMovesLabel: SKLabelNode!
+    var allMapUnitNodes: [MapUnitNode]!
+    var mapUnitTypeIndices: [MapUnitType: Int]!
 
     override init(size: CGSize) {
         super.init(size: size)
@@ -119,6 +123,8 @@ class LevelDesigningMapScene: SKScene {
         addChild(unitsLayer)
 
         setPaletteLayerPosition()
+        
+        createAllMapUnitNodes()
 
         addArrows()
         addPalette()
@@ -155,6 +161,24 @@ class LevelDesigningMapScene: SKScene {
         // are relative to the unitsLayer's bottom-left corner.
         unitsLayer.position = layerPosition
     }
+    
+    func createAllMapUnitNodes() {
+        let allMapUnitTypes = [MapUnitType.Agent,
+                               MapUnitType.EmptySpace,
+                               MapUnitType.Goal,
+                               MapUnitType.Wall,
+                               MapUnitType.Hole,
+                               MapUnitType.WoodenBlock,
+                               MapUnitType.Monster,
+                               MapUnitType.Door]
+        allMapUnitNodes = [MapUnitNode]()
+        mapUnitTypeIndices = [MapUnitType: Int]()
+        for index in 0..<allMapUnitTypes.count {
+            let mapUnitType = allMapUnitTypes[index]
+            allMapUnitNodes.append(MapUnitNode(type: mapUnitType))
+            mapUnitTypeIndices[mapUnitType] = index
+        }
+    }
 
     // Set all blocks to empty at the start
     func addBlocks() {
@@ -172,7 +196,7 @@ class LevelDesigningMapScene: SKScene {
 
     // Set block at a given row and column with a given image
     func setBlock(mapUnitType: MapUnitType, row: Int, column: Int) {
-        let blockNode = mapUnitType.nodeClass.init()
+        let blockNode = allMapUnitNodes[mapUnitTypeIndices[mapUnitType]!].copy() as! MapUnitNode
         setBlock(blockNode, row: row, column: column)
     }
 
@@ -560,30 +584,19 @@ extension LevelDesigningMapScene {
     }
 
     func addPalette() {
-        let paletteNumberOfRows = DesigningMapConstants.Dimension.paletteNumberOfRows
-        let paletteNumberOfColumns = DesigningMapConstants.Dimension.paletteNumberOfColumns
         let paletteCellWidth: CGFloat = DesigningMapConstants.Size.Palette.cell.width
         let paletteCellHeight: CGFloat = DesigningMapConstants.Size.Palette.cell.height
-        let paletteBackgroundSize = CGSize(width: CGFloat(paletteNumberOfColumns) * paletteCellWidth,
-                                           height: CGFloat(paletteNumberOfRows) * paletteCellHeight)
+        let paletteBackgroundSize = DesigningMapConstants.Size.Palette.background
         let paletteBackgroundColor = DesigningMapConstants.defaultGray
         paletteNode = SKSpriteNode(color: paletteBackgroundColor,
                                    size: paletteBackgroundSize)
         paletteLayer.addChild(paletteNode)
 
-        let textures = [MapUnitType.Agent.texture,
-                        MapUnitType.EmptySpace.texture,
-                        MapUnitType.Goal.texture,
-                        MapUnitType.Wall.texture,
-                        MapUnitType.Hole.texture,
-                        MapUnitType.WoodenBlock.texture,
-                        MapUnitType.Monster.texture,
-                        MapUnitType.Door.texture]
         let textureNames = ["Agent", "Block", "Toilet", "Wall", "Hole", "Wooden Block", "Monster", "Door"]
-        for position in 0..<textures.count {
-            let row = position / paletteNumberOfColumns
-            let column = position % paletteNumberOfColumns
-            let spriteNode = SKSpriteNode(texture: textures[position])
+        for position in 0..<textureNames.count {
+            let row = position / DesigningMapConstants.Dimension.paletteNumberOfColumns
+            let column = position % DesigningMapConstants.Dimension.paletteNumberOfColumns
+            let spriteNode = allMapUnitNodes[position]
             spriteNode.size = blockSize
             spriteNode.position = CGPoint(x: -175 + paletteCellWidth * CGFloat(column),
                                           y: 75 - paletteCellHeight * CGFloat(row))
