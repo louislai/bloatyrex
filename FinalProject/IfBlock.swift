@@ -49,7 +49,8 @@ class IfBlock: CodeBlock {
 
     override var objectDropZones: [DropZone] {
         get {
-            return boolOpZone.objectZones
+            let result = getNestedObjectDropZones() + boolOpZone.objectZones
+            return result
         }
     }
 
@@ -70,9 +71,23 @@ class IfBlock: CodeBlock {
         for block in ifTrueBlock.blocks {
             zones.appendContentsOf(block.boolOpZones)
         }
+        for block in elseBlock.blocks {
+            zones.appendContentsOf(block.boolOpZones)
+        }
         return zones
     }
-
+    
+    private func getNestedObjectDropZones() -> [DropZone] {
+        var zones = [DropZone]()
+        for block in ifTrueBlock.blocks {
+            zones.appendContentsOf(block.objectDropZones)
+        }
+        for block in elseBlock.blocks {
+            zones.appendContentsOf(block.objectDropZones)
+        }
+        return zones
+    }
+    
     override init(containingBlock: ContainerBlockProtocol) {
         middleBlock = SKSpriteNode(imageNamed: "else")
         topBlock = SKSpriteNode(imageNamed: "if")
