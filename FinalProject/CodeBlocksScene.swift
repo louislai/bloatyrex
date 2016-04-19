@@ -82,7 +82,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
 
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        backgroundColor = SKColor.whiteColor()
+        backgroundColor = UIColor.groupTableViewBackgroundColor()
         if editEnabled {
             upButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.4)
             turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
