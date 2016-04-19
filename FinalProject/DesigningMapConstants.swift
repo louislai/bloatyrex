@@ -17,7 +17,7 @@ struct DesigningMapConstants {
             static let numberOfColumns = 0
         }
         struct Action {
-            static let numberOfItemsPerPage = 15
+            static let numberOfItemsPerPage = 12
             static let maximumNumberOfCharacters = 30
         }
     }

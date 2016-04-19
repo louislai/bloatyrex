@@ -219,20 +219,11 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
     // - MARK: - Navigation Bar
 
-    var backButton: UIBarButtonItem {
-        return UIBarButtonItem(title: "< Back", style: .Plain, target: self,
-                               action: #selector(LevelSelectorPageViewController.goBack))
-    }
-
     func resetNavigationBar() {
         navigationItem.title = "Tap to load level, Press-and-hold for Settings"
-        navigationItem.leftBarButtonItems = [backButton]
+        navigationItem.leftBarButtonItems = nil
         navigationItem.rightBarButtonItem = nil
 
         navigationBar?.items = [navigationItem]
-    }
-
-    func goBack() {
-        dismissViewControllerAnimated(true, completion: nil)
     }
 }

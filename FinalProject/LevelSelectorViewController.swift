@@ -41,21 +41,33 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             title.textColor = GlobalConstants.Font.defaultGreen
             title.font = UIFont(name: "\(GlobalConstants.Font.defaultName)-Bold", size: 48)
             collectionView.addSubview(title)
-
-            // add back button
-            let backButtonImage = UIImage(named: "back") as UIImage?
-            let backButton = UIButton(type: UIButtonType.Custom) as UIButton
-            backButton.frame = CGRect(x: 20, y: 590, width: 73, height: 73)
-            backButton.setImage(backButtonImage, forState: .Normal)
-            backButton.addTarget(self,
-                action: #selector(LevelSelectorViewController.backButtonAction(_:)),
-                forControlEvents: .TouchUpInside)
-            collectionView.addSubview(backButton)
         }
+        
+        let pooImageView = UIImageView(frame: CGRect(x: 925, y: 590, width: 70, height: 70))
+        pooImageView.image = UIImage(named: "poo")
+        collectionView.addSubview(pooImageView)
+        
+        let toiletPaperImageView = UIImageView(frame: CGRect(x: 800, y: 540, width: 120, height: 120))
+        toiletPaperImageView.image = UIImage(named: "toilet-paper")
+        collectionView.addSubview(toiletPaperImageView)
+        
+        // add back button
+        let backButtonImage = UIImage(named: "back") as UIImage?
+        let backButton = UIButton(type: UIButtonType.Custom) as UIButton
+        backButton.frame = CGRect(x: 20, y: 590, width: 73, height: 73)
+        backButton.setImage(backButtonImage, forState: .Normal)
+        backButton.addTarget(self,
+                             action: #selector(LevelSelectorViewController.backButtonAction(_:)),
+                             forControlEvents: .TouchUpInside)
+        collectionView.addSubview(backButton)
     }
 
     func backButtonAction(sender: UIButton!) {
-        navigationController?.popViewControllerAnimated(true)
+        if previousViewController!.isKindOfClass(PackageSelectorViewController) {
+            navigationController?.popViewControllerAnimated(true)
+        } else {
+            pageViewController?.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -77,6 +89,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             forIndexPath: indexPath) as! LevelCell
         cell.levelSelectorViewController = self
         cell.levelSelectorPageViewController = pageViewController as! LevelSelectorPageViewController
+        cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         cell.textLabel.text = fileNames![indexPath.item]
         if previousViewController is LevelDesigningViewController {
             cell.addGesturesToContentView()
@@ -143,13 +156,10 @@ class LevelCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let background = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
-        background.image = UIImage(named: "toilet-paper")
-        contentView.addSubview(background)
         let labelHeight = frame.size.height/3
         textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width, height: labelHeight))
         textLabel.textAlignment = .Center
-        textLabel.textColor = GlobalConstants.Font.defaultGreen
+        textLabel.textColor = UIColor.whiteColor()
         textLabel.font = UIFont(name: GlobalConstants.Font.defaultNameBold, size: 17)
         contentView.addSubview(textLabel)
     }
@@ -263,10 +273,6 @@ class LevelCell: UICollectionViewCell {
         return UIBarButtonItem(image: trashBinImage, style: .Plain, target: self,
                                action: #selector(LevelCell.deleteFile))
     }
-    var backButton: UIBarButtonItem {
-        return UIBarButtonItem(title: "< Back", style: .Plain, target: self,
-                               action: #selector(resetNavigationBar))
-    }
 
     func resetNavigationBar() {
         self.levelSelectorPageViewController.resetNavigationBar()
@@ -277,7 +283,7 @@ class LevelCell: UICollectionViewCell {
     func setNavigationBar(fileName: String) {
         let navigationItem = navigationBar!.items!.first!
         navigationItem.title = fileName
-        navigationItem.leftBarButtonItems = [backButton, renameButton]
+        navigationItem.leftBarButtonItem = renameButton
         navigationItem.rightBarButtonItem = deleteButton
         navigationBar?.items = [navigationItem]
     }
