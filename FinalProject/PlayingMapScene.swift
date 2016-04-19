@@ -87,19 +87,8 @@ class PlayingMapScene: StaticMapScene {
         if !running {
             return
         }
-        makeMonstersSleep()
+        moveMonsters()
         moveActiveAgents()
-//        moveMonsters()
-        let delayAction = SKAction.waitForDuration(
-            AgentNodeConstants.timePerMoveMovement/3.0
-        )
-        let moveMonstersAction = SKAction.runBlock {
-            self.moveMonsters()
-        }
-        runAction(SKAction.sequence([
-                delayAction,
-                moveMonstersAction
-            ]))
         decrementMovesLeft()
         timeOfLastMove = currentTime
         if let gameWon = gameWon {
@@ -282,12 +271,6 @@ class PlayingMapScene: StaticMapScene {
     private func moveMonsters() {
         for monster in mapNode.monsterNodes {
             monster.nextAction()
-        }
-    }
-
-    private func makeMonstersSleep() {
-        for monster in mapNode.monsterNodes {
-            monster.setSleeping()
         }
     }
 

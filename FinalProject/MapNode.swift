@@ -104,24 +104,24 @@ class MapNode: SKNode {
     }
 
 
-    func isRowAndColumnSafeFromMonster(row: Int, column: Int, steps: Int = 0) -> Bool {
+    func isRowAndColumnSafeFromMonster(row: Int, column: Int) -> Bool {
         if let monster = map.retrieveMapUnitAt(row+1, column: column) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Down)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row-1, column: column) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Up)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column+1) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Left)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column-1) as? MonsterNode
-            where monster.isAwake(steps) {
+            where monster.isAwake() {
                 monster.setOrientation(.Right)
                 return false
         }

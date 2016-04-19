@@ -20,6 +20,7 @@ class AgentNode: MapUnitNode {
     var column: Int!
     var delegate: LanguageDelegate?
     var numberOfMoves = 30
+    var goingToExplode = false
     let walkingUpTextures = [
         SKTexture(
             rect: CGRect(
@@ -169,29 +170,40 @@ class AgentNode: MapUnitNode {
             return false
         }
         if let nextAction = delegate.nextAction(mapNode.map, agent: self) {
+            var status: Bool?
+            var duration: NSTimeInterval = 0.0
+            switch nextAction {
+            case .NoAction: break
+            case .RotateLeft:
+                (status, duration) = setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
+            case .RotateRight:
+                (status, duration) = setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
+            case .Forward:
+                (status, duration) = moveForward()
+            case .Jump:
+                (status, duration) = jump()
+            case .ChooseButton(let buttonNumber, _):
+                (status, duration) = chooseButton(buttonNumber)
+            }
             guard mapNode.isRowAndColumnSafeFromMonster(row, column: column) else {
-                runExplodingAnimation()
+                goingToExplode = true
+                let waitAction = SKAction.waitForDuration(duration)
+                let explodingAction = SKAction.runBlock {
+                    self.runExplodingAnimation()
+                }
+                runAction(SKAction.sequence([
+                        waitAction,
+                    explodingAction
+                    ]))
                 return false
             }
-            switch nextAction {
-            case .NoAction: return nil
-            case .RotateLeft:
-                return setOrientationTo(Direction(rawValue: (orientation.rawValue-1+4) % 4)!)
-            case .RotateRight:
-                return setOrientationTo(Direction(rawValue: (orientation.rawValue+1) % 4)!)
-            case .Forward:
-                return moveForward()
-            case .Jump:
-                return jump()
-            case .ChooseButton(let buttonNumber, _):
-                return chooseButton(buttonNumber)
-            }
+            return status
         } else {
             return false
         }
     }
 
-    func setOrientationTo(direction: Direction) -> Bool? {
+    func setOrientationTo(direction: Direction) -> (status: Bool?, duration: NSTimeInterval) {
         orientation = direction
         switch orientation {
         case .Up:
@@ -203,7 +215,7 @@ class AgentNode: MapUnitNode {
         case .Left:
             texture = TextureManager.agentLeftTexture
         }
-        return nil
+        return (status: nil, duration: 0)
     }
 
     func runWinningAnimation() {
@@ -216,7 +228,7 @@ class AgentNode: MapUnitNode {
     }
 
     func runLosingAnimation() {
-        guard !exploded else {
+        guard !goingToExplode else {
             return
         }
         let panicAction = SKAction.animateWithTextures(
@@ -318,31 +330,35 @@ class AgentNode: MapUnitNode {
 
 // MARK: Jump action
 extension AgentNode {
-    /// Return true if jump causes the agent to reach the goal
-    /// Return nil if undecided
-    func jump() -> Bool? {
+    /// Return status true if jump causes the agent to reach the goal
+    /// Return status nil if undecided
+    /// Return duration as total time taken for action
+    func jump() -> (status: Bool?, duration: NSTimeInterval) {
+        var duration: NSTimeInterval = 0.0
         guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
-            return nil
+            return (status: nil, duration: duration)
         }
         guard let contactPoint = nextEdgePoint() else {
-            return nil
+            return (status: nil, duration: duration)
         }
         let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
             duration: AgentNodeConstants.timePerMoveMovement * 0.5
         )
+        duration += AgentNodeConstants.timePerMoveMovement * 0.5
         guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
             where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
                 let failureAction = getMoveToAction(
                     mapNode.pointFor(row, column: column),
                     duration: AgentNodeConstants.timePerMoveMovement * 0.5
                 )
+                duration += AgentNodeConstants.timePerMoveMovement * 0.5
                 let failureSequence = SKAction.sequence([
                     agentMoveToContactPointAction,
                     failureAction
                     ])
                 runAction(failureSequence)
-                return nil
+                return (status: nil, duration: duration)
         }
 
         mapNode.map.clearMapUnitAt(row, column: column)
@@ -355,6 +371,7 @@ extension AgentNode {
             targetPoint,
             duration: AgentNodeConstants.timePerMoveMovement
         )
+        duration += AgentNodeConstants.timePerMoveMovement
         let jumpSequence = SKAction.sequence(
             [
                 agentMoveToContactPointAction,
@@ -364,26 +381,28 @@ extension AgentNode {
         runAction(jumpSequence)
 
         if nextNextUnit.type == .Goal {
-            return true
+            return (status: true, duration: duration)
         }
         mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
-        return nil
+        return (status: nil, duration: duration)
     }
 }
 
 // MARK: Move forward action
 extension AgentNode {
-    /// Return true if moveForward causes the agent to reach the goal
-    /// Return false if moveForward causes the agent to lose
-    /// Return nil if undecided
-    func moveForward() -> Bool? {
+    /// Return status true if moveForward causes the agent to reach the goal
+    /// Return status false if moveForward causes the agent to lose
+    /// Return status nil if undecided
+    /// Return duration as total time taken for action
+    func moveForward() -> (status: Bool?, duration: NSTimeInterval) {
+        var duration: NSTimeInterval = 0.0
         if let (nextRow, nextColumn, nextUnit) = nextPosition() {
             // Branch off to push method if nextUnit is a wooden block
             if nextUnit.type == .WoodenBlock {
                 return push()
             }
             guard isReachableUnit(nextUnit) else {
-                return nil
+                return (status: nil, duration)
             }
 
             mapNode.map.clearMapUnitAt(row, column: column)
@@ -395,31 +414,35 @@ extension AgentNode {
             // Move sprite
             let targetPoint = mapNode.pointFor(row, column: column)
             runAction(getMoveToAction(targetPoint))
+            duration += AgentNodeConstants.timePerMoveMovement
 
             if nextUnit.type == .Goal {
-                return true
+                return (status: true, duration: duration)
             }
             mapNode.map.setMapUnitAt(self, row: nextRow, column: nextColumn)
         }
-        return nil
+        return (status: nil, duration: duration)
     }
 }
 
 // MARK: Push action
 extension AgentNode {
-    /// Return true if push causes the agent to reach the goal
-    /// Return nil if undecided
-    func push() -> Bool? {
+    /// Return status true if push causes the agent to reach the goal
+    /// Return status nil if undecided
+    /// Duration is the time taken for the action
+    func push() -> (status: Bool?, duration: NSTimeInterval) {
+        var duration: NSTimeInterval = 0.0
         guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
-            return nil
+            return (status: nil, duration: duration)
         }
         guard let contactPoint = nextEdgePoint() else {
-            return nil
+            return (status: nil, duration: duration)
         }
         let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
             duration: AgentNodeConstants.timePerMoveMovement * 0.5
         )
+        duration += AgentNodeConstants.timePerMoveMovement * 0.5
         guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2),
             nextContactPoint = nextEdgePoint(2)
             where nextNextUnit.type == .EmptySpace && nextUnit.type == .WoodenBlock else {
@@ -427,20 +450,23 @@ extension AgentNode {
                     mapNode.pointFor(row, column: column),
                     duration: AgentNodeConstants.timePerMoveMovement * 0.5
                 )
+                duration += AgentNodeConstants.timePerMoveMovement * 0.5
                 let failureSequence = SKAction.sequence([
                     agentMoveToContactPointAction,
                     failureAction
                     ])
                 runAction(failureSequence)
-                return nil
+                return (status: nil, duration: duration)
         }
         let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
         let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
         let agentPushAction = getMoveToAction(nextContactPoint)
+        duration += AgentNodeConstants.timePerMoveMovement
         let agentRetreatAction = getMoveToAction(
             agentTargetPoint,
             duration: AgentNodeConstants.timePerMoveMovement * 0.5
         )
+        duration += AgentNodeConstants.timePerMoveMovement * 0.5
         let allAgentActions = SKAction.sequence(
             [
                 agentMoveToContactPointAction,
@@ -453,6 +479,7 @@ extension AgentNode {
             woodenBlockTargetPoint,
             duration: AgentNodeConstants.timePerMoveMovement
         )
+        duration += AgentNodeConstants.timePerMoveMovement * 0.5
         let allBlockActions = SKAction.sequence(
             [
                 SKAction.waitForDuration(AgentNodeConstants.timePerMoveMovement*0.5),
@@ -468,37 +495,38 @@ extension AgentNode {
         row = nextRow
         column = nextColumn
         mapNode.map.setMapUnitAt(self, row: row, column: column)
-        return nil
+        return (status: nil, duration: duration)
     }
 }
 
 // MARK: Choose button action
 extension AgentNode {
-    /// Return nil if choosing causes the door to be unlocked, or invalid action
+    /// Return status nil if choosing causes the door to be unlocked, or invalid action
     /// Return false if choosing causes the toilet to explode and lose
-    func chooseButton(buttonNumber: Int) -> Bool? {
+    /// Return duration as total time taken
+    func chooseButton(buttonNumber: Int) -> (status: Bool?, duration: NSTimeInterval) {
         guard let (nextRow, nextColumn, nextUnit) = nextPosition() else {
-            return nil
+            return (status: nil, duration: 0)
         }
         guard let door = nextUnit as? DoorNode else {
-            return nil
+            return (status: nil, duration: 0)
         }
         if door.type == .DoorLeft && buttonNumber == 0 ||
             door.type == .DoorRight && buttonNumber == 1 {
             mapNode.map.clearMapUnitAt(nextRow, column: nextColumn)
             door.runExplodingAnimation()
-            return nil
+            return (status: nil, duration: 0)
         } else {
             for goal in mapNode.goalNodes {
                 goal.runExplodingAnimation()
             }
-            return false
+            return (status: false, duration: 0)
         }
     }
 
     func isNextStepSafe() -> Bool {
         if let (nextRow, nextColumn) = nextRowAndColumn() {
-            let res = mapNode.isRowAndColumnSafeFromMonster(nextRow, column: nextColumn, steps: 1)
+            let res = mapNode.isRowAndColumnSafeFromMonster(nextRow, column: nextColumn)
             return res
         }
         return true

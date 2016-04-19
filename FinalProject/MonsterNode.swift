@@ -15,7 +15,7 @@ struct MonsterNodeConstants {
 class MonsterNode: MapUnitNode {
     var frequencyMin = 2
     var frequencyMax = 2
-    var turnsUntilAwake = [Int]()
+    var turnsUntilAwake = 0
     var zzzOn = false
     let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture("zzz"))
     var row: Int!
@@ -48,29 +48,11 @@ class MonsterNode: MapUnitNode {
     }
 
     func isAwake(steps: Int = 0) -> Bool {
-        if turnsUntilAwake.isEmpty {
-            return false
-        }
-        var stepsLeft = steps
-        var index = 0
-        while stepsLeft > 0 {
-            if index == turnsUntilAwake.count {
-                turnsUntilAwake.append(randomizeTurnsUntilAwake())
-            }
-            if stepsLeft <= turnsUntilAwake[index] {
-                return stepsLeft == turnsUntilAwake[index]
-            } else {
-                stepsLeft -= turnsUntilAwake[index]
-                index += 1
-            }
-        }
-        return stepsLeft == turnsUntilAwake[index]
+        return turnsUntilAwake == 0
     }
 
     func initializeTurnsUntilAwake() {
-        if turnsUntilAwake.isEmpty {
-            turnsUntilAwake.append(randomizeTurnsUntilAwake())
-        }
+        turnsUntilAwake = randomizeTurnsUntilAwake()
     }
 
     func setOrientation(orientation: Direction) {
@@ -96,10 +78,10 @@ class MonsterNode: MapUnitNode {
     /// Return false otherwise
     func nextAction() {
         if isAwake() {
-            turnsUntilAwake.removeFirst()
             initializeTurnsUntilAwake()
+            setSleeping()
         }
-        turnsUntilAwake[0] -= 1
+        turnsUntilAwake = max(turnsUntilAwake-1, 0)
         if isAwake() {
             setAwake()
         }
