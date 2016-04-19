@@ -28,8 +28,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let jumpButton = BlockButton(imageNamed: "jump-block", blockCategory: BlockCategory.Action, action: ActionBlock.getJumpBlock)
     let pressRedButton = BlockButton(imageNamed: "press-red-block", blockCategory: BlockCategory.Action, action: ActionBlock.getPressRedBlock)
     let pressBlueButton = BlockButton(imageNamed: "press-blue-block", blockCategory: BlockCategory.Action, action: ActionBlock.getPressBlueBlock)
-    let whileButton = BlockButton(imageNamed: "wall", blockCategory: BlockCategory.Action, action: WhileBlock.init)
-    let ifButton = BlockButton(imageNamed: "trash", blockCategory: BlockCategory.Action, action: IfBlock.init)
+    let whileButton = BlockButton(imageNamed: "while-block", blockCategory: BlockCategory.Action, action: WhileBlock.init)
+    let ifButton = BlockButton(imageNamed: "if-else-block", blockCategory: BlockCategory.Action, action: IfBlock.init)
     let eyesButton = BlockButton(imageNamed: "eyes", blockCategory: BlockCategory.BoolOp, boolOp: SeeBlock.init)
     let notButton = BlockButton(imageNamed: "not-block", blockCategory: BlockCategory.BoolOp, boolOp: NotBlock.init)
     let notSafeButton = BlockButton(imageNamed: "not-safe-block", blockCategory: BlockCategory.BoolOp, boolOp: NotSafeBlock.init)
@@ -64,7 +64,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         programBlocks = blocks
         programBlocks.removeFromParent()
         if editEnabled {
-            programBlocks.position = CGPoint(x: size.width * -0.1, y: size.height)
+            programBlocks.position = CGPoint(x: size.width * 0.1, y: size.height)
         } else {
             programBlocks.position = CGPoint(x: size.width * 0.1, y: size.height)
         }

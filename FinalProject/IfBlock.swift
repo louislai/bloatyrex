@@ -89,9 +89,15 @@ class IfBlock: CodeBlock {
     }
 
     override init(containingBlock: ContainerBlockProtocol) {
+        
         middleBlock = SKSpriteNode(imageNamed: "else")
         topBlock = SKSpriteNode(imageNamed: "if")
         bottomBlock = SKSpriteNode(imageNamed: "endif")
+        let size = GlobalConstants.CodeBlocks.blockSize
+        let ratio = size / bottomBlock.size.height
+        bottomBlock.size = CGSize(width: bottomBlock.size.width * ratio, height: size)
+        middleBlock.size = CGSize(width: middleBlock.size.width * ratio, height: size)
+        topBlock.size = CGSize(width: topBlock.size.width * ratio, height: size)
         ifTrueDropZone = DropZone(size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
                                   dropZoneCategory: BlockCategory.Action,
                                   containingBlock: ifTrueBlock)
