@@ -45,6 +45,8 @@
 		1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0961C9927170010F727 /* InsertionPosition.swift */; };
 		1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */; };
 		1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */; };
+		1DEDB2371CC64FCD00F5124A /* EmptySpaceBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEDB2361CC64FCD00F5124A /* EmptySpaceBlock.swift */; };
+		1DEDB2391CC6500600F5124A /* MonsterBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEDB2381CC6500600F5124A /* MonsterBlock.swift */; };
 		3D1592671CBACA46009E8559 /* ProgramBlocksSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */; };
 		3D15926A1CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */; };
 		3D15926D1CC32ACB009E8559 /* PackageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */; };
@@ -160,6 +162,8 @@
 		1DB4B0961C9927170010F727 /* InsertionPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertionPosition.swift; sourceTree = "<group>"; };
 		1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ForwardBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TurnLeftBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		1DEDB2361CC64FCD00F5124A /* EmptySpaceBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptySpaceBlock.swift; sourceTree = "<group>"; };
+		1DEDB2381CC6500600F5124A /* MonsterBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonsterBlock.swift; sourceTree = "<group>"; };
 		3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramBlocksSupplier.swift; sourceTree = "<group>"; };
 		3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedEditingProgramDelegate.swift; sourceTree = "<group>"; };
 		3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorViewController.swift; sourceTree = "<group>"; };
@@ -439,6 +443,8 @@
 				1D69B6DD1CB6A15C00C1FA04 /* HoleBlock.swift */,
 				1D69B6DF1CB6A1D900C1FA04 /* WoodBlock.swift */,
 				1D69B6DB1CB6A0BE00C1FA04 /* WallBlock.swift */,
+				1DEDB2361CC64FCD00F5124A /* EmptySpaceBlock.swift */,
+				1DEDB2381CC6500600F5124A /* MonsterBlock.swift */,
 				1D69B6D91CB5592600C1FA04 /* ToiletBlock.swift */,
 				1D8067371CC32E27003657EE /* HighlightableBlockProtocol.swift */,
 			);
@@ -648,6 +654,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DEDB2391CC6500600F5124A /* MonsterBlock.swift in Sources */,
 				3D1592671CBACA46009E8559 /* ProgramBlocksSupplier.swift in Sources */,
 				BFB045CE1CB4C418009F21EF /* MapUnitNode.swift in Sources */,
 				BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */,
@@ -700,6 +707,7 @@
 				BFFB1A3E1CABB78F00C746CD /* MapNode.swift in Sources */,
 				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
 				1D69B6CA1CB2AA9200C1FA04 /* NestingZone.swift in Sources */,
+				1DEDB2371CC64FCD00F5124A /* EmptySpaceBlock.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */,

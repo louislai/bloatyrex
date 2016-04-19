@@ -28,6 +28,8 @@ enum BlockType {
     case PressRed
     case LeftCorrect
     case RightCorrect
+    case Empty
+    case Monster
 }
 
 class BlockButton: SKNode {
