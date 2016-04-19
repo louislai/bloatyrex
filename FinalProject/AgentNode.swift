@@ -340,16 +340,16 @@ extension AgentNode {
         }
         let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
-            duration: AgentNodeConstants.timePerMoveMovement * 0.5
+            duration: AgentNodeConstants.timePerMoveMovement * 0.1
         )
-        duration += AgentNodeConstants.timePerMoveMovement * 0.5
+        duration += AgentNodeConstants.timePerMoveMovement * 0.1
         guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
             where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
                 let failureAction = getMoveToAction(
                     mapNode.pointFor(row, column: column),
-                    duration: AgentNodeConstants.timePerMoveMovement * 0.5
+                    duration: AgentNodeConstants.timePerMoveMovement * 0.1
                 )
-                duration += AgentNodeConstants.timePerMoveMovement * 0.5
+                duration += AgentNodeConstants.timePerMoveMovement * 0.1
                 let failureSequence = SKAction.sequence([
                     agentMoveToContactPointAction,
                     failureAction
@@ -366,9 +366,9 @@ extension AgentNode {
         let targetPoint = mapNode.pointFor(row, column: column)
         let jumpAction = SKAction.moveTo(
             targetPoint,
-            duration: AgentNodeConstants.timePerMoveMovement
+            duration: AgentNodeConstants.timePerMoveMovement*0.4
         )
-        duration += AgentNodeConstants.timePerMoveMovement
+        duration += AgentNodeConstants.timePerMoveMovement*0.4
         let jumpSequence = SKAction.sequence(
             [
                 agentMoveToContactPointAction,
@@ -437,17 +437,17 @@ extension AgentNode {
         }
         let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
-            duration: AgentNodeConstants.timePerMoveMovement * 0.5
+            duration: AgentNodeConstants.timePerMoveMovement * 0.1
         )
-        duration += AgentNodeConstants.timePerMoveMovement * 0.5
+        duration += AgentNodeConstants.timePerMoveMovement * 0.1
         guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2),
             nextContactPoint = nextEdgePoint(2)
             where nextNextUnit.type == .EmptySpace && nextUnit.type == .WoodenBlock else {
                 let failureAction = getMoveToAction(
                     mapNode.pointFor(row, column: column),
-                    duration: AgentNodeConstants.timePerMoveMovement * 0.5
+                    duration: AgentNodeConstants.timePerMoveMovement * 0.1
                 )
-                duration += AgentNodeConstants.timePerMoveMovement * 0.5
+                duration += AgentNodeConstants.timePerMoveMovement * 0.1
                 let failureSequence = SKAction.sequence([
                     agentMoveToContactPointAction,
                     failureAction
@@ -457,13 +457,13 @@ extension AgentNode {
         }
         let agentTargetPoint = mapNode.pointFor(nextRow, column: nextColumn)
         let woodenBlockTargetPoint = mapNode.pointFor(nextNextRow, column: nextNextColumn)
-        let agentPushAction = getMoveToAction(nextContactPoint)
-        duration += AgentNodeConstants.timePerMoveMovement
+        let agentPushAction = getMoveToAction(nextContactPoint, duration: AgentNodeConstants.timePerMoveMovement * 0.3)
+        duration += AgentNodeConstants.timePerMoveMovement * 0.3
         let agentRetreatAction = getMoveToAction(
             agentTargetPoint,
-            duration: AgentNodeConstants.timePerMoveMovement * 0.5
+            duration: AgentNodeConstants.timePerMoveMovement * 0.1
         )
-        duration += AgentNodeConstants.timePerMoveMovement * 0.5
+        duration += AgentNodeConstants.timePerMoveMovement * 0.1
         let allAgentActions = SKAction.sequence(
             [
                 agentMoveToContactPointAction,
@@ -474,12 +474,11 @@ extension AgentNode {
 
         let blockPushAction = SKAction.moveTo(
             woodenBlockTargetPoint,
-            duration: AgentNodeConstants.timePerMoveMovement
+            duration: AgentNodeConstants.timePerMoveMovement*0.3
         )
-        duration += AgentNodeConstants.timePerMoveMovement * 0.5
         let allBlockActions = SKAction.sequence(
             [
-                SKAction.waitForDuration(AgentNodeConstants.timePerMoveMovement*0.5),
+                SKAction.waitForDuration(AgentNodeConstants.timePerMoveMovement*0.1),
                 blockPushAction
             ]
         )
