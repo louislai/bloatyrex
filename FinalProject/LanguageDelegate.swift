@@ -10,5 +10,4 @@ import Foundation
 
 protocol LanguageDelegate {
     func nextAction(map: Map, agent: AgentProtocol) -> Action?
-    func resetInterpreter()
 }

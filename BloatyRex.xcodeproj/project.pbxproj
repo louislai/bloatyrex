@@ -278,8 +278,6 @@
 			children = (
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
 				BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */,
-				BF49FA501CA61ACF00546F43 /* Constants.swift */,
-				BF640D781CA815E800FC454F /* ReusableComponents */,
 				BF640D781CA815E800FC454F /* ReusableComponents */,
 				BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,

@@ -157,10 +157,6 @@ class AgentNode: MapUnitNode {
         aCoder.encodeInteger(numberOfMoves, forKey: "moves")
     }
 
-    func resetInterpreter() {
-        delegate?.resetInterpreter()
-    }
-
     func assignNumberOfMoves(numberOfMoves: Int) {
         self.numberOfMoves = numberOfMoves
     }
