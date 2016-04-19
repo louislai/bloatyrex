@@ -19,7 +19,8 @@ class PackageSelectorViewController: UICollectionViewController {
     private let packageNames = ["The Basics", "Loops", "hi", "fish", "hi", "fish", "hi", "fish", "hi"]
     private let sectionInsets = UIEdgeInsets(top: 50,
         left: (GlobalConstants.Dimension.screenWidth - PackageSelectorConstants.cellWidth) / 2,
-        bottom: 50.0, right: 5.0)
+        bottom: 50,
+        right: (GlobalConstants.Dimension.screenWidth - PackageSelectorConstants.cellWidth) / 2)
     private var cellWidth = PackageSelectorConstants.cellWidth
     private var cellHeight = PackageSelectorConstants.cellHeight
     var selectedPackageTitle: String!
