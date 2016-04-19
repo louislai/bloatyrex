@@ -8,14 +8,16 @@
 
 import Foundation
 
-class Interpreter {
+class Interpreter: NSObject {
     var instructions = [Instructions]()
     var programCounter = 0
     var previousAction: Action?
 
     init(program: Program) {
-        self.instructions = compileProgram(program)
+        self.instructions = Interpreter.compileProgram(program)
         self.instructions.append(.Done)
+        super.init()
+        registerObservers()
     }
 
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
@@ -69,8 +71,35 @@ class Interpreter {
             }
         }
     }
+    
+    func removeHighlight() {
+        if let action = previousAction {
+            switch action {
+            case .Forward(let block):
+                block?.unhighlight()
+            case .Jump(let block):
+                block?.unhighlight()
+            case .RotateLeft(let block):
+                block?.unhighlight()
+            case .RotateRight(let block):
+                block?.unhighlight()
+            case .NoAction(let block):
+                block?.unhighlight()
+            case .ChooseButton(_, let block):
+                block?.unhighlight()
+            }
+        }
+    }
+    
+    private func registerObservers() {
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(Interpreter.removeHighlight),
+            name: GlobalConstants.Notification.gameReset,
+            object: nil)
+    }
 
-    private func compileProgram(program: Program?) -> [Instructions] {
+    private static func compileProgram(program: Program?) -> [Instructions] {
         var sourceProgram = program
         var compiledProgram = [Instructions]()
         while let p = sourceProgram {
@@ -86,7 +115,7 @@ class Interpreter {
         return compiledProgram
     }
 
-    private func compileStatement(statement: Statement) -> [Instructions] {
+    private static func compileStatement(statement: Statement) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch statement {
         case .ActionStatement(let action):
@@ -99,7 +128,7 @@ class Interpreter {
         return compiledProgram
     }
 
-    private func compileConditional(conditional: ConditionalExpression) -> [Instructions] {
+    private static func compileConditional(conditional: ConditionalExpression) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch conditional {
         case .IfThenElseExpression(let predicate, let thenProg, let elseProg):
@@ -113,7 +142,7 @@ class Interpreter {
         return compiledProgram
     }
 
-    private func compileLoop(loop: LoopExpression) -> [Instructions] {
+    private static func compileLoop(loop: LoopExpression) -> [Instructions] {
         var compiledProgram = [Instructions]()
         switch loop {
         case .While(let predicate, let program):
