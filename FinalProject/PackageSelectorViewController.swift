@@ -62,9 +62,11 @@ extension PackageSelectorViewController {
         cell.packageTitle.text = packageNames[indexPath.item]
         cell.packageTitle.textColor = UIColor.whiteColor()
         cell.packageTitle.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
+        cell.packageTitle.font = cell.packageTitle.font.fontWithSize(38)
         cell.progressIndicator.text = "0/10"
         cell.progressIndicator.textColor = UIColor.whiteColor()
         cell.progressIndicator.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
+        cell.progressIndicator.font = cell.progressIndicator.font.fontWithSize(38)
         cell.backgroundColor = UIColor.darkGrayColor()
         return cell
     }
