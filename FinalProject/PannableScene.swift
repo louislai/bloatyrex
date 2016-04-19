@@ -276,6 +276,7 @@ class PannableScene: SKScene {
     location if the tapped location is on a node in the overlay.
     */
     func handleDoubleTap(sender: UITapGestureRecognizer) {
+        resetOtherTouches()
         if !doubleTapDisabled {
             let tapLocation = sender.locationInView(sender.view)
             let zoomLocation = self.convertPointFromView(tapLocation)
