@@ -19,7 +19,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let actionSection = BlocksSection(title: "Actions", color: SKColor.redColor())
     let controlSection = BlocksSection(title: "Control", color: SKColor.redColor())
     let conditionalSection = BlocksSection(title: "Conditionals", color: SKColor.purpleColor())
-    let objectSection = BlocksSection(title: "Objects", color: SKColor.greenColor())
+    let objectSection = BlocksSection(title: "Objects", color: GlobalConstants.Font.defaultGreen)
+    
     let upButton = BlockButton(imageNamed: "up-block", blockCategory: BlockCategory.Action, action: ActionBlock.getForwardBlock)
     let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnLeftBlock)
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnRightBlock)
