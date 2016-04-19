@@ -33,7 +33,11 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     var searchBar: UISearchBar?
     var searchActive: Bool = false
     var data: [String] {
-        return filesArchive.getFileNames()
+        if previousViewController is PackageSelectorViewController {
+            return filesArchive.getFileNamesFromPackage(package!)
+        } else {
+            return filesArchive.getFileNames()
+        }
     }
     var filtered: [String] = []
     var package: String?

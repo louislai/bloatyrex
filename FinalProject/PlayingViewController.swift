@@ -55,7 +55,7 @@ class PlayingViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? PlayingMapViewController {
-            destination.map = mapToPresetMap(map)
+            destination.map = map
             destination.programSupplier = self
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             destination.editEnabled = false
@@ -174,13 +174,6 @@ class PlayingViewController: UIViewController {
 
     private func hideStars() {
         let _ = stars.map { $0.hidden = true }
-    }
-
-    private func mapToPresetMap(map: Map) -> PresetMap {
-        let presetMap = PresetMap(numberOfRows: map.numberOfRows, numberOfColumns: map.numberOfColumns, numberOfStars: 3)
-        presetMap.grid = map.grid
-        presetMap.assignScoresForRatings([2, 4, 6])
-        return presetMap
     }
 }
 
