@@ -34,6 +34,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let notSafeButton = BlockButton(imageNamed: "not-safe-block", blockType: BlockType.Safe, blockCategory: BlockCategory.BoolOp)
     let leftCorrectButton = BlockButton(imageNamed: "buttons-left", blockType: BlockType.LeftCorrect, blockCategory: BlockCategory.Object)
     let rightCorrectButton = BlockButton(imageNamed: "buttons-right", blockType: BlockType.RightCorrect, blockCategory: BlockCategory.Object)
+    let emptySpaceButton = BlockButton(imageNamed: "space", blockType: BlockType.Empty, blockCategory: BlockCategory.Object)
+    let monsterButton = BlockButton(imageNamed: "monster-static", blockType: BlockType.Monster, blockCategory: BlockCategory.Object)
     let trashZone = TrashZone()
     private var programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
@@ -70,12 +72,17 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         if let block = heldBlock {
             block.pickBlock(false, scale: getScale())
         }
-        touchesEnded(Set(), withEvent: nil)
+        if let block = movedBlock {
+            block.activateDropZone()
+        }
+        heldBlock = nil
+        movedBlock = nil
+        programBlocks.flushBlocks()
     }
 
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        backgroundColor = SKColor.whiteColor()
+        backgroundColor = UIColor.groupTableViewBackgroundColor()
         if editEnabled {
             upButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.4)
             turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
@@ -91,10 +98,12 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             notButton.position = CGPoint(x: size.width * -0.2, y: 0)
             toiletButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.1)
             wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
-            leftCorrectButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.1)
+            emptySpaceButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.1)
+            leftCorrectButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.3)
             holeButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.2)
             woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
-            rightCorrectButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.2)
+            monsterButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.2)
+            rightCorrectButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.3)
             trashZone.position = CGPoint(x: size.width * 0.15, y: size.height * -0.45)
             turnLeftButton.zPosition = 10
             upButton.zPosition = 10
@@ -117,6 +126,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             addNodeToOverlay(pressBlueButton)
             addNodeToOverlay(rightCorrectButton)
             addNodeToOverlay(leftCorrectButton)
+            addNodeToOverlay(emptySpaceButton)
+            addNodeToOverlay(monsterButton)
         }
         programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height)
         addNodeToContent(programBlocks)
@@ -185,6 +196,12 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         } else if leftCorrectButton.containsPoint(locationInOverlay) {
             heldBlock = leftCorrectButton
             pressState = .AddingBlock(leftCorrectButton.blockCategory)
+        } else if emptySpaceButton.containsPoint(locationInOverlay) {
+            heldBlock = emptySpaceButton
+            pressState = .AddingBlock(emptySpaceButton.blockCategory)
+        } else if monsterButton.containsPoint(locationInOverlay) {
+            heldBlock = monsterButton
+            pressState = .AddingBlock(monsterButton.blockCategory)
         }
 
         heldBlock?.pickBlock(true, scale: scale)
@@ -308,6 +325,14 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     case .LeftCorrect:
                         if let zone = insertionPosition.zone {
                             zone.insertObjectBlock(LeftDoorBlock(containingBlock: insertionContainer, containingZone: zone))
+                        }
+                    case .Empty:
+                        if let zone = insertionPosition.zone {
+                            zone.insertObjectBlock(EmptySpaceBlock(containingBlock: insertionContainer, containingZone: zone))
+                        }
+                    case .Monster:
+                        if let zone = insertionPosition.zone {
+                            zone.insertObjectBlock(MonsterBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     default:
                         break
