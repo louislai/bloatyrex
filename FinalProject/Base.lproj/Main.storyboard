@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -26,10 +26,114 @@
             </objects>
             <point key="canvasLocation" x="-93.5" y="-78"/>
         </scene>
+        <!--Package Selector Outer View Controller-->
+        <scene sceneID="G85-gn-n2C">
+            <objects>
+                <viewController id="hoF-x2-mVx" customClass="PackageSelectorOuterViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JxF-aw-utm"/>
+                        <viewControllerLayoutGuide type="bottom" id="fbO-no-O8V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="45g-ku-0io">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwy-7f-7zl">
+                                <rect key="frame" x="266" y="64" width="493" height="74"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Select Puzzle Pack">
+                                        <attributes>
+                                            <color key="NSColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="48" name="ChalkboardSE-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2BY-k1-CZh">
+                                <rect key="frame" x="0.0" y="138" width="1024" height="500"/>
+                                <connections>
+                                    <segue destination="kGb-v8-DP9" kind="embed" id="Kr6-kD-5fz"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sW-aC-mvh">
+                                <rect key="frame" x="20" y="650" width="73" height="73"/>
+                                <state key="normal" title="Button" image="back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="hoF-x2-mVx" eventType="touchUpInside" id="WFO-vr-ywh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2C8-Dn-RGf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="654" y="2328"/>
+        </scene>
+        <!--Package Selector View Controller-->
+        <scene sceneID="XqH-m5-7Qv">
+            <objects>
+                <collectionViewController id="kGb-v8-DP9" customClass="PackageSelectorViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="wGs-SR-G7F">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="iDE-B9-aqM">
+                            <size key="itemSize" width="240" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="packageCell" id="lYt-H1-fiF" customClass="PackageCell" customModule="FinalProject" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="300" height="400"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i6B-mI-fQ4">
+                                            <rect key="frame" x="0.0" y="50" width="300" height="300"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PackageTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-ME-Efw">
+                                            <rect key="frame" x="0.0" y="8" width="300" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NB-HK-UZy">
+                                            <rect key="frame" x="0.0" y="354" width="300" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <size key="customSize" width="300" height="400"/>
+                                <connections>
+                                    <outlet property="imageView" destination="i6B-mI-fQ4" id="Xay-pq-RML"/>
+                                    <outlet property="packageTitle" destination="FP0-ME-Efw" id="weq-V0-XOJ"/>
+                                    <outlet property="progressIndicator" destination="9NB-HK-UZy" id="Ceo-Js-xHa"/>
+                                    <segue destination="KiG-n3-lml" kind="show" id="Mc7-b2-AZO"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="kGb-v8-DP9" id="g8E-Af-hBN"/>
+                            <outlet property="delegate" destination="kGb-v8-DP9" id="fhf-Gj-IAA"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KDS-6U-RPt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="812" y="3180"/>
+        </scene>
         <!--Level Selector Page View Controller-->
         <scene sceneID="rSA-Fq-nEy">
             <objects>
-                <viewController id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelSelectorOuterPageViewController" id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ekL-E4-vG9"/>
                         <viewControllerLayoutGuide type="bottom" id="3h9-r7-dLW"/>
@@ -44,7 +148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CCG-de-GbR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="970" y="2514"/>
+            <point key="canvasLocation" x="1922" y="2694"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="cdl-ir-dbv">
@@ -109,7 +213,7 @@
                                     <color key="titleColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="KiG-n3-lml" kind="show" id="LGY-AL-6yF"/>
+                                    <segue destination="hoF-x2-mVx" kind="show" id="ync-wI-41W"/>
                                 </connections>
                             </button>
                         </subviews>
