@@ -74,7 +74,7 @@ struct DesigningMapConstants {
 }
 
 class LevelDesigningMapScene: SKScene {
-    var levelDesigningViewController: LevelDesigningViewController?
+    weak var levelDesigningViewController: LevelDesigningViewController?
     var map: Map!
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
