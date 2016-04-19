@@ -29,8 +29,10 @@ class Interpreter {
                 block?.unhighlight()
             case .RotateRight(let block):
                 block?.unhighlight()
-            default:
-                break
+            case .NoAction(let block):
+                block?.unhighlight()
+            case .ChooseButton(_, let block):
+                block?.unhighlight()
             }
         }
         switch instructions[programCounter] {
@@ -48,8 +50,10 @@ class Interpreter {
                 block?.highlight()
             case .RotateRight(let block):
                 block?.highlight()
-            default:
-                break
+            case .NoAction(let block):
+                block?.highlight()
+            case .ChooseButton(_, let block):
+                block?.highlight()
             }
             return action
         case .Jump(let displacement):

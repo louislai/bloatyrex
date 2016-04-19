@@ -17,6 +17,8 @@ enum MapUnitType: Int {
     case WoodenBlock
     case Monster
     case Door
+    case DoorLeft
+    case DoorRight
 
     var texture: SKTexture {
         let textures = [
@@ -27,7 +29,9 @@ enum MapUnitType: Int {
             TextureManager.retrieveTexture("hole"),
             TextureManager.retrieveTexture("wooden-block"),
             TextureManager.monsterSleepingTexture,
-            TextureManager.retrieveTexture("buttons-unknown")
+            TextureManager.retrieveTexture("buttons-unknown"),
+            TextureManager.retrieveTexture("buttons-left"),
+            TextureManager.retrieveTexture("buttons-right")
         ]
         return textures[rawValue]
     }
@@ -41,6 +45,8 @@ enum MapUnitType: Int {
             HoleNode.self,
             WoodenBlockNode.self,
             MonsterNode.self,
+            DoorNode.self,
+            DoorNode.self,
             DoorNode.self
         ]
         return nodeClasses[rawValue]
