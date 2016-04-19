@@ -41,7 +41,7 @@ import SpriteKit
 ///
 
 struct PannableSceneConstants {
-    static let verticalPanBuffer: CGFloat = 200.0
+    static let verticalPanBuffer: CGFloat = 260.0
     static let horizontalPanBuffer: CGFloat = 50.0
 }
 
@@ -223,11 +223,7 @@ class PannableScene: SKScene {
                 distanceToViewContentBottom = max(distanceToViewContentBottom, 0)
 
                 // bottommost position of viewpoint allowed so as to not pan out of visible content
-                var minimumAllowedVerticalViewpointPosition = bottomBoundaryOfContent
-                if distanceToViewContentBottom > 0 {
-                    minimumAllowedVerticalViewpointPosition +=
-                        PannableSceneConstants.verticalPanBuffer
-                }
+                var minimumAllowedVerticalViewpointPosition = bottomBoundaryOfContent - PannableSceneConstants.verticalPanBuffer * currentScale
                 let minimumAllowedVerticalViewpointDisplacement =
                     minimumAllowedVerticalViewpointPosition - viewpoint.position.y
 
@@ -240,11 +236,8 @@ class PannableScene: SKScene {
                 let distanceToViewTopmostContent = max(distanceToTopBoundaryOfContent, 0)
 
                 // topmost position of viewpoint allowed so as to not pan out of visible content
-                var maximumAllowedVerticalViewpointPosition = topBoundaryOfContent
-                if distanceToViewTopmostContent > 0 {
-                    maximumAllowedVerticalViewpointPosition -=
-                        PannableSceneConstants.verticalPanBuffer
-                }
+                var maximumAllowedVerticalViewpointPosition = topBoundaryOfContent + PannableSceneConstants.verticalPanBuffer * currentScale
+
 
                 var maximumAllowedVerticalViewpointDisplacement =
                     maximumAllowedVerticalViewpointPosition - viewpoint.position.y
