@@ -61,7 +61,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         programBlocks.endHover()
         trashZone.unfocus()
         if let block = heldBlock {
-            block.pickBlock(false)
+            block.pickBlock(false, scale: getScale())
         }
     }
 
