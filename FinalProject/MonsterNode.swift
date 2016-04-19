@@ -10,6 +10,8 @@ import SpriteKit
 
 struct MonsterNodeConstants {
     static let deadZoneNodeName = "deadZone"
+    static let frequencyMin = 2
+    static let frequencyMax = 5
 }
 
 class MonsterNode: MapUnitNode {
@@ -18,9 +20,6 @@ class MonsterNode: MapUnitNode {
     var turnsUntilAwake = 0
     var zzzOn = false
     let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture("zzz"))
-    var row: Int!
-    var column: Int!
-    weak var mapNode: MapNode!
     var deadZoneNodes = [SKSpriteNode]()
     let timePerAnimation: NSTimeInterval = 0.15
 

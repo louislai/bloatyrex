@@ -517,10 +517,10 @@ extension LevelDesigningMapScene {
         paletteLabel.fontColor = GlobalConstants.Font.defaultGreen
         paletteLabel.position = DesigningMapConstants.Position.Palette.label
         addChild(paletteLabel)
-        
+
         summaryLayer.position = DesigningMapConstants.Position.Palette.summary
         addChild(summaryLayer)
-        
+
         nameToSummaryNodes = [String: SKSpriteNode]()
     }
 
@@ -553,7 +553,7 @@ extension LevelDesigningMapScene {
         spriteNode.size = DesigningMapConstants.Size.Palette.sprite
         spriteNode.name = name
         paletteNode.addChild(spriteNode)
-        
+
         let summaryBackgroundNode = SKSpriteNode(color: DesigningMapConstants.defaultGray,
                                                  size: DesigningMapConstants.Size.Palette.summary)
         let summaryNode = SKSpriteNode(imageNamed: "\(name)-summary")
@@ -575,7 +575,7 @@ extension LevelDesigningMapScene {
         }
         setSummary(nodeName)
     }
-    
+
     func setSummary(nodeName: String) {
         let summaryNode = nameToSummaryNodes[nodeName]!
         summaryLayer.removeAllChildren()

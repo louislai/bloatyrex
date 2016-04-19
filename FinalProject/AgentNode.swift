@@ -14,10 +14,7 @@ struct AgentNodeConstants {
 }
 
 class AgentNode: MapUnitNode {
-    weak var mapNode: MapNode!
     var orientation = Direction.Up
-    var row: Int!
-    var column: Int!
     var delegate: LanguageDelegate?
     var numberOfMoves = 30
     var goingToExplode = false
@@ -494,6 +491,8 @@ extension AgentNode {
         mapNode.map.setMapUnitAt(nextUnit, row: nextNextRow, column: nextNextColumn)
         row = nextRow
         column = nextColumn
+        nextUnit.row = nextNextRow
+        nextUnit.column = nextNextColumn
         mapNode.map.setMapUnitAt(self, row: row, column: column)
         return (status: nil, duration: duration)
     }

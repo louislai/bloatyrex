@@ -78,21 +78,19 @@ class MapNode: SKNode {
                     unit.position = pointFor(row, column: column)
                     unit.size = blockSize
                     unit.zPosition = GlobalConstants.zPosition.back
+                    unit.mapNode = self
+                    unit.row = row
+                    unit.column = column
                     if let agent = unit as? AgentNode {
                         agent.zPosition = GlobalConstants.zPosition.front
-                        agent.mapNode = self
-                        agent.row = row
-                        agent.column = column
                         activeAgentNodes.append(agent)
                         // This is fine since only 1 agent
                         originalMovesLeft = agent.numberOfMoves
                     } else if let door = unit as? DoorNode {
                         doorNodes.append(door)
                     } else if let monster = unit as? MonsterNode {
-                        monster.row = row
-                        monster.column = column
-                        monster.mapNode = self
                         monster.initializeTurnsUntilAwake()
+                        monster.setSleeping()
                         monsterNodes.append(monster)
                     } else if let goal = unit as? GoalNode {
                         goalNodes.append(goal)
