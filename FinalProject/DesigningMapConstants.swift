@@ -31,7 +31,7 @@ struct DesigningMapConstants {
         static let defaultNumberOfRows = 6
         static let defaultNumberOfColumns = 6
 
-        static let paletteNumberOfRows = 4
+        static let paletteNumberOfRows = 3
         static let paletteNumberOfColumns = 8
     }
     struct Position {
@@ -41,8 +41,8 @@ struct DesigningMapConstants {
 
         struct Palette {
             static let layer = CGPoint(x: 250, y: 150)
-            static let label = CGPoint(x: 250, y: 280)
-            static let summary = CGPoint(x: 250, y: -100)
+            static let label = CGPoint(x: 250, y: 250)
+            static let summary = CGPoint(x: 250, y: -20)
         }
 
         struct Action {
@@ -57,17 +57,18 @@ struct DesigningMapConstants {
         }
 
         struct AgentSetting {
-            static let agent = CGPoint(x: -25, y: 0)
-            static let numberOfMovesLabel = CGPoint(x: 20, y: 0)
-            static let incrementButton = CGPoint(x: 20, y: 35)
-            static let decrementButton = CGPoint(x: 20, y: -35)
+            static let agent = CGPoint(x: -75, y: 0)
+            static let movesLabel = CGPoint(x: 10, y: 0)
+            static let numberOfMovesLabel = CGPoint(x: 85, y: 0)
+            static let incrementButton = CGPoint(x: 85, y: 35)
+            static let decrementButton = CGPoint(x: 85, y: -35)
             static let background = CGPoint(x: -225, y: 300)
         }
     }
     struct Size {
         struct AgentSetting {
             static let button = CGSize(width: 30, height: 30)
-            static let background = CGSize(width: 100, height: 100)
+            static let background = CGSize(width: 230, height: 100)
         }
 
         struct Palette {

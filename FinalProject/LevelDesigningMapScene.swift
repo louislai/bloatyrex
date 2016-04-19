@@ -785,6 +785,13 @@ extension LevelDesigningMapScene {
         numberOfMovesLabel.fontColor = UIColor.blackColor()
         numberOfMovesLabel.horizontalAlignmentMode = .Center
         numberOfMovesLabel.verticalAlignmentMode = .Center
+        
+        let movesLabel = SKLabelNode(text: "Moves:")
+        movesLabel.position = DesigningMapConstants.Position.AgentSetting.movesLabel
+        movesLabel.fontName = GlobalConstants.Font.defaultName
+        movesLabel.fontColor = UIColor.blackColor()
+        movesLabel.horizontalAlignmentMode = .Center
+        movesLabel.verticalAlignmentMode = .Center
 
         let incrementButton = SKSpriteNode(texture: TextureManager.retrieveTexture("increase"))
         incrementButton.name = "Increase Move"
@@ -801,6 +808,7 @@ extension LevelDesigningMapScene {
         background.position = DesigningMapConstants.Position.AgentSetting.background
         background.addChild(agent)
         background.addChild(numberOfMovesLabel)
+        background.addChild(movesLabel)
         background.addChild(incrementButton)
         background.addChild(decrementButton)
         addChild(background)
