@@ -15,6 +15,7 @@ class MapNode: SKNode {
     var activeAgentNodes = [AgentNode]()
     var monsterNodes = [MonsterNode]()
     var goalNodes = [GoalNode]()
+    var doorNodes = [DoorNode]()
     var originalMovesLeft = 0
     private var numberOfRows: Int {
         return map.numberOfRows
@@ -87,7 +88,7 @@ class MapNode: SKNode {
                         // This is fine since only 1 agent
                         originalMovesLeft = agent.numberOfMoves
                     } else if let door = unit as? DoorNode {
-                        door.randomizeDoor()
+                        doorNodes.append(door)
                     } else if let monster = unit as? MonsterNode {
                         monster.row = row
                         monster.column = column

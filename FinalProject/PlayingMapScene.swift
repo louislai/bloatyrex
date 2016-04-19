@@ -28,7 +28,7 @@ class PlayingMapScene: StaticMapScene {
     var running = false
     var movesLeft = 0
     weak var programSupplier: ProgramSupplier!
-    var programRetrieved = false
+    var newRoundStarted = false
     var gameWon: Bool?
     var playButton: SKButton!
     var resetButton: SKButton!
@@ -89,7 +89,17 @@ class PlayingMapScene: StaticMapScene {
         }
         makeMonstersSleep()
         moveActiveAgents()
-        moveMonsters()
+//        moveMonsters()
+        let delayAction = SKAction.waitForDuration(
+            AgentNodeConstants.timePerMoveMovement/3.0
+        )
+        let moveMonstersAction = SKAction.runBlock {
+            self.moveMonsters()
+        }
+        runAction(SKAction.sequence([
+                delayAction,
+                moveMonstersAction
+            ]))
         decrementMovesLeft()
         timeOfLastMove = currentTime
         if let gameWon = gameWon {
@@ -124,14 +134,10 @@ class PlayingMapScene: StaticMapScene {
     }
 
     func run() {
-        if !programRetrieved {
-            for agent in mapNode.activeAgentNodes {
-                if let program = programSupplier.retrieveProgram() {
-                    agent.delegate = Interpreter(program: program)
-                }
-            }
+        if !newRoundStarted {
+            prepareNewRound()
         }
-        programRetrieved = true
+        newRoundStarted = true
         running = true
         playButton.setDefaultButton(pauseLabel)
     }
@@ -203,6 +209,17 @@ class PlayingMapScene: StaticMapScene {
                 ])
         )
         arrowNode.runAction(showHideAction)
+    }
+
+    private func prepareNewRound() {
+        for door in mapNode.doorNodes {
+            door.randomizeDoor()
+        }
+        for agent in mapNode.activeAgentNodes {
+            if let program = programSupplier.retrieveProgram() {
+                agent.delegate = Interpreter(program: program)
+            }
+        }
     }
 
     private func handleWinning() {

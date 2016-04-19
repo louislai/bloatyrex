@@ -8,6 +8,11 @@
 
 import SpriteKit
 
+struct AgentNodeConstants {
+    static let timePerMoveMovement: NSTimeInterval = 0.6
+    static let timePerFrame: NSTimeInterval = 0.1
+}
+
 class AgentNode: MapUnitNode {
     weak var mapNode: MapNode!
     var orientation = Direction.Up
@@ -15,8 +20,6 @@ class AgentNode: MapUnitNode {
     var column: Int!
     var delegate: LanguageDelegate?
     var numberOfMoves = 30
-    let timePerMoveMovement: NSTimeInterval = 0.6
-    let timePerFrame: NSTimeInterval = 0.1
     let walkingUpTextures = [
         SKTexture(
             rect: CGRect(
@@ -210,7 +213,7 @@ class AgentNode: MapUnitNode {
     func runWinningAnimation() {
         let happyAction = SKAction.animateWithTextures(
             winningTextures,
-            timePerFrame: timePerFrame
+            timePerFrame: AgentNodeConstants.timePerFrame
         )
         let happyActionForever = SKAction.repeatActionForever(happyAction)
         runAction(happyActionForever)
@@ -222,7 +225,7 @@ class AgentNode: MapUnitNode {
         }
         let panicAction = SKAction.animateWithTextures(
             losingTextures,
-            timePerFrame: timePerMoveMovement
+            timePerFrame: AgentNodeConstants.timePerMoveMovement
         )
         let panicActionForever = SKAction.repeatActionForever(panicAction)
         runAction(panicActionForever)
@@ -277,8 +280,8 @@ class AgentNode: MapUnitNode {
         let changeTextureAction = SKAction.repeatAction(
             SKAction.animateWithTextures(
                 movementTextures,
-                timePerFrame: timePerFrame),
-            count: Int(duration / 2 / timePerFrame)
+                timePerFrame: AgentNodeConstants.timePerFrame),
+            count: Int(duration / 2 / AgentNodeConstants.timePerFrame)
         )
         let actionSequence = SKAction.sequence([
             SKAction.group([moveAction, changeTextureAction]),
@@ -330,13 +333,13 @@ extension AgentNode {
         }
         let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
-            duration: timePerMoveMovement * 0.5
+            duration: AgentNodeConstants.timePerMoveMovement * 0.5
         )
         guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2)
             where nextUnit.type == .Hole && isReachableUnit(nextNextUnit) else {
                 let failureAction = getMoveToAction(
                     mapNode.pointFor(row, column: column),
-                    duration: timePerMoveMovement * 0.5
+                    duration: AgentNodeConstants.timePerMoveMovement * 0.5
                 )
                 let failureSequence = SKAction.sequence([
                     agentMoveToContactPointAction,
@@ -352,7 +355,10 @@ extension AgentNode {
 
         // Move sprite
         let targetPoint = mapNode.pointFor(row, column: column)
-        let jumpAction = SKAction.moveTo(targetPoint, duration: timePerMoveMovement)
+        let jumpAction = SKAction.moveTo(
+            targetPoint,
+            duration: AgentNodeConstants.timePerMoveMovement
+        )
         let jumpSequence = SKAction.sequence(
             [
                 agentMoveToContactPointAction,
@@ -416,14 +422,14 @@ extension AgentNode {
         }
         let agentMoveToContactPointAction = getMoveToAction(
             contactPoint,
-            duration: timePerMoveMovement * 0.5
+            duration: AgentNodeConstants.timePerMoveMovement * 0.5
         )
         guard let (nextNextRow, nextNextColumn, nextNextUnit) = nextPosition(2),
             nextContactPoint = nextEdgePoint(2)
             where nextNextUnit.type == .EmptySpace && nextUnit.type == .WoodenBlock else {
                 let failureAction = getMoveToAction(
                     mapNode.pointFor(row, column: column),
-                    duration: timePerMoveMovement * 0.5
+                    duration: AgentNodeConstants.timePerMoveMovement * 0.5
                 )
                 let failureSequence = SKAction.sequence([
                     agentMoveToContactPointAction,
@@ -437,7 +443,7 @@ extension AgentNode {
         let agentPushAction = getMoveToAction(nextContactPoint)
         let agentRetreatAction = getMoveToAction(
             agentTargetPoint,
-            duration: timePerMoveMovement * 0.5
+            duration: AgentNodeConstants.timePerMoveMovement * 0.5
         )
         let allAgentActions = SKAction.sequence(
             [
@@ -447,10 +453,13 @@ extension AgentNode {
             ]
         )
 
-        let blockPushAction = SKAction.moveTo(woodenBlockTargetPoint, duration: timePerMoveMovement)
+        let blockPushAction = SKAction.moveTo(
+            woodenBlockTargetPoint,
+            duration: AgentNodeConstants.timePerMoveMovement
+        )
         let allBlockActions = SKAction.sequence(
             [
-                SKAction.waitForDuration(timePerMoveMovement*0.5),
+                SKAction.waitForDuration(AgentNodeConstants.timePerMoveMovement*0.5),
                 blockPushAction
             ]
         )
@@ -478,7 +487,7 @@ extension AgentNode {
         guard let door = nextUnit as? DoorNode else {
             return nil
         }
-        if door.correctDoor == buttonNumber {
+        if door.correctDoor == .DoorLeft && buttonNumber == 0 {
             mapNode.map.clearMapUnitAt(nextRow, column: nextColumn)
             door.runExplodingAnimation()
             return nil

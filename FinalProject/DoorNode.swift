@@ -13,8 +13,7 @@ struct DoorNodeConstants {
 }
 
 class DoorNode: MapUnitNode {
-    var correctDoor = 0
-
+    var correctDoor: MapUnitType = .DoorLeft
     required init(type: MapUnitType = .WoodenBlock) {
         super.init(type: .Door)
     }
@@ -24,11 +23,15 @@ class DoorNode: MapUnitNode {
     }
 
     func randomizeDoor() {
-        correctDoor = Int(arc4random_uniform(UInt32(DoorNodeConstants.numberOfButtons)))
-        if correctDoor == 0 {
+        let doorValue = Int(
+            arc4random_uniform(UInt32(DoorNodeConstants.numberOfButtons))
+        )
+        if doorValue == 0 {
             texture = TextureManager.retrieveTexture("buttons-left")
+            correctDoor = .DoorLeft
         } else {
             texture = TextureManager.retrieveTexture("buttons-right")
+            correctDoor = .DoorRight
         }
     }
 }
