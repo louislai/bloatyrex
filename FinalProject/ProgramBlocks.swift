@@ -16,11 +16,13 @@ enum BlockCategory {
 
 class ProgramBlocks: SKNode, ContainerBlockProtocol {
     private var blocks = [CodeBlock]()
+    private var area = SKShapeNode(rect: CGRect(x: 0, y: 0, width: 0, height: 0))
 
     override init() {
         super.init()
         blocks.append(MainBlock(containingBlock: self))
         self.addChild(blocks[0])
+        flushBlocks()
     }
 
     func hover(location: CGPoint, category: BlockCategory, insertionHandler: InsertionPosition) {
@@ -99,8 +101,8 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
     }
 
     func shift(displacement: CGPoint) {
-        blocks[0].position.x += displacement.x
-        blocks[0].position.y += displacement.y
+        //blocks[0].position.x += displacement.x
+        //blocks[0].position.y += displacement.y
         flushBlocks()
     }
 
@@ -179,6 +181,12 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
                 block.position.y = yPos
             }
         }
+        area.removeFromParent()
+        let frame = self.calculateAccumulatedFrame()
+        let newRect = CGRect(x: -50, y: -frame.height - 50,
+                             width: frame.width + 100, height: frame.height + 100)
+        area = SKShapeNode(rect: newRect)
+        self.addChild(area)
     }
 
     required init?(coder aDecoder: NSCoder) {
