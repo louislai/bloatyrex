@@ -20,7 +20,7 @@ class StaticMapScene: PannableScene {
 
     init(size: CGSize, zoomLevel: CGFloat, map: Map) {
         self.mapNode = MapNode(size: size, map: map)
-        super.init(size: size, zoomLevel: zoomLevel)
+        super.init(size: size, initialZoomLevel: zoomLevel)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         backgroundColor = UIColor.whiteColor()
     }
