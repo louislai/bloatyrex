@@ -32,13 +32,14 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
         // different configuration when used from the package selector
         if let previousController = previousViewController as? PackageSelectorViewController {
-            sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 100.0, right: 10.0)
+            sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
 
             // add title
             let title = UILabel(frame: CGRectMake(0, 0, 1024, 50))
             title.textAlignment = .Center
             title.text = previousController.selectedPackageTitle
-            title.textColor = UIColor.blackColor()
+            title.textColor = GlobalConstants.Font.defaultGreen
+            title.font = UIFont(name: "\(GlobalConstants.Font.defaultName)-Bold", size: 48)
             collectionView.addSubview(title)
 
             // add back button
