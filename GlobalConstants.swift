@@ -1,5 +1,5 @@
 //
-//  Constants.swift
+//  GlobalConstants.swift
 //  FinalProject
 //
 //  Created by louis on 26/3/16.

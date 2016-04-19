@@ -105,12 +105,17 @@ class PannableScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func resetOtherTouches() {
+
+    }
+
     /**
     Handles the translation of the viewpoint using the pan gesture. Translation does not occur if
     the gesture starts from a node in the overlay. Horizontal/vertical translation can be disabled
     during initialization.
     */
     func handlePan(sender: UIPanGestureRecognizer) {
+        resetOtherTouches()
         sender.cancelsTouchesInView = false
         if sender.state == .Began {
             var touchLocation = sender.locationInView(sender.view!)
@@ -211,6 +216,8 @@ class PannableScene: SKScene {
     Handles the zooming in and out using the pinch gesture.
     */
     func handlePinch(sender: UIPinchGestureRecognizer) {
+        resetOtherTouches()
+        sender.cancelsTouchesInView = false
         if sender.numberOfTouches() == 2 {
             if sender.state == .Changed {
                 // The scale applied to the contents is the inverse of the camera node’s scale

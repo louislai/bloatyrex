@@ -110,7 +110,6 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         if let code = parseBlock(1) {
             return code
         }
-        print("boom")
         return nil
     }
 
@@ -145,6 +144,20 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         let block: Statement?
         switch blocks[programCounter].getBlockConstruct() {
         case .ActionConstruct(let action):
+            switch action {
+            case .Forward(let block):
+                block?.unhighlight()
+            case .Jump(let block):
+                block?.unhighlight()
+            case .RotateLeft(let block):
+                block?.unhighlight()
+            case .RotateRight(let block):
+                block?.unhighlight()
+            case .NoAction(let block):
+                block?.unhighlight()
+            case .ChooseButton(_, let block):
+                block?.unhighlight()
+            }
             block = Statement.ActionStatement(action)
         case .LoopExpressionConstruct(let loopExpression):
             block = Statement.LoopStatement(loopExpression)

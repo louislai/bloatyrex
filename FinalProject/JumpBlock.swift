@@ -12,7 +12,7 @@ import SpriteKit
 class JumpBlock: CodeBlock, HighlightableBlockProtocol {
     let blockBody: SKSpriteNode
     var highlightLayer: SKShapeNode?
-    
+
     func highlight() {
         unhighlight()
         let frame = blockBody.calculateAccumulatedFrame()
@@ -24,13 +24,13 @@ class JumpBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(newLayer)
         highlightLayer = newLayer
     }
-    
+
     func unhighlight() {
         if let layer = highlightLayer {
             layer.removeFromParent()
         }
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "jump-block")
         blockBody.position = CGPoint(x: blockBody.size.width / 2,
@@ -39,11 +39,11 @@ class JumpBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(blockBody)
         self.resizeDropZone()
     }
-    
+
     override func getBlockConstruct() -> Construct {
         return Construct.ActionConstruct(Action.Jump(self))
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

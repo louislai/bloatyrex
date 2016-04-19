@@ -47,6 +47,8 @@
 		1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */; };
 		3D1592671CBACA46009E8559 /* ProgramBlocksSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */; };
 		3D15926A1CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */; };
+		3D15926D1CC32ACB009E8559 /* PackageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */; };
+		3D15926F1CC32F72009E8559 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926E1CC32F72009E8559 /* PackageCell.swift */; };
 		3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21216A1C9A55F000E6564B /* PannableScene.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
@@ -55,6 +57,7 @@
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
 		3DF230B71C8F0617003420C0 /* FinalProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */; };
 		3DF230C21C8F0617003420C0 /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */; };
+		3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */; };
 		B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */; };
 		B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */; };
 		B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */; };
@@ -62,8 +65,9 @@
 		B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */; };
 		B04E40521CC6064400C73E86 /* DesigningMapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E40511CC6064400C73E86 /* DesigningMapConstants.swift */; };
 		BF145B8B1CBAA3EC00BF39D6 /* PresetMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */; };
+		BF156EDB1CC6272500B4EB2A /* edit-code-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF156EDA1CC6272500B4EB2A /* edit-code-icon.png */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
-		BF49FA511CA61ACF00546F43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* Constants.swift */; };
+		BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
 		BF4C52F41C910D5E00C56DD2 /* MapUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */; };
 		BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F51C9110A000C56DD2 /* Action.swift */; };
@@ -157,6 +161,8 @@
 		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TurnLeftBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramBlocksSupplier.swift; sourceTree = "<group>"; };
 		3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedEditingProgramDelegate.swift; sourceTree = "<group>"; };
+		3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorViewController.swift; sourceTree = "<group>"; };
+		3D15926E1CC32F72009E8559 /* PackageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageCell.swift; sourceTree = "<group>"; };
 		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PannableScene.swift; path = FinalProject/PannableScene.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* BloatyRex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloatyRex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 		3DF230BD1C8F0617003420C0 /* BloatyRex.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BloatyRex.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorOuterViewController.swift; sourceTree = "<group>"; };
 		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningViewController.swift; sourceTree = "<group>"; };
 		B01BF8CE1CA12C7400D02FCA /* FilesArchive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesArchive.swift; sourceTree = "<group>"; };
@@ -178,8 +185,9 @@
 		B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorPageViewController.swift; sourceTree = "<group>"; };
 		B04E40511CC6064400C73E86 /* DesigningMapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesigningMapConstants.swift; sourceTree = "<group>"; };
 		BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetMap.swift; sourceTree = "<group>"; };
+		BF156EDA1CC6272500B4EB2A /* edit-code-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-code-icon.png"; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
-		BF49FA501CA61ACF00546F43 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUnitType.swift; sourceTree = "<group>"; };
 		BF4C52F51C9110A000C56DD2 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
@@ -257,13 +265,24 @@
 			name = Delegates;
 			sourceTree = "<group>";
 		};
+		3D15926B1CC32AA4009E8559 /* PackageSelector */ = {
+			isa = PBXGroup;
+			children = (
+				3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */,
+				3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */,
+				3D15926E1CC32F72009E8559 /* PackageCell.swift */,
+			);
+			name = PackageSelector;
+			sourceTree = "<group>";
+		};
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
+				BF156EDA1CC6272500B4EB2A /* edit-code-icon.png */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
 				BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */,
-				BF49FA501CA61ACF00546F43 /* Constants.swift */,
 				BF640D781CA815E800FC454F /* ReusableComponents */,
+				BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,
 				3D1592681CBACD10009E8559 /* Delegates */,
 				3DF230A01C8F0617003420C0 /* FinalProject */,
@@ -293,6 +312,7 @@
 				BF8E12A71C99AA8400B210C3 /* TitleScene */,
 				BF4C52F71C913E8500C56DD2 /* GameEngine */,
 				1DB4B07D1C95142C0010F727 /* Language */,
+				3D15926B1CC32AA4009E8559 /* PackageSelector */,
 				B079C5B41CA38C0600F8B891 /* LevelSelector */,
 				BF4C52F01C910CB500C56DD2 /* Models */,
 				3DF230A11C8F0617003420C0 /* AppDelegate.swift */,
@@ -580,6 +600,7 @@
 			files = (
 				3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */,
 				BF8E76E51CC54BB5000AE8CC /* spark.png in Resources */,
+				BF156EDB1CC6272500B4EB2A /* edit-code-icon.png in Resources */,
 				BF8E76E41CC54BB5000AE8CC /* Spark.sks in Resources */,
 				3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */,
 				3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */,
@@ -636,6 +657,7 @@
 				BF145B8B1CBAA3EC00BF39D6 /* PresetMap.swift in Sources */,
 				1D69B6E41CB9FF3900C1FA04 /* MovableBlockProtocol.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
+				3D15926F1CC32F72009E8559 /* PackageCell.swift in Sources */,
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
 				BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */,
 				B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */,
@@ -644,7 +666,7 @@
 				1DB4B0931C991FC30010F727 /* CodeBlock.swift in Sources */,
 				1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
-				BF49FA511CA61ACF00546F43 /* Constants.swift in Sources */,
+				BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */,
 				1D69B6C61CB2998B00C1FA04 /* ContainerBlockProtocol.swift in Sources */,
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
 				BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */,
@@ -656,6 +678,7 @@
 				BFFB1A401CAC03AE00C746CD /* StaticMapScene.swift in Sources */,
 				1D69B6C81CB29E4500C1FA04 /* TrashContainer.swift in Sources */,
 				BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */,
+				3D15926D1CC32ACB009E8559 /* PackageSelectorViewController.swift in Sources */,
 				1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */,
 				1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */,
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
@@ -701,6 +724,7 @@
 				1DB4B0831C951D1F0010F727 /* Interpreter.swift in Sources */,
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
 				1D69B6E01CB6A1D900C1FA04 /* WoodBlock.swift in Sources */,
+				3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */,
 				1D69B6E61CBB896200C1FA04 /* NotBlock.swift in Sources */,
 				1D409C6A1CC5EEA6002E6B02 /* PressRedBlock.swift in Sources */,
 				1DB4B08B1C97FD940010F727 /* CodeBlocksScene.swift in Sources */,

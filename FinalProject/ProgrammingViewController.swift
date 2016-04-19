@@ -27,7 +27,6 @@ class ProgrammingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(navigationController?.viewControllers)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

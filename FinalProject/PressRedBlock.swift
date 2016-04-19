@@ -12,7 +12,7 @@ import SpriteKit
 class PressRedBlock: CodeBlock, HighlightableBlockProtocol {
     let blockBody: SKSpriteNode
     var highlightLayer: SKShapeNode?
-    
+
     func highlight() {
         unhighlight()
         let frame = blockBody.calculateAccumulatedFrame()
@@ -24,13 +24,13 @@ class PressRedBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(newLayer)
         highlightLayer = newLayer
     }
-    
+
     func unhighlight() {
         if let layer = highlightLayer {
             layer.removeFromParent()
         }
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol) {
         blockBody = SKSpriteNode(imageNamed: "press-red-block")
         blockBody.position = CGPoint(x: blockBody.size.width / 2,
@@ -39,13 +39,12 @@ class PressRedBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(blockBody)
         self.resizeDropZone()
     }
-    
+
     override func getBlockConstruct() -> Construct {
         return Construct.ActionConstruct(Action.ChooseButton(0, self))
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

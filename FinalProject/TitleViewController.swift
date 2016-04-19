@@ -21,7 +21,6 @@ class TitleViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? LevelSelectorPageViewController {
-            destination.currentStoryboard = self.storyboard
             destination.previousViewController = self
             destination.numberOfItemsPerPage = 15
         }

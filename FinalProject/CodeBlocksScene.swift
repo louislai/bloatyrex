@@ -22,7 +22,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let waitButton = BlockButton(imageNamed: "wait-block", blockType: BlockType.Wait, blockCategory: BlockCategory.Action)
     let jumpButton = BlockButton(imageNamed: "jump-block", blockType: BlockType.Jump, blockCategory: BlockCategory.Action)
     let pressRedButton = BlockButton(imageNamed: "press-red-block", blockType: BlockType.PressRed, blockCategory: BlockCategory.Action)
-    let pressBlueButton = BlockButton(imageNamed: "press-blue-block", blockType: BlockType.PressRed, blockCategory: BlockCategory.Action)
+    let pressBlueButton = BlockButton(imageNamed: "press-blue-block", blockType: BlockType.PressBlue, blockCategory: BlockCategory.Action)
     let whileButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While, blockCategory: BlockCategory.Action)
     let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes, blockCategory: BlockCategory.BoolOp)
     let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet, blockCategory: BlockCategory.Object)
@@ -64,12 +64,13 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         addNodeToContent(programBlocks)
     }
 
-    private func resetTouches() {
+    override func resetOtherTouches() {
         programBlocks.endHover()
         trashZone.unfocus()
         if let block = heldBlock {
             block.pickBlock(false, scale: getScale())
         }
+        touchesEnded(Set(), withEvent: nil)
     }
 
     override func didMoveToView(view: SKView) {
@@ -122,9 +123,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     }
 
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if touches.count > 1 {
-            resetTouches()
-        }
         if !editEnabled {
             return
         }
@@ -243,9 +241,6 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     }
 
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if touches.count > 1 {
-            resetTouches()
-        }
         if !editEnabled {
             return
         }

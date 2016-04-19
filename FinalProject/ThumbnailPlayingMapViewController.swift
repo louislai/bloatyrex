@@ -21,7 +21,6 @@ class ThumbnailPlayingMapViewController: UIViewController {
 
 
     func setUpScene() {
-        print(view.bounds.size)
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
         skView.showsFPS = true
