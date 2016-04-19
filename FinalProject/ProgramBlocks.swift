@@ -199,6 +199,7 @@ class ProgramBlocks: SKNode, ContainerBlockProtocol {
         let newRect = CGRect(x: -50, y: -frame.height - 50,
                              width: frame.width + 100, height: frame.height + 100)
         area = SKShapeNode(rect: newRect)
+        area.strokeColor = SKColor.clearColor()
         self.addChild(area)
     }
 

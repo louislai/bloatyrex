@@ -76,7 +76,7 @@ class IfBlock: CodeBlock {
         }
         return zones
     }
-    
+
     private func getNestedObjectDropZones() -> [DropZone] {
         var zones = [DropZone]()
         for block in ifTrueBlock.blocks {
@@ -87,7 +87,7 @@ class IfBlock: CodeBlock {
         }
         return zones
     }
-    
+
     override init(containingBlock: ContainerBlockProtocol) {
         middleBlock = SKSpriteNode(imageNamed: "else")
         topBlock = SKSpriteNode(imageNamed: "if")

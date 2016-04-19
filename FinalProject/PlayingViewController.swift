@@ -79,7 +79,7 @@ class PlayingViewController: UIViewController {
             height: winningScreen.bounds.height
         )
         winningScreen.hidden = false
-        winningScreen.backgroundColor = UIColor.cyanColor()
+        winningScreen.layer.zPosition = GlobalConstants.zPosition.front
         UIView.animateWithDuration(0.5, animations: { _ in
             self.winningScreen.frame = CGRect(
                 x: self.view.bounds.width-self.winningScreen.bounds.width,
