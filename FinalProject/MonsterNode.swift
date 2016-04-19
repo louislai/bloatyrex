@@ -21,6 +21,7 @@ class MonsterNode: MapUnitNode {
     var zzzOn = false
     let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture("zzz"))
     var deadZoneNodes = [SKSpriteNode]()
+    var indicatorNode: SKLabelNode?
     let timePerAnimation: NSTimeInterval = 0.15
 
     required init(type: MapUnitType = .Hole) {
@@ -81,6 +82,7 @@ class MonsterNode: MapUnitNode {
             setSleeping()
         }
         turnsUntilAwake = max(turnsUntilAwake-1, 0)
+        updateIndicator()
         if isAwake() {
             setAwake()
         }
@@ -128,6 +130,17 @@ class MonsterNode: MapUnitNode {
             zzzNode.runAction(actionSequence)
             zzzOn = true
         }
+    }
+
+    private func updateIndicator() {
+        if indicatorNode == nil {
+            indicatorNode = SKLabelNode(fontNamed: GlobalConstants.Font.defaultNameBold)
+            indicatorNode!.fontColor = UIColor.orangeColor()
+            indicatorNode!.verticalAlignmentMode = .Center
+            indicatorNode!.zPosition = GlobalConstants.zPosition.front
+            addChild(indicatorNode!)
+        }
+        indicatorNode!.text = "\(turnsUntilAwake)"
     }
 
     private func randomizeTurnsUntilAwake() -> Int {

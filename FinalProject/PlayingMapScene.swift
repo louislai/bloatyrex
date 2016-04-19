@@ -209,6 +209,9 @@ class PlayingMapScene: StaticMapScene {
                 agent.delegate = Interpreter(program: program)
             }
         }
+        for monster in mapNode.monsterNodes {
+            monster.setSleeping()
+        }
     }
 
     private func handleWinning() {

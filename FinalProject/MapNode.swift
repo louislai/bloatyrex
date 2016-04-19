@@ -90,7 +90,6 @@ class MapNode: SKNode {
                         doorNodes.append(door)
                     } else if let monster = unit as? MonsterNode {
                         monster.initializeTurnsUntilAwake()
-                        monster.setSleeping()
                         monsterNodes.append(monster)
                     } else if let goal = unit as? GoalNode {
                         goalNodes.append(goal)

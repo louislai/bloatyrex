@@ -785,7 +785,7 @@ extension LevelDesigningMapScene {
         numberOfMovesLabel.fontColor = UIColor.blackColor()
         numberOfMovesLabel.horizontalAlignmentMode = .Center
         numberOfMovesLabel.verticalAlignmentMode = .Center
-        
+
         let movesLabel = SKLabelNode(text: "Moves:")
         movesLabel.position = DesigningMapConstants.Position.AgentSetting.movesLabel
         movesLabel.fontName = GlobalConstants.Font.defaultName
