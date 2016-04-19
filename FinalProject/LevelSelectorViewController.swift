@@ -30,13 +30,24 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(collectionView)
 
-        if previousViewController is PackageSelectorViewController {
-            sectionInsets = UIEdgeInsets(top: 20.0, left: 10.0, bottom: 100.0, right: 10.0)
+        // different configuration when used from the package selector
+        if let previousController = previousViewController as? PackageSelectorViewController {
+            sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 100.0, right: 10.0)
+
+            // add title
+            let title = UILabel(frame: CGRectMake(0, 0, 1024, 50))
+            title.textAlignment = .Center
+            title.text = previousController.selectedPackageTitle
+            title.textColor = UIColor.blackColor()
+            collectionView.addSubview(title)
+
+            // add back button
             let backButtonImage = UIImage(named: "back") as UIImage?
             let backButton = UIButton(type: UIButtonType.Custom) as UIButton
             backButton.frame = CGRectMake(10, 590, 70, 70)
             backButton.setImage(backButtonImage, forState: .Normal)
-            backButton.addTarget(self, action: Selector("backButtonAction:"),
+            backButton.addTarget(self,
+                action: #selector(LevelSelectorViewController.backButtonAction(_:)),
                 forControlEvents: .TouchUpInside)
             collectionView.addSubview(backButton)
         }

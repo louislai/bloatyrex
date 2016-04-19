@@ -22,7 +22,7 @@ class PackageSelectorViewController: UICollectionViewController {
         bottom: 150.0, right: 5.0)
     private var cellWidth = PackageSelectorConstants.cellWidth
     private var cellHeight = PackageSelectorConstants.cellHeight
-    private var selectedPackageTitle: String!
+    var selectedPackageTitle: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,6 @@ class PackageSelectorViewController: UICollectionViewController {
         if let destination = segue.destinationViewController as? LevelSelectorPageViewController {
             destination.previousViewController = self
             destination.numberOfItemsPerPage = 15
-            destination.package = selectedPackageTitle
         }
     }
 }
