@@ -599,7 +599,7 @@ extension LevelDesigningMapScene {
         let eraserName = "Eraser"
         addPaletteSprite(eraserPosition, spriteNode: eraserTexture, name: eraserName)
     }
-    
+
     func addPaletteSprite(position: Int, spriteNode: SKSpriteNode, name: String) {
         let row = position / DesigningMapConstants.Dimension.paletteNumberOfColumns
         let column = position % DesigningMapConstants.Dimension.paletteNumberOfColumns

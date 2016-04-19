@@ -12,4 +12,5 @@ protocol AgentProtocol {
     var xPosition: Int { get }
     var yPosition: Int { get }
     var direction: Direction { get }
+    func isNextStepSafe() -> Bool
 }

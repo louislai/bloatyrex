@@ -180,8 +180,8 @@
 		BF7F3CA91CBE34A2004530F5 /* GameRatingsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRatingsTests.swift; sourceTree = "<group>"; };
 		BF8E12A81C99AA9200B210C3 /* TitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleViewController.swift; sourceTree = "<group>"; };
 		BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingViewController.swift; sourceTree = "<group>"; };
-		BF8E76E21CC54BB5000AE8CC /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
-		BF8E76E31CC54BB5000AE8CC /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		BF8E76E21CC54BB5000AE8CC /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Spark.sks; path = ../Spark.sks; sourceTree = "<group>"; };
+		BF8E76E31CC54BB5000AE8CC /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../spark.png; sourceTree = "<group>"; };
 		BF8FA5AC1C947C5100DAE175 /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		BF8FA5B21C948C9A00DAE175 /* WallNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallNode.swift; sourceTree = "<group>"; };
 		BF8FA5B61C948CB500DAE175 /* GoalNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalNode.swift; sourceTree = "<group>"; };
@@ -244,8 +244,6 @@
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
-				BF8E76E21CC54BB5000AE8CC /* Spark.sks */,
-				BF8E76E31CC54BB5000AE8CC /* spark.png */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
 				BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */,
 				BF49FA501CA61ACF00546F43 /* Constants.swift */,
@@ -346,6 +344,8 @@
 		BF4C52F71C913E8500C56DD2 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				BF8E76E21CC54BB5000AE8CC /* Spark.sks */,
+				BF8E76E31CC54BB5000AE8CC /* spark.png */,
 				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,

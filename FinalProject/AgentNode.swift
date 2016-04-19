@@ -224,7 +224,7 @@ class AgentNode: MapUnitNode {
         runAction(panicActionForever)
     }
 
-    func nextRowAndColumn(steps: Int) -> (row: Int, column: Int)? {
+    private func nextRowAndColumn(steps: Int = 1) -> (row: Int, column: Int)? {
         var nextRow: Int = row
         var nextColumn: Int = column
         switch orientation {
@@ -484,5 +484,12 @@ extension AgentNode {
             }
             return false
         }
+    }
+
+    func isNextStepSafe() -> Bool {
+        if let (nextRow, nextColumn) = nextRowAndColumn() {
+            return mapNode.isRowAndColumnSafeFromMonster(nextRow, column: nextColumn)
+        }
+        return true
     }
 }
