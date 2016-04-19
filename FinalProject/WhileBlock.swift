@@ -68,7 +68,11 @@ class WhileBlock: CodeBlock {
 
     override init(containingBlock: ContainerBlockProtocol) {
         bottomBlock = SKSpriteNode(imageNamed: "endwhile")
+        let size = GlobalConstants.CodeBlocks.blockSize
+        let ratio = size / bottomBlock.size.height
+        bottomBlock.size = CGSize(width: bottomBlock.size.width * ratio, height: size)
         topBlock = SKSpriteNode(imageNamed: "while")
+        topBlock.size = CGSize(width: topBlock.size.width * ratio, height: size)
         nestedDropZone = DropZone(size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
                                   dropZoneCategory: BlockCategory.Action,
                                   containingBlock: nestedBlocks)

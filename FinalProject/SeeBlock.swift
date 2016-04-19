@@ -36,6 +36,8 @@ class SeeBlock: BoolOpBlock {
 
     override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
         blockBody = SKSpriteNode(imageNamed: "eyes")
+        let size = GlobalConstants.CodeBlocks.blockSize
+        blockBody.size = CGSize(width: size, height: size)
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
         objectDropZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: blockBody.size.height),
                                   dropZoneCategory: BlockCategory.Object,

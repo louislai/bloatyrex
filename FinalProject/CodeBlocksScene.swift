@@ -19,27 +19,28 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let actionSection = BlocksSection(title: "Actions", color: SKColor.redColor())
     let controlSection = BlocksSection(title: "Control", color: SKColor.redColor())
     let conditionalSection = BlocksSection(title: "Conditionals", color: SKColor.purpleColor())
-    let objectSection = BlocksSection(title: "Objects", color: SKColor.greenColor())
-    let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward, blockCategory: BlockCategory.Action)
-    let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft, blockCategory: BlockCategory.Action)
-    let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight, blockCategory: BlockCategory.Action)
-    let waitButton = BlockButton(imageNamed: "wait-block", blockType: BlockType.Wait, blockCategory: BlockCategory.Action)
-    let jumpButton = BlockButton(imageNamed: "jump-block", blockType: BlockType.Jump, blockCategory: BlockCategory.Action)
-    let pressRedButton = BlockButton(imageNamed: "press-red-block", blockType: BlockType.PressRed, blockCategory: BlockCategory.Action)
-    let pressBlueButton = BlockButton(imageNamed: "press-blue-block", blockType: BlockType.PressBlue, blockCategory: BlockCategory.Action)
-    let whileButton = BlockButton(imageNamed: "wall", blockType:  BlockType.While, blockCategory: BlockCategory.Action)
-    let eyesButton = BlockButton(imageNamed: "eyes", blockType: BlockType.Eyes, blockCategory: BlockCategory.BoolOp)
-    let toiletButton = BlockButton(imageNamed: "toilet", blockType: BlockType.Toilet, blockCategory: BlockCategory.Object)
-    let holeButton = BlockButton(imageNamed: "hole", blockType: BlockType.Hole, blockCategory: BlockCategory.Object)
-    let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.Wall, blockCategory: BlockCategory.Object)
-    let woodButton = BlockButton(imageNamed: "wooden-block", blockType: BlockType.Wood, blockCategory: BlockCategory.Object)
-    let ifButton = BlockButton(imageNamed: "trash", blockType: BlockType.If, blockCategory: BlockCategory.Action)
-    let notButton = BlockButton(imageNamed: "not-block", blockType: BlockType.Not, blockCategory: BlockCategory.BoolOp)
-    let notSafeButton = BlockButton(imageNamed: "not-safe-block", blockType: BlockType.Safe, blockCategory: BlockCategory.BoolOp)
-    let leftCorrectButton = BlockButton(imageNamed: "buttons-left", blockType: BlockType.LeftCorrect, blockCategory: BlockCategory.Object)
-    let rightCorrectButton = BlockButton(imageNamed: "buttons-right", blockType: BlockType.RightCorrect, blockCategory: BlockCategory.Object)
-    let emptySpaceButton = BlockButton(imageNamed: "space", blockType: BlockType.Empty, blockCategory: BlockCategory.Object)
-    let monsterButton = BlockButton(imageNamed: "monster-static", blockType: BlockType.Monster, blockCategory: BlockCategory.Object)
+    let objectSection = BlocksSection(title: "Objects", color: GlobalConstants.Font.defaultGreen)
+    
+    let upButton = BlockButton(imageNamed: "up-block", blockCategory: BlockCategory.Action, action: ActionBlock.getForwardBlock)
+    let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnLeftBlock)
+    let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnRightBlock)
+    let waitButton = BlockButton(imageNamed: "wait-block", blockCategory: BlockCategory.Action, action: ActionBlock.getWaitBlock)
+    let jumpButton = BlockButton(imageNamed: "jump-block", blockCategory: BlockCategory.Action, action: ActionBlock.getJumpBlock)
+    let pressRedButton = BlockButton(imageNamed: "press-red-block", blockCategory: BlockCategory.Action, action: ActionBlock.getPressRedBlock)
+    let pressBlueButton = BlockButton(imageNamed: "press-blue-block", blockCategory: BlockCategory.Action, action: ActionBlock.getPressBlueBlock)
+    let whileButton = BlockButton(imageNamed: "while-block", blockCategory: BlockCategory.Action, action: WhileBlock.init)
+    let ifButton = BlockButton(imageNamed: "if-else-block", blockCategory: BlockCategory.Action, action: IfBlock.init)
+    let eyesButton = BlockButton(imageNamed: "eyes", blockCategory: BlockCategory.BoolOp, boolOp: SeeBlock.init)
+    let notButton = BlockButton(imageNamed: "not-block", blockCategory: BlockCategory.BoolOp, boolOp: NotBlock.init)
+    let notSafeButton = BlockButton(imageNamed: "not-safe-block", blockCategory: BlockCategory.BoolOp, boolOp: NotSafeBlock.init)
+    let toiletButton = BlockButton(imageNamed: "toilet", blockCategory: BlockCategory.Object, object: ObjectBlock.getToiletBlock)
+    let holeButton = BlockButton(imageNamed: "hole", blockCategory: BlockCategory.Object, object: ObjectBlock.getHoleBlock)
+    let wallButton = BlockButton(imageNamed: "wall", blockCategory: BlockCategory.Object, object: ObjectBlock.getWallBlock)
+    let woodButton = BlockButton(imageNamed: "wooden-block", blockCategory: BlockCategory.Object, object: ObjectBlock.getWoodBlock)
+    let leftCorrectButton = BlockButton(imageNamed: "buttons-left", blockCategory: BlockCategory.Object, object: ObjectBlock.getLeftDoorBlock)
+    let rightCorrectButton = BlockButton(imageNamed: "buttons-right", blockCategory: BlockCategory.Object, object: ObjectBlock.getRightDoorBlock)
+    let emptySpaceButton = BlockButton(imageNamed: "space", blockCategory: BlockCategory.Object, object: ObjectBlock.getEmptySpaceBlock)
+    let monsterButton = BlockButton(imageNamed: "monster-static", blockCategory: BlockCategory.Object, object: ObjectBlock.getMonsterBlock)
     let trashZone = TrashZone()
     private var programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
@@ -63,7 +64,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         programBlocks = blocks
         programBlocks.removeFromParent()
         if editEnabled {
-            programBlocks.position = CGPoint(x: size.width * -0.1, y: size.height)
+            programBlocks.position = CGPoint(x: size.width * 0.1, y: size.height)
         } else {
             programBlocks.position = CGPoint(x: size.width * 0.1, y: size.height)
         }
@@ -226,71 +227,19 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 block.dropBlock()
                 programBlocks.endHover()
                 if let insertionContainer = insertionPosition.container {
-                    switch block.blockType {
-                    case .Forward:
-                        insertionContainer.insertBlock(ActionBlock.getForwardBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .TurnLeft:
-                        insertionContainer.insertBlock(ActionBlock.getTurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .TurnRight:
-                        insertionContainer.insertBlock(ActionBlock.getTurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .Wait:
-                        insertionContainer.insertBlock(ActionBlock.getWaitBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .Jump:
-                        insertionContainer.insertBlock(ActionBlock.getJumpBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .PressRed:
-                        insertionContainer.insertBlock(ActionBlock.getPressRedBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .PressBlue:
-                        insertionContainer.insertBlock(ActionBlock.getPressBlueBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .While:
-                        insertionContainer.insertBlock(WhileBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .If:
-                        insertionContainer.insertBlock(IfBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
-                    case .Eyes:
-                        if let zone = insertionPosition.zone {
-                            zone.insertBlock(SeeBlock(containingBlock: insertionContainer, containingZone: zone))
+                    switch block.blockCategory {
+                    case .Action:
+                        if let action = block.getAction(insertionContainer) {
+                            insertionContainer.insertBlock(action, insertionPosition: insertionPosition)
                         }
-                    case .Not:
-                        if let zone = insertionPosition.zone {
-                            zone.insertBlock(NotBlock(containingBlock: insertionContainer, containingZone: zone))
+                    case .BoolOp:
+                        if let zone = insertionPosition.zone, boolOp = block.getBoolOp(insertionContainer, zone: zone) {
+                            zone.insertBlock(boolOp)
                         }
-                    case .Safe:
-                        if let zone = insertionPosition.zone {
-                            zone.insertBlock(NotSafeBlock(containingBlock: insertionContainer, containingZone: zone))
+                    case .Object:
+                        if let zone = insertionPosition.zone, object = block.getObject(insertionContainer, zone: zone) {
+                            zone.insertObjectBlock(object)
                         }
-                    case .Toilet:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getToiletBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    case .Hole:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getHoleBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    case .Wall:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getWallBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    case .Wood:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getWoodBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    case .RightCorrect:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getRightDoorBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    case .LeftCorrect:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getLeftDoorBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    case .Empty:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getEmptySpaceBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    case .Monster:
-                        if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ObjectBlock.getMonsterBlock(containingBlock: insertionContainer, containingZone: zone))
-                        }
-                    default:
-                        break
                     }
                 }
                 insertionPosition.position = nil
