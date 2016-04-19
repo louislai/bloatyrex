@@ -39,7 +39,7 @@ class NotBlock: BoolOpBlock {
     }
 
     override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
-        blockBody = SKSpriteNode(imageNamed: "poo")
+        blockBody = SKSpriteNode(imageNamed: "not-block")
         blockBody.size = CGSize(width: 64, height: 64)
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
         boolOpZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: blockBody.size.height),

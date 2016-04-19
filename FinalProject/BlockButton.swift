@@ -21,6 +21,13 @@ enum BlockType {
     case Wood
     case If
     case Not
+    case Safe
+    case Wait
+    case Jump
+    case PressBlue
+    case PressRed
+    case LeftCorrect
+    case RightCorrect
 }
 
 class BlockButton: SKNode {
