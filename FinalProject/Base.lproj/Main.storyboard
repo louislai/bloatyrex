@@ -52,13 +52,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2BY-k1-CZh">
-                                <rect key="frame" x="0.0" y="138" width="1024" height="550"/>
+                                <rect key="frame" x="0.0" y="138" width="1024" height="500"/>
                                 <connections>
                                     <segue destination="kGb-v8-DP9" kind="embed" id="Kr6-kD-5fz"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8sW-aC-mvh">
-                                <rect key="frame" x="20" y="688" width="73" height="73"/>
+                                <rect key="frame" x="20" y="650" width="73" height="73"/>
                                 <state key="normal" title="Button" image="back"/>
                                 <connections>
                                     <action selector="backButtonPressed:" destination="hoF-x2-mVx" eventType="touchUpInside" id="WFO-vr-ywh"/>
@@ -77,7 +77,7 @@
             <objects>
                 <collectionViewController id="kGb-v8-DP9" customClass="PackageSelectorViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="wGs-SR-G7F">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="550"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="iDE-B9-aqM">
                             <size key="itemSize" width="240" height="128"/>
@@ -87,7 +87,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="packageCell" id="lYt-H1-fiF" customClass="PackageCell" customModule="FinalProject" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="75" width="300" height="400"/>
+                                <rect key="frame" x="0.0" y="50" width="300" height="400"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
@@ -116,7 +116,7 @@
                                     <outlet property="imageView" destination="i6B-mI-fQ4" id="Xay-pq-RML"/>
                                     <outlet property="packageTitle" destination="FP0-ME-Efw" id="weq-V0-XOJ"/>
                                     <outlet property="progressIndicator" destination="9NB-HK-UZy" id="Ceo-Js-xHa"/>
-                                    <segue destination="KiG-n3-lml" kind="show" animates="NO" id="Mc7-b2-AZO"/>
+                                    <segue destination="KiG-n3-lml" kind="show" id="Mc7-b2-AZO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

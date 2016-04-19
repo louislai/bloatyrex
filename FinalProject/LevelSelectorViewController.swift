@@ -44,7 +44,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             // add back button
             let backButtonImage = UIImage(named: "back") as UIImage?
             let backButton = UIButton(type: UIButtonType.Custom) as UIButton
-            backButton.frame = CGRectMake(10, 590, 70, 70)
+            backButton.frame = CGRectMake(20, 590, 73, 73)
             backButton.setImage(backButtonImage, forState: .Normal)
             backButton.addTarget(self,
                 action: #selector(LevelSelectorViewController.backButtonAction(_:)),
