@@ -164,13 +164,13 @@ class LevelDesigningMapScene: SKScene {
     
     func createAllMapUnitNodes() {
         let allMapUnitTypes = [MapUnitType.Agent,
-                               MapUnitType.EmptySpace,
                                MapUnitType.Goal,
                                MapUnitType.Wall,
                                MapUnitType.Hole,
                                MapUnitType.WoodenBlock,
                                MapUnitType.Monster,
-                               MapUnitType.Door]
+                               MapUnitType.Door,
+                               MapUnitType.EmptySpace]
         allMapUnitNodes = [MapUnitNode]()
         mapUnitTypeIndices = [MapUnitType: Int]()
         for index in 0..<allMapUnitTypes.count {
@@ -344,7 +344,7 @@ extension LevelDesigningMapScene {
                 resetAction()
             case "Agent":
                 updateCurrentItemSelected(.Agent, nodeName: name)
-            case "Block":
+            case "Eraser":
                 updateCurrentItemSelected(.EmptySpace, nodeName: name)
             case "Toilet":
                 updateCurrentItemSelected(.Goal, nodeName: name)
@@ -584,25 +584,30 @@ extension LevelDesigningMapScene {
     }
 
     func addPalette() {
-        let paletteCellWidth: CGFloat = DesigningMapConstants.Size.Palette.cell.width
-        let paletteCellHeight: CGFloat = DesigningMapConstants.Size.Palette.cell.height
         let paletteBackgroundSize = DesigningMapConstants.Size.Palette.background
         let paletteBackgroundColor = DesigningMapConstants.defaultGray
         paletteNode = SKSpriteNode(color: paletteBackgroundColor,
                                    size: paletteBackgroundSize)
         paletteLayer.addChild(paletteNode)
 
-        let textureNames = ["Agent", "Block", "Toilet", "Wall", "Hole", "Wooden Block", "Monster", "Door"]
+        let textureNames = ["Agent", "Toilet", "Wall", "Hole", "Wooden Block", "Monster", "Door"]
         for position in 0..<textureNames.count {
-            let row = position / DesigningMapConstants.Dimension.paletteNumberOfColumns
-            let column = position % DesigningMapConstants.Dimension.paletteNumberOfColumns
-            let spriteNode = allMapUnitNodes[position]
-            spriteNode.size = blockSize
-            spriteNode.position = CGPoint(x: -175 + paletteCellWidth * CGFloat(column),
-                                          y: 75 - paletteCellHeight * CGFloat(row))
-            spriteNode.name = textureNames[position]
-            paletteNode.addChild(spriteNode)
+            addPaletteSprite(position, spriteNode: allMapUnitNodes[position], name: textureNames[position])
         }
+        let eraserTexture = SKSpriteNode(imageNamed: "eraser-2")
+        let eraserPosition = textureNames.count
+        let eraserName = "Eraser"
+        addPaletteSprite(eraserPosition, spriteNode: eraserTexture, name: eraserName)
+    }
+    
+    func addPaletteSprite(position: Int, spriteNode: SKSpriteNode, name: String) {
+        let row = position / DesigningMapConstants.Dimension.paletteNumberOfColumns
+        let column = position % DesigningMapConstants.Dimension.paletteNumberOfColumns
+        spriteNode.size = blockSize
+        spriteNode.position = CGPoint(x: -175 + DesigningMapConstants.Size.Palette.cell.width * CGFloat(column),
+                                      y: 75 - DesigningMapConstants.Size.Palette.cell.height * CGFloat(row))
+        spriteNode.name = name
+        paletteNode.addChild(spriteNode)
     }
 
     func updateCurrentItemSelected(mapUnitType: MapUnitType, nodeName: String) {
