@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// Protocol for blocks that are highlightable. This is used for tracing which program blocks are
+/// currently being ran on the programming interface of the game.
+
 protocol HighlightableBlockProtocol {
     func highlight()
     func unhighlight()

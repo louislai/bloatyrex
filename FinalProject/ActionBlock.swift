@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+/// This class represents actions that can be taken by the agent. As the
+/// properties of these blocks are largely the same save a few fields and images, objects of this
+/// class is only instantiated by static factory methods.
+
 class ActionBlock: CodeBlock, HighlightableBlockProtocol {
     var highlightLayer: SKShapeNode?
     let action: Action
@@ -54,6 +58,9 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
         return block
     }
     
+    /**
+     Highlights the block with a translucent overlay. Used for code tracing during its execution
+     **/
     func highlight() {
         unhighlight()
         let size = GlobalConstants.CodeBlocks.blockSize

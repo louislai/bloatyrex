@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+/// This class serves as a container for subprograms that may like within constructs such as 
+/// a while loop or the branches of an if else clause.
 class NestingZone: SKNode, ContainerBlockProtocol {
     var blocks = [CodeBlock]()
     var count: Int {
@@ -16,12 +18,19 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         }
     }
 
+    /**
+     The dropZones of each block in this nesting zone make up the dropZones available due to this 
+     class
+     **/
     var dropZones: [DropZone] {
         get {
             return blocks.flatMap { $0.actionZones }
         }
     }
 
+    /**
+     Inserts a code block given an insertionPosition as appropriate
+     **/
     func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition) {
         if let position = insertionPosition.position {
             blocks.insert(block, atIndex: position - 1)
@@ -30,16 +39,26 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         }
     }
 
+    /**
+     Removes the code block at given index.
+     **/
     func removeBlockAtIndex(index: Int) {
         blocks.removeAtIndex(index - 1)
     }
 
+    /**
+     Unfocuses all contained blocks
+     **/
     func unfocus() {
         for block in blocks {
             block.unfocus()
         }
     }
 
+    /**
+     Gets the selected block given a location. Typically used to find out which of the containing
+     block is being clicked.
+     **/
     func getBlock(location: CGPoint) -> MovableBlockProtocol? {
         let x = location.x - self.position.x
         let y = location.y - self.position.y
@@ -52,6 +71,10 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         return nil
     }
 
+    /**
+     Returns the subprogram contained by this nestingZone. If the contained subprogram is invalid,
+     nil is returned.
+     **/
     func parseBlock(programCounter: Int) -> Program? {
         guard blocks.count > programCounter else {
             return nil
@@ -98,6 +121,9 @@ class NestingZone: SKNode, ContainerBlockProtocol {
         }
     }
 
+    /**
+     Realigns the contained blocks
+     **/
     func flushBlocks() {
         var yPos: CGFloat = 0
         let xPos: CGFloat = 0

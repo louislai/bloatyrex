@@ -8,6 +8,11 @@
 
 import Foundation
 
+/// This class serves as the interpreter of the Abstract Syntax Tree as defined in Syntax.swift.
+/// The root of the tree is always a Program, and branches out to the relevant constructs.
+/// This class takes in a program and compiles it to an array of Instructions, which is then
+/// ran stepwise given a Map and an agent, which produces an action to be executed. At the end of
+/// the program, nextAction returns nil
 class Interpreter: NSObject {
     var instructions = [Instructions]()
     var programCounter = 0
@@ -20,28 +25,21 @@ class Interpreter: NSObject {
         registerObservers()
     }
 
+    /**
+     Evaluates the next action to take for the current program given a map and an agent. Returns nil
+     at the end of the program, as there are no more actions to take.
+     **/
     func nextAction(map: Map, agent: AgentProtocol) -> Action? {
-        if let action = previousAction {
-            switch action {
-            case .Forward(let block):
-                block?.unhighlight()
-            case .Jump(let block):
-                block?.unhighlight()
-            case .RotateLeft(let block):
-                block?.unhighlight()
-            case .RotateRight(let block):
-                block?.unhighlight()
-            case .NoAction(let block):
-                block?.unhighlight()
-            case .ChooseButton(_, let block):
-                block?.unhighlight()
-            }
-        }
+        removeHighlight()
+        //Reads current instruction
         switch instructions[programCounter] {
         case .Done:
+            //Done is always the final instruction
             return nil
         case .ActionInstruction(let action):
+            //If the current instruction is an action, we can return it
             programCounter += 1
+            //Highlight the block of the current action
             previousAction = action
             switch action {
             case .Forward(let block):
@@ -72,6 +70,10 @@ class Interpreter: NSObject {
         }
     }
     
+    /**
+     Unhighlight the previously highligted action block. Does nothing if there was no previously
+     highlighted block.
+    **/
     func removeHighlight() {
         if let action = previousAction {
             switch action {

@@ -8,6 +8,10 @@
 
 import Foundation
 
+/// The enums used to represent the language constructs needed. These enums are used to build an
+/// Abstract Syntax Tree, which is then parsed by the Interpreter and compiled into instructions
+/// for execution.
+
 indirect enum Program {
     case SingleStatement(Statement)
     case MultipleStatement(Statement, Program)
