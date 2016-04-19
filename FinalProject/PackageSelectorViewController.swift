@@ -37,6 +37,7 @@ class PackageSelectorViewController: UICollectionViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? LevelSelectorPageViewController {
+            destination.package = selectedPackageTitle
             destination.previousViewController = self
             destination.numberOfItemsPerPage = 12
         }
@@ -92,6 +93,7 @@ extension PackageSelectorViewController {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         if let packageCell = cell as? PackageCell {
             selectedPackageTitle = packageCell.packageTitle.text
+            self.performSegueWithIdentifier("packageToLevelSelectorSegue", sender: self)
         }
     }
 }

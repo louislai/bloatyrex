@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -116,7 +116,6 @@
                                     <outlet property="imageView" destination="i6B-mI-fQ4" id="Xay-pq-RML"/>
                                     <outlet property="packageTitle" destination="FP0-ME-Efw" id="weq-V0-XOJ"/>
                                     <outlet property="progressIndicator" destination="9NB-HK-UZy" id="Ceo-Js-xHa"/>
-                                    <segue destination="KiG-n3-lml" kind="show" id="Mc7-b2-AZO"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -125,6 +124,9 @@
                             <outlet property="delegate" destination="kGb-v8-DP9" id="fhf-Gj-IAA"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="KiG-n3-lml" kind="show" identifier="packageToLevelSelectorSegue" id="Nr6-Vy-AR1"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KDS-6U-RPt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
