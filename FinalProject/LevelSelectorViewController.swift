@@ -27,7 +27,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         collectionView.registerClass(LevelCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = UIColor(red: 0, green: 0.9, blue: 0, alpha: 0.2)
         self.view.addSubview(collectionView)
 
         // different configuration when used from the package selector
@@ -78,9 +78,6 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         cell.levelSelectorViewController = self
         cell.levelSelectorPageViewController = pageViewController as! LevelSelectorPageViewController
         cell.textLabel.text = fileNames![indexPath.item]
-        cell.textLabel.textColor = UIColor.whiteColor()
-        cell.textLabel.font = UIFont(name: "Courier", size: 18)
-        cell.backgroundColor = UIColor.darkGrayColor()
         if previousViewController is LevelDesigningViewController {
             cell.addGesturesToContentView()
         }
@@ -136,12 +133,18 @@ class LevelCell: UICollectionViewCell {
     private var filesArchive = FilesArchive()
     private var levelSelectorViewController: LevelSelectorViewController!
     private var levelSelectorPageViewController: LevelSelectorPageViewController!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        let background = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
+        background.image = UIImage(named: "toilet-paper")
+        contentView.addSubview(background)
         let labelHeight = frame.size.height/3
         textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width, height: labelHeight))
         textLabel.textAlignment = .Center
+        textLabel.textColor = GlobalConstants.Font.defaultGreen
+        textLabel.font = UIFont(name: GlobalConstants.Font.defaultNameBold, size: 17)
         contentView.addSubview(textLabel)
     }
 

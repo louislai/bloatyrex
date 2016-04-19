@@ -106,9 +106,9 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
     private func setupPageControl() {
         let appearance = UIPageControl.appearance()
-        appearance.pageIndicatorTintColor = UIColor.grayColor()
+        appearance.pageIndicatorTintColor = UIColor.blackColor()
         appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
-        appearance.backgroundColor = UIColor.darkGrayColor()
+        appearance.backgroundColor = UIColor.brownColor()
     }
 
     // MARK: - UIPageViewControllerDataSource

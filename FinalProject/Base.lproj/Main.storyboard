@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -99,13 +99,13 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PackageTitle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-ME-Efw">
                                             <rect key="frame" x="0.0" y="8" width="300" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NB-HK-UZy">
                                             <rect key="frame" x="0.0" y="354" width="300" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -197,25 +197,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-6c-KJW">
-                                <rect key="frame" x="368" y="458" width="288" height="98"/>
+                                <rect key="frame" x="368" y="462" width="288" height="98"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="35"/>
-                                <state key="normal" title="DESIGN">
-                                    <color key="titleColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="DESIGN" backgroundImage="GreenRoundedButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="E7z-cA-Cz9" kind="show" id="zWI-AD-rre"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBV-6B-4Sf">
-                                <rect key="frame" x="368" y="273" width="288" height="98"/>
+                                <rect key="frame" x="368" y="345" width="288" height="98"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="35"/>
-                                <state key="normal" title="PLAY">
-                                    <color key="titleColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="PLAY" backgroundImage="GreenRoundedButton">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="hoF-x2-mVx" kind="show" id="ync-wI-41W"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="toilet-roll" translatesAutoresizingMaskIntoConstraints="NO" id="8v4-CE-eim">
+                                <rect key="frame" x="0.0" y="537" width="311" height="217"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="t-rex-toilet" translatesAutoresizingMaskIntoConstraints="NO" id="pDX-fw-LCT">
+                                <rect key="frame" x="696" y="509" width="303" height="239"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bloaty-rex-title" translatesAutoresizingMaskIntoConstraints="NO" id="K3C-5p-eo4">
+                                <rect key="frame" x="195" y="64" width="635" height="235"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -223,7 +232,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="78k-KX-mx5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="429" y="1162"/>
+            <point key="canvasLocation" x="431" y="1156"/>
         </scene>
         <!--Level Designing View Controller-->
         <scene sceneID="b55-Kr-jMs">
@@ -396,7 +405,7 @@
                     <view key="view" contentMode="scaleToFill" id="8pg-Ex-xAT" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                 </viewController>
@@ -483,11 +492,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="GreenRoundedButton" width="2400" height="732"/>
         <image name="Yoshi-win.png" width="703" height="795"/>
         <image name="back" width="512" height="512"/>
+        <image name="bloaty-rex-title" width="1197" height="534"/>
         <image name="edit-code-icon.png" width="512" height="512"/>
         <image name="filled-star" width="119" height="115"/>
         <image name="play" width="512" height="512"/>
+        <image name="t-rex-toilet" width="254" height="198"/>
+        <image name="toilet-roll" width="460" height="277"/>
         <image name="unfilled-star" width="122" height="118"/>
     </resources>
     <inferredMetricsTieBreakers>
