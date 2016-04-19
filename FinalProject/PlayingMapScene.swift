@@ -187,7 +187,7 @@ class PlayingMapScene: StaticMapScene {
 
         let retryText = SKLabelNode(text: "Rewind to retry")
         retryText.fontColor = UIColor.redColor()
-        retryText.fontName = GlobalConstants.Font.defaultName
+        retryText.fontName = GlobalConstants.Font.defaultNameBold
         retryText.position = CGPoint(
             x: arrowNode.position.x,
             y: arrowNode.position.y + buttonSize.height*1.1

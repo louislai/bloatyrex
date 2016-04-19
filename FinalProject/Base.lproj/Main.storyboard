@@ -94,16 +94,20 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-6c-KJW">
                                 <rect key="frame" x="368" y="458" width="288" height="98"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="DESIGN LEVEL"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="35"/>
+                                <state key="normal" title="DESIGN">
+                                    <color key="titleColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="E7z-cA-Cz9" kind="show" id="zWI-AD-rre"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UBV-6B-4Sf">
                                 <rect key="frame" x="368" y="273" width="288" height="98"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <state key="normal" title="LEVEL SELECT"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="35"/>
+                                <state key="normal" title="PLAY">
+                                    <color key="titleColor" red="0.0" green="0.50196078431372548" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <segue destination="KiG-n3-lml" kind="show" id="LGY-AL-6yF"/>
                                 </connections>
@@ -373,6 +377,6 @@
         <image name="zoom" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="p0G-XZ-8kD"/>
+        <segue reference="JCV-Rq-O91"/>
     </inferredMetricsTieBreakers>
 </document>
