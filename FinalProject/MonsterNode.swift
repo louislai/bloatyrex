@@ -15,8 +15,8 @@ struct MonsterNodeConstants {
 }
 
 class MonsterNode: MapUnitNode {
-    var frequencyMin = 2
-    var frequencyMax = 2
+    var frequencyMin = MonsterNodeConstants.frequencyMin
+    var frequencyMax = MonsterNodeConstants.frequencyMax
     var turnsUntilAwake = 0
     var zzzOn = false
     let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture("zzz"))
