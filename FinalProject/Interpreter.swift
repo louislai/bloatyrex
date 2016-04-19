@@ -136,7 +136,7 @@ class Interpreter {
         case .CompareObservation(let observation, let object):
             return observedObject(observation, map: map, agent: agent) == object
         case .Safe():
-            return true
+            return agent.isNextStepSafe()
         }
     }
 
