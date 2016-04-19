@@ -92,8 +92,8 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! LevelCell
         let fileName = cell.textLabel.text!
-        if let loadedMap = filesArchive.loadFromFile(fileName) {
-            if previousViewController is LevelDesigningViewController {
+        if previousViewController is LevelDesigningViewController {
+            if let loadedMap = filesArchive.loadFromFile(fileName) {
                 let levelDesigningViewController = previousViewController as! LevelDesigningViewController
                 levelDesigningViewController.map = loadedMap
                 for row in 0...loadedMap.numberOfRows {
@@ -110,10 +110,16 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
                 }
                 levelDesigningViewController.viewDidLoad()
                 dismissViewControllerAnimated(true, completion: nil)
-            } else if previousViewController is PackageSelectorViewController {
-                /// load selected level to play
-                self.loadedMap = loadedMap
-                performSegueWithIdentifier("loadLevelToPlay", sender: self)
+            }
+        } else if previousViewController is PackageSelectorViewController {
+            let levelSelectorPageViewController = pageViewController as! LevelSelectorPageViewController
+            if let package = levelSelectorPageViewController.package {
+                if let loadedMap = filesArchive.loadFromPackageFile(fileName,
+                                                                    packageName: package) {
+                    /// load selected level to play
+                    self.loadedMap = loadedMap
+                    performSegueWithIdentifier("loadLevelToPlay", sender: self)
+                }
             }
         }
     }
