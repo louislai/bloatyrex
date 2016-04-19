@@ -29,7 +29,7 @@
         <!--Package Selector Outer View Controller-->
         <scene sceneID="G85-gn-n2C">
             <objects>
-                <viewController id="hoF-x2-mVx" customClass="PackageSelectorOuterViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hoF-x2-mVx" customClass="PackageSelectorOuterViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JxF-aw-utm"/>
                         <viewControllerLayoutGuide type="bottom" id="fbO-no-O8V"/>
@@ -75,7 +75,7 @@
         <!--Package Selector View Controller-->
         <scene sceneID="XqH-m5-7Qv">
             <objects>
-                <collectionViewController id="kGb-v8-DP9" customClass="PackageSelectorViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="kGb-v8-DP9" customClass="PackageSelectorViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="wGs-SR-G7F">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,7 +86,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="packageCell" id="lYt-H1-fiF" customClass="PackageCell" customModule="FinalProject" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="packageCell" id="lYt-H1-fiF" customClass="PackageCell" customModule="BloatyRex" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="300" height="400"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -133,7 +133,7 @@
         <!--Level Selector Page View Controller-->
         <scene sceneID="rSA-Fq-nEy">
             <objects>
-                <viewController storyboardIdentifier="LevelSelectorOuterPageViewController" id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LevelSelectorOuterPageViewController" id="KiG-n3-lml" customClass="LevelSelectorPageViewController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ekL-E4-vG9"/>
                         <viewControllerLayoutGuide type="bottom" id="3h9-r7-dLW"/>
