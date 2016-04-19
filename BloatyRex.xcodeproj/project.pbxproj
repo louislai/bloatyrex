@@ -50,6 +50,7 @@
 		3D15926D1CC32ACB009E8559 /* PackageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */; };
 		3D15926F1CC32F72009E8559 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926E1CC32F72009E8559 /* PackageCell.swift */; };
 		3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21216A1C9A55F000E6564B /* PannableScene.swift */; };
+		3D42AABF1CC63EEB00C7FDF2 /* CodeBlocksScaleSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D42AABE1CC63EEB00C7FDF2 /* CodeBlocksScaleSupplier.swift */; };
 		3DF230A21C8F0617003420C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
@@ -164,6 +165,7 @@
 		3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorViewController.swift; sourceTree = "<group>"; };
 		3D15926E1CC32F72009E8559 /* PackageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageCell.swift; sourceTree = "<group>"; };
 		3D21216A1C9A55F000E6564B /* PannableScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PannableScene.swift; path = FinalProject/PannableScene.swift; sourceTree = "<group>"; };
+		3D42AABE1CC63EEB00C7FDF2 /* CodeBlocksScaleSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeBlocksScaleSupplier.swift; sourceTree = "<group>"; };
 		3DF2309E1C8F0617003420C0 /* BloatyRex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BloatyRex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230A11C8F0617003420C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingMapViewController.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */,
 				BF7F3C9E1CBDD702004530F5 /* Scorer.swift */,
 				BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */,
+				3D42AABE1CC63EEB00C7FDF2 /* CodeBlocksScaleSupplier.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				TargetAttributes = {
 					3DF2309D1C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 62L5G97YTE;
 						DevelopmentTeam = XC99LK63YN;
 					};
 					3DF230B11C8F0617003420C0 = {
@@ -658,6 +662,7 @@
 				1D69B6E41CB9FF3900C1FA04 /* MovableBlockProtocol.swift in Sources */,
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				3D15926F1CC32F72009E8559 /* PackageCell.swift in Sources */,
+				3D42AABF1CC63EEB00C7FDF2 /* CodeBlocksScaleSupplier.swift in Sources */,
 				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
 				BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */,
 				B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */,

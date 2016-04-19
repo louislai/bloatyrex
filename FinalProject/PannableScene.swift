@@ -61,13 +61,12 @@ class PannableScene: SKScene {
     - parameter zoomRangeFactor: denotes how much the zoom level can be adjusted. The default value of 2.0
     allows the zoom to be a max 2.0 times larger than the original zoom level.
     */
-    init(size: CGSize, zoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
-         zoomRangeFactor: CGFloat = 2.0, enableDoubleTap: Bool = true,
-         disableHorizontalPan: Bool = false, disableVerticalPan: Bool = false,
-         disableDoubleTap: Bool = false) {
-        initialScale = 1.0 / zoomLevel
-        minimumScale = initialScale / zoomRangeFactor
-        maximumScale = initialScale * zoomRangeFactor
+    init(size: CGSize, initialZoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
+        enableDoubleTap: Bool = true, disableHorizontalPan: Bool = false,
+        disableVerticalPan: Bool = false, disableDoubleTap: Bool = false) {
+        initialScale = 1.0 / initialZoomLevel
+        minimumScale = initialScale / 2.0
+        maximumScale = initialScale * 2.0
         horizontalPanDisabled = disableHorizontalPan
         verticalPanDisabled = disableVerticalPan
         doubleTapDisabled = disableDoubleTap
@@ -105,8 +104,34 @@ class PannableScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // Can be overriden to dynamically dispatch subclasses with the overriden method.
     func resetOtherTouches() {
+    }
 
+    /**
+    Sets the scale of the viewpoint. The given scale will be adjusted if it is beyond the bounds
+    of the minimum and maximum scale values.
+    */
+    func setViewpointScale(scale: CGFloat) {
+        var boundedScale = min(scale, maximumScale)
+        boundedScale = max(boundedScale, minimumScale)
+        viewpoint.setScale(boundedScale)
+    }
+
+    /**
+    Sets the minimum scale of the viewpoint. The minimum scale should be smaller than or equal to
+    the initial and maximum scales.
+    */
+    func setMinimumScale(scale: CGFloat) {
+        minimumScale = scale
+    }
+
+    /**
+    Sets the minimum scale of the viewpoint. The minimum scale should be greater than or equal to
+    the initial and minimum scales.
+    */
+    func setMaximumScale(scale: CGFloat) {
+        maximumScale = scale
     }
 
     /**

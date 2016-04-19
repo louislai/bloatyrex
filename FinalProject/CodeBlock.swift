@@ -51,7 +51,11 @@ class CodeBlock: SKNode, MovableBlockProtocol {
     var dropZoneActivated = true
     var actionZones: [DropZone] {
         get {
-            return [dropZone]
+            if dropZoneActivated {
+                return [dropZone]
+            } else {
+                return []
+            }
         }
     }
 

@@ -12,13 +12,19 @@ class ProgrammingViewController: UIViewController {
     weak var delegate: FinishedEditingProgramDelegate!
     var map: Map!
     var programBlocksSupplier: ProgramBlocksSupplier!
+    var codeBlocksScaleSupplier: CodeBlocksScaleSupplier!
     var storedProgramBlocks: ProgramBlocks!
+    var scaleToDisplay: CGFloat?
 
     @IBAction func playingViewButtonPressed(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayingViewController")
         let playingViewController = viewController as! PlayingViewController
         playingViewController.map = map
         playingViewController.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()
+        scaleToDisplay = codeBlocksScaleSupplier.retrieveScale()
+        if let scaleToDisplay = scaleToDisplay {
+            playingViewController.scaleToDisplay = scaleToDisplay
+        }
         navigationController?.pushViewController(playingViewController, animated: false)
         var viewControllersOnStack = (navigationController?.viewControllers)!
         viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
@@ -36,6 +42,10 @@ class ProgrammingViewController: UIViewController {
             destination.editEnabled = true
             destination.programBlocksToLoad = storedProgramBlocks
             programBlocksSupplier = destination
+            codeBlocksScaleSupplier = destination
+            if let scaleToDisplay = scaleToDisplay {
+                destination.scaleToDisplay = scaleToDisplay
+            }
         }
     }
 }
