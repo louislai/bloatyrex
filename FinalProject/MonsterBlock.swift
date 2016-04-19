@@ -10,7 +10,7 @@ import SpriteKit
 
 class MonsterBlock: ObjectBlock {
     let blockBody: SKSpriteNode
-    
+
     override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
         blockBody = SKSpriteNode(imageNamed: "monster-static")
         blockBody.size = CGSize(width: 64, height: 64)
@@ -18,13 +18,12 @@ class MonsterBlock: ObjectBlock {
         super.init(containingBlock: containingBlock, containingZone: containingZone)
         addChild(blockBody)
     }
-    
+
     override func getMapUnit() -> MapUnitType {
         return MapUnitType.Monster
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
