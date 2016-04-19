@@ -30,7 +30,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let wallButton = BlockButton(imageNamed: "wall", blockType: BlockType.Wall, blockCategory: BlockCategory.Object)
     let woodButton = BlockButton(imageNamed: "wooden-block", blockType: BlockType.Wood, blockCategory: BlockCategory.Object)
     let ifButton = BlockButton(imageNamed: "trash", blockType: BlockType.If, blockCategory: BlockCategory.Action)
-    let notButton = BlockButton(imageNamed: "poo", blockType: BlockType.Not, blockCategory: BlockCategory.BoolOp)
+    let notButton = BlockButton(imageNamed: "not-block", blockType: BlockType.Not, blockCategory: BlockCategory.BoolOp)
+    let safeButton = BlockButton(imageNamed: "safe-block", blockType: BlockType.Safe, blockCategory: BlockCategory.BoolOp)
     let trashZone = TrashZone()
     private var programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?
@@ -82,7 +83,8 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             pressRedButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
             whileButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
             ifButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.1)
-            eyesButton.position = CGPoint(x: size.width * -0.3, y: 0)
+            eyesButton.position = CGPoint(x: size.width * -0.4, y: 0)
+            safeButton.position = CGPoint(x: size.width * -0.3, y: 0)
             notButton.position = CGPoint(x: size.width * -0.2, y: 0)
             toiletButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.1)
             wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
@@ -102,6 +104,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             addNodeToOverlay(turnRightButton)
             addNodeToOverlay(ifButton)
             addNodeToOverlay(notButton)
+            addNodeToOverlay(safeButton)
             addNodeToOverlay(trashZone)
             addNodeToOverlay(waitButton)
             addNodeToOverlay(jumpButton)
@@ -169,9 +172,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         } else if pressBlueButton.containsPoint(locationInOverlay) {
             heldBlock = pressBlueButton
             pressState = .AddingBlock(pressBlueButton.blockCategory)
+        } else if safeButton.containsPoint(locationInOverlay) {
+            heldBlock = safeButton
+            pressState = .AddingBlock(safeButton.blockCategory)
         }
-
-        heldBlock?.pickBlock(true, scale: scale)
 
         heldBlock?.pickBlock(true, scale: scale)
 
@@ -266,6 +270,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                     case .Not:
                         if let zone = insertionPosition.zone {
                             zone.insertBlock(NotBlock(containingBlock: insertionContainer, containingZone: zone))
+                        }
+                    case .Safe:
+                        if let zone = insertionPosition.zone {
+                            zone.insertBlock(SafeBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Toilet:
                         if let zone = insertionPosition.zone {

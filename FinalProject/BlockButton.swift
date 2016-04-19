@@ -21,6 +21,7 @@ enum BlockType {
     case Wood
     case If
     case Not
+    case Safe
     case Wait
     case Jump
     case PressBlue
