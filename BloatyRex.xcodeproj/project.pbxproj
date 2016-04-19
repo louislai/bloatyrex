@@ -65,6 +65,7 @@
 		B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */; };
 		B04E40521CC6064400C73E86 /* DesigningMapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E40511CC6064400C73E86 /* DesigningMapConstants.swift */; };
 		BF145B8B1CBAA3EC00BF39D6 /* PresetMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */; };
+		BF156EDB1CC6272500B4EB2A /* edit-code-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BF156EDA1CC6272500B4EB2A /* edit-code-icon.png */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
@@ -184,6 +185,7 @@
 		B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorPageViewController.swift; sourceTree = "<group>"; };
 		B04E40511CC6064400C73E86 /* DesigningMapConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesigningMapConstants.swift; sourceTree = "<group>"; };
 		BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresetMap.swift; sourceTree = "<group>"; };
+		BF156EDA1CC6272500B4EB2A /* edit-code-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-code-icon.png"; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		3DF230951C8F0617003420C0 = {
 			isa = PBXGroup;
 			children = (
+				BF156EDA1CC6272500B4EB2A /* edit-code-icon.png */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
 				BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */,
 				BF640D781CA815E800FC454F /* ReusableComponents */,
@@ -597,6 +600,7 @@
 			files = (
 				3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */,
 				BF8E76E51CC54BB5000AE8CC /* spark.png in Resources */,
+				BF156EDB1CC6272500B4EB2A /* edit-code-icon.png in Resources */,
 				BF8E76E41CC54BB5000AE8CC /* Spark.sks in Resources */,
 				3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */,
 				3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */,
