@@ -17,7 +17,7 @@ class Interpreter {
         self.instructions = compileProgram(program)
         self.instructions.append(.Done)
     }
-    
+
     func removeHighlight() {
         if let action = previousAction {
             switch action {

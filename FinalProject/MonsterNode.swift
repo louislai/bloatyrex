@@ -15,7 +15,7 @@ struct MonsterNodeConstants {
 class MonsterNode: MapUnitNode {
     var frequencyMin = 2
     var frequencyMax = 2
-    var turnsUntilAwake = 0
+    var turnsUntilAwake = [Int]()
     var zzzOn = false
     let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture("zzz"))
     var row: Int!
@@ -47,13 +47,30 @@ class MonsterNode: MapUnitNode {
         return copy
     }
 
-    func randomizeTurnsUntilAwake() {
-        turnsUntilAwake = Int(arc4random_uniform(UInt32(frequencyMax-frequencyMin)))
-            + frequencyMin
+    func isAwake(steps: Int = 0) -> Bool {
+        if turnsUntilAwake.isEmpty {
+            return false
+        }
+        var stepsLeft = steps
+        var index = 0
+        while stepsLeft > 0 {
+            if index == turnsUntilAwake.count {
+                turnsUntilAwake.append(randomizeTurnsUntilAwake())
+            }
+            if stepsLeft <= turnsUntilAwake[index] {
+                return stepsLeft == turnsUntilAwake[index]
+            } else {
+                stepsLeft -= turnsUntilAwake[index]
+                index += 1
+            }
+        }
+        return stepsLeft == turnsUntilAwake[index]
     }
 
-    func isAwake() -> Bool {
-        return turnsUntilAwake <= 0
+    func initializeTurnsUntilAwake() {
+        if turnsUntilAwake.isEmpty {
+            turnsUntilAwake.append(randomizeTurnsUntilAwake())
+        }
     }
 
     func setOrientation(orientation: Direction) {
@@ -79,9 +96,10 @@ class MonsterNode: MapUnitNode {
     /// Return false otherwise
     func nextAction() {
         if isAwake() {
-            randomizeTurnsUntilAwake()
+            turnsUntilAwake.removeFirst()
+            initializeTurnsUntilAwake()
         }
-        turnsUntilAwake -= 1
+        turnsUntilAwake[0] -= 1
         if isAwake() {
             setAwake()
         }
@@ -129,6 +147,11 @@ class MonsterNode: MapUnitNode {
             zzzNode.runAction(actionSequence)
             zzzOn = true
         }
+    }
+
+    private func randomizeTurnsUntilAwake() -> Int {
+        return Int(arc4random_uniform(UInt32(frequencyMax-frequencyMin)))
+            + frequencyMin
     }
 
     private func showDeadZones() {

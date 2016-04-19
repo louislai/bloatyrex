@@ -93,7 +93,7 @@ class MapNode: SKNode {
                         monster.row = row
                         monster.column = column
                         monster.mapNode = self
-                        monster.randomizeTurnsUntilAwake()
+                        monster.initializeTurnsUntilAwake()
                         monsterNodes.append(monster)
                     } else if let goal = unit as? GoalNode {
                         goalNodes.append(goal)
@@ -105,24 +105,24 @@ class MapNode: SKNode {
     }
 
 
-    func isRowAndColumnSafeFromMonster(row: Int, column: Int) -> Bool {
+    func isRowAndColumnSafeFromMonster(row: Int, column: Int, steps: Int = 0) -> Bool {
         if let monster = map.retrieveMapUnitAt(row+1, column: column) as? MonsterNode
-            where monster.isAwake() {
+            where monster.isAwake(steps) {
                 monster.setOrientation(.Down)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row-1, column: column) as? MonsterNode
-            where monster.isAwake() {
+            where monster.isAwake(steps) {
                 monster.setOrientation(.Up)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column+1) as? MonsterNode
-            where monster.isAwake() {
+            where monster.isAwake(steps) {
                 monster.setOrientation(.Left)
                 return false
         }
         if let monster = map.retrieveMapUnitAt(row, column: column-1) as? MonsterNode
-            where monster.isAwake() {
+            where monster.isAwake(steps) {
                 monster.setOrientation(.Right)
                 return false
         }

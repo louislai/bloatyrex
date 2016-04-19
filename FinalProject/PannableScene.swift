@@ -104,6 +104,10 @@ class PannableScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func resetOtherTouches() {
+        
+    }
 
     /**
     Handles the translation of the viewpoint using the pan gesture. Translation does not occur if
@@ -111,6 +115,7 @@ class PannableScene: SKScene {
     during initialization.
     */
     func handlePan(sender: UIPanGestureRecognizer) {
+        resetOtherTouches()
         sender.cancelsTouchesInView = false
         if sender.state == .Began {
             var touchLocation = sender.locationInView(sender.view!)
@@ -211,6 +216,8 @@ class PannableScene: SKScene {
     Handles the zooming in and out using the pinch gesture.
     */
     func handlePinch(sender: UIPinchGestureRecognizer) {
+        resetOtherTouches()
+        sender.cancelsTouchesInView = false
         if sender.numberOfTouches() == 2 {
             if sender.state == .Changed {
                 // The scale applied to the contents is the inverse of the camera node’s scale

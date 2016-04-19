@@ -156,7 +156,7 @@ class AgentNode: MapUnitNode {
         aCoder.encodeInteger(orientation.rawValue, forKey: "orientation")
         aCoder.encodeInteger(numberOfMoves, forKey: "moves")
     }
-    
+
     func resetInterpreter() {
         delegate?.resetInterpreter()
     }
@@ -501,7 +501,8 @@ extension AgentNode {
 
     func isNextStepSafe() -> Bool {
         if let (nextRow, nextColumn) = nextRowAndColumn() {
-            return mapNode.isRowAndColumnSafeFromMonster(nextRow, column: nextColumn)
+            let res = mapNode.isRowAndColumnSafeFromMonster(nextRow, column: nextColumn, steps: 1)
+            return res
         }
         return true
     }
