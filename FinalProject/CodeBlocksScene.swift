@@ -88,7 +88,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         super.didMoveToView(view)
         backgroundColor = SKColor.whiteColor()
         if editEnabled {
-            trashZone.position = CGPoint(x: size.width * 0.15, y: size.height * -0.45)
+            trashZone.position = CGPoint(x: size.width * -0.15, y: size.height * -0.45)
 
             addNodeToOverlay(trashZone)
             
@@ -228,19 +228,19 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 if let insertionContainer = insertionPosition.container {
                     switch block.blockType {
                     case .Forward:
-                        insertionContainer.insertBlock(ForwardBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getForwardBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .TurnLeft:
-                        insertionContainer.insertBlock(TurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getTurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .TurnRight:
-                        insertionContainer.insertBlock(TurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getTurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .Wait:
-                        insertionContainer.insertBlock(WaitBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getWaitBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .Jump:
-                        insertionContainer.insertBlock(JumpBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getJumpBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .PressRed:
-                        insertionContainer.insertBlock(PressRedBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getPressRedBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .PressBlue:
-                        insertionContainer.insertBlock(PressBlueBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getPressBlueBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .While:
                         insertionContainer.insertBlock(WhileBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .If:

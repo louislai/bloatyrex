@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D409C661CC5EE58002E6B02 /* WaitBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C651CC5EE58002E6B02 /* WaitBlock.swift */; };
-		1D409C681CC5EE89002E6B02 /* JumpBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C671CC5EE89002E6B02 /* JumpBlock.swift */; };
-		1D409C6A1CC5EEA6002E6B02 /* PressRedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */; };
-		1D409C6C1CC5EEE6002E6B02 /* PressBlueBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */; };
 		1D409C6E1CC5F45E002E6B02 /* NotSafeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C6D1CC5F45E002E6B02 /* NotSafeBlock.swift */; };
 		1D69B6C61CB2998B00C1FA04 /* ContainerBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */; };
 		1D69B6C81CB29E4500C1FA04 /* TrashContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */; };
@@ -22,7 +18,6 @@
 		1D69B6E41CB9FF3900C1FA04 /* MovableBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6E31CB9FF3900C1FA04 /* MovableBlockProtocol.swift */; };
 		1D69B6E61CBB896200C1FA04 /* NotBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6E51CBB896200C1FA04 /* NotBlock.swift */; };
 		1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D61C9984F6003E7B75 /* TrashZone.swift */; };
-		1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */; };
 		1D8067381CC32E27003657EE /* HighlightableBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D8067371CC32E27003657EE /* HighlightableBlockProtocol.swift */; };
 		1D934FE71CAD6AC0009F1FBA /* WhileBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */; };
 		1DB4B0811C9516610010F727 /* Syntax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0801C9516610010F727 /* Syntax.swift */; };
@@ -37,9 +32,8 @@
 		1DB4B0931C991FC30010F727 /* CodeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0921C991FC30010F727 /* CodeBlock.swift */; };
 		1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0941C9920480010F727 /* MainBlock.swift */; };
 		1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0961C9927170010F727 /* InsertionPosition.swift */; };
-		1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */; };
-		1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */; };
 		1DEDB23B1CC67C9000F5124A /* BlocksSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEDB23A1CC67C9000F5124A /* BlocksSection.swift */; };
+		1DEDB23D1CC6959D00F5124A /* ActionBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEDB23C1CC6959D00F5124A /* ActionBlock.swift */; };
 		3D1592671CBACA46009E8559 /* ProgramBlocksSupplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */; };
 		3D15926A1CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */; };
 		3D15926D1CC32ACB009E8559 /* PackageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */; };
@@ -117,10 +111,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1D409C651CC5EE58002E6B02 /* WaitBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitBlock.swift; sourceTree = "<group>"; };
-		1D409C671CC5EE89002E6B02 /* JumpBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpBlock.swift; sourceTree = "<group>"; };
-		1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressRedBlock.swift; sourceTree = "<group>"; };
-		1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressBlueBlock.swift; sourceTree = "<group>"; };
 		1D409C6D1CC5F45E002E6B02 /* NotSafeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotSafeBlock.swift; sourceTree = "<group>"; };
 		1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerBlockProtocol.swift; sourceTree = "<group>"; };
 		1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrashContainer.swift; sourceTree = "<group>"; };
@@ -132,7 +122,6 @@
 		1D69B6E31CB9FF3900C1FA04 /* MovableBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovableBlockProtocol.swift; sourceTree = "<group>"; };
 		1D69B6E51CBB896200C1FA04 /* NotBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotBlock.swift; sourceTree = "<group>"; };
 		1D7E23D61C9984F6003E7B75 /* TrashZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TrashZone.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TurnRightBlock.swift; sourceTree = "<group>"; };
 		1D8067371CC32E27003657EE /* HighlightableBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighlightableBlockProtocol.swift; sourceTree = "<group>"; };
 		1D934FE61CAD6AC0009F1FBA /* WhileBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhileBlock.swift; sourceTree = "<group>"; };
 		1DB4B0801C9516610010F727 /* Syntax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Syntax.swift; sourceTree = "<group>"; };
@@ -147,9 +136,8 @@
 		1DB4B0921C991FC30010F727 /* CodeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CodeBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B0941C9920480010F727 /* MainBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MainBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DB4B0961C9927170010F727 /* InsertionPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertionPosition.swift; sourceTree = "<group>"; };
-		1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ForwardBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TurnLeftBlock.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		1DEDB23A1CC67C9000F5124A /* BlocksSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlocksSection.swift; sourceTree = "<group>"; };
+		1DEDB23C1CC6959D00F5124A /* ActionBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionBlock.swift; sourceTree = "<group>"; };
 		3D1592661CBACA46009E8559 /* ProgramBlocksSupplier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramBlocksSupplier.swift; sourceTree = "<group>"; };
 		3D1592691CBACD2C009E8559 /* FinishedEditingProgramDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinishedEditingProgramDelegate.swift; sourceTree = "<group>"; };
 		3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorViewController.swift; sourceTree = "<group>"; };
@@ -411,14 +399,8 @@
 				1D7E23D61C9984F6003E7B75 /* TrashZone.swift */,
 				1DB4B08E1C9913C00010F727 /* BlockButton.swift */,
 				1DB4B0921C991FC30010F727 /* CodeBlock.swift */,
-				1DB4B0981C9935FE0010F727 /* ForwardBlock.swift */,
-				1D409C651CC5EE58002E6B02 /* WaitBlock.swift */,
-				1D409C671CC5EE89002E6B02 /* JumpBlock.swift */,
-				1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */,
 				1D409C6D1CC5F45E002E6B02 /* NotSafeBlock.swift */,
-				1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */,
-				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
-				1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */,
+				1DEDB23C1CC6959D00F5124A /* ActionBlock.swift */,
 				1DB4B0941C9920480010F727 /* MainBlock.swift */,
 				1DB4B0961C9927170010F727 /* InsertionPosition.swift */,
 				1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */,
@@ -638,6 +620,7 @@
 				BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */,
 				BF695B8D1CC3809B00532797 /* DoorNode.swift in Sources */,
 				BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */,
+				1DEDB23D1CC6959D00F5124A /* ActionBlock.swift in Sources */,
 				BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */,
 				1D69B6E21CB6B37E00C1FA04 /* IfBlock.swift in Sources */,
 				1DB4B08F1C9913C00010F727 /* BlockButton.swift in Sources */,
@@ -652,7 +635,6 @@
 				1D69B6D01CB3AF0600C1FA04 /* BoolOpBlock.swift in Sources */,
 				1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */,
 				1DB4B0931C991FC30010F727 /* CodeBlock.swift in Sources */,
-				1D7E23D91C9FC01D003E7B75 /* TurnRightBlock.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
 				BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */,
 				1D69B6C61CB2998B00C1FA04 /* ContainerBlockProtocol.swift in Sources */,
@@ -668,7 +650,6 @@
 				BF8E12A91C99AA9200B210C3 /* TitleViewController.swift in Sources */,
 				3D15926D1CC32ACB009E8559 /* PackageSelectorViewController.swift in Sources */,
 				1DB4B0971C9927170010F727 /* InsertionPosition.swift in Sources */,
-				1DB4B09B1C9938650010F727 /* TurnLeftBlock.swift in Sources */,
 				BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */,
 				BFFB1A3C1CABB56900C746CD /* ThumbnailPlayingMapViewController.swift in Sources */,
 				1D934FE71CAD6AC0009F1FBA /* WhileBlock.swift in Sources */,
@@ -677,7 +658,6 @@
 				BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */,
 				BF7F3CA31CBDDAB6004530F5 /* DefaultGameScorer.swift in Sources */,
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
-				1DB4B0991C9935FE0010F727 /* ForwardBlock.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
 				BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */,
 				3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */,
@@ -688,11 +668,8 @@
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */,
 				1D69B6D81CB5583600C1FA04 /* ObjectBlock.swift in Sources */,
-				1D409C6C1CC5EEE6002E6B02 /* PressBlueBlock.swift in Sources */,
 				1D409C6E1CC5F45E002E6B02 /* NotSafeBlock.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
-				1D409C681CC5EE89002E6B02 /* JumpBlock.swift in Sources */,
-				1D409C661CC5EE58002E6B02 /* WaitBlock.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
 				1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */,
 				1DB4B08D1C99073F0010F727 /* DropZone.swift in Sources */,
@@ -710,7 +687,6 @@
 				1DB4B0851C951E250010F727 /* AgentProtocol.swift in Sources */,
 				3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */,
 				1D69B6E61CBB896200C1FA04 /* NotBlock.swift in Sources */,
-				1D409C6A1CC5EEA6002E6B02 /* PressRedBlock.swift in Sources */,
 				1DB4B08B1C97FD940010F727 /* CodeBlocksScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
