@@ -56,7 +56,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         }
         addNodeToContent(programBlocks)
     }
-    
+
     private func resetTouches() {
         programBlocks.endHover()
         trashZone.unfocus()
