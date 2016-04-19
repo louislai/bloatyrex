@@ -70,7 +70,12 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         if let block = heldBlock {
             block.pickBlock(false, scale: getScale())
         }
-        touchesEnded(Set(), withEvent: nil)
+        if let block = movedBlock {
+            block.activateDropZone()
+        }
+        heldBlock = nil
+        movedBlock = nil
+        programBlocks.flushBlocks()
     }
 
     override func didMoveToView(view: SKView) {
