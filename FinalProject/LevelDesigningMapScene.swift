@@ -577,7 +577,7 @@ extension LevelDesigningMapScene {
         addChild(paletteLayer)
 
         let paletteLabel = SKLabelNode(text: "MAP COMPONENTS")
-        paletteLabel.fontName = GlobalConstants.Font.defaultName + "-Bold"
+        paletteLabel.fontName = GlobalConstants.Font.defaultNameBold
         paletteLabel.fontColor = GlobalConstants.Font.defaultGreen
         paletteLabel.position = DesigningMapConstants.Position.Palette.label
         addChild(paletteLabel)
