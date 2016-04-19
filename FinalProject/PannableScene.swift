@@ -55,15 +55,15 @@ class PannableScene: SKScene {
 
     /**
     Initialise the scene with a given size, and optional scale and overlay z position.
-
-    - parameter zoomLevel: is how far the camera is zoomed in, e.g. 1 is no zoom and 2 is 2x zoom.
-
-    - parameter zoomRangeFactor: denotes how much the zoom level can be adjusted. The default value of 2.0
-    allows the zoom to be a max 2.0 times larger than the original zoom level.
+    - parameter initialZoomLevel: how far the camera is zoomed in, e.g. 1 is no zoom,2 is 2x zoom.
+    - parameter overlayZPosition: the Z position of the overlay.
+    - parameter disableHorizontalPan: whether horizontal panning is disabled.
+    - parameter disableVerticalPan: whether vertital panning is disabled.
+    - parameter disableDoubleTap: whether the double tap recognizer to zoom is disabled.
     */
     init(size: CGSize, initialZoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
-        enableDoubleTap: Bool = true, disableHorizontalPan: Bool = false,
-        disableVerticalPan: Bool = false, disableDoubleTap: Bool = false) {
+        disableHorizontalPan: Bool = false, disableVerticalPan: Bool = false,
+        disableDoubleTap: Bool = false) {
         initialScale = 1.0 / initialZoomLevel
         minimumScale = initialScale / 2.0
         maximumScale = initialScale * 2.0
@@ -221,7 +221,8 @@ class PannableScene: SKScene {
                 let minimumAllowedVerticalViewpointDisplacement =
                     minimumAllowedVerticalViewpointPosition - viewpoint.position.y
 
-                verticalDisplacement = min(-minimumAllowedVerticalViewpointDisplacement, verticalDisplacement)
+                verticalDisplacement = min(-minimumAllowedVerticalViewpointDisplacement,
+                                           verticalDisplacement)
             } else if verticalDisplacement < 0 {
                 let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
                 verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
