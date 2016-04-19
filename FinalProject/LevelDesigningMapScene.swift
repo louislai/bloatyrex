@@ -743,7 +743,6 @@ extension LevelDesigningMapScene {
                     row: agentRow, column: agentColumn)
 
         // Update view
-        //let blockNode = SKSpriteNode(texture: newTexture, size: blockSize)
         setBlock(agentNode, row: agentRow, column: agentColumn)
     }
 
