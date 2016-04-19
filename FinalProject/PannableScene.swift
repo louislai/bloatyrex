@@ -41,7 +41,7 @@ import SpriteKit
 ///
 
 struct PannableSceneConstants {
-    static let verticalPanBuffer: CGFloat = 100.0
+    static let verticalPanBuffer: CGFloat = 200.0
     static let horizontalPanBuffer: CGFloat = 50.0
 }
 
@@ -122,6 +122,7 @@ class PannableScene: SKScene {
         var boundedScale = min(scale, maximumScale)
         boundedScale = max(boundedScale, minimumScale)
         viewpoint.setScale(boundedScale)
+        currentScale = boundedScale
     }
 
     /**
@@ -169,8 +170,8 @@ class PannableScene: SKScene {
                 horizontalDisplacement = 0
             } else if horizontalDisplacement > 0 {
                 let leftBoundaryOfContent = contentCenter.x - contentFrame.width / 2
-                let viewpointDistanceToLeftBoundaryOfContent = viewpoint.position.x -
-                    leftBoundaryOfContent
+                let viewpointDistanceToLeftBoundaryOfContent = (viewpoint.position.x -
+                    leftBoundaryOfContent) / currentScale
                 let viewpointDistanceToLeftBoundary = viewpoint.position.x
                 var distanceToViewLeftmostContent = viewpointDistanceToLeftBoundaryOfContent -
                     viewpointDistanceToLeftBoundary
@@ -189,8 +190,8 @@ class PannableScene: SKScene {
                     horizontalDisplacement)
             } else if horizontalDisplacement < 0 {
                 let rightBoundaryOfContent = contentCenter.x + contentFrame.width / 2
-                let viewpointDistanceToRightBoundaryOfContent = rightBoundaryOfContent -
-                    viewpoint.position.x
+                let viewpointDistanceToRightBoundaryOfContent = (rightBoundaryOfContent -
+                    viewpoint.position.x) / currentScale
                 let viewpointDistanceToRightBoundary = self.size.width - viewpoint.position.x
                 var distanceToViewRightmostContent = viewpointDistanceToRightBoundaryOfContent -
                 viewpointDistanceToRightBoundary
@@ -213,18 +214,18 @@ class PannableScene: SKScene {
             if verticalPanDisabled {
                 verticalDisplacement = 0
             } else if verticalDisplacement > 0 {
-                let distanceToBottomBoundaryOfContent = contentFrame.height
+                let bottomBoundaryOfContent = contentCenter.y - contentFrame.height / 2
+                let distanceToBottomBoundaryOfContent = bottomBoundaryOfContent
                     - viewpoint.position.y
                 let distanceToBottomBoundary = self.size.height - viewpoint.position.y
-                var distanceToViewContentBottom = distanceToBottomBoundaryOfContent -
-                    distanceToBottomBoundary
+                var distanceToViewContentBottom = (distanceToBottomBoundaryOfContent -
+                    distanceToBottomBoundary) / currentScale
                 distanceToViewContentBottom = max(distanceToViewContentBottom, 0)
 
-                // topmost position of viewpoint allowed so as to not pan out of visible content
-                var minimumAllowedVerticalViewpointPosition = originalViewpointPosition.y -
-                    distanceToViewContentBottom
+                // bottommost position of viewpoint allowed so as to not pan out of visible content
+                var minimumAllowedVerticalViewpointPosition = bottomBoundaryOfContent
                 if distanceToViewContentBottom > 0 {
-                    minimumAllowedVerticalViewpointPosition -=
+                    minimumAllowedVerticalViewpointPosition +=
                         PannableSceneConstants.verticalPanBuffer
                 }
                 let minimumAllowedVerticalViewpointDisplacement =
@@ -233,8 +234,24 @@ class PannableScene: SKScene {
                 verticalDisplacement = min(-minimumAllowedVerticalViewpointDisplacement,
                                            verticalDisplacement)
             } else if verticalDisplacement < 0 {
-                let distanceToTopBoundary = self.size.height / 2 - viewpoint.position.y
-                verticalDisplacement = -min(distanceToTopBoundary, -verticalDisplacement)
+                let topBoundaryOfContent = contentCenter.y + contentFrame.height / 2
+                let distanceToTopBoundaryOfContent = topBoundaryOfContent - viewpoint.position.y
+
+                let distanceToViewTopmostContent = max(distanceToTopBoundaryOfContent, 0)
+
+                // topmost position of viewpoint allowed so as to not pan out of visible content
+                var maximumAllowedVerticalViewpointPosition = topBoundaryOfContent
+                if distanceToViewTopmostContent > 0 {
+                    maximumAllowedVerticalViewpointPosition -=
+                        PannableSceneConstants.verticalPanBuffer
+                }
+
+                var maximumAllowedVerticalViewpointDisplacement =
+                    maximumAllowedVerticalViewpointPosition - viewpoint.position.y
+                maximumAllowedVerticalViewpointDisplacement =
+                    max(maximumAllowedVerticalViewpointDisplacement, 0)
+                verticalDisplacement = max(-maximumAllowedVerticalViewpointDisplacement,
+                                           verticalDisplacement)
             }
 
             // viewpoint moves in opposite direction from pan to simulate movement
