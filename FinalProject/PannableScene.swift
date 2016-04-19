@@ -183,8 +183,7 @@ class PannableScene: SKScene {
                 var minimumAllowedHorizontalViewpointPosition = originalViewpointPosition.x -
                     distanceToViewLeftmostContent
                 if distanceToViewLeftmostContent > 0 {
-                    minimumAllowedHorizontalViewpointPosition -=
-                        PannableSceneConstants.horizontalPanBuffer
+                    minimumAllowedHorizontalViewpointPosition -= horizontalPanBuffer
                 }
                 let minimumAllowedHorizontalDisplacement =
                     minimumAllowedHorizontalViewpointPosition - viewpoint.position.x
@@ -203,8 +202,7 @@ class PannableScene: SKScene {
                 var maximumAllowedHorizontalViewpointPosition = originalViewpointPosition.x +
                 distanceToViewRightmostContent
                 if distanceToViewRightmostContent > 0 {
-                    maximumAllowedHorizontalViewpointPosition +=
-                        PannableSceneConstants.horizontalPanBuffer
+                    maximumAllowedHorizontalViewpointPosition += horizontalPanBuffer
                 }
                 var maximumAllowedHorizontalViewpointDisplacement =
                     maximumAllowedHorizontalViewpointPosition - viewpoint.position.x
@@ -217,15 +215,10 @@ class PannableScene: SKScene {
                 verticalDisplacement = 0
             } else if verticalDisplacement > 0 {
                 let bottomBoundaryOfContent = contentCenter.y - contentFrame.height / 2
-                let distanceToBottomBoundaryOfContent = bottomBoundaryOfContent
-                    - viewpoint.position.y
-                let distanceToBottomBoundary = self.size.height - viewpoint.position.y
-                var distanceToViewContentBottom = (distanceToBottomBoundaryOfContent -
-                    distanceToBottomBoundary) / currentScale
-                distanceToViewContentBottom = max(distanceToViewContentBottom, 0)
 
                 // bottommost position of viewpoint allowed so as to not pan out of visible content
-                var minimumAllowedVerticalViewpointPosition = bottomBoundaryOfContent - PannableSceneConstants.verticalPanBuffer * currentScale
+                let minimumAllowedVerticalViewpointPosition = bottomBoundaryOfContent -
+                    verticalPanBuffer * currentScale
                 let minimumAllowedVerticalViewpointDisplacement =
                     minimumAllowedVerticalViewpointPosition - viewpoint.position.y
 
@@ -233,13 +226,10 @@ class PannableScene: SKScene {
                                            verticalDisplacement)
             } else if verticalDisplacement < 0 {
                 let topBoundaryOfContent = contentCenter.y + contentFrame.height / 2
-                let distanceToTopBoundaryOfContent = topBoundaryOfContent - viewpoint.position.y
-
-                let distanceToViewTopmostContent = max(distanceToTopBoundaryOfContent, 0)
 
                 // topmost position of viewpoint allowed so as to not pan out of visible content
-                var maximumAllowedVerticalViewpointPosition = topBoundaryOfContent + PannableSceneConstants.verticalPanBuffer * currentScale
-
+                let maximumAllowedVerticalViewpointPosition = topBoundaryOfContent +
+                    verticalPanBuffer * currentScale
 
                 var maximumAllowedVerticalViewpointDisplacement =
                     maximumAllowedVerticalViewpointPosition - viewpoint.position.y
