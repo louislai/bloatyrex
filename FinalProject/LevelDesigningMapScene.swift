@@ -15,6 +15,7 @@ class LevelDesigningMapScene: SKScene {
     let blocksLayer = SKNode()
     let unitsLayer = SKNode()
     let paletteLayer = SKNode()
+    let summaryLayer = SKNode()
     let actionsLayer = SKNode()
     private var numberOfRows: Int {
         return map.numberOfRows
@@ -38,6 +39,7 @@ class LevelDesigningMapScene: SKScene {
     var numberOfMovesLabel: SKLabelNode!
     var allMapUnitNodes: [MapUnitNode]!
     var mapUnitTypeIndices: [MapUnitType: Int]!
+    var nameToSummaryNodes: [String: SKSpriteNode]!
 
     override init(size: CGSize) {
         super.init(size: size)
@@ -515,6 +517,11 @@ extension LevelDesigningMapScene {
         paletteLabel.fontColor = GlobalConstants.Font.defaultGreen
         paletteLabel.position = DesigningMapConstants.Position.Palette.label
         addChild(paletteLabel)
+        
+        summaryLayer.position = DesigningMapConstants.Position.Palette.summary
+        addChild(summaryLayer)
+        
+        nameToSummaryNodes = [String: SKSpriteNode]()
     }
 
     func addPalette() {
@@ -546,6 +553,13 @@ extension LevelDesigningMapScene {
         spriteNode.size = DesigningMapConstants.Size.Palette.sprite
         spriteNode.name = name
         paletteNode.addChild(spriteNode)
+        
+        let summaryBackgroundNode = SKSpriteNode(color: DesigningMapConstants.defaultGray,
+                                                 size: DesigningMapConstants.Size.Palette.summary)
+        let summaryNode = SKSpriteNode(imageNamed: "\(name)-summary")
+        summaryNode.size = DesigningMapConstants.Size.Palette.summary
+        summaryBackgroundNode.addChild(summaryNode)
+        nameToSummaryNodes[name] = summaryBackgroundNode
     }
 
     func updateCurrentItemSelected(mapUnitType: MapUnitType, nodeName: String) {
@@ -559,6 +573,13 @@ extension LevelDesigningMapScene {
                 node.alpha = DesigningMapConstants.Alpha.translucent
             }
         }
+        setSummary(nodeName)
+    }
+    
+    func setSummary(nodeName: String) {
+        let summaryNode = nameToSummaryNodes[nodeName]!
+        summaryLayer.removeAllChildren()
+        summaryLayer.addChild(summaryNode)
     }
 }
 

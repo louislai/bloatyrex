@@ -42,6 +42,7 @@ struct DesigningMapConstants {
         struct Palette {
             static let layer = CGPoint(x: 250, y: 150)
             static let label = CGPoint(x: 250, y: 280)
+            static let summary = CGPoint(x: 250, y: -100)
         }
         
         struct Action {
@@ -74,6 +75,7 @@ struct DesigningMapConstants {
             static let cell = CGSize(width: 50, height: 50)
             static let background = CGSize(width: CGFloat(Dimension.paletteNumberOfColumns) * cell.width,
                                            height: CGFloat(Dimension.paletteNumberOfRows) * cell.height)
+            static let summary = CGSize(width: 400, height: 120)
         }
         
         struct Action {
