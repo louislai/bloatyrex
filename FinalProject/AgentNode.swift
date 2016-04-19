@@ -313,7 +313,7 @@ class AgentNode: MapUnitNode {
         guard let unit = unit else {
             return false
         }
-        let invalidTypes: [MapUnitType] = [.Agent, .Wall, .Hole, .Door, .Monster]
+        let invalidTypes: [MapUnitType] = [.Agent, .Wall, .Hole, .Door, .DoorLeft, .DoorRight, .Monster]
         return !invalidTypes.contains(unit.type)
     }
 
