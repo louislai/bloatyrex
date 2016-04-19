@@ -31,6 +31,27 @@ class FilesArchive: NSObject {
         return mapFileNames
     }
 
+    // Returns: All the files' names in the given package's directory
+    func getFileNamesFromPackage(packageName: String) -> [String] {
+        var filesInDirectory = [NSString]()
+        if let resourceURL = NSBundle.mainBundle().resourceURL {
+            let packageURL = resourceURL.URLByAppendingPathComponent("Prepackaged Levels/\(packageName)")
+            do {
+                let URLsInDirectory = try NSFileManager.defaultManager().contentsOfDirectoryAtURL(packageURL, includingPropertiesForKeys: nil, options: [])
+                filesInDirectory = URLsInDirectory.map {
+                    $0.lastPathComponent!
+                }
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+        let packageMapFiles = filesInDirectory.filter { ($0 as NSString).pathExtension == "map" }
+        let packageMapFileNames = packageMapFiles.map {
+            ($0 as NSString).stringByDeletingPathExtension
+        }.sort()
+        return packageMapFileNames
+    }
+
     // Save Map into a file with given name.
     // Returns: true if save is successful, false otherwise.
     func saveToFile(map: Map, name: String) -> Bool {
@@ -65,6 +86,29 @@ class FilesArchive: NSObject {
                 return nil
         }
         return map
+    }
+
+    // Reconstruct PresetMap for a given filename and package name
+    // Returns: PresetMap if filename and package name exist, nil otherwise
+    func loadFromPackageFile(fileName: String, packageName: String) -> PresetMap? {
+        if let resourceURL = NSBundle.mainBundle().resourceURL {
+            let fileURL = resourceURL.URLByAppendingPathComponent(
+                "Prepackaged Levels/\(packageName)/\(fileName).map")
+            if let filePath = fileURL.path {
+                guard let data = NSFileManager.defaultManager().contentsAtPath(filePath) else {
+                    return nil
+                }
+                let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+                guard let map = unarchiver.decodeObject() as? PresetMap else {
+                    return nil
+                }
+                return map
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
     }
 
     // Remove the map file from the directory
