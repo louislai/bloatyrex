@@ -11,7 +11,7 @@
 		1D409C681CC5EE89002E6B02 /* JumpBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C671CC5EE89002E6B02 /* JumpBlock.swift */; };
 		1D409C6A1CC5EEA6002E6B02 /* PressRedBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */; };
 		1D409C6C1CC5EEE6002E6B02 /* PressBlueBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */; };
-		1D409C6E1CC5F45E002E6B02 /* SafeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C6D1CC5F45E002E6B02 /* SafeBlock.swift */; };
+		1D409C6E1CC5F45E002E6B02 /* NotSafeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C6D1CC5F45E002E6B02 /* NotSafeBlock.swift */; };
 		1D409C701CC6042A002E6B02 /* LeftDoorBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C6F1CC6042A002E6B02 /* LeftDoorBlock.swift */; };
 		1D409C721CC60464002E6B02 /* RightDoorBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D409C711CC60464002E6B02 /* RightDoorBlock.swift */; };
 		1D69B6C61CB2998B00C1FA04 /* ContainerBlockProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */; };
@@ -120,7 +120,7 @@
 		1D409C671CC5EE89002E6B02 /* JumpBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JumpBlock.swift; sourceTree = "<group>"; };
 		1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressRedBlock.swift; sourceTree = "<group>"; };
 		1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PressBlueBlock.swift; sourceTree = "<group>"; };
-		1D409C6D1CC5F45E002E6B02 /* SafeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeBlock.swift; sourceTree = "<group>"; };
+		1D409C6D1CC5F45E002E6B02 /* NotSafeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotSafeBlock.swift; sourceTree = "<group>"; };
 		1D409C6F1CC6042A002E6B02 /* LeftDoorBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftDoorBlock.swift; sourceTree = "<group>"; };
 		1D409C711CC60464002E6B02 /* RightDoorBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightDoorBlock.swift; sourceTree = "<group>"; };
 		1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerBlockProtocol.swift; sourceTree = "<group>"; };
@@ -401,7 +401,7 @@
 				1D409C6F1CC6042A002E6B02 /* LeftDoorBlock.swift */,
 				1D409C711CC60464002E6B02 /* RightDoorBlock.swift */,
 				1D409C6B1CC5EEE6002E6B02 /* PressBlueBlock.swift */,
-				1D409C6D1CC5F45E002E6B02 /* SafeBlock.swift */,
+				1D409C6D1CC5F45E002E6B02 /* NotSafeBlock.swift */,
 				1D409C691CC5EEA6002E6B02 /* PressRedBlock.swift */,
 				1DB4B09A1C9938650010F727 /* TurnLeftBlock.swift */,
 				1D7E23D81C9FC01D003E7B75 /* TurnRightBlock.swift */,
@@ -674,7 +674,7 @@
 				BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */,
 				1D69B6D81CB5583600C1FA04 /* ObjectBlock.swift in Sources */,
 				1D409C6C1CC5EEE6002E6B02 /* PressBlueBlock.swift in Sources */,
-				1D409C6E1CC5F45E002E6B02 /* SafeBlock.swift in Sources */,
+				1D409C6E1CC5F45E002E6B02 /* NotSafeBlock.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1D69B6DE1CB6A15C00C1FA04 /* HoleBlock.swift in Sources */,
 				1D409C681CC5EE89002E6B02 /* JumpBlock.swift in Sources */,

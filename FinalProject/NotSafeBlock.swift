@@ -1,5 +1,5 @@
 //
-//  SafeBlock.swift
+//  NotSafeBlock.swift
 //  FinalProject
 //
 //  Created by Koh Wai Kit on 19/4/16.
@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class SafeBlock: BoolOpBlock {
+class NotSafeBlock: BoolOpBlock {
     let blockBody: SKSpriteNode
     
     override var objectZones: [DropZone] {
@@ -16,11 +16,11 @@ class SafeBlock: BoolOpBlock {
     }
     
     override func getBlockPredicate() -> Predicate? {
-        return Predicate.Safe()
+        return Predicate.NotSafe()
     }
     
     override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
-        blockBody = SKSpriteNode(imageNamed: "safe-block")
+        blockBody = SKSpriteNode(imageNamed: "not-safe-block")
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)
         super.init(containingBlock: containingBlock, containingZone: containingZone)
         addChild(blockBody)

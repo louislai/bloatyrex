@@ -135,8 +135,8 @@ class Interpreter {
             return !evaluatePredicate(p, map: map, agent: agent)
         case .CompareObservation(let observation, let object):
             return observedObject(observation, map: map, agent: agent) == object
-        case .Safe():
-            return agent.isNextStepSafe()
+        case .NotSafe():
+            return !agent.isNextStepSafe()
         }
     }
 
