@@ -42,8 +42,9 @@ class BlockButton: SKNode {
     init(imageNamed: String, blockType: BlockType, blockCategory: BlockCategory) {
         button = SKSpriteNode(imageNamed: imageNamed)
         block = SKSpriteNode(imageNamed: imageNamed)
-        button.size = CGSize(width: 64, height: 64)
-        block.size = CGSize(width: 64, height: 64)
+        let size = GlobalConstants.CodeBlocks.blockSize
+        button.size = CGSize(width: size, height: size)
+        block.size = CGSize(width: size, height: size)
         block.hidden = true
         self.blockType = blockType
         self.blockCategory = blockCategory

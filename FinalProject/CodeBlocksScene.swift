@@ -16,6 +16,10 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         case Idle
     }
 
+    let actionSection = BlocksSection(title: "Actions", color: SKColor.redColor())
+    let controlSection = BlocksSection(title: "Control", color: SKColor.redColor())
+    let conditionalSection = BlocksSection(title: "Conditionals", color: SKColor.purpleColor())
+    let objectSection = BlocksSection(title: "Objects", color: SKColor.greenColor())
     let upButton = BlockButton(imageNamed: "up-block", blockType: BlockType.Forward, blockCategory: BlockCategory.Action)
     let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockType: BlockType.TurnLeft, blockCategory: BlockCategory.Action)
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockType: BlockType.TurnRight, blockCategory: BlockCategory.Action)
@@ -59,7 +63,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         programBlocks = blocks
         programBlocks.removeFromParent()
         if editEnabled {
-            programBlocks.position = CGPoint(x: size.width * 0.4, y: size.height)
+            programBlocks.position = CGPoint(x: size.width * -0.1, y: size.height)
         } else {
             programBlocks.position = CGPoint(x: size.width * 0.1, y: size.height)
         }
@@ -84,50 +88,49 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         super.didMoveToView(view)
         backgroundColor = UIColor.groupTableViewBackgroundColor()
         if editEnabled {
-            upButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.4)
-            turnLeftButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.4)
-            turnRightButton.position = CGPoint(x: size.width * -0.2, y: size.height * 0.4)
-            waitButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.3)
-            jumpButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.3)
-            pressBlueButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.2)
-            pressRedButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.2)
-            whileButton.position = CGPoint(x: size.width * -0.3, y: size.height * 0.1)
-            ifButton.position = CGPoint(x: size.width * -0.4, y: size.height * 0.1)
-            eyesButton.position = CGPoint(x: size.width * -0.4, y: 0)
-            notSafeButton.position = CGPoint(x: size.width * -0.3, y: 0)
-            notButton.position = CGPoint(x: size.width * -0.2, y: 0)
-            toiletButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.1)
-            wallButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.1)
-            emptySpaceButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.1)
-            leftCorrectButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.3)
-            holeButton.position = CGPoint(x: size.width * -0.2, y: size.height * -0.2)
-            woodButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.2)
-            monsterButton.position = CGPoint(x: size.width * -0.4, y: size.height * -0.2)
-            rightCorrectButton.position = CGPoint(x: size.width * -0.3, y: size.height * -0.3)
-            trashZone.position = CGPoint(x: size.width * 0.15, y: size.height * -0.45)
-            turnLeftButton.zPosition = 10
-            upButton.zPosition = 10
-            addNodeToOverlay(toiletButton)
-            addNodeToOverlay(wallButton)
-            addNodeToOverlay(holeButton)
-            addNodeToOverlay(woodButton)
-            addNodeToOverlay(turnLeftButton)
-            addNodeToOverlay(whileButton)
-            addNodeToOverlay(upButton)
-            addNodeToOverlay(eyesButton)
-            addNodeToOverlay(turnRightButton)
-            addNodeToOverlay(ifButton)
-            addNodeToOverlay(notButton)
-            addNodeToOverlay(notSafeButton)
+            trashZone.position = CGPoint(x: size.width * -0.15, y: size.height * -0.45)
+
             addNodeToOverlay(trashZone)
-            addNodeToOverlay(waitButton)
-            addNodeToOverlay(jumpButton)
-            addNodeToOverlay(pressRedButton)
-            addNodeToOverlay(pressBlueButton)
-            addNodeToOverlay(rightCorrectButton)
-            addNodeToOverlay(leftCorrectButton)
-            addNodeToOverlay(emptySpaceButton)
-            addNodeToOverlay(monsterButton)
+            
+            let blockSectionsX = self.frame.width / 2 - GlobalConstants.CodeBlocks.blockSectionWidth
+            let actionSectionY = self.frame.height / 2 - GlobalConstants.CodeBlocks.blockSectionTitleHeight
+            actionSection.position = CGPoint(x: blockSectionsX, y: actionSectionY)
+            addNodeToOverlay(actionSection)
+            actionSection.addButton(upButton)
+            actionSection.addButton(turnLeftButton)
+            actionSection.addButton(turnRightButton)
+            actionSection.addButton(waitButton)
+            actionSection.addButton(pressRedButton)
+            actionSection.addButton(pressBlueButton)
+            actionSection.addButton(jumpButton)
+            
+            let actionSectionFrame = actionSection.calculateAccumulatedFrame()
+            let controlSectionY = -actionSectionFrame.height + actionSectionY - GlobalConstants.CodeBlocks.blockSectionMargin
+            controlSection.position = CGPoint(x: blockSectionsX, y: controlSectionY)
+            addNodeToOverlay(controlSection)
+            controlSection.addButton(whileButton)
+            controlSection.addButton(ifButton)
+            
+            let controlSectionFrame = controlSection.calculateAccumulatedFrame()
+            let conditionalSectionY = -controlSectionFrame.height + controlSectionY - GlobalConstants.CodeBlocks.blockSectionMargin
+            conditionalSection.position = CGPoint(x: blockSectionsX, y: conditionalSectionY)
+            addNodeToOverlay(conditionalSection)
+            conditionalSection.addButton(eyesButton)
+            conditionalSection.addButton(notButton)
+            conditionalSection.addButton(notSafeButton)
+            
+            let conditionalSectionFrame = conditionalSection.calculateAccumulatedFrame()
+            let objectSectionY = -conditionalSectionFrame.height + conditionalSectionY - GlobalConstants.CodeBlocks.blockSectionMargin
+            objectSection.position = CGPoint(x: blockSectionsX, y: objectSectionY)
+            addNodeToOverlay(objectSection)
+            objectSection.addButton(toiletButton)
+            objectSection.addButton(wallButton)
+            objectSection.addButton(emptySpaceButton)
+            objectSection.addButton(monsterButton)
+            objectSection.addButton(woodButton)
+            objectSection.addButton(holeButton)
+            objectSection.addButton(leftCorrectButton)
+            objectSection.addButton(rightCorrectButton)
         }
         programBlocks.position = CGPoint(x: size.width * 0.3, y: size.height)
         addNodeToContent(programBlocks)
@@ -141,70 +144,22 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         let locationInOverlay = touch.locationInNode(overlay)
         let locationInContent = touch.locationInNode(content)
         let scale = 1/getScale()
-
-        if upButton.containsPoint(locationInOverlay) {
-            heldBlock = upButton
-            pressState = .AddingBlock(upButton.blockCategory)
-        } else if turnLeftButton.containsPoint(locationInOverlay) {
-            heldBlock = turnLeftButton
-            pressState = .AddingBlock(turnLeftButton.blockCategory)
-        } else if turnRightButton.containsPoint(locationInOverlay) {
-            heldBlock = turnRightButton
-            pressState = .AddingBlock(turnRightButton.blockCategory)
-        } else if whileButton.containsPoint(locationInOverlay) {
-            heldBlock = whileButton
-            pressState = .AddingBlock(whileButton.blockCategory)
-        } else if ifButton.containsPoint(locationInOverlay) {
-            heldBlock = ifButton
-            pressState = .AddingBlock(ifButton.blockCategory)
-        } else if eyesButton.containsPoint(locationInOverlay) {
-            heldBlock = eyesButton
-            pressState = .AddingBlock(eyesButton.blockCategory)
-        } else if notButton.containsPoint(locationInOverlay) {
-            heldBlock = notButton
-            pressState = .AddingBlock(notButton.blockCategory)
-        } else if toiletButton.containsPoint(locationInOverlay) {
-            heldBlock = toiletButton
-            pressState = .AddingBlock(toiletButton.blockCategory)
-        } else if wallButton.containsPoint(locationInOverlay) {
-            heldBlock = wallButton
-            pressState = .AddingBlock(wallButton.blockCategory)
-        } else if holeButton.containsPoint(locationInOverlay) {
-            heldBlock = holeButton
-            pressState = .AddingBlock(holeButton.blockCategory)
-        } else if woodButton.containsPoint(locationInOverlay) {
-            heldBlock = woodButton
-            pressState = .AddingBlock(woodButton.blockCategory)
-        } else if waitButton.containsPoint(locationInOverlay) {
-            heldBlock = waitButton
-            pressState = .AddingBlock(waitButton.blockCategory)
-        } else if jumpButton.containsPoint(locationInOverlay) {
-            heldBlock = jumpButton
-            pressState = .AddingBlock(jumpButton.blockCategory)
-        } else if pressRedButton.containsPoint(locationInOverlay) {
-            heldBlock = pressRedButton
-            pressState = .AddingBlock(pressRedButton.blockCategory)
-        } else if pressBlueButton.containsPoint(locationInOverlay) {
-            heldBlock = pressBlueButton
-            pressState = .AddingBlock(pressBlueButton.blockCategory)
-        } else if notSafeButton.containsPoint(locationInOverlay) {
-            heldBlock = notSafeButton
-            pressState = .AddingBlock(notSafeButton.blockCategory)
-        } else if rightCorrectButton.containsPoint(locationInOverlay) {
-            heldBlock = rightCorrectButton
-            pressState = .AddingBlock(rightCorrectButton.blockCategory)
-        } else if leftCorrectButton.containsPoint(locationInOverlay) {
-            heldBlock = leftCorrectButton
-            pressState = .AddingBlock(leftCorrectButton.blockCategory)
-        } else if emptySpaceButton.containsPoint(locationInOverlay) {
-            heldBlock = emptySpaceButton
-            pressState = .AddingBlock(emptySpaceButton.blockCategory)
-        } else if monsterButton.containsPoint(locationInOverlay) {
-            heldBlock = monsterButton
-            pressState = .AddingBlock(monsterButton.blockCategory)
+        
+        if actionSection.containsPoint(locationInOverlay) {
+            heldBlock = actionSection.getButton(locationInOverlay)
+        } else if controlSection.containsPoint(locationInOverlay) {
+            heldBlock = controlSection.getButton(locationInOverlay)
+        } else if conditionalSection.containsPoint(locationInOverlay) {
+            heldBlock = conditionalSection.getButton(locationInOverlay)
+        } else if objectSection.containsPoint(locationInOverlay) {
+            heldBlock = objectSection.getButton(locationInOverlay)
         }
 
-        heldBlock?.pickBlock(true, scale: scale)
+        if let block = heldBlock {
+            pressState = .AddingBlock(block.blockCategory)
+            block.pickBlock(true, scale: scale)
+        }
+        
 
         if programBlocks.containsPoint(locationInContent) {
             movedBlock = programBlocks.getBlock(locationInContent)
@@ -273,19 +228,19 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                 if let insertionContainer = insertionPosition.container {
                     switch block.blockType {
                     case .Forward:
-                        insertionContainer.insertBlock(ForwardBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getForwardBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .TurnLeft:
-                        insertionContainer.insertBlock(TurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getTurnLeftBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .TurnRight:
-                        insertionContainer.insertBlock(TurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getTurnRightBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .Wait:
-                        insertionContainer.insertBlock(WaitBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getWaitBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .Jump:
-                        insertionContainer.insertBlock(JumpBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getJumpBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .PressRed:
-                        insertionContainer.insertBlock(PressRedBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getPressRedBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .PressBlue:
-                        insertionContainer.insertBlock(PressBlueBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
+                        insertionContainer.insertBlock(ActionBlock.getPressBlueBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .While:
                         insertionContainer.insertBlock(WhileBlock(containingBlock: insertionContainer), insertionPosition: insertionPosition)
                     case .If:
@@ -304,35 +259,35 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
                         }
                     case .Toilet:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(ToiletBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getToiletBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Hole:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(HoleBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getHoleBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Wall:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(WallBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getWallBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Wood:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(WoodBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getWoodBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .RightCorrect:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(RightDoorBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getRightDoorBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .LeftCorrect:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(LeftDoorBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getLeftDoorBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Empty:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(EmptySpaceBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getEmptySpaceBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     case .Monster:
                         if let zone = insertionPosition.zone {
-                            zone.insertObjectBlock(MonsterBlock(containingBlock: insertionContainer, containingZone: zone))
+                            zone.insertObjectBlock(ObjectBlock.getMonsterBlock(containingBlock: insertionContainer, containingZone: zone))
                         }
                     default:
                         break
