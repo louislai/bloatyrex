@@ -15,6 +15,7 @@ class PlayingMapViewController: UIViewController {
     var scene: PlayingMapScene!
     var levelName: String!
     weak var programSupplier: ProgramSupplier!
+    var fromProgrammingView = false
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -29,6 +30,9 @@ class PlayingMapViewController: UIViewController {
 
         // Present the scene.
         skView.presentScene(newScene())
+        if fromProgrammingView {
+            resetAndRun()
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -84,7 +88,7 @@ extension PlayingMapViewController {
 
     func resetAndRun() {
         reset()
-        let delay = (Int64(NSEC_PER_SEC))
+        let delay = Int64(NSEC_PER_SEC)/Int64(3)
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
             self.scene.run()
         })

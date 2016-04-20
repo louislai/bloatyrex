@@ -12,6 +12,7 @@ class PlayingViewController: UIViewController {
     var map: Map!
     var levelName = GlobalConstants.customLevelName
     var packageName: String?
+    var fromProgrammingView = false
 
     @IBAction func programmingViewTapped(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.programmingViewController)
@@ -69,6 +70,7 @@ class PlayingViewController: UIViewController {
             destination.map = map
             destination.programSupplier = self
             destination.levelName = levelName
+            destination.fromProgrammingView = true
             if let packageName = packageName {
                 destination.levelName = "\(packageName) - \(levelName)"
             }

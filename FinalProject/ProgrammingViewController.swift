@@ -24,6 +24,7 @@ class ProgrammingViewController: UIViewController {
         playingViewController.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()
         playingViewController.levelName = levelName
         playingViewController.packageName = packageName
+        playingViewController.fromProgrammingView = true
         scaleToDisplay = codeBlocksScaleSupplier.retrieveScale()
         if let scaleToDisplay = scaleToDisplay {
             playingViewController.scaleToDisplay = scaleToDisplay
