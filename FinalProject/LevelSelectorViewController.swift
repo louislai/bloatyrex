@@ -158,7 +158,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             return UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
         }
     }
-    
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
             return 100
@@ -166,7 +166,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             return 10
         }
     }
-    
+
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
             return 50
