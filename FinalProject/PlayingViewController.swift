@@ -12,6 +12,7 @@ class PlayingViewController: UIViewController {
     var map: Map!
     var levelName = GlobalConstants.customLevelName
     var packageName: String?
+    var fromProgrammingView = false
 
     @IBAction func programmingViewTapped(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.programmingViewController)
@@ -68,6 +69,11 @@ class PlayingViewController: UIViewController {
         if let destination = segue.destinationViewController as? PlayingMapViewController {
             destination.map = map
             destination.programSupplier = self
+            destination.levelName = levelName
+            destination.fromProgrammingView = fromProgrammingView
+            if let packageName = packageName {
+                destination.levelName = "\(packageName) - \(levelName)"
+            }
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             destination.editEnabled = false
             codeBlocksDisplay = destination
@@ -175,7 +181,7 @@ class PlayingViewController: UIViewController {
 
     private func showNextStage() {
         retrieveNextStage()
-        guard let nextPackage = nextPackage, nextLevel = nextLevel else {
+        guard let _ = nextPackage, _ = nextLevel else {
             return
         }
         nextStageButton.hidden = false

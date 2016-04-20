@@ -10,7 +10,7 @@ import SpriteKit
 
 protocol MovableBlockProtocol: class {
     var position: CGPoint { get set }
-    
+
     var zPosition: CGFloat { get set }
 
     var containingBlock: ContainerBlockProtocol { get set }

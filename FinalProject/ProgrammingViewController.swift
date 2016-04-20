@@ -24,6 +24,7 @@ class ProgrammingViewController: UIViewController {
         playingViewController.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()
         playingViewController.levelName = levelName
         playingViewController.packageName = packageName
+        playingViewController.fromProgrammingView = true
         scaleToDisplay = codeBlocksScaleSupplier.retrieveScale()
         if let scaleToDisplay = scaleToDisplay {
             playingViewController.scaleToDisplay = scaleToDisplay
@@ -41,6 +42,10 @@ class ProgrammingViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? ThumbnailPlayingMapViewController {
             destination.map = map
+            destination.levelName = levelName
+            if let packageName = packageName {
+                destination.levelName = "\(packageName) - \(levelName)"
+            }
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             destination.editEnabled = true
             destination.programBlocksToLoad = storedProgramBlocks
