@@ -11,32 +11,8 @@ import UIKit
 class TitleViewController: UIViewController {
     var leftRandomTileGenerator: UIView!
     var rightRandomTileGenerator: UIView!
-    let upButton = UIImage(named: "up-block")!
-    let turnLeftButton = UIImage(named: "turn-left-block")!
-    let turnRightButton = UIImage(named: "turn-right-block")!
-    let waitButton = UIImage(named: "wait-block")!
-    let jumpButton = UIImage(named: "jump-block")!
-    let pressRedButton = UIImage(named: "press-red-block")!
-    let pressBlueButton = UIImage(named: "press-blue-block")!
-    let whileButton = UIImage(named: "while-block")!
-    let ifButton = UIImage(named: "if-else-block")!
-    let eyesButton = UIImage(named: "eyes")!
-    let notButton = UIImage(named: "not-block")!
-    let notSafeButton = UIImage(named: "not-safe-block")!
-    let toiletButton = UIImage(named: "toilet")!
-    let holeButton = UIImage(named: "hole")!
-    let wallButton = UIImage(named: "wall")!
-    let woodButton = UIImage(named: "wooden-block")!
-    let leftCorrectButton = UIImage(named: "buttons-left")!
-    let rightCorrectButton = UIImage(named: "buttons-right")!
-    let emptySpaceButton = UIImage(named: "space")!
-    let monsterButton = UIImage(named: "monster-static")!
-    var buttons: [UIImage] {
-        return [upButton, turnLeftButton, turnRightButton, waitButton, jumpButton,
-                pressRedButton, pressBlueButton, whileButton, ifButton, eyesButton,
-                notButton, notSafeButton, toiletButton, holeButton, wallButton,
-                woodButton, leftCorrectButton, rightCorrectButton, emptySpaceButton, monsterButton]
-    }
+    let poop = UIImage(named: "poo")!
+    var poopView: UIImageView!
     var animator: UIDynamicAnimator? = nil
     let gravity = UIGravityBehavior()
     var timer = NSTimer()
@@ -72,7 +48,7 @@ class TitleViewController: UIViewController {
     }
 
     func runRandomTileDrops() {
-        let randomDelay = Double(arc4random_uniform(200)) / 100
+        let randomDelay = Double(arc4random_uniform(150)) / 100
         timer = NSTimer.scheduledTimerWithTimeInterval(randomDelay,
                                                target: self,
                                                selector: #selector(delayedAction),
@@ -82,23 +58,21 @@ class TitleViewController: UIViewController {
 
     func delayedAction() {
         let isLeft = Int(arc4random_uniform(2)) == 0
-
         let randomX = Int(arc4random_uniform(250)) - 50
         let randomPosition = CGRect(x: randomX, y: -50, width: 50, height: 50)
         addRandomTile(randomPosition, isLeft: isLeft)
     }
 
     func addRandomTile(location: CGRect, isLeft: Bool) {
-        let newTile = UIImageView(frame: location)
-        let randomButtonIndex = Int(arc4random_uniform(UInt32(buttons.count)))
-        newTile.image = buttons[randomButtonIndex]
+        poopView = UIImageView(frame: location)
+        poopView.image = poop
 
         if isLeft {
-            leftRandomTileGenerator.addSubview(newTile)
+            leftRandomTileGenerator.addSubview(poopView)
         } else {
-            rightRandomTileGenerator.addSubview(newTile)
+            rightRandomTileGenerator.addSubview(poopView)
         }
-        addGravity(newTile)
+        addGravity(poopView)
         runRandomTileDrops()
     }
 
