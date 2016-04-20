@@ -16,7 +16,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     var pageViewController: UIViewController?
     private let filesArchive = FilesArchive()
     var loadedMap: Map! = nil
-    var loadedMapFileName: String?
+    var loadedMapFileName = GlobalConstants.customLevelName
     private let reuseIdentifier = "LevelCellIdentifier"
     private var sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
 

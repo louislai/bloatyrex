@@ -26,6 +26,11 @@ class GlobalConstants {
         static let back = CGFloat(1)
     }
 
+    struct Identifier {
+        static let playingViewController = "PlayingViewController"
+        static let programmingViewController = "ProgrammingViewController"
+    }
+
     struct Notification {
         static let gameReset = "reset"
         static let gameResetAndRun = "resetAndRun"
@@ -49,4 +54,12 @@ class GlobalConstants {
         static let blockSectionTitleSize = CGFloat(32)
     }
     static let filesArchive = FilesArchive()
+    static let customLevelName = "Free Play"
+
+    static let PrepackageNames = ["The Basics", "If", "While"]
+    static let PrepackagedLevelsNames: [[String]] = [
+        ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        ["1", "2"],
+        ["1", "2", "5"]
+    ]
 }
