@@ -71,7 +71,7 @@ class Interpreter: NSObject {
             }
         }
     }
-    
+
     func removeHighlight() {
         if let action = previousAction {
             switch action {
@@ -90,7 +90,7 @@ class Interpreter: NSObject {
             }
         }
     }
-    
+
     private func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,

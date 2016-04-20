@@ -38,6 +38,9 @@ class PlayingViewController: UIViewController {
     @IBOutlet var firstStar: UIImageView!
     @IBOutlet var secondStar: UIImageView!
     @IBOutlet var thirdStar: UIImageView!
+
+    @IBOutlet var nextStageButton: UIButton!
+
     let animationDelay: NSTimeInterval = 0.5
     var scaleToDisplay: CGFloat?
 
@@ -95,6 +98,7 @@ class PlayingViewController: UIViewController {
                     let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
                     if isPlayingPresetMap {
                         self.showStarSlots()
+                        self.nextStageButton.hidden = false
                         let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
                         let toAppearStars = self.stars[0..<rating]
                         for (index, star) in toAppearStars.enumerate() {
@@ -118,8 +122,7 @@ class PlayingViewController: UIViewController {
                 }
         })
 
-        hideStarSlots()
-        hideStars()
+        hidePresetMapWidgets()
     }
 
     func resetGameScene() {
@@ -166,16 +169,14 @@ class PlayingViewController: UIViewController {
             object: nil)
     }
 
-    private func hideStarSlots() {
+    private func hidePresetMapWidgets() {
         let _ = starSlots.map { $0.hidden = true }
+        let _ = stars.map { $0.hidden = true }
+        nextStageButton.hidden = true
     }
 
     private func showStarSlots() {
         let _ = starSlots.map { $0.hidden = false }
-    }
-
-    private func hideStars() {
-        let _ = stars.map { $0.hidden = true }
     }
 }
 

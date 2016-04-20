@@ -43,15 +43,15 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
             title.font = UIFont(name: "\(GlobalConstants.Font.defaultName)-Bold", size: 48)
             collectionView.addSubview(title)
         }
-        
+
         let pooImageView = UIImageView(frame: CGRect(x: 925, y: 590, width: 70, height: 70))
         pooImageView.image = UIImage(named: "poo")
         collectionView.addSubview(pooImageView)
-        
+
         let toiletPaperImageView = UIImageView(frame: CGRect(x: 800, y: 540, width: 120, height: 120))
         toiletPaperImageView.image = UIImage(named: "toilet-paper")
         collectionView.addSubview(toiletPaperImageView)
-        
+
         // add back button
         let backButtonImage = UIImage(named: "back") as UIImage?
         let backButton = UIButton(type: UIButtonType.Custom) as UIButton
@@ -158,7 +158,7 @@ class LevelCell: UICollectionViewCell {
     private var filesArchive = FilesArchive()
     private var levelSelectorViewController: LevelSelectorViewController!
     private var levelSelectorPageViewController: LevelSelectorPageViewController!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
