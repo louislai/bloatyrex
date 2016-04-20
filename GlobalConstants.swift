@@ -59,7 +59,7 @@ class GlobalConstants {
     static let PrepackageNames = ["The Basics", "If", "While"]
     static let PrepackagedLevelsNames: [[String]] = [
         ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
-        ["1", "2"],
-        ["1", "2", "5"]
+        ["1", "2", "3", "4", "5"],
+        ["1", "2", "3", "4", "5", "6"]
     ]
 }
