@@ -13,6 +13,7 @@ class PlayingMapViewController: UIViewController {
 
     var map: Map!
     var scene: PlayingMapScene!
+    var levelName: String!
     weak var programSupplier: ProgramSupplier!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
@@ -37,9 +38,13 @@ class PlayingMapViewController: UIViewController {
 
     func newScene() -> PlayingMapScene {
         let skView = view as! SKView
-
         // Create and configure the scene
-        scene = PlayingMapScene(size: skView.bounds.size, zoomLevel: 1, map: map.copy() as! Map)
+        scene = PlayingMapScene(
+            size: skView.bounds.size,
+            zoomLevel: 1,
+            map: map.copy() as! Map,
+            levelName: levelName
+        )
         scene.scaleMode = .AspectFill
 
         // Load the map

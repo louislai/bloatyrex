@@ -41,6 +41,10 @@ class ProgrammingViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? ThumbnailPlayingMapViewController {
             destination.map = map
+            destination.levelName = levelName
+            if let packageName = packageName {
+                destination.levelName = "\(packageName) - \(levelName)"
+            }
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             destination.editEnabled = true
             destination.programBlocksToLoad = storedProgramBlocks

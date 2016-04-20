@@ -11,6 +11,7 @@ import SpriteKit
 
 class ThumbnailPlayingMapViewController: UIViewController {
     var map: Map!
+    var levelName: String!
 
     override func didMoveToParentViewController(parent: UIViewController?) {
         super.didMoveToParentViewController(parent)
@@ -28,7 +29,7 @@ class ThumbnailPlayingMapViewController: UIViewController {
         skView.ignoresSiblingOrder = true
 
         // Present the scene.
-        let scene = StaticMapScene(size: view.bounds.size, zoomLevel: 0.6, map: map)
+        let scene = StaticMapScene(size: view.bounds.size, zoomLevel: 0.6, map: map, levelName: levelName)
         scene.setup()
         skView.presentScene(scene)
     }

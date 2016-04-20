@@ -11,15 +11,18 @@ import SpriteKit
 struct StaticMapSceneConstants {
     struct NodeNames {
         static let movesLeftLabel = "movesLeft"
+        static let levelNameLabel = "levelName"
     }
 }
 
 class StaticMapScene: PannableScene {
     var mapNode: MapNode
     let hudLayer = SKNode()
+    let levelName: String
 
-    init(size: CGSize, zoomLevel: CGFloat, map: Map) {
+    init(size: CGSize, zoomLevel: CGFloat, map: Map, levelName: String) {
         self.mapNode = MapNode(size: size, map: map)
+        self.levelName = levelName
         super.init(size: size, initialZoomLevel: zoomLevel)
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         backgroundColor = UIColor.whiteColor()
@@ -27,6 +30,22 @@ class StaticMapScene: PannableScene {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) not used")
+    }
+
+    var hudFontSize: CGFloat {
+        return 25.0
+    }
+    var movesLeftLabelPosition: CGPoint {
+        return CGPoint(
+            x: 0,
+            y: 250.0
+        )
+    }
+    var levelNameLabelPosition: CGPoint {
+        return CGPoint(
+            x: 0,
+            y: 300.0
+        )
     }
 
     func setup() {
@@ -42,16 +61,19 @@ class StaticMapScene: PannableScene {
         movesLeftLabel.name = StaticMapSceneConstants.NodeNames.movesLeftLabel
         movesLeftLabel.fontName = GlobalConstants.Font.defaultNameBold
         movesLeftLabel.fontColor = GlobalConstants.Font.defaultGreen
-
-        let layerPosition = CGPoint(
-            x: 0,
-            y: 300.0
-        )
+        movesLeftLabel.fontSize = hudFontSize
         movesLeftLabel.text = String(format: "MOVES LEFT: %d", mapNode.originalMovesLeft)
+        movesLeftLabel.position = movesLeftLabelPosition
 
-        // 3
-        movesLeftLabel.position = layerPosition
+        let levelNameLabel = SKLabelNode(text: levelName.uppercaseString)
+        levelNameLabel.fontName = GlobalConstants.Font.defaultNameBold
+        levelNameLabel.name = StaticMapSceneConstants.NodeNames.levelNameLabel
+        levelNameLabel.fontColor = GlobalConstants.Font.defaultGreen
+        levelNameLabel.position = levelNameLabelPosition
+        levelNameLabel.fontSize = hudFontSize
+
         hudLayer.addChild(movesLeftLabel)
+        hudLayer.addChild(levelNameLabel)
     }
 
     // Convert a row, column pair into a CGPoint relative

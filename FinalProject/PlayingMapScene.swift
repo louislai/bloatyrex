@@ -57,14 +57,29 @@ class PlayingMapScene: StaticMapScene {
         )
     }()
 
+    override var hudFontSize: CGFloat {
+        return 30.0
+    }
+    override var movesLeftLabelPosition: CGPoint {
+        return CGPoint(
+            x: 130,
+            y: 300.0
+        )
+    }
+    override var levelNameLabelPosition: CGPoint {
+        return CGPoint(
+            x: -250.0,
+            y: 300.0
+        )
+    }
 
-    override init(size: CGSize, zoomLevel: CGFloat, map: Map) {
+    override init(size: CGSize, zoomLevel: CGFloat, map: Map, levelName: String) {
         if let _ = map as? PresetMap {
             self.isPlayingPresetMap = true
         } else {
             self.isPlayingPresetMap = false
         }
-        super.init(size: size, zoomLevel: zoomLevel, map: map)
+        super.init(size: size, zoomLevel: zoomLevel, map: map, levelName: levelName)
         self.movesLeft = mapNode.originalMovesLeft
     }
 
@@ -107,8 +122,13 @@ class PlayingMapScene: StaticMapScene {
         self.movesLeft = mapNode.originalMovesLeft
         if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.movesLeftLabel)
             as? SKLabelNode {
-            node.text = "MOVES LEFT: \(movesLeft)"
+                node.text = "MOVES LEFT: \(movesLeft)"
         }
+        if let node = hudLayer.childNodeWithName(StaticMapSceneConstants.NodeNames.levelNameLabel)
+            as? SKLabelNode {
+                node.horizontalAlignmentMode = .Left
+        }
+
     }
 
     func toggleRun() {

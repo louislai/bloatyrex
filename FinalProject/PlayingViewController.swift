@@ -68,6 +68,10 @@ class PlayingViewController: UIViewController {
         if let destination = segue.destinationViewController as? PlayingMapViewController {
             destination.map = map
             destination.programSupplier = self
+            destination.levelName = levelName
+            if let packageName = packageName {
+                destination.levelName = "\(packageName) - \(levelName)"
+            }
         } else if let destination = segue.destinationViewController as? CodeBlocksViewController {
             destination.editEnabled = false
             codeBlocksDisplay = destination
@@ -175,7 +179,7 @@ class PlayingViewController: UIViewController {
 
     private func showNextStage() {
         retrieveNextStage()
-        guard let nextPackage = nextPackage, nextLevel = nextLevel else {
+        guard let _ = nextPackage, _ = nextLevel else {
             return
         }
         nextStageButton.hidden = false
