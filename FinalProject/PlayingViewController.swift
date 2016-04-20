@@ -14,6 +14,7 @@ class PlayingViewController: UIViewController {
     var packageName: String?
     var fromProgrammingView = false
     var tutorialImage: UIImage?
+    var tutorialImageView: UIImageView?
 
     @IBAction func programmingViewTapped(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.programmingViewController)
@@ -110,9 +111,10 @@ class PlayingViewController: UIViewController {
             }
         }
         if let tutorialImage = tutorialImage {
-            let imageView = UIImageView(image: tutorialImage)
-            imageView.frame = CGRectMake(100, 100, 824, 568)
-            self.view.addSubview(imageView)
+            tutorialImageView = UIImageView(image: tutorialImage)
+            tutorialImageView!.frame = CGRectMake(100, 100, 824, 568)
+
+            self.view.addSubview(tutorialImageView!)
         }
     }
 
@@ -178,6 +180,17 @@ class PlayingViewController: UIViewController {
 
     @IBAction func backButtonPressed(sender: UIButton) {
         navigationController?.popViewControllerAnimated(true)
+    }
+
+    @IBAction func tutorialButtonPressed(sender: AnyObject) {
+        // toggle tutorial visibility
+        if let tutorialImageView = tutorialImageView {
+            if tutorialImageView.alpha == 1 {
+                tutorialImageView.alpha = 0
+            } else {
+                tutorialImageView.alpha = 1
+            }
+        }
     }
 
     @IBAction func replayButtonTapped(sender: UIButton) {
