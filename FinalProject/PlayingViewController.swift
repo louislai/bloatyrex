@@ -70,7 +70,7 @@ class PlayingViewController: UIViewController {
             destination.map = map
             destination.programSupplier = self
             destination.levelName = levelName
-            destination.fromProgrammingView = true
+            destination.fromProgrammingView = fromProgrammingView
             if let packageName = packageName {
                 destination.levelName = "\(packageName) - \(levelName)"
             }
