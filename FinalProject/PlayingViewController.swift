@@ -19,6 +19,8 @@ class PlayingViewController: UIViewController {
         programmingViewController.map = map.copy() as! Map
         programmingViewController.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
         scaleToDisplay = codeBlocksDisplay.retrieveScale()
+        programmingViewController.levelName = levelName
+        programmingViewController.packageName = packageName
         if let scaleToDisplay = scaleToDisplay {
             programmingViewController.scaleToDisplay = scaleToDisplay
         }

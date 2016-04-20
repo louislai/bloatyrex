@@ -15,12 +15,16 @@ class ProgrammingViewController: UIViewController {
     var codeBlocksScaleSupplier: CodeBlocksScaleSupplier!
     var storedProgramBlocks: ProgramBlocks!
     var scaleToDisplay: CGFloat?
+    var packageName: String?
+    var levelName: String?
 
     @IBAction func playingViewButtonPressed(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayingViewController")
         let playingViewController = viewController as! PlayingViewController
         playingViewController.map = map
         playingViewController.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()
+        playingViewController.levelName = levelName
+        playingViewController.packageName = packageName
         scaleToDisplay = codeBlocksScaleSupplier.retrieveScale()
         if let scaleToDisplay = scaleToDisplay {
             playingViewController.scaleToDisplay = scaleToDisplay
