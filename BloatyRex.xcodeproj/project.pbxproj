@@ -64,6 +64,9 @@
 		BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C41C941134007F56F0 /* LanguageDelegate.swift */; };
 		BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C61C941155007F56F0 /* AgentNode.swift */; };
 		BF5339C91C941459007F56F0 /* MapBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5339C81C941459007F56F0 /* MapBlock.swift */; };
+		BF6736251CC7782600C8752B /* ModalPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6736231CC7782600C8752B /* ModalPresentationAnimationController.swift */; };
+		BF6736261CC7782600C8752B /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6736241CC7782600C8752B /* ModalPresentationController.swift */; };
+		BF6736281CC7786E00C8752B /* PlayingHintController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6736271CC7786E00C8752B /* PlayingHintController.swift */; };
 		BF695B8B1CC37F8B00532797 /* MonsterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF695B8A1CC37F8B00532797 /* MonsterNode.swift */; };
 		BF695B8D1CC3809B00532797 /* DoorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF695B8C1CC3809B00532797 /* DoorNode.swift */; };
 		BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF695B8E1CC4C46200532797 /* AgentNode+AgentProtocol.swift */; };
@@ -174,6 +177,9 @@
 		BF5339C41C941134007F56F0 /* LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageDelegate.swift; path = FinalProject/LanguageDelegate.swift; sourceTree = "<group>"; };
 		BF5339C61C941155007F56F0 /* AgentNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNode.swift; sourceTree = "<group>"; };
 		BF5339C81C941459007F56F0 /* MapBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapBlock.swift; sourceTree = "<group>"; };
+		BF6736231CC7782600C8752B /* ModalPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationAnimationController.swift; sourceTree = "<group>"; };
+		BF6736241CC7782600C8752B /* ModalPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModalPresentationController.swift; sourceTree = "<group>"; };
+		BF6736271CC7786E00C8752B /* PlayingHintController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingHintController.swift; sourceTree = "<group>"; };
 		BF695B8A1CC37F8B00532797 /* MonsterNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonsterNode.swift; sourceTree = "<group>"; };
 		BF695B8C1CC3809B00532797 /* DoorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorNode.swift; sourceTree = "<group>"; };
 		BF695B8E1CC4C46200532797 /* AgentNode+AgentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AgentNode+AgentProtocol.swift"; sourceTree = "<group>"; };
@@ -292,6 +298,7 @@
 				3DF230A81C8F0617003420C0 /* Assets.xcassets */,
 				3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */,
 				3DF230AD1C8F0617003420C0 /* Info.plist */,
+				BF6736271CC7786E00C8752B /* PlayingHintController.swift */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -407,6 +414,8 @@
 		BF640D781CA815E800FC454F /* ReusableComponents */ = {
 			isa = PBXGroup;
 			children = (
+				BF6736231CC7782600C8752B /* ModalPresentationAnimationController.swift */,
+				BF6736241CC7782600C8752B /* ModalPresentationController.swift */,
 				BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */,
 				3D21216A1C9A55F000E6564B /* PannableScene.swift */,
 			);
@@ -634,6 +643,7 @@
 				BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */,
 				BFD365D71CA25BAD00956CE1 /* ProgramSupplier.swift in Sources */,
 				1D69B6D21CB3B24000C1FA04 /* SeeBlock.swift in Sources */,
+				BF6736251CC7782600C8752B /* ModalPresentationAnimationController.swift in Sources */,
 				B04E40521CC6064400C73E86 /* DesigningMapConstants.swift in Sources */,
 				B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */,
 				BF7F3C9F1CBDD702004530F5 /* Scorer.swift in Sources */,
@@ -650,6 +660,7 @@
 				BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */,
 				BF7F3CA31CBDDAB6004530F5 /* DefaultGameScorer.swift in Sources */,
 				1DB4B0951C9920480010F727 /* MainBlock.swift in Sources */,
+				BF6736261CC7782600C8752B /* ModalPresentationController.swift in Sources */,
 				BF8FA5AD1C947C5100DAE175 /* Direction.swift in Sources */,
 				BFFB1A3A1CABB3F300C746CD /* ProgrammingViewController.swift in Sources */,
 				3D21216B1C9A55F000E6564B /* PannableScene.swift in Sources */,
@@ -661,6 +672,7 @@
 				BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */,
 				1D69B6D81CB5583600C1FA04 /* ObjectBlock.swift in Sources */,
 				1D409C6E1CC5F45E002E6B02 /* NotSafeBlock.swift in Sources */,
+				BF6736281CC7786E00C8752B /* PlayingHintController.swift in Sources */,
 				BF5339C71C941155007F56F0 /* AgentNode.swift in Sources */,
 				1DB4B0811C9516610010F727 /* Syntax.swift in Sources */,
 				1D7E23D71C9984F6003E7B75 /* TrashZone.swift in Sources */,

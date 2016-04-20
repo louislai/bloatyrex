@@ -14,7 +14,6 @@ class PlayingViewController: UIViewController {
     var packageName: String?
     var fromProgrammingView = false
     var tutorialImage: UIImage?
-    var tutorialImageView: UIImageView?
 
     @IBOutlet var tutorialButton: UIButton!
     @IBAction func programmingViewTapped(sender: AnyObject) {
@@ -61,7 +60,9 @@ class PlayingViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         registerObservers()
-        setupTutorial()
+        if !fromProgrammingView {
+            setupTutorial()
+        }
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -89,6 +90,8 @@ class PlayingViewController: UIViewController {
             if let scaleToDisplay = scaleToDisplay {
                 destination.scaleToDisplay = scaleToDisplay
             }
+        } else if let destination = segue.destinationViewController as? PlayingHintController {
+                destination.tutorialImage = tutorialImage
         }
     }
 
@@ -111,12 +114,7 @@ class PlayingViewController: UIViewController {
                 break
             }
             if let tutorialImage = tutorialImage {
-                tutorialImageView = UIImageView(image: tutorialImage)
-                tutorialImageView!.frame = CGRectMake(100, 100, 824, 568)
-
-                self.view.addSubview(tutorialImageView!)
-            } else {
-                tutorialButton.alpha = 0
+                performSegueWithIdentifier("Hello", sender: self)
             }
         }
     }
@@ -187,13 +185,6 @@ class PlayingViewController: UIViewController {
 
     @IBAction func tutorialButtonPressed(sender: AnyObject) {
         // toggle tutorial visibility
-        if let tutorialImageView = tutorialImageView {
-            if tutorialImageView.alpha == 1 {
-                tutorialImageView.alpha = 0
-            } else {
-                tutorialImageView.alpha = 1
-            }
-        }
     }
 
     @IBAction func replayButtonTapped(sender: UIButton) {

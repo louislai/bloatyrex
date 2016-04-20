@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="YMt-fA-ysv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Playing Hint Controller-->
+        <scene sceneID="1CB-4G-052">
+            <objects>
+                <viewController id="nny-Ez-dDU" customClass="PlayingHintController" customModule="BloatyRex" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0mO-PJ-ceb"/>
+                        <viewControllerLayoutGuide type="bottom" id="XPe-EH-QoL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wlm-pq-Y6S">
+                        <rect key="frame" x="0.0" y="0.0" width="824" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwH-tp-56X">
+                                <rect key="frame" x="0.0" y="0.0" width="824" height="568"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eua-Ig-jUC">
+                                <rect key="frame" x="682" y="0.0" width="142" height="61"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="22"/>
+                                <state key="normal" title="Close Hint"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="nny-Ez-dDU" eventType="touchUpInside" id="4I4-0C-by7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="824" height="568"/>
+                    <connections>
+                        <outlet property="imageView" destination="CwH-tp-56X" id="TiP-2u-tsZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RJW-L5-8vV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="205" y="666"/>
+        </scene>
         <!--Playing Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -384,6 +420,7 @@
                                 <state key="normal" title="Button" image="hint"/>
                                 <connections>
                                     <action selector="tutorialButtonPressed:" destination="Wpj-nb-g8C" eventType="touchUpInside" id="822-qn-Kft"/>
+                                    <segue destination="nny-Ez-dDU" kind="presentation" identifier="Hello" id="HdX-M4-tu6"/>
                                 </connections>
                             </button>
                         </subviews>
