@@ -16,7 +16,6 @@ struct PackageSelectorConstants {
 
 class PackageSelectorViewController: UICollectionViewController {
     private let reuseIdentifier = "packageCell"
-    private let packageNames = ["The Basics", "If", "While"]
     private let sectionInsets = UIEdgeInsets(top: 50,
         left: (GlobalConstants.Dimension.screenWidth - PackageSelectorConstants.cellWidth) / 2,
         bottom: 50,
@@ -52,7 +51,7 @@ extension PackageSelectorViewController {
 
     override func collectionView(collectionView: UICollectionView,
         numberOfItemsInSection section: Int) -> Int {
-        return packageNames.count
+        return GlobalConstants.PrepackageNames.count
     }
 
     override func collectionView(collectionView: UICollectionView,
@@ -61,11 +60,11 @@ extension PackageSelectorViewController {
                        forIndexPath: indexPath) as! PackageCell
         let fullSizedImage = UIImage(named: "Yoshi-win")
         cell.imageView.image = fullSizedImage
-        cell.packageTitle.text = packageNames[indexPath.item]
+        cell.packageTitle.text = GlobalConstants.PrepackageNames[indexPath.item]
         cell.packageTitle.textColor = UIColor.whiteColor()
         cell.packageTitle.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
         cell.packageTitle.font = cell.packageTitle.font.fontWithSize(38)
-        cell.progressIndicator.text = "0/10"
+        cell.progressIndicator.text = "\(GlobalConstants.PrepackagedLevelsNames[indexPath.item].count) levels"
         cell.progressIndicator.textColor = UIColor.whiteColor()
         cell.progressIndicator.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
         cell.progressIndicator.font = cell.progressIndicator.font.fontWithSize(38)
