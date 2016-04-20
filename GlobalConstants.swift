@@ -62,4 +62,8 @@ class GlobalConstants {
         ["1", "2", "3", "4", "5"],
         ["1", "2", "3", "4", "5", "6"]
     ]
+
+    static let BasicLevelsWithImages = ["1", "2", "3", "4", "6"]
+    static let IfLevelsWithImages = ["1", "2"]
+    static let WhileLevelsWithImages = ["1"]
 }

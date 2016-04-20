@@ -13,6 +13,7 @@ class PlayingViewController: UIViewController {
     var levelName = GlobalConstants.customLevelName
     var packageName: String?
     var fromProgrammingView = false
+    var tutorialImage: UIImage?
 
     @IBAction func programmingViewTapped(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.programmingViewController)
@@ -58,6 +59,7 @@ class PlayingViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         registerObservers()
+        loadTutorialImage()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -85,6 +87,32 @@ class PlayingViewController: UIViewController {
             if let scaleToDisplay = scaleToDisplay {
                 destination.scaleToDisplay = scaleToDisplay
             }
+        }
+    }
+
+    func loadTutorialImage() {
+        if let packageName = packageName {
+            switch packageName {
+            case "The Basics":
+                if GlobalConstants.BasicLevelsWithImages.contains(levelName) {
+                    tutorialImage = UIImage(named: "basic-\(levelName)-summary")
+                }
+            case "If":
+                if GlobalConstants.IfLevelsWithImages.contains(levelName) {
+                    tutorialImage = UIImage(named: "if-\(levelName)-summary")
+                }
+            case "While":
+                if GlobalConstants.IfLevelsWithImages.contains(levelName) {
+                    tutorialImage = UIImage(named: "while-\(levelName)-summary")
+                }
+            default:
+                break
+            }
+        }
+        if let tutorialImage = tutorialImage {
+            let imageView = UIImageView(image: tutorialImage)
+            imageView.frame = CGRectMake(100, 100, 824, 568)
+            self.view.addSubview(imageView)
         }
     }
 
