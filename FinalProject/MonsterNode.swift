@@ -153,7 +153,7 @@ class MonsterNode: MapUnitNode {
         blueprintDeadZone.zPosition = GlobalConstants.zPosition.back
         blueprintDeadZone.size = mapNode.blockSize
         blueprintDeadZone.name = MonsterNodeConstants.deadZoneNodeName
-        if row + 1 <= mapNode.map.numberOfRows {
+        if row + 1 <= mapNode.map.numberOfRows-1 {
             let copy = blueprintDeadZone.copy() as! SKSpriteNode
             copy.position = mapNode.pointFor(row+1, column: column)
             mapNode.unitsLayer.addChild(copy)
@@ -165,7 +165,7 @@ class MonsterNode: MapUnitNode {
             mapNode.unitsLayer.addChild(copy)
             deadZoneNodes.append(copy)
         }
-        if column + 1 <= mapNode.map.numberOfColumns {
+        if column + 1 <= mapNode.map.numberOfColumns-1 {
             let copy = blueprintDeadZone.copy() as! SKSpriteNode
             copy.position = mapNode.pointFor(row, column: column+1)
             mapNode.unitsLayer.addChild(copy)
