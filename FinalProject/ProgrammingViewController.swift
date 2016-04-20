@@ -9,17 +9,16 @@
 import UIKit
 
 class ProgrammingViewController: UIViewController {
-    weak var delegate: FinishedEditingProgramDelegate!
     var map: Map!
     var programBlocksSupplier: ProgramBlocksSupplier!
     var codeBlocksScaleSupplier: CodeBlocksScaleSupplier!
     var storedProgramBlocks: ProgramBlocks!
     var scaleToDisplay: CGFloat?
+    var levelName = GlobalConstants.customLevelName
     var packageName: String?
-    var levelName: String?
 
     @IBAction func playingViewButtonPressed(sender: AnyObject) {
-        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("PlayingViewController")
+        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.playingViewController)
         let playingViewController = viewController as! PlayingViewController
         playingViewController.map = map
         playingViewController.programBlocksToDisplay = programBlocksSupplier.retrieveProgramBlocks()

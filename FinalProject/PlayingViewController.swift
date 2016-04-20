@@ -10,14 +10,16 @@ import UIKit
 
 class PlayingViewController: UIViewController {
     var map: Map!
-    var levelName: String?
+    var levelName = GlobalConstants.customLevelName
     var packageName: String?
 
     @IBAction func programmingViewTapped(sender: AnyObject) {
-        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgrammingViewController")
+        let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.programmingViewController)
         let programmingViewController = viewController as! ProgrammingViewController
         programmingViewController.map = map.copy() as! Map
         programmingViewController.storedProgramBlocks = displayedProgramBlocksSupplier.retrieveProgramBlocks()
+        programmingViewController.levelName = levelName
+        programmingViewController.packageName = packageName
         scaleToDisplay = codeBlocksDisplay.retrieveScale()
         programmingViewController.levelName = levelName
         programmingViewController.packageName = packageName
@@ -46,9 +48,11 @@ class PlayingViewController: UIViewController {
     let animationDelay: NSTimeInterval = 0.5
     var scaleToDisplay: CGFloat?
 
-    var stars: [UIImageView] {
+    private var stars: [UIImageView] {
         return [firstStar, secondStar, thirdStar]
     }
+    private var nextLevel: String?
+    private var nextPackage: String?
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -100,7 +104,7 @@ class PlayingViewController: UIViewController {
                     let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
                     if isPlayingPresetMap {
                         self.showStarSlots()
-                        self.nextStageButton.hidden = false
+                        self.showNextStage()
                         let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
                         let toAppearStars = self.stars[0..<rating]
                         for (index, star) in toAppearStars.enumerate() {
@@ -147,10 +151,53 @@ class PlayingViewController: UIViewController {
     }
 
     @IBAction func nextStageTapped(sender: UIButton) {
+        guard let nextPackage = nextPackage, nextLevel = nextLevel else {
+            return
+        }
+        let newPlayingViewController = storyboard?.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.playingViewController) as! PlayingViewController
+        let filesArchive = FilesArchive()
+        newPlayingViewController.map = filesArchive
+            .loadFromPackageFile(
+                nextLevel,
+                packageName: nextPackage
+        )
+        newPlayingViewController.packageName = nextPackage
+        newPlayingViewController.levelName = nextLevel
+        navigationController?.pushViewController(newPlayingViewController, animated: true)
+        var viewControllersOnStack = (navigationController?.viewControllers)!
+        viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
+        navigationController?.viewControllers = viewControllersOnStack
     }
 
     @IBAction func menuButtonTapped(sender: UIButton) {
         navigationController?.popToRootViewControllerAnimated(true)
+    }
+
+    private func showNextStage() {
+        retrieveNextStage()
+        guard let nextPackage = nextPackage, nextLevel = nextLevel else {
+            return
+        }
+        nextStageButton.hidden = false
+    }
+
+    private func retrieveNextStage() {
+        guard let packageName = packageName else {
+            return
+        }
+        if let packageIndex = GlobalConstants.PrepackageNames.indexOf(packageName) {
+            if let levelIndex = GlobalConstants.PrepackagedLevelsNames[packageIndex].indexOf(levelName) {
+                if levelIndex == GlobalConstants.PrepackagedLevelsNames[packageIndex].count-1 {
+                    if packageIndex < GlobalConstants.PrepackageNames.count-1 {
+                        nextPackage = GlobalConstants.PrepackageNames[packageIndex+1]
+                        nextLevel = GlobalConstants.PrepackagedLevelsNames[packageIndex+1][0]
+                    }
+                } else {
+                    nextPackage = packageName
+                    nextLevel = GlobalConstants.PrepackagedLevelsNames[packageIndex][levelIndex+1]
+                }
+            }
+        }
     }
 
     private func registerObservers() {
