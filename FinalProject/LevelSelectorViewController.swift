@@ -16,6 +16,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     var pageViewController: UIViewController?
     private let filesArchive = FilesArchive()
     var loadedMap: Map! = nil
+    var loadedMapFileName: String?
     private let reuseIdentifier = "LevelCellIdentifier"
     private var sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
 
@@ -72,7 +73,11 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destination = segue.destinationViewController as? PlayingViewController {
+            let levelSelectorPageViewController =
+                pageViewController as! LevelSelectorPageViewController
             destination.map = loadedMap
+            destination.levelName = loadedMapFileName
+            destination.packageName = levelSelectorPageViewController.package
         }
     }
 
@@ -128,6 +133,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
                                                                     packageName: package) {
                     /// load selected level to play
                     self.loadedMap = loadedMap
+                    self.loadedMapFileName = fileName
                     performSegueWithIdentifier("loadLevelToPlay", sender: self)
                 }
             }
@@ -156,7 +162,7 @@ class LevelCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        let labelHeight = frame.size.height/3
+        let labelHeight = frame.size.height / 3
         textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width, height: labelHeight))
         textLabel.textAlignment = .Center
         textLabel.textColor = UIColor.whiteColor()

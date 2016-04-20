@@ -10,6 +10,8 @@ import UIKit
 
 class PlayingViewController: UIViewController {
     var map: Map!
+    var levelName: String?
+    var packageName: String?
 
     @IBAction func programmingViewTapped(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProgrammingViewController")
