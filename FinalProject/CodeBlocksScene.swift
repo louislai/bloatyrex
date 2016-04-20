@@ -166,6 +166,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             movedBlock = programBlocks.getBlock(locationInContent)
             if let block = movedBlock {
                 block.deactivateDropZone()
+                block.zPosition = 10
                 pressState = .MovingBlock
             }
 
@@ -247,6 +248,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             heldBlock = nil
         case .MovingBlock:
             if let block = movedBlock {
+                block.zPosition = 0
                 if let _ = block as? MainBlock {
 
                 } else {
