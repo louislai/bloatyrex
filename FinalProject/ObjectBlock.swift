@@ -24,55 +24,55 @@ class ObjectBlock: SKNode, MovableBlockProtocol {
             containingBlockValue = newBlock
         }
     }
-    
+
     static func getHoleBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Hole)
         block.setSprite("hole")
         return block
     }
-    
+
     static func getWoodBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.WoodenBlock)
         block.setSprite("wooden-block")
         return block
     }
-    
+
     static func getWallBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Wall)
         block.setSprite("wall")
         return block
     }
-    
+
     static func getEmptySpaceBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.EmptySpace)
         block.setSprite("space")
         return block
     }
-    
+
     static func getMonsterBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Monster)
         block.setSprite("monster-static")
         return block
     }
-    
+
     static func getToiletBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Goal)
         block.setSprite("toilet")
         return block
     }
-    
+
     static func getLeftDoorBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.DoorLeft)
         block.setSprite("buttons-left")
         return block
     }
-    
+
     static func getRightDoorBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.DoorRight)
         block.setSprite("buttons-right")
         return block
     }
-    
+
     private func setSprite(imageNamed: String) {
         let blockBody = SKSpriteNode(imageNamed: imageNamed)
         let size = GlobalConstants.CodeBlocks.blockSize

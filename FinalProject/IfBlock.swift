@@ -89,7 +89,7 @@ class IfBlock: CodeBlock {
     }
 
     override init(containingBlock: ContainerBlockProtocol) {
-        
+
         middleBlock = SKSpriteNode(imageNamed: "else")
         topBlock = SKSpriteNode(imageNamed: "if")
         bottomBlock = SKSpriteNode(imageNamed: "endif")

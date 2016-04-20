@@ -37,24 +37,24 @@ class TitleViewController: UIViewController {
                 notButton, notSafeButton, toiletButton, holeButton, wallButton,
                 woodButton, leftCorrectButton, rightCorrectButton, emptySpaceButton, monsterButton]
     }
-    var animator: UIDynamicAnimator? = nil;
+    var animator: UIDynamicAnimator? = nil
     let gravity = UIGravityBehavior()
     var timer = NSTimer()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         leftRandomTileGenerator = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 500))
         view.addSubview(leftRandomTileGenerator)
         view.sendSubviewToBack(leftRandomTileGenerator)
-        
+
         rightRandomTileGenerator = UIView(frame: CGRect(x: 824, y: 0, width: 200, height: 500))
         view.addSubview(rightRandomTileGenerator)
         view.sendSubviewToBack(rightRandomTileGenerator)
-        
+
         animator = UIDynamicAnimator(referenceView: self.view)
         animator?.addBehavior(gravity)
-        
+
         runRandomTileDrops()
     }
 
@@ -70,7 +70,7 @@ class TitleViewController: UIViewController {
             destination.numberOfItemsPerPage = 15
         }
     }
-    
+
     func runRandomTileDrops() {
         let randomDelay = Double(arc4random_uniform(200)) / 100
         timer = NSTimer.scheduledTimerWithTimeInterval(randomDelay,
@@ -79,7 +79,7 @@ class TitleViewController: UIViewController {
                                                userInfo: nil,
                                                repeats: false)
     }
-    
+
     func delayedAction() {
         let isLeft = Int(arc4random_uniform(2)) == 0
 
@@ -87,7 +87,7 @@ class TitleViewController: UIViewController {
         let randomPosition = CGRect(x: randomX, y: -50, width: 50, height: 50)
         addRandomTile(randomPosition, isLeft: isLeft)
     }
-    
+
     func addRandomTile(location: CGRect, isLeft: Bool) {
         let newTile = UIImageView(frame: location)
         let randomButtonIndex = Int(arc4random_uniform(UInt32(buttons.count)))
@@ -101,9 +101,9 @@ class TitleViewController: UIViewController {
         addGravity(newTile)
         runRandomTileDrops()
     }
-    
+
     func addGravity(tile: UIView) {
-        gravity.addItem(tile);
-        gravity.gravityDirection = CGVectorMake(0, 0.8)
+        gravity.addItem(tile)
+        gravity.gravityDirection = CGVector(dx: 0, dy: 0.8)
     }
 }

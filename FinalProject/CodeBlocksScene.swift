@@ -20,7 +20,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let controlSection = BlocksSection(title: "Control", color: SKColor.redColor())
     let conditionalSection = BlocksSection(title: "Conditionals", color: SKColor.purpleColor())
     let objectSection = BlocksSection(title: "Objects", color: GlobalConstants.Font.defaultGreen)
-    
+
     let upButton = BlockButton(imageNamed: "up-block", blockCategory: BlockCategory.Action, action: ActionBlock.getForwardBlock)
     let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnLeftBlock)
     let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnRightBlock)
@@ -92,7 +92,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             trashZone.position = CGPoint(x: size.width * -0.15, y: size.height * -0.45)
 
             addNodeToOverlay(trashZone)
-            
+
             let blockSectionsX = self.frame.width / 2 - GlobalConstants.CodeBlocks.blockSectionWidth
             let actionSectionY = self.frame.height / 2 - GlobalConstants.CodeBlocks.blockSectionTitleHeight
             actionSection.position = CGPoint(x: blockSectionsX, y: actionSectionY)
@@ -104,14 +104,14 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             actionSection.addButton(pressRedButton)
             actionSection.addButton(pressBlueButton)
             actionSection.addButton(jumpButton)
-            
+
             let actionSectionFrame = actionSection.calculateAccumulatedFrame()
             let controlSectionY = -actionSectionFrame.height + actionSectionY - GlobalConstants.CodeBlocks.blockSectionMargin
             controlSection.position = CGPoint(x: blockSectionsX, y: controlSectionY)
             addNodeToOverlay(controlSection)
             controlSection.addButton(whileButton)
             controlSection.addButton(ifButton)
-            
+
             let controlSectionFrame = controlSection.calculateAccumulatedFrame()
             let conditionalSectionY = -controlSectionFrame.height + controlSectionY - GlobalConstants.CodeBlocks.blockSectionMargin
             conditionalSection.position = CGPoint(x: blockSectionsX, y: conditionalSectionY)
@@ -119,7 +119,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             conditionalSection.addButton(eyesButton)
             conditionalSection.addButton(notButton)
             conditionalSection.addButton(notSafeButton)
-            
+
             let conditionalSectionFrame = conditionalSection.calculateAccumulatedFrame()
             let objectSectionY = -conditionalSectionFrame.height + conditionalSectionY - GlobalConstants.CodeBlocks.blockSectionMargin
             objectSection.position = CGPoint(x: blockSectionsX, y: objectSectionY)
@@ -145,7 +145,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
         let locationInOverlay = touch.locationInNode(overlay)
         let locationInContent = touch.locationInNode(content)
         let scale = 1/getScale()
-        
+
         if actionSection.containsPoint(locationInOverlay) {
             heldBlock = actionSection.getButton(locationInOverlay)
         } else if controlSection.containsPoint(locationInOverlay) {
@@ -160,7 +160,7 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
             pressState = .AddingBlock(block.blockCategory)
             block.pickBlock(true, scale: scale)
         }
-        
+
 
         if programBlocks.containsPoint(locationInContent) {
             movedBlock = programBlocks.getBlock(locationInContent)
