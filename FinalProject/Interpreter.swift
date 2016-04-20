@@ -69,7 +69,7 @@ class Interpreter: NSObject {
             }
         }
     }
-    
+
     /**
      Unhighlight the previously highligted action block. Does nothing if there was no previously
      highlighted block.
@@ -92,7 +92,7 @@ class Interpreter: NSObject {
             }
         }
     }
-    
+
     private func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,

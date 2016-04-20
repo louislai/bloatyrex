@@ -8,7 +8,7 @@
 /// The mother view controller in the programming screen
 /// ProgrammingViewController contains 2 containers, one segueing to ThumbnailPlayingViewController
 /// and another segueing to CodesBlockViewController
-/// 
+///
 /// Public Properties
 /// - delegate: FinishedEditingProgramDelegate delegate that will dismiss the view controller
 /// - map: a Map object containing the map information

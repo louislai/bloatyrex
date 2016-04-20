@@ -40,7 +40,7 @@ class GlobalConstants {
         static let defaultNameBold = "ChalkboardSE-Bold"
         static let defaultGreen = SKColor(red: 0, green: 0.5, blue: 0, alpha: 1)
     }
-    
+
     struct CodeBlocks {
         static let blockSectionButtonsPerRow = 3
         static let blockSize = CGFloat(50)

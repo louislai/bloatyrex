@@ -30,7 +30,7 @@ class BlockButton: SKNode {
         self.addChild(button)
         self.addChild(block)
     }
-    
+
     init(imageNamed: String, blockCategory: BlockCategory, object: (ContainerBlockProtocol, DropZone) -> ObjectBlock) {
         button = SKSpriteNode(imageNamed: imageNamed)
         block = SKSpriteNode(imageNamed: imageNamed)
@@ -44,7 +44,7 @@ class BlockButton: SKNode {
         self.addChild(button)
         self.addChild(block)
     }
-    
+
     init(imageNamed: String, blockCategory: BlockCategory, boolOp: (ContainerBlockProtocol, DropZone) -> BoolOpBlock) {
         button = SKSpriteNode(imageNamed: imageNamed)
         block = SKSpriteNode(imageNamed: imageNamed)
@@ -58,21 +58,21 @@ class BlockButton: SKNode {
         self.addChild(button)
         self.addChild(block)
     }
-    
+
     func getAction(container: ContainerBlockProtocol) -> CodeBlock? {
         if let fun = actionFunc {
             return fun(container)
         }
         return nil
     }
-    
+
     func getObject(container: ContainerBlockProtocol, zone: DropZone) -> ObjectBlock? {
         if let fun = objectFunc {
             return fun(container, zone)
         }
         return nil
     }
-    
+
     func getBoolOp(container: ContainerBlockProtocol, zone: DropZone) -> BoolOpBlock? {
         if let fun = boolOpFunc {
             return fun(container, zone)

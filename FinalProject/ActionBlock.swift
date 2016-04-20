@@ -15,49 +15,49 @@ import SpriteKit
 class ActionBlock: CodeBlock, HighlightableBlockProtocol {
     var highlightLayer: SKShapeNode?
     let action: Action
-    
+
     static func getForwardBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.Forward(nil))
         block.setSprite("up-block")
         return block
     }
-    
+
     static func getWaitBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.NoAction(nil))
         block.setSprite("wait-block")
         return block
     }
-    
+
     static func getJumpBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.Jump(nil))
         block.setSprite("jump-block")
         return block
     }
-    
+
     static func getPressBlueBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.ChooseButton(1, nil))
         block.setSprite("press-blue-block")
         return block
     }
-    
+
     static func getPressRedBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.ChooseButton(0, nil))
         block.setSprite("press-red-block")
         return block
     }
-    
+
     static func getTurnLeftBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.RotateLeft(nil))
         block.setSprite("turn-left-block")
         return block
     }
-    
+
     static func getTurnRightBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.RotateRight(nil))
         block.setSprite("turn-right-block")
         return block
     }
-    
+
     /**
      Highlights the block with a translucent overlay. Used for code tracing during its execution
      **/
@@ -72,13 +72,13 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(newLayer)
         highlightLayer = newLayer
     }
-    
+
     func unhighlight() {
         if let layer = highlightLayer {
             layer.removeFromParent()
         }
     }
-    
+
     private func setSprite(imageNamed: String) {
         let blockBody = SKSpriteNode(imageNamed: imageNamed)
         let size = GlobalConstants.CodeBlocks.blockSize
@@ -88,12 +88,12 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
         self.addChild(blockBody)
         self.resizeDropZone()
     }
-    
+
     private init(containingBlock: ContainerBlockProtocol, action: Action) {
         self.action = action
         super.init(containingBlock: containingBlock)
     }
-    
+
     override func getBlockConstruct() -> Construct {
         let blockAction: Action
         switch action {
@@ -112,7 +112,7 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
         }
         return Construct.ActionConstruct(blockAction)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

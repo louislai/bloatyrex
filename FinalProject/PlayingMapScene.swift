@@ -229,7 +229,7 @@ class PlayingMapScene: StaticMapScene {
         mapNode.activeAgentNodes = nextActiveAgentNodes
     }
 
-    private func run() {
+    func run() {
         if !newRoundStarted {
             prepareNewRound()
         }
