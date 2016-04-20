@@ -16,6 +16,7 @@ class PlayingViewController: UIViewController {
     var tutorialImage: UIImage?
     var tutorialImageView: UIImageView?
 
+    @IBOutlet var tutorialButton: UIButton!
     @IBAction func programmingViewTapped(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.programmingViewController)
         let programmingViewController = viewController as! ProgrammingViewController
@@ -60,7 +61,7 @@ class PlayingViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         registerObservers()
-        loadTutorialImage()
+        setupTutorial()
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -91,7 +92,7 @@ class PlayingViewController: UIViewController {
         }
     }
 
-    func loadTutorialImage() {
+    func setupTutorial() {
         if let packageName = packageName {
             switch packageName {
             case "The Basics":
@@ -109,12 +110,14 @@ class PlayingViewController: UIViewController {
             default:
                 break
             }
-        }
-        if let tutorialImage = tutorialImage {
-            tutorialImageView = UIImageView(image: tutorialImage)
-            tutorialImageView!.frame = CGRectMake(100, 100, 824, 568)
+            if let tutorialImage = tutorialImage {
+                tutorialImageView = UIImageView(image: tutorialImage)
+                tutorialImageView!.frame = CGRectMake(100, 100, 824, 568)
 
-            self.view.addSubview(tutorialImageView!)
+                self.view.addSubview(tutorialImageView!)
+            } else {
+                tutorialButton.alpha = 0
+            }
         }
     }
 

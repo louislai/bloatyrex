@@ -396,6 +396,7 @@
                         <outlet property="nextStageButton" destination="hMR-ff-J78" id="bwh-sh-6UI"/>
                         <outlet property="secondStar" destination="btf-ym-1f8" id="zR0-x2-cyM"/>
                         <outlet property="thirdStar" destination="0R8-eU-WY1" id="D5S-VK-rAL"/>
+                        <outlet property="tutorialButton" destination="XyH-e1-D4F" id="GPY-Yx-duA"/>
                         <outlet property="winningScreen" destination="JjC-TY-fwJ" id="OUP-s1-2nt"/>
                         <outletCollection property="starSlots" destination="MAm-Ij-GjD" collectionClass="NSMutableArray" id="6ni-XU-lA5"/>
                     </connections>
