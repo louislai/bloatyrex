@@ -18,7 +18,6 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     var loadedMap: Map! = nil
     var loadedMapFileName: String?
     private let reuseIdentifier = "LevelCellIdentifier"
-    private var sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +32,6 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
         // different configuration when used from the package selector
         if let previousController = previousViewController as? PackageSelectorViewController {
-            sectionInsets = UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
-
             // add title
             let title = UILabel(frame: CGRect(x: 0, y: 0, width: 1024, height: 80))
             title.textAlignment = .Center
@@ -92,6 +89,8 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier,
             forIndexPath: indexPath) as! LevelCell
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 10
         cell.levelSelectorViewController = self
         cell.levelSelectorPageViewController = pageViewController as! LevelSelectorPageViewController
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
@@ -143,13 +142,37 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: 325, height: 100)
+        if previousViewController!.isKindOfClass(PackageSelectorViewController) {
+            return CGSize(width: 100, height: 100)
+        } else {
+            return CGSize(width: 325, height: 100)
+        }
     }
 
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return sectionInsets
+        if previousViewController!.isKindOfClass(PackageSelectorViewController) {
+            return UIEdgeInsets(top: 100.0, left: 100.0, bottom: 100.0, right: 100.0)
+        } else {
+            return UIEdgeInsets(top: 100.0, left: 10.0, bottom: 100.0, right: 10.0)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        if previousViewController!.isKindOfClass(PackageSelectorViewController) {
+            return 100
+        } else {
+            return 10
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        if previousViewController!.isKindOfClass(PackageSelectorViewController) {
+            return 50
+        } else {
+            return 10
+        }
     }
 }
 
