@@ -33,7 +33,8 @@ class BlocksSection: SKNode {
         self.addChild(button)
     }
 
-    func getButton(var location: CGPoint) -> BlockButton? {
+    func getButton(location: CGPoint) -> BlockButton? {
+        var location = location
         location.x -= self.position.x
         location.y -= self.position.y
 
