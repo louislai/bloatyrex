@@ -163,7 +163,9 @@ class AgentNode: MapUnitNode {
     /// Return false if program terminates while not reaching the goal
     /// Return nil if undecided
     func runNextAction() -> Bool? {
+        print(3)
         guard let delegate = delegate else {
+            print(4)
             return false
         }
         if let nextAction = delegate.nextAction(mapNode.map, agent: self) {
@@ -192,10 +194,14 @@ class AgentNode: MapUnitNode {
                         waitAction,
                     explodingAction
                     ]))
+                print(2)
                 return false
             }
+            print(status)
+            print(1)
             return status
         } else {
+            print(5)
             return false
         }
     }
@@ -523,7 +529,10 @@ extension AgentNode {
     }
 
     func isNextStepSafe() -> Bool {
-        if let (nextRow, nextColumn) = nextRowAndColumn() {
+        if let (nextRow, nextColumn, nextUnit) = nextPosition() {
+            guard isReachableUnit(nextUnit) else {
+                return true
+            }
             let res = mapNode.isRowAndColumnSafeFromMonster(nextRow, column: nextColumn)
             return res
         }
