@@ -344,19 +344,19 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Yoshi-win.png" translatesAutoresizingMaskIntoConstraints="NO" id="j6V-fp-h0c">
                                         <rect key="frame" x="87" y="8" width="291" height="267"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="OUD-Gb-hex">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="OUD-Gb-hex">
                                         <rect key="frame" x="139" y="360" width="51" height="47"/>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="filled-star" translatesAutoresizingMaskIntoConstraints="NO" id="MAm-Ij-GjD">
                                         <rect key="frame" x="139" y="360" width="51" height="47"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="lg6-9s-Nrb">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="lg6-9s-Nrb">
                                         <rect key="frame" x="199" y="360" width="51" height="47"/>
                                     </imageView>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="filled-star" translatesAutoresizingMaskIntoConstraints="NO" id="btf-ym-1f8">
                                         <rect key="frame" x="198" y="360" width="51" height="47"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="pCK-Bw-XRQ">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="unfilled-star" translatesAutoresizingMaskIntoConstraints="NO" id="pCK-Bw-XRQ">
                                         <rect key="frame" x="259" y="360" width="51" height="47"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qv6-uB-dwz">

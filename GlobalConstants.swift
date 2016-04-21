@@ -12,6 +12,7 @@ import SpriteKit
 class GlobalConstants {
     struct SegueIdentifier {
         static let designToPlaying = "DesignToPlayingSegue"
+        static let playingToTutorial = "Hello"
     }
 
     struct Dimension {
