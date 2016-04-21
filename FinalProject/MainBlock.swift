@@ -8,6 +8,7 @@
 
 import SpriteKit
 
+/// The MainBlock is the leading block of any code blocks program
 class MainBlock: CodeBlock {
     let blockBody: SKShapeNode
 

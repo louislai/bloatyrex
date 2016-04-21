@@ -148,6 +148,7 @@
 		BF695B8B1CC37F8B00532797 /* MonsterNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF695B8A1CC37F8B00532797 /* MonsterNode.swift */; };
 		BF695B8D1CC3809B00532797 /* DoorNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF695B8C1CC3809B00532797 /* DoorNode.swift */; };
 		BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF695B8E1CC4C46200532797 /* AgentNode+AgentProtocol.swift */; };
+		BF6AB17D1CC6C925009943BB /* PlayingMapSceneConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6AB17C1CC6C925009943BB /* PlayingMapSceneConstants.swift */; };
 		BF7F3C9D1CBBA2BF004530F5 /* Yoshi-win.png in Resources */ = {isa = PBXBuildFile; fileRef = BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */; };
 		BF7F3C9F1CBDD702004530F5 /* Scorer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3C9E1CBDD702004530F5 /* Scorer.swift */; };
 		BF7F3CA11CBDD86F004530F5 /* ScoreCriterion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */; };
@@ -258,6 +259,7 @@
 		BF695B8A1CC37F8B00532797 /* MonsterNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonsterNode.swift; sourceTree = "<group>"; };
 		BF695B8C1CC3809B00532797 /* DoorNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorNode.swift; sourceTree = "<group>"; };
 		BF695B8E1CC4C46200532797 /* AgentNode+AgentProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AgentNode+AgentProtocol.swift"; sourceTree = "<group>"; };
+		BF6AB17C1CC6C925009943BB /* PlayingMapSceneConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapSceneConstants.swift; sourceTree = "<group>"; };
 		BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Yoshi-win.png"; sourceTree = "<group>"; };
 		BF7F3C9E1CBDD702004530F5 /* Scorer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scorer.swift; sourceTree = "<group>"; };
 		BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreCriterion.swift; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 				BF8E76E31CC54BB5000AE8CC /* spark.png */,
 				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
+				BF6AB17C1CC6C925009943BB /* PlayingMapSceneConstants.swift */,
 				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,
 				BFFB1A3D1CABB78F00C746CD /* MapNode.swift */,
 				BF8FA5AC1C947C5100DAE175 /* Direction.swift */,
@@ -571,6 +574,11 @@
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = XC99LK63YN;
 					};
+					3DF230B11C8F0617003420C0 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 62L5G97YTE;
+						TestTargetID = 3DF2309D1C8F0617003420C0;
+					};
 					BF17DEAD1CC897AA00192183 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = XC99LK63YN;
@@ -706,6 +714,7 @@
 				1DB4B08D1C99073F0010F727 /* DropZone.swift in Sources */,
 				BF4C52F41C910D5E00C56DD2 /* MapUnitType.swift in Sources */,
 				B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */,
+				BF6AB17D1CC6C925009943BB /* PlayingMapSceneConstants.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
 				1DB4B0911C991F260010F727 /* ProgramBlocks.swift in Sources */,

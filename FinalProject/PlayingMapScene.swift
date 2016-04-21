@@ -5,52 +5,39 @@
 //  Created by louis on 12/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// Extends StaticMapScene
+/// The dynamic scene that executes the game
+///
+/// Public Properties:
+/// - programSupplier: the supplier of the program tree to be fed to the agent
 
 import SpriteKit
 
-struct PlayingMapSceneConstants {
-    struct LabelText {
-        static let play = "Play"
-        static let pause = "Pause"
-        static let reset = "Reset"
-    }
-    struct ButtonSpriteName {
-        static let play = "play"
-        static let pause = "pause"
-        static let reset = "rewind"
-        static let back = "back"
-    }
-    static let buttonYPosition = CGFloat(-334)
-    static let buttonDimension = CGFloat(60)
-}
-
 class PlayingMapScene: StaticMapScene {
-    var running = false
-    var movesLeft = 0
     weak var programSupplier: ProgramSupplier!
-    var newRoundStarted = false
-    var gameWon: Bool?
-    var playButton: SKButton!
-    var resetButton: SKButton!
 
-    var timeOfLastMove: CFTimeInterval = 0.0
-    let timePerMove: CFTimeInterval = 1.0
-    let isPlayingPresetMap: Bool
-    let scorer: Scorer = DefaultGameScorer()
-
-    var buttonSize: CGSize {
+    private var newRoundStarted = false
+    private var playButton: SKButton!
+    private var resetButton: SKButton!
+    private var running = false
+    private var movesLeft = 0
+    private var gameWon: Bool?
+    private var timeOfLastMove: CFTimeInterval = 0.0
+    private let isPlayingPresetMap: Bool
+    private let scorer: Scorer = DefaultGameScorer()
+    private var buttonSize: CGSize {
         return CGSize(
             width: PlayingMapSceneConstants.buttonDimension,
             height: PlayingMapSceneConstants.buttonDimension
         )
     }
-    lazy var playLabel: SKSpriteNode = {
+    private lazy var playLabel: SKSpriteNode = {
         return SKSpriteNode(
             texture: TextureManager.retrieveTexture(PlayingMapSceneConstants.ButtonSpriteName.play),
             size: self.buttonSize
         )
     }()
-    lazy var pauseLabel: SKSpriteNode = {
+    private lazy var pauseLabel: SKSpriteNode = {
         return SKSpriteNode(
             texture: TextureManager.retrieveTexture(PlayingMapSceneConstants.ButtonSpriteName.pause),
             size: self.buttonSize
@@ -87,8 +74,12 @@ class PlayingMapScene: StaticMapScene {
         fatalError("init(coder:) not used")
     }
 
+    /// The game loop, execute action every timePerMove constant
+    /// In each execution, the engine will first check if the game is still ongoing
+    /// then execute the monters' actions, followed by the agent
+    /// and then check for game end condition
     override func update(currentTime: CFTimeInterval) {
-        if currentTime - timeOfLastMove < timePerMove {
+        if currentTime - timeOfLastMove < PlayingMapSceneConstants.timePerMove {
             return
         }
         if mapNode.activeAgentNodes.isEmpty {
@@ -115,6 +106,7 @@ class PlayingMapScene: StaticMapScene {
         }
     }
 
+    /// Setup the game components
     override func setup() {
         super.setup()
         setupButtons()
@@ -131,6 +123,7 @@ class PlayingMapScene: StaticMapScene {
 
     }
 
+    /// Toggle the play/pause state of the play button
     func toggleRun() {
         if running {
             pause()
@@ -142,52 +135,17 @@ class PlayingMapScene: StaticMapScene {
         }
     }
 
-    func run() {
-        if !newRoundStarted {
-            prepareNewRound()
-        }
-        newRoundStarted = true
-        running = true
-        playButton.setDefaultButton(pauseLabel)
-    }
-
-    func pause() {
-        running = false
-        playButton.setDefaultButton(playLabel)
-    }
-
+    /// Send notification to reset the game
     func reset() {
         NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameReset, object: self)
     }
 
+    /// Send notificaiotn to reset the game and re-run the game right away
     func resetAndRun() {
         NSNotificationCenter.defaultCenter().postNotificationName(GlobalConstants.Notification.gameResetAndRun, object: self)
     }
 
-    func setupButtons() {
-        // Setup Play button
-        playButton = SKButton(defaultButton: playLabel)
-        playButton.addTarget(self, selector: #selector(PlayingMapScene.toggleRun))
-        playButton.position = CGPoint(
-            x: 0.0,
-            y: PlayingMapSceneConstants.buttonYPosition
-        )
-        addNodeToOverlay(playButton)
-
-        // Setup Reset button
-        let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)
-        resetLabel.size = buttonSize
-        resetButton = SKButton(defaultButton: resetLabel)
-        resetButton.addTarget(self, selector: #selector(PlayingMapScene.reset))
-        resetButton.position = CGPoint(
-            x: 80.0,
-            y: PlayingMapSceneConstants.buttonYPosition
-        )
-        addNodeToOverlay(resetButton)
-    }
-
-    func addRetryText() {
-
+    private func addRetryText() {
         let arrowSize = CGSize(
         width: buttonSize.width*2.0,
         height: buttonSize.height*2.0
@@ -200,7 +158,7 @@ class PlayingMapScene: StaticMapScene {
         )
         addNodeToOverlay(arrowNode)
 
-        let retryText = SKLabelNode(text: "Rewind to retry")
+        let retryText = SKLabelNode(text: PlayingMapSceneConstants.LabelText.resetHint)
         retryText.fontColor = UIColor.redColor()
         retryText.fontName = GlobalConstants.Font.defaultNameBold
         retryText.position = CGPoint(
@@ -291,6 +249,20 @@ class PlayingMapScene: StaticMapScene {
         mapNode.activeAgentNodes = nextActiveAgentNodes
     }
 
+    func run() {
+        if !newRoundStarted {
+            prepareNewRound()
+        }
+        newRoundStarted = true
+        running = true
+        playButton.setDefaultButton(pauseLabel)
+    }
+
+    private func pause() {
+        running = false
+        playButton.setDefaultButton(playLabel)
+    }
+
     private func moveMonsters() {
         for monster in mapNode.monsterNodes {
             monster.nextAction()
@@ -304,4 +276,27 @@ class PlayingMapScene: StaticMapScene {
             node.text = "MOVES LEFT: \(movesLeft)"
         }
     }
+
+    private func setupButtons() {
+        // Setup Play button
+        playButton = SKButton(defaultButton: playLabel)
+        playButton.addTarget(self, selector: #selector(PlayingMapScene.toggleRun))
+        playButton.position = CGPoint(
+            x: 0.0,
+            y: PlayingMapSceneConstants.buttonYPosition
+        )
+        addNodeToOverlay(playButton)
+
+        // Setup Reset button
+        let resetLabel = SKSpriteNode(imageNamed: PlayingMapSceneConstants.ButtonSpriteName.reset)
+        resetLabel.size = buttonSize
+        resetButton = SKButton(defaultButton: resetLabel)
+        resetButton.addTarget(self, selector: #selector(PlayingMapScene.reset))
+        resetButton.position = CGPoint(
+            x: 80.0,
+            y: PlayingMapSceneConstants.buttonYPosition
+        )
+        addNodeToOverlay(resetButton)
+    }
+
 }

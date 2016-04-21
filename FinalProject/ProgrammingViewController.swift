@@ -5,6 +5,16 @@
 //  Created by louis on 30/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// The mother view controller in the programming screen
+/// ProgrammingViewController contains 2 containers, one segueing to ThumbnailPlayingViewController
+/// and another segueing to CodesBlockViewController
+///
+/// Public Properties
+/// - delegate: FinishedEditingProgramDelegate delegate that will dismiss the view controller
+/// - map: a Map object containing the map information
+/// - programBlocksSupplier: supplier of the program to the view controller
+/// - storedProgramBlocks: the program tree held by the controller
+/// - scaleToDisplay: the zoom scale for the view controller
 
 import UIKit
 

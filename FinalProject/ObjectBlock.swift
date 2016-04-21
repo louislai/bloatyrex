@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+/// This class represents objects that can appear on the map and be observed by the agent. As the
+/// properties of these blocks are largely the same save a few fields and images, objects of this
+/// class is only instantiated by static factory methods.
+
 class ObjectBlock: SKNode, MovableBlockProtocol {
     private var containingBlockValue: ContainerBlockProtocol
     var blockPosition = 0
@@ -15,6 +19,9 @@ class ObjectBlock: SKNode, MovableBlockProtocol {
     let category = BlockCategory.Object
     let objectType: MapUnitType
 
+    /**
+     Retrieves the container block that holds this object block
+     **/
     var containingBlock: ContainerBlockProtocol {
         get {
             return containingBlockValue
@@ -81,6 +88,9 @@ class ObjectBlock: SKNode, MovableBlockProtocol {
         addChild(blockBody)
     }
 
+    /**
+     Returns the map unit this block is associated to
+     **/
     func getMapUnit() -> MapUnitType {
         return objectType
     }

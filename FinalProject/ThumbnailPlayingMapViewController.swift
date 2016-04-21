@@ -5,6 +5,8 @@
 //  Created by louis on 30/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// ThumbnailPlayingMapViewController serves to show the player a small thumbnail
+/// of the map in the programming view
 
 import UIKit
 import SpriteKit
@@ -19,7 +21,6 @@ class ThumbnailPlayingMapViewController: UIViewController {
         // Configure the view
         setUpScene()
     }
-
 
     func setUpScene() {
         let skView = view as! SKView

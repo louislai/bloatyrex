@@ -5,6 +5,13 @@
 //  Created by Tham Zheng Yi on 8/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// PlayingMapViewController is reponsible for displaying the game execution
+/// This is a child view controller segued from PlayingViewController
+///
+/// Public Properties:
+/// - map: map of the level
+/// - scene: the SKScene scene executing the game
+/// - programSupplier: supply to program that will run the agent
 
 import UIKit
 import SpriteKit
@@ -40,7 +47,7 @@ class PlayingMapViewController: UIViewController {
         registerObservers()
     }
 
-    func newScene() -> PlayingMapScene {
+    private func newScene() -> PlayingMapScene {
         let skView = view as! SKView
         // Create and configure the scene
         scene = PlayingMapScene(
@@ -58,6 +65,7 @@ class PlayingMapViewController: UIViewController {
         return scene
     }
 
+    /// Observes the notifications from the game scene's reset and re-run events
     private func registerObservers() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,

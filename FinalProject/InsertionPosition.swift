@@ -8,6 +8,8 @@
 
 import SpriteKit
 
+/// This class is passed around to dropZones to record which zones are being selected when dragging
+/// blocks around for insertion
 class InsertionPosition {
     var trash = false
     var position: Int?

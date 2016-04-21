@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// This class is used as a container that disposes of blocks placed in it. Since the blocks are
+/// always removed from their previous locations before reinsertion, by doing nothing when we
+/// insert blocks here we are removing them from our program.
 class TrashContainer: ContainerBlockProtocol {
     func insertBlock(block: CodeBlock, insertionPosition: InsertionPosition) {
         return

@@ -5,6 +5,7 @@
 //  Created by Melvin Tan Jun Keong on 31/1/16.
 //  Copyright © 2016 NUS CS3217. All rights reserved.
 //
+/// FileArchive is responsible for managing level files
 
 import Foundation
 
