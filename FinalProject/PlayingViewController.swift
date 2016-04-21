@@ -106,6 +106,15 @@ class PlayingViewController: UIViewController {
         )
         winningScreen.hidden = false
         winningScreen.layer.zPosition = GlobalConstants.zPosition.front
+
+        // Check if user is playing preset map
+        hidePresetMapWidgets()
+        let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
+        if isPlayingPresetMap {
+            self.showStarSlots()
+            self.showNextStage()
+        }
+
         UIView.animateWithDuration(0.5, animations: { _ in
             self.winningScreen.frame = CGRect(
                 x: self.view.bounds.width-self.winningScreen.bounds.width,
@@ -116,10 +125,7 @@ class PlayingViewController: UIViewController {
             }, completion: { finished in
                 // Handle rating
                 if finished {
-                    let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
                     if isPlayingPresetMap {
-                        self.showStarSlots()
-                        self.showNextStage()
                         let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
                         let toAppearStars = self.stars[0..<rating]
                         for (index, star) in toAppearStars.enumerate() {
@@ -142,7 +148,6 @@ class PlayingViewController: UIViewController {
                     }
                 }
         })
-        hidePresetMapWidgets()
     }
 
     func resetGameScene() {
