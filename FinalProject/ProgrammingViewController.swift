@@ -26,6 +26,7 @@ class ProgrammingViewController: UIViewController {
     var scaleToDisplay: CGFloat?
     var levelName = GlobalConstants.customLevelName
     var packageName: String?
+    var tutorialImage: UIImage?
 
     @IBAction func playingViewButtonPressed(sender: AnyObject) {
         let viewController = self.storyboard!.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.playingViewController)
@@ -35,6 +36,7 @@ class ProgrammingViewController: UIViewController {
         playingViewController.levelName = levelName
         playingViewController.packageName = packageName
         playingViewController.fromProgrammingView = true
+        playingViewController.tutorialImage = tutorialImage
         scaleToDisplay = codeBlocksScaleSupplier.retrieveScale()
         if let scaleToDisplay = scaleToDisplay {
             playingViewController.scaleToDisplay = scaleToDisplay

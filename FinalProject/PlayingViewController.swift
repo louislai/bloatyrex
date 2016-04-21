@@ -30,6 +30,7 @@ class PlayingViewController: UIViewController {
         scaleToDisplay = codeBlocksDisplay.retrieveScale()
         programmingViewController.levelName = levelName
         programmingViewController.packageName = packageName
+        programmingViewController.tutorialImage = tutorialImage
         if let scaleToDisplay = scaleToDisplay {
             programmingViewController.scaleToDisplay = scaleToDisplay
         }
