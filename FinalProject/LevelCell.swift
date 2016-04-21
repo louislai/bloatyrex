@@ -98,9 +98,13 @@ class LevelCell: UICollectionViewCell {
         }
         renameAlert.addAction(UIAlertAction(title: "Confirm", style: .Default,
             handler: { (action: UIAlertAction!) in
+                var failureMessage = "Failed to save this level."
                 if newName!.text!.characters.count <= LevelCellConstants.maximumLevelLength {
                     renamedSuccessfully = self.filesArchive.renameFile(originalFileName,
                         newFileName: newName!.text!)
+                } else {
+                    failureMessage = "Filename cannot exceed " +
+                        "\(LevelCellConstants.maximumLevelLength) characters."
                 }
                 if renamedSuccessfully {
                     self.levelSelectorPageViewController.resetNavigationBar()
@@ -115,7 +119,7 @@ class LevelCell: UICollectionViewCell {
                         animated: true, completion: nil)
                 } else {
                     let failureAlert = UIAlertController(title: "Failed",
-                        message: "Failed to save this level.",
+                        message: failureMessage,
                         preferredStyle: UIAlertControllerStyle.Alert)
                     failureAlert.addAction(UIAlertAction(title: "OK", style: .Default,
                         handler: { (action: UIAlertAction!) in
