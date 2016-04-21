@@ -34,49 +34,49 @@ class ObjectBlock: SKNode, MovableBlockProtocol {
 
     static func getHoleBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Hole)
-        block.setSprite("hole")
+        block.setSprite(GlobalConstants.ImageNames.hole)
         return block
     }
 
     static func getWoodBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.WoodenBlock)
-        block.setSprite("wooden-block")
+        block.setSprite(GlobalConstants.ImageNames.wooden_block)
         return block
     }
 
     static func getWallBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Wall)
-        block.setSprite("wall")
+        block.setSprite(GlobalConstants.ImageNames.wall)
         return block
     }
 
     static func getEmptySpaceBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.EmptySpace)
-        block.setSprite("space")
+        block.setSprite(GlobalConstants.ImageNames.space)
         return block
     }
 
     static func getMonsterBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Monster)
-        block.setSprite("monster-static")
+        block.setSprite(GlobalConstants.ImageNames.monster_static)
         return block
     }
 
     static func getToiletBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.Goal)
-        block.setSprite("toilet")
+        block.setSprite(GlobalConstants.ImageNames.goal)
         return block
     }
 
     static func getLeftDoorBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.DoorLeft)
-        block.setSprite("buttons-left")
+        block.setSprite(GlobalConstants.ImageNames.buttons_left)
         return block
     }
 
     static func getRightDoorBlock(containingBlock containingBlock: ContainerBlockProtocol, containingZone: DropZone) -> ObjectBlock {
         let block = ObjectBlock(containingBlock: containingBlock, containingZone: containingZone, objectType: MapUnitType.DoorRight)
-        block.setSprite("buttons-right")
+        block.setSprite(GlobalConstants.ImageNames.buttons_right)
         return block
     }
 
