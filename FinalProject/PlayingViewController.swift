@@ -215,6 +215,8 @@ extension PlayingViewController {
             }
             if let _ = tutorialImage {
                 performSegueWithIdentifier(GlobalConstants.SegueIdentifier.playingToTutorial, sender: self)
+            } else {
+                tutorialButton.alpha = 0
             }
         }
     }
