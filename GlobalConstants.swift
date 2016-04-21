@@ -68,7 +68,10 @@ class GlobalConstants {
         static let hole = "hole"
         static let wall = "wall"
         static let goal = "toilet"
+        static let skull = "skull"
+        static let sleeping = "zzz"
     }
+    static let explosionEmitterName = "Spark.sks"
 
     static let filesArchive = FilesArchive()
     static let customLevelName = "Free Play"

@@ -10,6 +10,8 @@ import SpriteKit
 
 struct DoorNodeConstants {
     static let numberOfButtons = 2
+    static let doorLeft = 0
+    static let doorRight = 1
 }
 
 class DoorNode: MapUnitNode {
@@ -25,11 +27,15 @@ class DoorNode: MapUnitNode {
         let doorValue = Int(
             arc4random_uniform(UInt32(DoorNodeConstants.numberOfButtons))
         )
-        if doorValue == 0 {
-            texture = TextureManager.retrieveTexture("buttons-left")
+        if doorValue == DoorNodeConstants.doorLeft {
+            texture = TextureManager.retrieveTexture(
+                GlobalConstants.ImageNames.buttons_left
+            )
             type = .DoorLeft
         } else {
-            texture = TextureManager.retrieveTexture("buttons-right")
+            texture = TextureManager.retrieveTexture(
+                GlobalConstants.ImageNames.buttons_right
+            )
             type = .DoorRight
         }
     }

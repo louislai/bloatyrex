@@ -19,7 +19,9 @@ class MonsterNode: MapUnitNode {
     var frequencyMax = MonsterNodeConstants.frequencyMax
     var turnsUntilAwake = 0
     var zzzOn = false
-    let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture("zzz"))
+    let zzzNode = SKSpriteNode(texture: TextureManager.retrieveTexture(
+            GlobalConstants.ImageNames.sleeping
+        ))
     var deadZoneNodes = [SKSpriteNode]()
     var indicatorNode: SKLabelNode?
     let timePerAnimation: NSTimeInterval = 0.15
@@ -149,7 +151,10 @@ class MonsterNode: MapUnitNode {
     }
 
     private func showDeadZones() {
-        let blueprintDeadZone = SKSpriteNode(texture: TextureManager.retrieveTexture("skull"))
+        let blueprintDeadZone = SKSpriteNode(
+            texture: TextureManager.retrieveTexture(
+                GlobalConstants.ImageNames.skull
+            ))
         blueprintDeadZone.zPosition = GlobalConstants.zPosition.back
         blueprintDeadZone.size = mapNode.blockSize
         blueprintDeadZone.name = MonsterNodeConstants.deadZoneNodeName
