@@ -15,7 +15,7 @@ struct LevelCellConstants {
 }
 
 class LevelCell: UICollectionViewCell {
-    var textLabel: UILabel!
+    private var textLabel: UILabel!
     private var filesArchive = FilesArchive()
     private var levelSelectorViewController: LevelSelectorViewController!
     private var levelSelectorPageViewController: LevelSelectorPageViewController!
@@ -37,8 +37,9 @@ class LevelCell: UICollectionViewCell {
     }
 
     func addGesturesToContentView() {
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
-                                                                      action: #selector(LevelCell.handleLongPressedCell(_:)))
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(
+            target: self,
+            action: #selector(LevelCell.handleLongPressedCell(_:)))
         contentView.addGestureRecognizer(longPressGestureRecognizer)
         contentView.userInteractionEnabled = true
     }
@@ -47,7 +48,7 @@ class LevelCell: UICollectionViewCell {
         levelSelectorViewController = controller
     }
 
-    func setLevelSelectorPageViewController(controller: LevelSelectorPageViewController) {
+    private func setLevelSelectorPageViewController(controller: LevelSelectorPageViewController) {
         levelSelectorPageViewController = controller
     }
 
@@ -137,32 +138,32 @@ class LevelCell: UICollectionViewCell {
                                                               completion: nil)
     }
 
-    func reloadPageViewController() {
+    private func reloadPageViewController() {
         levelSelectorPageViewController.filtered = []
         levelSelectorPageViewController.viewDidAppear(false)
     }
 
     // Mark: - Search Bar
 
-    var searchBar: UISearchBar? {
+    private var searchBar: UISearchBar? {
         return levelSelectorPageViewController.searchBar
     }
 
-    func resetSearchBar() {
+    private func resetSearchBar() {
         searchBar?.text = ""
     }
 
     // MARK: - Navigation Bar
 
-    var navigationBar: UINavigationBar? {
+    private var navigationBar: UINavigationBar? {
         return levelSelectorPageViewController.navigationBar
     }
 
-    var renameButton: UIBarButtonItem {
+    private var renameButton: UIBarButtonItem {
         return UIBarButtonItem(title: "Rename", style: .Plain, target: self,
                                action: #selector(LevelCell.renameFile))
     }
-    var deleteButton: UIBarButtonItem {
+    private var deleteButton: UIBarButtonItem {
         let trashBinImage = UIImage(named: "trash")
         return UIBarButtonItem(image: trashBinImage, style: .Plain, target: self,
                                action: #selector(LevelCell.deleteFile))
@@ -174,7 +175,7 @@ class LevelCell: UICollectionViewCell {
         self.reloadPageViewController()
     }
 
-    func setNavigationBar(fileName: String) {
+    private func setNavigationBar(fileName: String) {
         let navigationItem = navigationBar!.items!.first!
         navigationItem.title = fileName
         navigationItem.leftBarButtonItem = renameButton

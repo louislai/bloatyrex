@@ -12,16 +12,17 @@ import Darwin
 class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDataSource,
     UIPageViewControllerDelegate, UISearchBarDelegate {
 
-    private let filesArchive = FilesArchive()
     var numberOfItemsPerPage: Int?
-    var totalNumberOfItems: Int {
+    var package: String?
+    private let filesArchive = FilesArchive()
+    private var totalNumberOfItems: Int {
         if searchActive {
             return filtered.count
         } else {
             return data.count
         }
     }
-    var totalNumberOfPages: Int {
+    private var totalNumberOfPages: Int {
         if totalNumberOfItems == 0 {
             return 1
         } else {
@@ -30,9 +31,9 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
     private var pageViewController: UIPageViewController?
     var previousViewController: UIViewController?
-    var searchBar: UISearchBar?
-    var searchActive: Bool = false
-    var data: [String] {
+    private var searchBar: UISearchBar?
+    private var searchActive: Bool = false
+    private var data: [String] {
         if previousViewController is PackageSelectorViewController {
             return filesArchive.getFileNamesFromPackage(package!)
         } else {
@@ -40,7 +41,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         }
     }
     var filtered: [String] = []
-    var package: String?
     var navigationBar: UINavigationBar?
 
     // MARK: - View Lifecycle
@@ -190,10 +190,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
     // MARK: - Search Bar
 
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true
-    }
-
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchActive = false
     }
@@ -218,6 +214,10 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
             searchActive = true
         }
         viewDidAppear(false)
+    }
+
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true
     }
 
     // - MARK: - Navigation Bar
