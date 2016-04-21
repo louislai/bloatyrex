@@ -55,8 +55,14 @@ class GlobalConstants {
         static let blockSectionWidth = CGFloat(blockSectionButtonsPerRow) * (blockSize + blockSectionMargin) + blockSectionMargin
         static let blockSectionTitleSize = CGFloat(32)
     }
+
+    struct ImageNames {
+        static let poo = "poo"
+    }
+
     static let filesArchive = FilesArchive()
     static let customLevelName = "Free Play"
+
 
     static let PrepackageNames = ["The Basics", "If", "While"]
     static let PrepackagedLevelsNames: [[String]] = [

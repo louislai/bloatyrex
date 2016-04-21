@@ -5,6 +5,12 @@
 //  Created by louis on 12/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// A static map scene containing the game environment
+///
+/// Public Properties:
+/// - mapNode: the map node for game
+/// - hudLayer: the hud layer
+/// - levelName: the name of the map
 
 import SpriteKit
 
@@ -48,6 +54,7 @@ class StaticMapScene: PannableScene {
         )
     }
 
+    /// Setup the environment for the game
     func setup() {
         addNodeToContent(mapNode)
         mapNode.setup()
@@ -55,7 +62,15 @@ class StaticMapScene: PannableScene {
         setupHud()
     }
 
-    func setupHud() {
+    /// Convert a row, column pair into a CGPoint coordinate
+    func pointFor(row: Int, column: Int) -> CGPoint {
+        return CGPoint(
+            x: CGFloat(column)*GlobalConstants.Dimension.blockWidth,
+            y: CGFloat(row)*GlobalConstants.Dimension.blockHeight
+        )
+    }
+
+    private func setupHud() {
         // 1
         let movesLeftLabel = SKLabelNode(text: "MOVES LEFT: ")
         movesLeftLabel.name = StaticMapSceneConstants.NodeNames.movesLeftLabel
@@ -74,14 +89,5 @@ class StaticMapScene: PannableScene {
 
         hudLayer.addChild(movesLeftLabel)
         hudLayer.addChild(levelNameLabel)
-    }
-
-    // Convert a row, column pair into a CGPoint relative
-    // to unitsLayer
-    func pointFor(row: Int, column: Int) -> CGPoint {
-        return CGPoint(
-            x: CGFloat(column)*GlobalConstants.Dimension.blockWidth,
-            y: CGFloat(row)*GlobalConstants.Dimension.blockHeight
-        )
     }
 }

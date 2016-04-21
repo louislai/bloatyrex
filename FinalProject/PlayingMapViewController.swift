@@ -83,6 +83,7 @@ class PlayingMapViewController: UIViewController {
     }
 }
 
+// MARK: These methods executes in response to the nofication sent by NotificationCenter
 extension PlayingMapViewController {
     func reset() {
         let skView = view as! SKView
@@ -101,6 +102,7 @@ extension PlayingMapViewController {
     }
 }
 
+// MARK: ProgramSupplier
 extension PlayingMapViewController: ProgramSupplier {
     func retrieveProgram() -> Program? {
         return programSupplier.retrieveProgram()

@@ -5,7 +5,7 @@
 //  Created by louis on 12/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
-/// Extends StaticMapScene
+/// Inherits from StaticMapScene
 /// The dynamic scene that executes the game
 ///
 /// Public Properties:

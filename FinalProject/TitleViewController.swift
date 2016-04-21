@@ -5,17 +5,19 @@
 //  Created by louis on 16/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// The controller for the first screen in the game
+/// Also animate some random image to be dropped on the screen
 
 import UIKit
 
 class TitleViewController: UIViewController {
-    var leftRandomTileGenerator: UIView!
-    var rightRandomTileGenerator: UIView!
-    let poop = UIImage(named: "poo")!
-    var poopView: UIImageView!
-    var animator: UIDynamicAnimator? = nil
-    let gravity = UIGravityBehavior()
-    var timer = NSTimer()
+    private var leftRandomTileGenerator: UIView!
+    private var rightRandomTileGenerator: UIView!
+    private let poop = UIImage(named: GlobalConstants.ImageNames.poo)!
+    private var poopView: UIImageView!
+    private var animator: UIDynamicAnimator? = nil
+    private let gravity = UIGravityBehavior()
+    private var timer = NSTimer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +30,7 @@ class TitleViewController: UIViewController {
         view.addSubview(rightRandomTileGenerator)
         view.sendSubviewToBack(rightRandomTileGenerator)
 
-        animator = UIDynamicAnimator(referenceView: self.view)
+        animator = UIDynamicAnimator(referenceView: view)
         animator?.addBehavior(gravity)
 
         runRandomTileDrops()
@@ -47,15 +49,6 @@ class TitleViewController: UIViewController {
         }
     }
 
-    func runRandomTileDrops() {
-        let randomDelay = Double(arc4random_uniform(150)) / 100
-        timer = NSTimer.scheduledTimerWithTimeInterval(randomDelay,
-                                               target: self,
-                                               selector: #selector(delayedAction),
-                                               userInfo: nil,
-                                               repeats: false)
-    }
-
     func delayedAction() {
         let isLeft = Int(arc4random_uniform(2)) == 0
         let randomX = Int(arc4random_uniform(250)) - 50
@@ -63,7 +56,18 @@ class TitleViewController: UIViewController {
         addRandomTile(randomPosition, isLeft: isLeft)
     }
 
-    func addRandomTile(location: CGRect, isLeft: Bool) {
+    private func runRandomTileDrops() {
+        let randomDelay = Double(arc4random_uniform(150)) / 100
+        timer = NSTimer.scheduledTimerWithTimeInterval(
+            randomDelay,
+            target: self,
+            selector: #selector(delayedAction),
+            userInfo: nil,
+            repeats: false
+        )
+    }
+
+    private func addRandomTile(location: CGRect, isLeft: Bool) {
         poopView = UIImageView(frame: location)
         poopView.image = poop
 
@@ -76,7 +80,7 @@ class TitleViewController: UIViewController {
         runRandomTileDrops()
     }
 
-    func addGravity(tile: UIView) {
+    private func addGravity(tile: UIView) {
         gravity.addItem(tile)
         gravity.gravityDirection = CGVector(dx: 0, dy: 0.8)
     }

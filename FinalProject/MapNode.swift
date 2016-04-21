@@ -5,18 +5,29 @@
 //  Created by louis on 12/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// MapNode holds the node displaying the game map
+///
+/// Public Properties
+/// - map: the map model
+/// - activeAgentNodes: the list of agents that are still running
+/// - monsterNodes: the list of monsters
+/// - goalNodes: the list of goals
+/// - doorNodes: the list of doors
+/// - originalMovesLeft: the allowed number of moves for the map/level
+/// - unitsLayer: The SKNode containing all the unit nodes
 
 import SpriteKit
 
 class MapNode: SKNode {
     var map: Map
-    let blocksLayer = SKNode()
-    let unitsLayer = SKNode()
     var activeAgentNodes = [AgentNode]()
     var monsterNodes = [MonsterNode]()
     var goalNodes = [GoalNode]()
     var doorNodes = [DoorNode]()
     var originalMovesLeft = 0
+    let unitsLayer = SKNode()
+
+    private let blocksLayer = SKNode()
     private var numberOfRows: Int {
         return map.numberOfRows
     }
@@ -69,8 +80,32 @@ class MapNode: SKNode {
         }
     }
 
+    /// Check if a particular row & column in the map model is safe from monsters
+    func isRowAndColumnSafeFromMonster(row: Int, column: Int) -> Bool {
+        if let monster = map.retrieveMapUnitAt(row+1, column: column) as? MonsterNode
+            where monster.isAwake() {
+            monster.setOrientation(.Down)
+            return false
+        }
+        if let monster = map.retrieveMapUnitAt(row-1, column: column) as? MonsterNode
+            where monster.isAwake() {
+            monster.setOrientation(.Up)
+            return false
+        }
+        if let monster = map.retrieveMapUnitAt(row, column: column+1) as? MonsterNode
+            where monster.isAwake() {
+            monster.setOrientation(.Left)
+            return false
+        }
+        if let monster = map.retrieveMapUnitAt(row, column: column-1) as? MonsterNode
+            where monster.isAwake() {
+            monster.setOrientation(.Right)
+            return false
+        }
+        return true
+    }
 
-    func setupMapUnits() {
+    private func setupMapUnits() {
         for row in 0..<numberOfRows {
             for column in 0..<numberOfColumns {
                 if let unit = map.retrieveMapUnitAt(row, column: column)
@@ -98,31 +133,6 @@ class MapNode: SKNode {
                 }
             }
         }
-    }
-
-
-    func isRowAndColumnSafeFromMonster(row: Int, column: Int) -> Bool {
-        if let monster = map.retrieveMapUnitAt(row+1, column: column) as? MonsterNode
-            where monster.isAwake() {
-                monster.setOrientation(.Down)
-                return false
-        }
-        if let monster = map.retrieveMapUnitAt(row-1, column: column) as? MonsterNode
-            where monster.isAwake() {
-                monster.setOrientation(.Up)
-                return false
-        }
-        if let monster = map.retrieveMapUnitAt(row, column: column+1) as? MonsterNode
-            where monster.isAwake() {
-                monster.setOrientation(.Left)
-                return false
-        }
-        if let monster = map.retrieveMapUnitAt(row, column: column-1) as? MonsterNode
-            where monster.isAwake() {
-                monster.setOrientation(.Right)
-                return false
-        }
-        return true
     }
 
     // Convert a row, column pair into a CGPoint relative
