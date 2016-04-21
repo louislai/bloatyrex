@@ -8,6 +8,15 @@
 
 import UIKit
 
+struct LevelSelectorConstants {
+    static let cellReuseIdentifier = "packageCell"
+
+    static let pooImage = UIImage(named: "poo")
+    static let toiletPaperImage = UIImage(named: "toilet-paper")
+    static let backImage = UIImage(named: "back")
+    static let loadLevelSegueIdentifier = "loadLevelToPlay"
+}
+
 class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     var pageIndex: Int?
@@ -17,14 +26,15 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     private let filesArchive = FilesArchive()
     var loadedMap: Map! = nil
     var loadedMapFileName = GlobalConstants.customLevelName
-    private let reuseIdentifier = "LevelCellIdentifier"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let flowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: flowLayout)
-        collectionView.registerClass(LevelCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        let collectionView = UICollectionView(frame: self.view.frame,
+            collectionViewLayout: flowLayout)
+        collectionView.registerClass(LevelCell.self,
+            forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor(red: 0, green: 0.9, blue: 0, alpha: 0.2)
@@ -42,15 +52,16 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         }
 
         let pooImageView = UIImageView(frame: CGRect(x: 925, y: 590, width: 70, height: 70))
-        pooImageView.image = UIImage(named: "poo")
+        pooImageView.image = LevelSelectorConstants.pooImage
         collectionView.addSubview(pooImageView)
 
-        let toiletPaperImageView = UIImageView(frame: CGRect(x: 800, y: 540, width: 120, height: 120))
-        toiletPaperImageView.image = UIImage(named: "toilet-paper")
+        let toiletPaperImageView =
+            UIImageView(frame: CGRect(x: 800, y: 540, width: 120, height: 120))
+        toiletPaperImageView.image = LevelSelectorConstants.toiletPaperImage
         collectionView.addSubview(toiletPaperImageView)
 
         // add back button
-        let backButtonImage = UIImage(named: "back") as UIImage?
+        let backButtonImage = LevelSelectorConstants.backImage as UIImage?
         let backButton = UIButton(type: UIButtonType.Custom) as UIButton
         backButton.frame = CGRect(x: 20, y: 590, width: 73, height: 73)
         backButton.setImage(backButtonImage, forState: .Normal)
@@ -87,12 +98,14 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     // Make cell and return cell
     func collectionView(collectionView: UICollectionView,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier,
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
+            LevelSelectorConstants.cellReuseIdentifier,
             forIndexPath: indexPath) as! LevelCell
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 10
         cell.levelSelectorViewController = self
-        cell.levelSelectorPageViewController = pageViewController as! LevelSelectorPageViewController
+        cell.levelSelectorPageViewController =
+            pageViewController as! LevelSelectorPageViewController
         cell.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
         cell.textLabel.text = fileNames![indexPath.item]
         if previousViewController is LevelDesigningViewController {
@@ -108,7 +121,8 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         let fileName = cell.textLabel.text!
         if previousViewController is LevelDesigningViewController {
             if let loadedMap = filesArchive.loadFromFile(fileName) {
-                let levelDesigningViewController = previousViewController as! LevelDesigningViewController
+                let levelDesigningViewController =
+                    previousViewController as! LevelDesigningViewController
                 levelDesigningViewController.map = loadedMap
                 for row in 0...loadedMap.numberOfRows {
                     for column in 0...loadedMap.numberOfColumns {
@@ -126,14 +140,16 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
                 dismissViewControllerAnimated(true, completion: nil)
             }
         } else if previousViewController is PackageSelectorViewController {
-            let levelSelectorPageViewController = pageViewController as! LevelSelectorPageViewController
+            let levelSelectorPageViewController =
+                pageViewController as! LevelSelectorPageViewController
             if let package = levelSelectorPageViewController.package {
                 if let loadedMap = filesArchive.loadFromPackageFile(fileName,
                                                                     packageName: package) {
                     /// load selected level to play
                     self.loadedMap = loadedMap
                     self.loadedMapFileName = fileName
-                    performSegueWithIdentifier("loadLevelToPlay", sender: self)
+                    performSegueWithIdentifier(LevelSelectorConstants.loadLevelSegueIdentifier,
+                                               sender: self)
                 }
             }
         }
@@ -198,12 +214,14 @@ class LevelCell: UICollectionViewCell {
     }
 
     func addGesturesToContentView() {
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(LevelCell.handleLongPressedCell(_:)))
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self,
+            action: #selector(LevelCell.handleLongPressedCell(_:)))
         contentView.addGestureRecognizer(longPressGestureRecognizer)
         contentView.userInteractionEnabled = true
     }
 
-    // When the user long-pressed a cell, the user can choose to delete the file with the corresponding file name.
+    // When the user long-pressed a cell, the user can choose to delete the file with the 
+    // corresponding file name.
     func handleLongPressedCell(sender: UILongPressGestureRecognizer) {
         let tappedContentView = sender.view as UIView!
         let label = tappedContentView.subviews.first! as! UILabel
@@ -232,44 +250,55 @@ class LevelCell: UICollectionViewCell {
         deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
             self.levelSelectorPageViewController.resetNavigationBar()
         }))
-        levelSelectorViewController.presentViewController(deleteAlert, animated: true, completion: nil)
+        levelSelectorViewController.presentViewController(deleteAlert, animated: true,
+                                                          completion: nil)
     }
 
     func renameFile() {
         let originalFileName = textLabel.text!
         var newName: UITextField?
         var renamedSuccessfully = false
-        let renameAlert = UIAlertController(title: "Rename", message: "Rename '\(originalFileName)' as?",
+        let renameAlert = UIAlertController(title: "Rename",
+                                            message: "Rename '\(originalFileName)' as?",
             preferredStyle: UIAlertControllerStyle.Alert)
         renameAlert.addTextFieldWithConfigurationHandler { (textField) -> Void in
             newName = textField
             newName?.placeholder = "Enter new name here"
         }
-        renameAlert.addAction(UIAlertAction(title: "Confirm", style: .Default, handler: { (action: UIAlertAction!) in
+        renameAlert.addAction(UIAlertAction(title: "Confirm", style: .Default,
+            handler: { (action: UIAlertAction!) in
             if newName!.text!.characters.count <= 30 {
-                renamedSuccessfully = self.filesArchive.renameFile(originalFileName, newFileName: newName!.text!)
+                renamedSuccessfully = self.filesArchive.renameFile(originalFileName,
+                    newFileName: newName!.text!)
             }
             if renamedSuccessfully {
                 self.levelSelectorPageViewController.resetNavigationBar()
                 self.resetSearchBar()
                 self.reloadPageViewController()
-                let successAlert = UIAlertController(title: "Renamed!", message: "You have successfully renamed this level!",
+                let successAlert = UIAlertController(title: "Renamed!",
+                    message: "You have successfully renamed this level!",
                     preferredStyle: UIAlertControllerStyle.Alert)
                 successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                self.levelSelectorPageViewController.presentViewController(successAlert, animated: true, completion: nil)
+                self.levelSelectorPageViewController.presentViewController(successAlert,
+                    animated: true, completion: nil)
             } else {
-                let failureAlert = UIAlertController(title: "Failed", message: "Failed to save this level.",
+                let failureAlert = UIAlertController(title: "Failed",
+                    message: "Failed to save this level.",
                     preferredStyle: UIAlertControllerStyle.Alert)
-                failureAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+                failureAlert.addAction(UIAlertAction(title: "OK", style: .Default,
+                    handler: { (action: UIAlertAction!) in
                     self.levelSelectorPageViewController.resetNavigationBar()
                 }))
-                self.levelSelectorPageViewController.presentViewController(failureAlert, animated: true, completion: nil)
+                self.levelSelectorPageViewController.presentViewController(failureAlert,
+                    animated: true, completion: nil)
             }
         }))
-        renameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+        renameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel,
+            handler: { (action: UIAlertAction!) in
             self.levelSelectorPageViewController.resetNavigationBar()
         }))
-        levelSelectorPageViewController.presentViewController(renameAlert, animated: true, completion: nil)
+        levelSelectorPageViewController.presentViewController(renameAlert, animated: true,
+                                                              completion: nil)
     }
 
     func reloadPageViewController() {
