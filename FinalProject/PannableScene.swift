@@ -43,6 +43,9 @@ import SpriteKit
 struct PannableSceneConstants {
     static let defaultVerticalPanBuffer: CGFloat = 260.0
     static let defaultHorizontalPanBuffer: CGFloat = 50.0
+    static let zoomRangeFactor: CGFloat = 2.0
+    static let doubleTapGestureTapsRequired = 2
+    static let panGestureTouchesRequired = 2
 }
 
 class PannableScene: SKScene {
@@ -72,9 +75,10 @@ class PannableScene: SKScene {
     init(size: CGSize, initialZoomLevel: CGFloat = 1, overlayZPosition: CGFloat = 10,
         disableHorizontalPan: Bool = false, disableVerticalPan: Bool = false,
         disableDoubleTap: Bool = false) {
+        // scale is the inverse of zoom
         initialScale = 1.0 / initialZoomLevel
-        minimumScale = initialScale / 2.0
-        maximumScale = initialScale * 2.0
+        minimumScale = initialScale / PannableSceneConstants.zoomRangeFactor
+        maximumScale = initialScale * PannableSceneConstants.zoomRangeFactor
         horizontalPanDisabled = disableHorizontalPan
         verticalPanDisabled = disableVerticalPan
         doubleTapDisabled = disableDoubleTap
@@ -99,12 +103,13 @@ class PannableScene: SKScene {
         self.view!.addGestureRecognizer(pinchRecognizer)
         let doubleTapRecognizer = UITapGestureRecognizer(target: self,
             action: #selector(PannableScene.handleDoubleTap(_:)))
-        doubleTapRecognizer.numberOfTapsRequired = 2
+        doubleTapRecognizer.numberOfTapsRequired =
+            PannableSceneConstants.doubleTapGestureTapsRequired
         self.view!.addGestureRecognizer(doubleTapRecognizer)
         let panRecognizer = UIPanGestureRecognizer(target: self,
                                                    action: #selector(PannableScene.handlePan(_:)))
-        panRecognizer.maximumNumberOfTouches = 2
-        panRecognizer.minimumNumberOfTouches = 2
+        panRecognizer.maximumNumberOfTouches = PannableSceneConstants.panGestureTouchesRequired
+        panRecognizer.minimumNumberOfTouches = PannableSceneConstants.panGestureTouchesRequired
         self.view!.addGestureRecognizer(panRecognizer)
     }
 
