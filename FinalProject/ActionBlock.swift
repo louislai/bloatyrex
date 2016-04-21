@@ -75,6 +75,7 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
 
     func unhighlight() {
         if let layer = highlightLayer {
+            highlightLayer = nil
             layer.removeFromParent()
         }
     }
