@@ -56,8 +56,8 @@ struct PannableSceneConstants {
 class PannableScene: SKScene {
     var content = SKNode()
     var overlay = SKNode()
-    var verticalPanBuffer = PannableSceneConstants.defaultVerticalPanBuffer
-    var horizontalPanBuffer = PannableSceneConstants.defaultHorizontalPanBuffer
+    private var verticalPanBuffer = PannableSceneConstants.defaultVerticalPanBuffer
+    private var horizontalPanBuffer = PannableSceneConstants.defaultHorizontalPanBuffer
     private var viewpoint: SKCameraNode = SKCameraNode()
     private var initialScale: CGFloat
     private var currentScale: CGFloat
@@ -151,6 +151,22 @@ class PannableScene: SKScene {
     */
     func setMaximumScale(scale: CGFloat) {
         maximumScale = scale
+    }
+
+    /**
+    Sets the vertical buffer amount for which the viewpoint is allowed to pan beyond the top and
+    bottom edges of the content.
+    */
+    func setVerticalPanBuffer(buffer: CGFloat) {
+        verticalPanBuffer = buffer
+    }
+
+    /**
+    Sets the horizontal buffer amount for which the viewpoint is allowed to pan beyond the left and
+    right edges of the content.
+    */
+    func setHorizontalPanBuffer(buffer: CGFloat) {
+        horizontalPanBuffer = buffer
     }
 
     /**
