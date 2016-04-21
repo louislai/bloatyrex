@@ -90,23 +90,29 @@ class IfBlock: CodeBlock {
 
     override init(containingBlock: ContainerBlockProtocol) {
 
-        middleBlock = SKSpriteNode(imageNamed: "else")
-        topBlock = SKSpriteNode(imageNamed: "if")
-        bottomBlock = SKSpriteNode(imageNamed: "endif")
+        middleBlock = SKSpriteNode(imageNamed: GlobalConstants.ImageNames.else_block)
+        topBlock = SKSpriteNode(imageNamed: GlobalConstants.ImageNames.if_block)
+        bottomBlock = SKSpriteNode(imageNamed: GlobalConstants.ImageNames.endif_block)
         let size = GlobalConstants.CodeBlocks.blockSize
         let ratio = size / bottomBlock.size.height
         bottomBlock.size = CGSize(width: bottomBlock.size.width * ratio, height: size)
         middleBlock.size = CGSize(width: middleBlock.size.width * ratio, height: size)
         topBlock.size = CGSize(width: topBlock.size.width * ratio, height: size)
-        ifTrueDropZone = DropZone(size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
-                                  dropZoneCategory: BlockCategory.Action,
-                                  containingBlock: ifTrueBlock)
-        elseDropZone = DropZone(size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
-                                dropZoneCategory: BlockCategory.Action,
-                                containingBlock: elseBlock)
-        boolOpZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: topBlock.size.height),
-                              dropZoneCategory: BlockCategory.BoolOp,
-                              containingBlock: containingBlock)
+        ifTrueDropZone = DropZone(
+            size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
+            dropZoneCategory: BlockCategory.Action,
+            containingBlock: ifTrueBlock
+        )
+        elseDropZone = DropZone(
+            size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
+            dropZoneCategory: BlockCategory.Action,
+            containingBlock: elseBlock
+        )
+        boolOpZone = DropZone(
+            size: CGSize(width: CodeBlock.dropZoneSize, height: topBlock.size.height),
+            dropZoneCategory: BlockCategory.BoolOp,
+            containingBlock: containingBlock
+        )
         super.init(containingBlock: containingBlock)
         self.addChild(topBlock)
         self.addChild(ifTrueDropZone)
@@ -135,48 +141,81 @@ class IfBlock: CodeBlock {
             ifTrueBlock.position.x = nestingDepth
             elseBlock.position.x = nestingDepth
 
-            topBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                        y: 5 * topBlock.size.height / 2 +
-                                            3 * CodeBlock.dropZoneSize + nestedBlocksFrame.height +
-                                            elseBlockFrame.height)
-            middleBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                           y: 3 * topBlock.size.height / 2 +
-                                            2 * CodeBlock.dropZoneSize + elseBlockFrame.height)
-            bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                           y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
-
-            boolOpZone.position = CGPoint(x: topBlock.size.width,
-                                          y: 2 * topBlock.size.height +
-                                            3 * CodeBlock.dropZoneSize + nestedBlocksFrame.height +
-                                            elseBlockFrame.height)
-
-            ifTrueDropZone.position = CGPoint(x: nestingDepth, y: 2 * topBlock.size.height +
-                2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height + elseBlockFrame.height)
-            ifTrueBlock.position.y = 2 * topBlock.size.height + nestedBlocksFrame.height +
+            topBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: 5 * topBlock.size.height / 2 +
+                    3 * CodeBlock.dropZoneSize + nestedBlocksFrame.height +
+                    elseBlockFrame.height
+            )
+            middleBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: 3 * topBlock.size.height / 2 +
+                    2 * CodeBlock.dropZoneSize + elseBlockFrame.height
+            )
+            bottomBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: topBlock.size.height / 2 + CodeBlock.dropZoneSize
+            )
+            boolOpZone.position = CGPoint(
+                x: topBlock.size.width,
+                y: 2 * topBlock.size.height +
+                    3 * CodeBlock.dropZoneSize + nestedBlocksFrame.height +
+                    elseBlockFrame.height
+            )
+            ifTrueDropZone.position = CGPoint(
+                x: nestingDepth, y: 2 * topBlock.size.height +
+                    2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height
+                    + elseBlockFrame.height
+            )
+            ifTrueBlock.position.y = 2 * topBlock.size.height
+                + nestedBlocksFrame.height +
                 2 * CodeBlock.dropZoneSize + elseBlockFrame.height
 
-            elseDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
-                CodeBlock.dropZoneSize + elseBlockFrame.height)
+            elseDropZone.position = CGPoint(
+                x: nestingDepth,
+                y: topBlock.size.height +
+                CodeBlock.dropZoneSize + elseBlockFrame.height
+            )
             elseBlock.position.y = topBlock.size.height + elseBlockFrame.height +
                 CodeBlock.dropZoneSize
         } else {
-            bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                          y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
-            middleBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                           y: 3 * topBlock.size.height / 2 +
-                                            2 * CodeBlock.dropZoneSize)
-            topBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                        y: 5 * topBlock.size.height / 2 +
-                                            3 * CodeBlock.dropZoneSize)
-            boolOpZone.position = CGPoint(x: topBlock.size.width, y: 2 * topBlock.size.height +
-                3 * CodeBlock.dropZoneSize)
-            ifTrueDropZone.position = CGPoint(x: nestingDepth, y: 2 * topBlock.size.height +
-                2 * CodeBlock.dropZoneSize)
-            ifTrueBlock.position = CGPoint(x: nestingDepth, y: 2 * topBlock.size.height +
-                3 * CodeBlock.dropZoneSize)
-            elseDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height + CodeBlock.dropZoneSize)
-            elseBlock.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
-                2 * CodeBlock.dropZoneSize)
+            bottomBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: topBlock.size.height / 2 + CodeBlock.dropZoneSize
+            )
+            middleBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: 3 * topBlock.size.height / 2 +
+                    2 * CodeBlock.dropZoneSize
+            )
+            topBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: 5 * topBlock.size.height / 2 +
+                    3 * CodeBlock.dropZoneSize
+            )
+            boolOpZone.position = CGPoint(
+                x: topBlock.size.width,
+                y: 2 * topBlock.size.height +
+                    3 * CodeBlock.dropZoneSize
+            )
+            ifTrueDropZone.position = CGPoint(
+                x: nestingDepth,
+                y: 2 * topBlock.size.height +
+                    2 * CodeBlock.dropZoneSize
+            )
+            ifTrueBlock.position = CGPoint(
+                x: nestingDepth,
+                y: 2 * topBlock.size.height +
+                    3 * CodeBlock.dropZoneSize
+            )
+            elseDropZone.position = CGPoint(
+                x: nestingDepth,
+                y: topBlock.size.height + CodeBlock.dropZoneSize
+            )
+            elseBlock.position = CGPoint(
+                x: nestingDepth,
+                y: topBlock.size.height + 2 * CodeBlock.dropZoneSize
+            )
         }
     }
 

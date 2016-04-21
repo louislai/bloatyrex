@@ -22,8 +22,6 @@ class CodeBlocksViewController: UIViewController {
         scene.setMaximumScale(2)
         scene.setMinimumScale(0.9)
         let skView = view as! SKView
-//        skView.showsFPS = true
-//        skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         scene.scaleMode = .ResizeFill
         scene.editEnabled = editEnabled

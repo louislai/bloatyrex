@@ -74,6 +74,15 @@ class GlobalConstants {
         static let skull = "skull"
         static let sleeping = "zzz"
         static let winning = "Yoshi-win"
+
+        static let not_block = "not-block"
+        static let see_block = "eyes"
+        static let not_safe_block = "not-safe-block"
+        static let if_block = "if"
+        static let else_block = "else"
+        static let endif_block = "endif"
+        static let while_block = "while"
+        static let endwhile_block = "endwhile"
     }
     static let explosionEmitterName = "Spark.sks"
 

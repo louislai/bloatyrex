@@ -20,7 +20,7 @@ class NotSafeBlock: BoolOpBlock {
     }
 
     override init(containingBlock: ContainerBlockProtocol, containingZone: DropZone) {
-        blockBody = SKSpriteNode(imageNamed: "not-safe-block")
+        blockBody = SKSpriteNode(imageNamed: GlobalConstants.ImageNames.not_safe_block)
         let size = GlobalConstants.CodeBlocks.blockSize
         blockBody.size = CGSize(width: size, height: size)
         blockBody.position = CGPoint(x: blockBody.size.height / 2, y: blockBody.size.width / 2)

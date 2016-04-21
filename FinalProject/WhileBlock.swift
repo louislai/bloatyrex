@@ -67,18 +67,22 @@ class WhileBlock: CodeBlock {
     }
 
     override init(containingBlock: ContainerBlockProtocol) {
-        bottomBlock = SKSpriteNode(imageNamed: "endwhile")
+        bottomBlock = SKSpriteNode(imageNamed: GlobalConstants.ImageNames.endwhile_block)
         let size = GlobalConstants.CodeBlocks.blockSize
         let ratio = size / bottomBlock.size.height
         bottomBlock.size = CGSize(width: bottomBlock.size.width * ratio, height: size)
-        topBlock = SKSpriteNode(imageNamed: "while")
+        topBlock = SKSpriteNode(imageNamed: GlobalConstants.ImageNames.while_block)
         topBlock.size = CGSize(width: topBlock.size.width * ratio, height: size)
-        nestedDropZone = DropZone(size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
-                                  dropZoneCategory: BlockCategory.Action,
-                                  containingBlock: nestedBlocks)
-        boolOpZone = DropZone(size: CGSize(width: CodeBlock.dropZoneSize, height: topBlock.size.height),
-                              dropZoneCategory: BlockCategory.BoolOp,
-                              containingBlock: containingBlock)
+        nestedDropZone = DropZone(
+            size: CGSize(width: 64, height: CodeBlock.dropZoneSize),
+            dropZoneCategory: BlockCategory.Action,
+            containingBlock: nestedBlocks
+        )
+        boolOpZone = DropZone(
+            size: CGSize(width: CodeBlock.dropZoneSize, height: topBlock.size.height),
+            dropZoneCategory: BlockCategory.BoolOp,
+            containingBlock: containingBlock
+        )
         super.init(containingBlock: containingBlock)
         self.addChild(topBlock)
         self.addChild(nestedDropZone)
@@ -100,27 +104,35 @@ class WhileBlock: CodeBlock {
         if nestedBlocks.count > 0 {
             let nestedBlocksFrame = nestedBlocks.calculateAccumulatedFrame()
             nestedBlocks.position.x = nestingDepth
-            bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                           y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
+            bottomBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
             nestedBlocks.position.y = topBlock.size.height + nestedBlocksFrame.height +
                 CodeBlock.dropZoneSize
-            topBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                        y: 3 * topBlock.size.height / 2 +
-                                            2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height)
-            boolOpZone.position = CGPoint(x: topBlock.size.width,
-                                         y: topBlock.size.height +
-                                            2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height)
+            topBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: 3 * topBlock.size.height / 2 +
+                    2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height)
+            boolOpZone.position = CGPoint(
+                x: topBlock.size.width,
+                y: topBlock.size.height +
+                    2 * CodeBlock.dropZoneSize + nestedBlocksFrame.height)
             nestedDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
                 CodeBlock.dropZoneSize + nestedBlocksFrame.height)
         } else {
-            bottomBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                           y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
-            topBlock.position = CGPoint(x: topBlock.size.width / 2,
-                                        y: 3 * topBlock.size.height / 2 +
-                                            2 * CodeBlock.dropZoneSize)
-            boolOpZone.position = CGPoint(x: topBlock.size.width, y: topBlock.size.height +
-                2 * CodeBlock.dropZoneSize)
-            nestedDropZone.position = CGPoint(x: nestingDepth, y: topBlock.size.height + CodeBlock.dropZoneSize)
+            bottomBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: topBlock.size.height / 2 + CodeBlock.dropZoneSize)
+            topBlock.position = CGPoint(
+                x: topBlock.size.width / 2,
+                y: 3 * topBlock.size.height / 2 +
+                    2 * CodeBlock.dropZoneSize)
+            boolOpZone.position = CGPoint(
+                x: topBlock.size.width,
+                y: topBlock.size.height + 2 * CodeBlock.dropZoneSize)
+            nestedDropZone.position = CGPoint(
+                x: nestingDepth,
+                y: topBlock.size.height + CodeBlock.dropZoneSize)
             nestedBlocks.position = CGPoint(x: nestingDepth, y: topBlock.size.height +
                 2 * CodeBlock.dropZoneSize)
         }
