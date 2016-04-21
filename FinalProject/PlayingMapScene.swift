@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  PlayingMapScene.swift
 //  FinalProject
 //
 //  Created by louis on 12/3/16.

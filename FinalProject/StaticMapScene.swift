@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  StaticMapScene.swift
 //  FinalProject
 //
 //  Created by louis on 12/3/16.

@@ -5,6 +5,8 @@
 //  Created by Tham Zheng Yi on 17/4/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+//  Displays the packages using a collection view.
+//
 
 import Foundation
 import UIKit

@@ -5,7 +5,8 @@
 //  Created by Melvin Tan Jun Keong on 23/3/16.
 //  Copyright Â© 2016 nus.cs3217.2016Group6. All rights reserved.
 //
-
+//  Displays the levels on the current page in the level selector.
+//
 import UIKit
 
 struct LevelSelectorConstants {

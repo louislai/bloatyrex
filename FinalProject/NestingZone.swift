@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-/// This class serves as a container for subprograms that may like within constructs such as
+/// This class serves as a container for subprograms that may exist within constructs such as
 /// a while loop or the branches of an if else clause.
 class NestingZone: SKNode, ContainerBlockProtocol {
     var blocks = [CodeBlock]()

@@ -5,6 +5,8 @@
 //  Created by Melvin Tan Jun Keong on 23/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+//  Handles the displaying of the different pages of levels in the level selector.
+//
 
 import UIKit
 import Darwin

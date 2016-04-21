@@ -5,8 +5,8 @@
 //  Created by louis on 16/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
-/// The controller for the first screen in the game
-/// Also animate some random image to be dropped on the screen
+/// The controller for the first screen in the game.
+/// Handles animation on the title screen.
 
 import UIKit
 
