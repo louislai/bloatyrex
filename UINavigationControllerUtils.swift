@@ -12,8 +12,9 @@ import UIKit
 extension UINavigationController {
     func replaceViewController(viewController: UIViewController) {
         pushViewController(viewController, animated: false)
-        var viewControllersOnStack = (navigationController?.viewControllers)!
-        viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
-        viewControllers = viewControllersOnStack
+        guard viewControllers.count > 1 else {
+            return
+        }
+        viewControllers.removeAtIndex(viewControllers.count - 2)
     }
 }
