@@ -95,30 +95,6 @@ class PlayingViewController: UIViewController {
         }
     }
 
-    func setupTutorial() {
-        if let packageName = packageName {
-            switch packageName {
-            case "The Basics":
-                if GlobalConstants.BasicLevelsWithImages.contains(levelName) {
-                    tutorialImage = UIImage(named: "basic-\(levelName)-summary")
-                }
-            case "If":
-                if GlobalConstants.IfLevelsWithImages.contains(levelName) {
-                    tutorialImage = UIImage(named: "if-\(levelName)-summary")
-                }
-            case "While":
-                if GlobalConstants.IfLevelsWithImages.contains(levelName) {
-                    tutorialImage = UIImage(named: "while-\(levelName)-summary")
-                }
-            default:
-                break
-            }
-            if let tutorialImage = tutorialImage {
-                performSegueWithIdentifier("Hello", sender: self)
-            }
-        }
-    }
-
     func notifyGameWon(notification: NSNotification) {
         winningScreen.frame = CGRect(
             x: view.bounds.width,
@@ -213,6 +189,34 @@ class PlayingViewController: UIViewController {
     @IBAction func menuButtonTapped(sender: UIButton) {
         navigationController?.popToRootViewControllerAnimated(true)
     }
+}
+
+// MARK: Private functions
+
+extension PlayingViewController {
+    private func setupTutorial() {
+        if let packageName = packageName {
+            switch packageName {
+            case "The Basics":
+                if GlobalConstants.BasicLevelsWithImages.contains(levelName) {
+                    tutorialImage = UIImage(named: "basic-\(levelName)-summary")
+                }
+            case "If":
+                if GlobalConstants.IfLevelsWithImages.contains(levelName) {
+                    tutorialImage = UIImage(named: "if-\(levelName)-summary")
+                }
+            case "While":
+                if GlobalConstants.IfLevelsWithImages.contains(levelName) {
+                    tutorialImage = UIImage(named: "while-\(levelName)-summary")
+                }
+            default:
+                break
+            }
+            if let tutorialImage = tutorialImage {
+                performSegueWithIdentifier(GlobalConstants.SegueIdentifier.playingToTutorial, sender: self)
+            }
+        }
+    }
 
     private func showNextStage() {
         retrieveNextStage()
@@ -269,6 +273,8 @@ class PlayingViewController: UIViewController {
         let _ = starSlots.map { $0.hidden = false }
     }
 }
+
+// MARK: ProgramSupplier
 
 extension PlayingViewController: ProgramSupplier {
     func retrieveProgram() -> Program? {
