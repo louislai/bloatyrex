@@ -1,15 +1,14 @@
 //
-//  FinalProjectTests.swift
-//  FinalProjectTests
+//  BloatyRexTests.swift
+//  BloatyRexTests
 //
-//  Created by Tham Zheng Yi on 8/3/16.
+//  Created by louis on 21/4/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
 import XCTest
-@testable import FinalProject
 
-class FinalProjectTests: XCTestCase {
+class BloatyRexTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
@@ -17,8 +16,7 @@ class FinalProjectTests: XCTestCase {
     }
 
     override func tearDown() {
-        // Put teardown code here.
-        // This method is called after the invocation of each test method in the class.
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
 
