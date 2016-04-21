@@ -12,10 +12,15 @@ import UIKit
 struct PackageSelectorConstants {
     static let cellWidth: CGFloat = 300.0
     static let cellHeight: CGFloat = 400.0
+    static let cellFontSize: CGFloat = 38
+    static let cellImage = UIImage(named: "Yoshi-win")
+    static let cellReuseIdentifier = "packageCell"
+
+    static let levelSelectorItemsPerPage = 12
+    static let levelSelectorSegueIdentifier = "packageToLevelSelectorSegue"
 }
 
 class PackageSelectorViewController: UICollectionViewController {
-    private let reuseIdentifier = "packageCell"
     private let sectionInsets = UIEdgeInsets(top: 50,
         left: (GlobalConstants.Dimension.screenWidth - PackageSelectorConstants.cellWidth) / 2,
         bottom: 50,
@@ -38,7 +43,7 @@ class PackageSelectorViewController: UICollectionViewController {
         if let destination = segue.destinationViewController as? LevelSelectorPageViewController {
             destination.package = selectedPackageTitle
             destination.previousViewController = self
-            destination.numberOfItemsPerPage = 12
+            destination.numberOfItemsPerPage = PackageSelectorConstants.levelSelectorItemsPerPage
         }
     }
 }
@@ -56,18 +61,23 @@ extension PackageSelectorViewController {
 
     override func collectionView(collectionView: UICollectionView,
         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier,
-                       forIndexPath: indexPath) as! PackageCell
-        let fullSizedImage = UIImage(named: "Yoshi-win")
-        cell.imageView.image = fullSizedImage
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
+            PackageSelectorConstants.cellReuseIdentifier,
+            forIndexPath: indexPath) as! PackageCell
+        cell.imageView.image = PackageSelectorConstants.cellImage
         cell.packageTitle.text = GlobalConstants.PrepackageNames[indexPath.item]
         cell.packageTitle.textColor = UIColor.whiteColor()
-        cell.packageTitle.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
-        cell.packageTitle.font = cell.packageTitle.font.fontWithSize(38)
-        cell.progressIndicator.text = "\(GlobalConstants.PrepackagedLevelsNames[indexPath.item].count) levels"
+        cell.packageTitle.font = UIFont(name: GlobalConstants.Font.defaultName,
+                                        size: PackageSelectorConstants.cellFontSize)
+        cell.packageTitle.font =
+            cell.packageTitle.font.fontWithSize(PackageSelectorConstants.cellFontSize)
+        cell.progressIndicator.text =
+            "\(GlobalConstants.PrepackagedLevelsNames[indexPath.item].count) levels"
         cell.progressIndicator.textColor = UIColor.whiteColor()
-        cell.progressIndicator.font = UIFont(name: GlobalConstants.Font.defaultName, size: 38)
-        cell.progressIndicator.font = cell.progressIndicator.font.fontWithSize(38)
+        cell.progressIndicator.font = UIFont(name: GlobalConstants.Font.defaultName,
+                                             size: PackageSelectorConstants.cellFontSize)
+        cell.progressIndicator.font =
+            cell.progressIndicator.font.fontWithSize(PackageSelectorConstants.cellFontSize)
         cell.backgroundColor = UIColor.darkGrayColor()
         return cell
     }
@@ -92,7 +102,8 @@ extension PackageSelectorViewController {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         if let packageCell = cell as? PackageCell {
             selectedPackageTitle = packageCell.packageTitle.text
-            self.performSegueWithIdentifier("packageToLevelSelectorSegue", sender: self)
+            self.performSegueWithIdentifier(PackageSelectorConstants.levelSelectorSegueIdentifier,
+                                            sender: self)
         }
     }
 }
