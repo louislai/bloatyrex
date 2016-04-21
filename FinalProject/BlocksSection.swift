@@ -15,7 +15,14 @@ class BlocksSection: SKNode {
     var buttons = [BlockButton]()
 
     init(title: String, color: SKColor) {
-        sectionHeader = SKShapeNode(rect: CGRect(x: 0, y: 0, width: GlobalConstants.CodeBlocks.blockSectionWidth, height: GlobalConstants.CodeBlocks.blockSectionTitleHeight))
+        sectionHeader = SKShapeNode(
+            rect: CGRect(
+                x: 0,
+                y: 0,
+                width: GlobalConstants.CodeBlocks.blockSectionWidth,
+                height: GlobalConstants.CodeBlocks.blockSectionTitleHeight
+            )
+        )
         sectionHeader.fillColor = color
         sectionTitle = SKLabelNode(text: title)
         sectionTitle.zPosition = 1

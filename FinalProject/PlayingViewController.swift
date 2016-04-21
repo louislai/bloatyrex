@@ -33,10 +33,7 @@ class PlayingViewController: UIViewController {
         if let scaleToDisplay = scaleToDisplay {
             programmingViewController.scaleToDisplay = scaleToDisplay
         }
-        navigationController?.pushViewController(programmingViewController, animated: false)
-        var viewControllersOnStack = (navigationController?.viewControllers)!
-        viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
-        navigationController?.viewControllers = viewControllersOnStack
+        navigationController?.replaceViewController(programmingViewController)
     }
 
     weak var programSupplier: ProgramSupplier!
@@ -116,7 +113,7 @@ class PlayingViewController: UIViewController {
                 height: self.winningScreen.bounds.height
             )
             }, completion: { finished in
-//                // Handle rating
+                // Handle rating
                 if finished {
                     let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
                     if isPlayingPresetMap {
@@ -144,7 +141,6 @@ class PlayingViewController: UIViewController {
                     }
                 }
         })
-
         hidePresetMapWidgets()
     }
 
@@ -175,7 +171,10 @@ class PlayingViewController: UIViewController {
         guard let nextPackage = nextPackage, nextLevel = nextLevel else {
             return
         }
-        let newPlayingViewController = storyboard?.instantiateViewControllerWithIdentifier(GlobalConstants.Identifier.playingViewController) as! PlayingViewController
+        let newPlayingViewController = storyboard?
+            .instantiateViewControllerWithIdentifier(
+                GlobalConstants.Identifier.playingViewController
+            ) as! PlayingViewController
         let filesArchive = FilesArchive()
         newPlayingViewController.map = filesArchive
             .loadFromPackageFile(
@@ -184,10 +183,7 @@ class PlayingViewController: UIViewController {
         )
         newPlayingViewController.packageName = nextPackage
         newPlayingViewController.levelName = nextLevel
-        navigationController?.pushViewController(newPlayingViewController, animated: true)
-        var viewControllersOnStack = (navigationController?.viewControllers)!
-        viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
-        navigationController?.viewControllers = viewControllersOnStack
+        navigationController?.replaceViewController(newPlayingViewController)
     }
 
     @IBAction func menuButtonTapped(sender: UIButton) {
@@ -201,22 +197,22 @@ extension PlayingViewController {
     private func setupTutorial() {
         if let packageName = packageName {
             switch packageName {
-            case "The Basics":
+            case GlobalConstants.PrepackageNames[0]:
                 if GlobalConstants.BasicLevelsWithImages.contains(levelName) {
                     tutorialImage = UIImage(named: "basic-\(levelName)-summary")
                 }
-            case "If":
+            case GlobalConstants.PrepackageNames[1]:
                 if GlobalConstants.IfLevelsWithImages.contains(levelName) {
                     tutorialImage = UIImage(named: "if-\(levelName)-summary")
                 }
-            case "While":
+            case GlobalConstants.PrepackageNames[2]:
                 if GlobalConstants.IfLevelsWithImages.contains(levelName) {
                     tutorialImage = UIImage(named: "while-\(levelName)-summary")
                 }
             default:
                 break
             }
-            if let tutorialImage = tutorialImage {
+            if let _ = tutorialImage {
                 performSegueWithIdentifier(GlobalConstants.SegueIdentifier.playingToTutorial, sender: self)
             }
         }

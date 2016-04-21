@@ -70,7 +70,7 @@ class ModalPresentationController: UIPresentationController {
         }
         // Inset the presented view's frame
         var frame = containerView!.bounds
-//        frame = CGRectInset(frame, 100.0, 100.0)
+        frame = CGRectInset(frame, 100.0, 100.0)
         return frame
     }
 }

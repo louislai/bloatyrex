@@ -23,10 +23,10 @@ class GameRatingsTests: XCTestCase {
     }
 
     func testAssignScoresPresetMap() {
-        map.assignScoresForRatings([1,1,1,1])
+        map.assignScoresForRatings([1, 1, 1, 1])
         XCTAssertEqual(map.getRatingForScore(0), 3)
 
-        map.assignScoresForRatings([2,1,4])
+        map.assignScoresForRatings([2, 1, 4])
         XCTAssertEqual(map.getRatingForScore(0), 0)
         XCTAssertEqual(map.getRatingForScore(1), 1)
         XCTAssertEqual(map.getRatingForScore(2), 2)

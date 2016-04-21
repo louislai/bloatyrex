@@ -5,6 +5,8 @@
 //  Created by Melvin Tan Jun Keong on 14/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// LevelDesigningMapScene is responsible for the logic for the user tools to design
+/// a game level
 
 import SpriteKit
 import Darwin
