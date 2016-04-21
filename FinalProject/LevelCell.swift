@@ -3,7 +3,7 @@
 //  BloatyRex
 //
 //  Created by Tham Zheng Yi on 21/4/16.
-//  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
+//  Copyright Â© 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
 import Foundation
@@ -64,8 +64,8 @@ class LevelCell: UICollectionViewCell {
     func deleteFile() {
         let fileName = textLabel.text!
         let deleteAlert = UIAlertController(title: "Delete",
-            message: "'\(fileName)' will be deleted. This action cannot be undone.",
-            preferredStyle: UIAlertControllerStyle.Alert)
+                                            message: "'\(fileName)' will be deleted. This action cannot be undone.",
+                                            preferredStyle: UIAlertControllerStyle.Alert)
         deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
             self.filesArchive.removeFile(fileName)
             let successAlert = UIAlertController(title: "Deleted!",
@@ -173,7 +173,7 @@ class LevelCell: UICollectionViewCell {
         self.resetSearchBar()
         self.reloadPageViewController()
     }
-    
+
     func setNavigationBar(fileName: String) {
         let navigationItem = navigationBar!.items!.first!
         navigationItem.title = fileName

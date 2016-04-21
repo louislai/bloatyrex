@@ -5,6 +5,7 @@
 //  Created by Melvin Tan Jun Keong on 14/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// LevelDesignViewController is the controller holding the designing scene
 
 import UIKit
 import SpriteKit
@@ -24,7 +25,6 @@ class LevelDesigningViewController: UIViewController {
         // Configure the view.
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
-//        skView.showsFPS = true
         skView.ignoresSiblingOrder = true
 
         // Create and configure the scene.

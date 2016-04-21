@@ -31,8 +31,6 @@ class PlayingMapViewController: UIViewController {
         // Configure the view
         let skView = view as! SKView
         skView.multipleTouchEnabled = false
-//        skView.showsFPS = true
-//        skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
 
         // Present the scene.

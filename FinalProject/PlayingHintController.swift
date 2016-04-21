@@ -5,6 +5,7 @@
 //  Created by louis on 20/4/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// This controller is responsible for showing the image tutorials in the preset maps
 
 import UIKit
 
@@ -39,28 +40,29 @@ class PlayingHintController: UIViewController {
 }
 
 extension PlayingHintController: UIViewControllerTransitioningDelegate {
-    func presentationControllerForPresentedViewController(presented: UIViewController,
-                                                          presentingViewController presenting: UIViewController,
-                                                                                   sourceViewController source: UIViewController) -> UIPresentationController? {
+    func presentationControllerForPresentedViewController(
+        presented: UIViewController, presentingViewController presenting: UIViewController,
+        sourceViewController source: UIViewController) -> UIPresentationController? {
 
+        let preferredFrame = CGRect(
+            x: 100.0,
+            y: 100.0,
+            width: 824.0,
+            height: 568.0
+        )
         if presented == self {
             let controller = ModalPresentationController(
                 presentedViewController: presented,
                 presentingViewController: presenting)
-            controller.preferredFrame = CGRect(
-                x: 100.0,
-                y: 100.0,
-                width: 824.0,
-                height: 568.0
-            )
+            controller.preferredFrame = preferredFrame
             return controller
         }
         return nil
     }
 
-    func animationControllerForPresentedController(presented: UIViewController,
-                                                   presentingController presenting: UIViewController,
-                                                                        sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationControllerForPresentedController(
+        presented: UIViewController, presentingController presenting: UIViewController,
+        sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
         if presented == self {
             return ModalPresentationAnimationController(isPresenting: true)

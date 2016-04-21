@@ -3,7 +3,7 @@
 //  FinalProject
 //
 //  Created by Melvin Tan Jun Keong on 23/3/16.
-//  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
+//  Copyright Â© 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
 import UIKit
@@ -45,7 +45,7 @@ struct LevelSelectorConstants {
 }
 
 class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     var pageIndex: Int?
     var fileNames: [String]?
     var previousViewController: UIViewController?
@@ -59,9 +59,9 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: self.view.frame,
-            collectionViewLayout: flowLayout)
+                                              collectionViewLayout: flowLayout)
         collectionView.registerClass(LevelCell.self,
-            forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier)
+                                     forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = LevelSelectorConstants.backGroundColor
@@ -119,13 +119,13 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
     // Make this number of cell
     func collectionView(collectionView: UICollectionView,
-        numberOfItemsInSection section: Int) -> Int {
+                        numberOfItemsInSection section: Int) -> Int {
         return fileNames!.count
     }
 
     // Make cell and return cell
     func collectionView(collectionView: UICollectionView,
-        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
             LevelSelectorConstants.cellReuseIdentifier,
             forIndexPath: indexPath) as! LevelCell
@@ -144,7 +144,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
     // When the user tapped a cell, it loads the file with the corresponding file name.
     func collectionView(collectionView: UICollectionView,
-        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+                        didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! LevelCell
         let fileName = cell.textLabel.text!
         if previousViewController is LevelDesigningViewController {
@@ -184,8 +184,8 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     }
 
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
             return LevelSelectorConstants.packageLevelSelectorItemSize
         } else {
@@ -194,8 +194,8 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     }
 
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
             return LevelSelectorConstants.packageLevelSelectorSectionInsets
         } else {

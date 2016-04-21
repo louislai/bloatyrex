@@ -44,8 +44,6 @@
 		3DF230A71C8F0617003420C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A51C8F0617003420C0 /* Main.storyboard */; };
 		3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A81C8F0617003420C0 /* Assets.xcassets */; };
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
-		3DF230B71C8F0617003420C0 /* FinalProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */; };
-		3DF230C21C8F0617003420C0 /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */; };
 		3DF3A7761CC892980074C287 /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3A7751CC892980074C287 /* LevelCell.swift */; };
 		3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */; };
 		B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */; };
@@ -134,6 +132,8 @@
 		BF17DF041CC89B8500192183 /* PackageSelectorOuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */; };
 		BF17DF051CC89B8500192183 /* PackageSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */; };
 		BF17DF061CC89B8500192183 /* PackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D15926E1CC32F72009E8559 /* PackageCell.swift */; };
+		BF17DF081CC8A9C100192183 /* UINavigationControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF071CC8A9C100192183 /* UINavigationControllerUtils.swift */; };
+		BF17DF091CC8AC2600192183 /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3A7751CC892980074C287 /* LevelCell.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
@@ -186,7 +186,7 @@
 
 /* Begin PBXFileReference section */
 		1D409C6D1CC5F45E002E6B02 /* NotSafeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotSafeBlock.swift; sourceTree = "<group>"; };
-		1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerBlockProtocol.swift; sourceTree = "<group>"; };
+		1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContainerBlockProtocol.swift; path = FinalProject/ContainerBlockProtocol.swift; sourceTree = "<group>"; };
 		1D69B6C71CB29E4500C1FA04 /* TrashContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrashContainer.swift; sourceTree = "<group>"; };
 		1D69B6C91CB2AA9200C1FA04 /* NestingZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NestingZone.swift; sourceTree = "<group>"; };
 		1D69B6CF1CB3AF0600C1FA04 /* BoolOpBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolOpBlock.swift; sourceTree = "<group>"; };
@@ -224,12 +224,6 @@
 		3DF230A81C8F0617003420C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DF230AB1C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DF230AD1C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3DF230B21C8F0617003420C0 /* BloatyRex.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BloatyRex.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectTests.swift; sourceTree = "<group>"; };
-		3DF230B81C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3DF230BD1C8F0617003420C0 /* BloatyRex.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BloatyRex.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
-		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DF3A7751CC892980074C287 /* LevelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
 		3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorOuterViewController.swift; sourceTree = "<group>"; };
 		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -245,6 +239,7 @@
 		BF17DEB21CC897AA00192183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF17DEB81CC897C200192183 /* GameRatingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameRatingTests.swift; sourceTree = "<group>"; };
 		BF17DEBA1CC897D000192183 /* InterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterpreterTests.swift; sourceTree = "<group>"; };
+		BF17DF071CC8A9C100192183 /* UINavigationControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerUtils.swift; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
@@ -308,6 +303,9 @@
 			children = (
 				1DB4B0801C9516610010F727 /* Syntax.swift */,
 				BF8FA5B81C952E6300DAE175 /* Observation.swift */,
+				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
+				BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */,
+				BF4C52F51C9110A000C56DD2 /* Action.swift */,
 			);
 			name = Language;
 			sourceTree = "<group>";
@@ -328,8 +326,9 @@
 				BF156EDA1CC6272500B4EB2A /* edit-code-icon.png */,
 				BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */,
 				BF7F3C9C1CBBA2BF004530F5 /* Yoshi-win.png */,
-				BF640D781CA815E800FC454F /* ReusableComponents */,
 				BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */,
+				BF17DF071CC8A9C100192183 /* UINavigationControllerUtils.swift */,
+				BF640D781CA815E800FC454F /* ReusableComponents */,
 				BFD365D51CA25B5600956CE1 /* Protocols */,
 				3DF230A01C8F0617003420C0 /* FinalProject */,
 				BF17DEAF1CC897AA00192183 /* BloatyRexTests */,
@@ -408,10 +407,7 @@
 				BF4C52F11C910CD100C56DD2 /* Map.swift */,
 				BF145B8A1CBAA3EC00BF39D6 /* PresetMap.swift */,
 				BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */,
-				BF4C52F51C9110A000C56DD2 /* Action.swift */,
 				BF5339C81C941459007F56F0 /* MapBlock.swift */,
-				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
-				BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -421,7 +417,6 @@
 			children = (
 				BF8E76E21CC54BB5000AE8CC /* Spark.sks */,
 				BF8E76E31CC54BB5000AE8CC /* spark.png */,
-				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 				BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */,
 				BF6AB17C1CC6C925009943BB /* PlayingMapSceneConstants.swift */,
 				BFFB1A3F1CAC03AE00C746CD /* StaticMapScene.swift */,
@@ -444,7 +439,6 @@
 		BF640D771CA7BFF000FC454F /* CodeBlocks */ = {
 			isa = PBXGroup;
 			children = (
-				1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */,
 				1D69B6CF1CB3AF0600C1FA04 /* BoolOpBlock.swift */,
 				1D69B6E51CBB896200C1FA04 /* NotBlock.swift */,
 				1D69B6D11CB3B24000C1FA04 /* SeeBlock.swift */,
@@ -494,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				BF8E12AB1C99ADE900B210C3 /* PlayingViewController.swift */,
+				3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */,
 			);
 			name = PlayingScene;
 			sourceTree = "<group>";
@@ -508,6 +503,7 @@
 				BF7F3C9E1CBDD702004530F5 /* Scorer.swift */,
 				BF7F3CA01CBDD86F004530F5 /* ScoreCriterion.swift */,
 				3D42AABE1CC63EEB00C7FDF2 /* CodeBlocksScaleSupplier.swift */,
+				1D69B6C51CB2998B00C1FA04 /* ContainerBlockProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -573,11 +569,6 @@
 					3DF2309D1C8F0617003420C0 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = XC99LK63YN;
-					};
-					3DF230B11C8F0617003420C0 = {
-						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 62L5G97YTE;
-						TestTargetID = 3DF2309D1C8F0617003420C0;
 					};
 					BF17DEAD1CC897AA00192183 = {
 						CreatedOnToolsVersion = 7.3;
@@ -716,6 +707,7 @@
 				B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */,
 				BF6AB17D1CC6C925009943BB /* PlayingMapSceneConstants.swift in Sources */,
 				BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */,
+				BF17DF081CC8A9C100192183 /* UINavigationControllerUtils.swift in Sources */,
 				BF4C52F61C9110A000C56DD2 /* Action.swift in Sources */,
 				1DB4B0911C991F260010F727 /* ProgramBlocks.swift in Sources */,
 				BF7F3CA11CBDD86F004530F5 /* ScoreCriterion.swift in Sources */,
@@ -770,6 +762,7 @@
 				BF17DEE71CC89A5200192183 /* BlocksSection.swift in Sources */,
 				BF17DF031CC89B7E00192183 /* LevelSelectorPageViewController.swift in Sources */,
 				BF17DEC71CC899C100192183 /* PlayingMapScene.swift in Sources */,
+				BF17DF091CC8AC2600192183 /* LevelCell.swift in Sources */,
 				BF17DEF71CC89A6500192183 /* DesigningMapConstants.swift in Sources */,
 				BF17DECB1CC899C100192183 /* AgentNode.swift in Sources */,
 				BF17DEE91CC89A5200192183 /* ProgramBlocks.swift in Sources */,
@@ -1014,6 +1007,7 @@
 				BF17DEB71CC897AA00192183 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
