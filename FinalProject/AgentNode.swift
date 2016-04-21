@@ -8,136 +8,11 @@
 
 import SpriteKit
 
-struct AgentNodeConstants {
-    static let timePerMoveMovement: NSTimeInterval = 0.6
-    static let timePerFrame: NSTimeInterval = 0.1
-}
-
 class AgentNode: MapUnitNode {
     var orientation = Direction.Up
     var delegate: LanguageDelegate?
     var numberOfMoves = 30
     var goingToExplode = false
-    let walkingUpTextures = [
-        SKTexture(
-            rect: CGRect(
-                x: 22.0/521.0,
-                y: 48.0/175.0,
-                width: 21.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        ),
-        SKTexture(
-            rect: CGRect(
-                x: 64.0/521.0,
-                y: 48.0/175.0,
-                width: 21.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        )
-    ]
-    let walkingRightTextures = [
-        SKTexture(
-            rect: CGRect(
-                x: 149.0/521.0,
-                y: 87.0/175.0,
-                width: 25.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        ),
-        SKTexture(
-            rect: CGRect(
-                x: 203.0/521.0,
-                y: 87.0/175.0,
-                width: 25.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        )
-    ]
-    let walkingLeftTextures = [
-        SKTexture(
-            rect: CGRect(
-                x: 148.0/521.0,
-                y: 45.0/175.0,
-                width: 25.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        ),
-        SKTexture(
-            rect: CGRect(
-                x: 202.0/521.0,
-                y: 45.0/175.0,
-                width: 25.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        )
-    ]
-    let walkingDownTextures = [
-        SKTexture(
-            rect: CGRect(
-                x: 22.0/521.0,
-                y: 88.0/175.0,
-                width: 21.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        ),
-        SKTexture(
-            rect: CGRect(
-                x: 64.0/521.0,
-                y: 88.0/175.0,
-                width: 21.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        )
-    ]
-    let winningTextures = [
-        SKTexture(
-            rect: CGRect(
-                x: 417.0/521.0,
-                y: 47.0/175.0,
-                width: 29.0/521.0,
-                height: 40.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        ),
-        SKTexture(
-            rect: CGRect(
-                x: 484.0/521.0,
-                y: 47.0/175.0,
-                width: 29.0/521.0,
-                height: 40.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        )
-    ]
-    let losingTextures = [
-        SKTexture(
-            rect: CGRect(
-                x: 270.0/521.0,
-                y: 47.0/175.0,
-                width: 29.0/521.0,
-                height: 40.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        ),
-        SKTexture(
-            rect: CGRect(
-                x: 271.0/521.0,
-                y: 87.0/175.0,
-                width: 25.0/521.0,
-                height: 39.0/175.0
-            ),
-            inTexture: TextureManager.retrieveTexture("agent")
-        )
-    ]
 
     required init(type: MapUnitType = .Agent) {
         super.init(type: .Agent)
@@ -223,7 +98,7 @@ class AgentNode: MapUnitNode {
 
     func runWinningAnimation() {
         let happyAction = SKAction.animateWithTextures(
-            winningTextures,
+            AgentNodeConstants.winningTextures,
             timePerFrame: AgentNodeConstants.timePerFrame
         )
         let happyActionForever = SKAction.repeatActionForever(happyAction)
@@ -235,7 +110,7 @@ class AgentNode: MapUnitNode {
             return
         }
         let panicAction = SKAction.animateWithTextures(
-            losingTextures,
+            AgentNodeConstants.losingTextures,
             timePerFrame: AgentNodeConstants.timePerMoveMovement
         )
         let panicActionForever = SKAction.repeatActionForever(panicAction)
@@ -283,10 +158,10 @@ class AgentNode: MapUnitNode {
         let moveAction = SKAction.moveTo(toPoint, duration: duration)
         var movementTextures: [SKTexture]
         switch direction {
-        case .Up: movementTextures = walkingUpTextures
-        case .Right: movementTextures = walkingRightTextures
-        case .Down: movementTextures = walkingDownTextures
-        case .Left: movementTextures = walkingLeftTextures
+        case .Up: movementTextures = AgentNodeConstants.walkingUpTextures
+        case .Right: movementTextures = AgentNodeConstants.walkingRightTextures
+        case .Down: movementTextures = AgentNodeConstants.walkingDownTextures
+        case .Left: movementTextures = AgentNodeConstants.walkingLeftTextures
         }
         let changeTextureAction = SKAction.repeatAction(
             SKAction.animateWithTextures(
