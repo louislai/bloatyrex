@@ -5,6 +5,8 @@
 //  Created by louis on 10/4/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// Inherits from Map
+/// Ratings can be set for PresetMap
 
 import Foundation
 

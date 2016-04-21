@@ -58,6 +58,16 @@ class GlobalConstants {
 
     struct ImageNames {
         static let poo = "poo"
+        static let agent = "agent"
+        static let monster = "monster"
+        static let space = "space"
+        static let buttons_default = "buttons-unknown"
+        static let buttons_left = "buttons-left"
+        static let buttons_right = "buttons-right"
+        static let wooden_block = "wooden-block"
+        static let hole = "hole"
+        static let wall = "wall"
+        static let goal = "toilet"
     }
 
     static let filesArchive = FilesArchive()

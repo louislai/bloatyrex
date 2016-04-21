@@ -27,7 +27,7 @@ class TextureManager {
             width: 21.0/521.0,
             height: 39.0/175.0
         ),
-        inTexture: TextureManager.retrieveTexture("agent")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.agent)
     )
     static let agentRightTexture = SKTexture(
         rect: CGRect(
@@ -36,7 +36,7 @@ class TextureManager {
             width: 25.0/521.0,
             height: 39.0/175.0
         ),
-        inTexture: TextureManager.retrieveTexture("agent")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.agent)
     )
     static let agentLeftTexture = SKTexture(
         rect: CGRect(
@@ -45,7 +45,7 @@ class TextureManager {
             width: 25.0/521.0,
             height: 39.0/175.0
         ),
-        inTexture: TextureManager.retrieveTexture("agent")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.agent)
     )
     static let agentDownTexture = SKTexture(
         rect: CGRect(
@@ -54,7 +54,7 @@ class TextureManager {
             width: 21.0/521.0,
             height: 39.0/175.0
         ),
-        inTexture: TextureManager.retrieveTexture("agent")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.agent)
     )
     static let monsterDownTexture = SKTexture(
         rect: CGRect(
@@ -63,7 +63,7 @@ class TextureManager {
             width: 48.0/712.0,
             height: 47.0/449.0
             ),
-        inTexture: TextureManager.retrieveTexture("monster")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.agent)
     )
     static let monsterUpTexture = SKTexture(
         rect: CGRect(
@@ -72,7 +72,7 @@ class TextureManager {
             width: 48.0/712.0,
             height: 47.0/449.0
         ),
-        inTexture: TextureManager.retrieveTexture("monster")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.monster)
     )
     static let monsterRightTexture = SKTexture(
         rect: CGRect(
@@ -81,7 +81,7 @@ class TextureManager {
             width: 48.0/712.0,
             height: 47.0/449.0
         ),
-        inTexture: TextureManager.retrieveTexture("monster")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.monster)
     )
     static let monsterSleepingTexture = SKTexture(
         rect: CGRect(
@@ -90,6 +90,6 @@ class TextureManager {
             width: 48.0/712.0,
             height: 47.0/449.0
         ),
-        inTexture: TextureManager.retrieveTexture("monster")
+        inTexture: TextureManager.retrieveTexture(GlobalConstants.ImageNames.monster)
     )
 }

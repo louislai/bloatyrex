@@ -20,22 +20,24 @@ enum MapUnitType: Int {
     case DoorLeft
     case DoorRight
 
+    /// Return the default texture for a particular MapUnitType
     var texture: SKTexture {
         let textures = [
-            TextureManager.retrieveTexture("space"),
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.space),
             TextureManager.agentDownTexture,
-            TextureManager.retrieveTexture("wall"),
-            TextureManager.retrieveTexture("toilet"),
-            TextureManager.retrieveTexture("hole"),
-            TextureManager.retrieveTexture("wooden-block"),
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.wall),
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.goal),
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.hole),
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.wooden_block),
             TextureManager.monsterSleepingTexture,
-            TextureManager.retrieveTexture("buttons-unknown"),
-            TextureManager.retrieveTexture("buttons-left"),
-            TextureManager.retrieveTexture("buttons-right")
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.buttons_default),
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.buttons_left),
+            TextureManager.retrieveTexture(GlobalConstants.ImageNames.buttons_right)
         ]
         return textures[rawValue]
     }
 
+    /// Return the default SKNode class representing a particular MapUnitType
     var nodeClass: MapUnitNode.Type {
         let nodeClasses: [MapUnitNode.Type] = [
             MapUnitNode.self,
