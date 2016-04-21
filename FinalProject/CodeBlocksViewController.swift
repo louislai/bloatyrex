@@ -34,12 +34,6 @@ class CodeBlocksViewController: UIViewController {
             scene.setProgramBlocks(programBlocksToLoad)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
 
 extension CodeBlocksViewController: ProgramSupplier {

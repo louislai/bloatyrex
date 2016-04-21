@@ -6,7 +6,7 @@
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 /// The parent class for unit node node class
-/// 
+///
 /// Public Properties:
 /// - type: the unit type, enumerated in MapUnitType
 /// - exploded: whether this unit type has exploded

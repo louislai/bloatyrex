@@ -21,26 +21,87 @@ class CodeBlocksScene: PannableScene, ProgramSupplier {
     let conditionalSection = BlocksSection(title: "Conditionals", color: SKColor.purpleColor())
     let objectSection = BlocksSection(title: "Objects", color: GlobalConstants.Font.defaultGreen)
 
-    let upButton = BlockButton(imageNamed: "up-block", blockCategory: BlockCategory.Action, action: ActionBlock.getForwardBlock)
-    let turnLeftButton = BlockButton(imageNamed: "turn-left-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnLeftBlock)
-    let turnRightButton = BlockButton(imageNamed: "turn-right-block", blockCategory: BlockCategory.Action, action: ActionBlock.getTurnRightBlock)
-    let waitButton = BlockButton(imageNamed: "wait-block", blockCategory: BlockCategory.Action, action: ActionBlock.getWaitBlock)
-    let jumpButton = BlockButton(imageNamed: "jump-block", blockCategory: BlockCategory.Action, action: ActionBlock.getJumpBlock)
-    let pressRedButton = BlockButton(imageNamed: "press-red-block", blockCategory: BlockCategory.Action, action: ActionBlock.getPressRedBlock)
-    let pressBlueButton = BlockButton(imageNamed: "press-blue-block", blockCategory: BlockCategory.Action, action: ActionBlock.getPressBlueBlock)
-    let whileButton = BlockButton(imageNamed: "while-block", blockCategory: BlockCategory.Action, action: WhileBlock.init)
-    let ifButton = BlockButton(imageNamed: "if-else-block", blockCategory: BlockCategory.Action, action: IfBlock.init)
-    let eyesButton = BlockButton(imageNamed: "eyes", blockCategory: BlockCategory.BoolOp, boolOp: SeeBlock.init)
-    let notButton = BlockButton(imageNamed: "not-block", blockCategory: BlockCategory.BoolOp, boolOp: NotBlock.init)
-    let notSafeButton = BlockButton(imageNamed: "not-safe-block", blockCategory: BlockCategory.BoolOp, boolOp: NotSafeBlock.init)
-    let toiletButton = BlockButton(imageNamed: "toilet", blockCategory: BlockCategory.Object, object: ObjectBlock.getToiletBlock)
-    let holeButton = BlockButton(imageNamed: "hole", blockCategory: BlockCategory.Object, object: ObjectBlock.getHoleBlock)
-    let wallButton = BlockButton(imageNamed: "wall", blockCategory: BlockCategory.Object, object: ObjectBlock.getWallBlock)
-    let woodButton = BlockButton(imageNamed: "wooden-block", blockCategory: BlockCategory.Object, object: ObjectBlock.getWoodBlock)
-    let leftCorrectButton = BlockButton(imageNamed: "buttons-left", blockCategory: BlockCategory.Object, object: ObjectBlock.getLeftDoorBlock)
-    let rightCorrectButton = BlockButton(imageNamed: "buttons-right", blockCategory: BlockCategory.Object, object: ObjectBlock.getRightDoorBlock)
-    let emptySpaceButton = BlockButton(imageNamed: "space", blockCategory: BlockCategory.Object, object: ObjectBlock.getEmptySpaceBlock)
-    let monsterButton = BlockButton(imageNamed: "monster-static", blockCategory: BlockCategory.Object, object: ObjectBlock.getMonsterBlock)
+    let upButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.move_block,
+        blockCategory: BlockCategory.Action,
+        action: ActionBlock.getForwardBlock)
+    let turnLeftButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.rotate_left_block,
+        blockCategory: BlockCategory.Action,
+        action: ActionBlock.getTurnLeftBlock)
+    let turnRightButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.rotate_right_block,
+        blockCategory: BlockCategory.Action,
+        action: ActionBlock.getTurnRightBlock)
+    let waitButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.wait_block,
+        blockCategory: BlockCategory.Action,
+        action: ActionBlock.getWaitBlock)
+    let jumpButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.jump_block,
+        blockCategory: BlockCategory.Action,
+        action: ActionBlock.getJumpBlock)
+    let pressRedButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.press_left_block,
+        blockCategory: BlockCategory.Action,
+        action: ActionBlock.getPressRedBlock)
+    let pressBlueButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.press_right_block,
+        blockCategory: BlockCategory.Action,
+        action: ActionBlock.getPressBlueBlock)
+    let whileButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.while_block,
+        blockCategory: BlockCategory.Action,
+        action: WhileBlock.init)
+    let ifButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.if_else_block,
+        blockCategory: BlockCategory.Action,
+        action: IfBlock.init)
+    let eyesButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.see_block,
+        blockCategory: BlockCategory.BoolOp,
+        boolOp: SeeBlock.init)
+    let notButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.not_block,
+        blockCategory: BlockCategory.BoolOp,
+        boolOp: NotBlock.init)
+    let notSafeButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.not_safe_block,
+        blockCategory: BlockCategory.BoolOp,
+        boolOp: NotSafeBlock.init)
+    let toiletButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.goal,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getToiletBlock)
+    let holeButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.hole,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getHoleBlock)
+    let wallButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.wall,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getWallBlock)
+    let woodButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.wooden_block,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getWoodBlock)
+    let leftCorrectButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.buttons_left,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getLeftDoorBlock)
+    let rightCorrectButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.buttons_right,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getRightDoorBlock)
+    let emptySpaceButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.space,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getEmptySpaceBlock
+    )
+    let monsterButton = BlockButton(
+        imageNamed: GlobalConstants.ImageNames.monster_static,
+        blockCategory: BlockCategory.Object,
+        object: ObjectBlock.getMonsterBlock)
     let trashZone = TrashZone()
     private var programBlocks = ProgramBlocks()
     var heldBlock: BlockButton?

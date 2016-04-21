@@ -18,43 +18,43 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
 
     static func getForwardBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.Forward(nil))
-        block.setSprite("up-block")
+        block.setSprite(GlobalConstants.ImageNames.move_block)
         return block
     }
 
     static func getWaitBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.NoAction(nil))
-        block.setSprite("wait-block")
+        block.setSprite(GlobalConstants.ImageNames.wait_block)
         return block
     }
 
     static func getJumpBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.Jump(nil))
-        block.setSprite("jump-block")
+        block.setSprite(GlobalConstants.ImageNames.jump_block)
         return block
     }
 
     static func getPressBlueBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
-        let block = ActionBlock(containingBlock: containingBlock, action: Action.ChooseButton(1, nil))
-        block.setSprite("press-blue-block")
+        let block = ActionBlock(containingBlock: containingBlock, action: Action.ChooseButton(DoorNodeConstants.doorRight, nil))
+        block.setSprite(GlobalConstants.ImageNames.press_right_block)
         return block
     }
 
     static func getPressRedBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
-        let block = ActionBlock(containingBlock: containingBlock, action: Action.ChooseButton(0, nil))
-        block.setSprite("press-red-block")
+        let block = ActionBlock(containingBlock: containingBlock, action: Action.ChooseButton(DoorNodeConstants.doorLeft, nil))
+        block.setSprite(GlobalConstants.ImageNames.press_left_block)
         return block
     }
 
     static func getTurnLeftBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.RotateLeft(nil))
-        block.setSprite("turn-left-block")
+        block.setSprite(GlobalConstants.ImageNames.rotate_left_block)
         return block
     }
 
     static func getTurnRightBlock(containingBlock containingBlock: ContainerBlockProtocol) -> ActionBlock {
         let block = ActionBlock(containingBlock: containingBlock, action: Action.RotateRight(nil))
-        block.setSprite("turn-right-block")
+        block.setSprite(GlobalConstants.ImageNames.rotate_right_block)
         return block
     }
 
@@ -64,8 +64,9 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
     func highlight() {
         unhighlight()
         let size = GlobalConstants.CodeBlocks.blockSize
-        let newLayer = SKShapeNode(rect: CGRect(x: 0, y: CodeBlock.dropZoneSize, width: size, height: size),
-                                   cornerRadius: 0)
+        let newLayer = SKShapeNode(
+            rect: CGRect(x: 0, y: CodeBlock.dropZoneSize, width: size, height: size),
+            cornerRadius: 0)
         newLayer.fillColor = UIColor.yellowColor()
         newLayer.alpha = 0.3
         newLayer.zPosition = 3

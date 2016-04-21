@@ -63,6 +63,7 @@ class GlobalConstants {
         static let poo = "poo"
         static let agent = "agent"
         static let monster = "monster"
+        static let monster_static = "monster-static"
         static let space = "space"
         static let buttons_default = "buttons-unknown"
         static let buttons_left = "buttons-left"
@@ -74,6 +75,7 @@ class GlobalConstants {
         static let skull = "skull"
         static let sleeping = "zzz"
         static let winning = "Yoshi-win"
+        static let trash_bin = "trash-container"
 
         static let not_block = "not-block"
         static let see_block = "eyes"
@@ -83,6 +85,15 @@ class GlobalConstants {
         static let endif_block = "endif"
         static let while_block = "while"
         static let endwhile_block = "endwhile"
+        static let move_block = "up-block"
+        static let rotate_left_block = "turn-left-block"
+        static let rotate_right_block = "turn-right-block"
+        static let wait_block = "wait-block"
+        static let jump_block = "jump-block"
+        static let press_left_block = "press-red-block"
+        static let press_right_block = "press-blue-block"
+        static let if_else_block = "if-else-block"
+
     }
     static let explosionEmitterName = "Spark.sks"
 
