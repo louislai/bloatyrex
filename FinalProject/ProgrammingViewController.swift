@@ -39,10 +39,7 @@ class ProgrammingViewController: UIViewController {
         if let scaleToDisplay = scaleToDisplay {
             playingViewController.scaleToDisplay = scaleToDisplay
         }
-        navigationController?.pushViewController(playingViewController, animated: false)
-        var viewControllersOnStack = (navigationController?.viewControllers)!
-        viewControllersOnStack.removeAtIndex(viewControllersOnStack.count - 2)
-        navigationController?.viewControllers = viewControllersOnStack
+        navigationController?.replaceViewController(playingViewController)
     }
 
     override func viewDidLoad() {

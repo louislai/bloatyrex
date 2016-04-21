@@ -3,7 +3,7 @@
 //  FinalProject
 //
 //  Created by Melvin Tan Jun Keong on 23/3/16.
-//  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
+//  Copyright Â© 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 
 import UIKit
@@ -45,7 +45,7 @@ struct LevelSelectorConstants {
 }
 
 class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     var pageIndex: Int?
     var fileNames: [String]?
     var previousViewController: UIViewController?
@@ -59,9 +59,9 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
         let flowLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: self.view.frame,
-            collectionViewLayout: flowLayout)
+                                              collectionViewLayout: flowLayout)
         collectionView.registerClass(LevelCell.self,
-            forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier)
+                                     forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = LevelSelectorConstants.backGroundColor
@@ -119,13 +119,13 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
     // Make this number of cell
     func collectionView(collectionView: UICollectionView,
-        numberOfItemsInSection section: Int) -> Int {
+                        numberOfItemsInSection section: Int) -> Int {
         return fileNames!.count
     }
 
     // Make cell and return cell
     func collectionView(collectionView: UICollectionView,
-        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+                        cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
             LevelSelectorConstants.cellReuseIdentifier,
             forIndexPath: indexPath) as! LevelCell
@@ -144,7 +144,7 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 
     // When the user tapped a cell, it loads the file with the corresponding file name.
     func collectionView(collectionView: UICollectionView,
-        didSelectItemAtIndexPath indexPath: NSIndexPath) {
+                        didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell = collectionView.cellForItemAtIndexPath(indexPath) as! LevelCell
         let fileName = cell.textLabel.text!
         if previousViewController is LevelDesigningViewController {
@@ -184,8 +184,8 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     }
 
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
             return LevelSelectorConstants.packageLevelSelectorItemSize
         } else {
@@ -194,8 +194,8 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
     }
 
     func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                               insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
             return LevelSelectorConstants.packageLevelSelectorSectionInsets
         } else {
@@ -217,131 +217,5 @@ class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
         } else {
             return LevelSelectorConstants.standardLevelSelectorLineSpacing
         }
-    }
-}
-    // When the user long-pressed a cell, the user can choose to delete the file with the
-    // corresponding file name.
-    func handleLongPressedCell(sender: UILongPressGestureRecognizer) {
-        let tappedContentView = sender.view as UIView!
-        let label = tappedContentView.subviews.first! as! UILabel
-        let fileName = label.text!
-        setNavigationBar(fileName)
-    }
-
-    // Delete a file from FilesArchive given its fileName.
-    func deleteFile() {
-        let fileName = textLabel.text!
-        let deleteAlert = UIAlertController(title: "Delete",
-            message: "'\(fileName)' will be deleted. This action cannot be undone.",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
-            self.filesArchive.removeFile(fileName)
-            let successAlert = UIAlertController(title: "Deleted!",
-                message: "You have successfully deleted \(fileName)!",
-                preferredStyle: UIAlertControllerStyle.Alert)
-            successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
-                self.levelSelectorPageViewController.resetNavigationBar()
-                self.resetSearchBar()
-                self.reloadPageViewController()
-            }))
-            self.levelSelectorPageViewController.presentViewController(successAlert, animated: true, completion: nil)
-        }))
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-            self.levelSelectorPageViewController.resetNavigationBar()
-        }))
-        levelSelectorViewController.presentViewController(deleteAlert, animated: true,
-                                                          completion: nil)
-    }
-
-    func renameFile() {
-        let originalFileName = textLabel.text!
-        var newName: UITextField?
-        var renamedSuccessfully = false
-        let renameAlert = UIAlertController(title: "Rename",
-                                            message: "Rename '\(originalFileName)' as?",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        renameAlert.addTextFieldWithConfigurationHandler { (textField) -> Void in
-            newName = textField
-            newName?.placeholder = "Enter new name here"
-        }
-        renameAlert.addAction(UIAlertAction(title: "Confirm", style: .Default,
-            handler: { (action: UIAlertAction!) in
-            if newName!.text!.characters.count <= 30 {
-                renamedSuccessfully = self.filesArchive.renameFile(originalFileName,
-                    newFileName: newName!.text!)
-            }
-            if renamedSuccessfully {
-                self.levelSelectorPageViewController.resetNavigationBar()
-                self.resetSearchBar()
-                self.reloadPageViewController()
-                let successAlert = UIAlertController(title: "Renamed!",
-                    message: "You have successfully renamed this level!",
-                    preferredStyle: UIAlertControllerStyle.Alert)
-                successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                self.levelSelectorPageViewController.presentViewController(successAlert,
-                    animated: true, completion: nil)
-            } else {
-                let failureAlert = UIAlertController(title: "Failed",
-                    message: "Failed to save this level.",
-                    preferredStyle: UIAlertControllerStyle.Alert)
-                failureAlert.addAction(UIAlertAction(title: "OK", style: .Default,
-                    handler: { (action: UIAlertAction!) in
-                    self.levelSelectorPageViewController.resetNavigationBar()
-                }))
-                self.levelSelectorPageViewController.presentViewController(failureAlert,
-                    animated: true, completion: nil)
-            }
-        }))
-        renameAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel,
-            handler: { (action: UIAlertAction!) in
-            self.levelSelectorPageViewController.resetNavigationBar()
-        }))
-        levelSelectorPageViewController.presentViewController(renameAlert, animated: true,
-                                                              completion: nil)
-    }
-
-    func reloadPageViewController() {
-        levelSelectorPageViewController.filtered = []
-        levelSelectorPageViewController.viewDidAppear(false)
-    }
-
-    // Mark: - Search Bar
-
-    var searchBar: UISearchBar? {
-        return levelSelectorPageViewController.searchBar
-    }
-
-    func resetSearchBar() {
-        searchBar?.text = ""
-    }
-
-    // MARK: - Navigation Bar
-
-    var navigationBar: UINavigationBar? {
-        return levelSelectorPageViewController.navigationBar
-    }
-
-    var renameButton: UIBarButtonItem {
-        return UIBarButtonItem(title: "Rename", style: .Plain, target: self,
-                               action: #selector(LevelCell.renameFile))
-    }
-    var deleteButton: UIBarButtonItem {
-        let trashBinImage = UIImage(named: "trash")
-        return UIBarButtonItem(image: trashBinImage, style: .Plain, target: self,
-                               action: #selector(LevelCell.deleteFile))
-    }
-
-    func resetNavigationBar() {
-        self.levelSelectorPageViewController.resetNavigationBar()
-        self.resetSearchBar()
-        self.reloadPageViewController()
-    }
-
-    func setNavigationBar(fileName: String) {
-        let navigationItem = navigationBar!.items!.first!
-        navigationItem.title = fileName
-        navigationItem.leftBarButtonItem = renameButton
-        navigationItem.rightBarButtonItem = deleteButton
-        navigationBar?.items = [navigationItem]
     }
 }

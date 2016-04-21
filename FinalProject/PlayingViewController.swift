@@ -5,6 +5,10 @@
 //  Created by louis on 16/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+/// This is main controller responsible for displaying the main game
+/// The PlayingViewController contain two containers that segue to 2 child view controllers,
+/// PlayingMapViewController to display the game's execution & CodesBlockViewController to
+/// display the user's program blocks
 
 import UIKit
 
