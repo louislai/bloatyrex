@@ -14,7 +14,7 @@ struct PlayingMapSceneConstants {
         static let play = "Play"
         static let pause = "Pause"
         static let reset = "Reset"
-        static let resetHint = "Rewind to try"
+        static let resetHint = "Rewind to retry"
     }
     struct ButtonSpriteName {
         static let play = "play"
