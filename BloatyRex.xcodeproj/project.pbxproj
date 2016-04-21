@@ -136,6 +136,7 @@
 		BF17DF0A1CC8B2DF00192183 /* PlayingMapSceneConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6AB17C1CC6C925009943BB /* PlayingMapSceneConstants.swift */; };
 		BF17DF0C1CC8B81400192183 /* AgentNodeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0B1CC8B81400192183 /* AgentNodeConstants.swift */; };
 		BF17DF0D1CC8B8C200192183 /* AgentNodeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0B1CC8B81400192183 /* AgentNodeConstants.swift */; };
+		BF17DF0E1CC8BED200192183 /* UINavigationControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF071CC8A9C100192183 /* UINavigationControllerUtils.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
@@ -755,6 +756,7 @@
 				BF17DEF31CC89A5200192183 /* ObjectBlock.swift in Sources */,
 				BF17DED41CC899C100192183 /* DefaultGameScorer.swift in Sources */,
 				BF17DEEF1CC89A5200192183 /* TrashContainer.swift in Sources */,
+				BF17DF0E1CC8BED200192183 /* UINavigationControllerUtils.swift in Sources */,
 				BF17DEE41CC89A5200192183 /* WhileBlock.swift in Sources */,
 				BF17DEDE1CC89A5200192183 /* ContainerBlockProtocol.swift in Sources */,
 				BF17DEC31CC899AC00192183 /* Interpreter.swift in Sources */,

@@ -224,21 +224,19 @@ class PlayingMapScene: StaticMapScene {
         var shouldLose = false
         for agentNode in mapNode.activeAgentNodes {
             // If agent hasnt reached toilet, add it to the next list
-            if let result = agentNode.runNextAction() {
-                if result {
-                    agentNode.runWinningAnimation()
-                } else {
-                    agentNode.runLosingAnimation()
-                    shouldWin = false
-                    shouldLose = true
-                }
-            } else {
+            switch agentNode.runNextAction() {
+            case .NoResult:
                 if shouldLose {
                     agentNode.runLosingAnimation()
                 } else {
                     shouldWin = false
                     nextActiveAgentNodes.append(agentNode)
                 }
+            case .Win: agentNode.runWinningAnimation()
+            case .Lose:
+                agentNode.runLosingAnimation()
+                shouldWin = false
+                shouldLose = true
             }
         }
         if shouldWin {
