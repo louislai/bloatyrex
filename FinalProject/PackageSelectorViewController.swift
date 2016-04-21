@@ -13,11 +13,10 @@ struct PackageSelectorConstants {
     static let cellWidth: CGFloat = 300.0
     static let cellHeight: CGFloat = 400.0
     static let cellFontSize: CGFloat = 38
-    static let cellImage = UIImage(named: "Yoshi-win")
+    static let cellImage = UIImage(named: GlobalConstants.ImageNames.winning)
     static let cellReuseIdentifier = "packageCell"
 
     static let levelSelectorItemsPerPage = 12
-    static let levelSelectorSegueIdentifier = "packageToLevelSelectorSegue"
 }
 
 class PackageSelectorViewController: UICollectionViewController {
@@ -102,8 +101,9 @@ extension PackageSelectorViewController {
         let cell = collectionView.cellForItemAtIndexPath(indexPath)
         if let packageCell = cell as? PackageCell {
             selectedPackageTitle = packageCell.packageTitle.text
-            self.performSegueWithIdentifier(PackageSelectorConstants.levelSelectorSegueIdentifier,
-                                            sender: self)
+            self.performSegueWithIdentifier(
+                GlobalConstants.SegueIdentifier.levelSelector,
+                sender: self)
         }
     }
 }

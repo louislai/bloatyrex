@@ -27,8 +27,10 @@ struct LevelSelectorConstants {
 
     // standard level selector settings
     static let standardLevelSelectorItemSize = CGSize(width: 325, height: 100)
-    static let standardLevelSelectorSectionInsets = UIEdgeInsets(top: 100.0, left: 10.0,
-                                                                 bottom: 100.0, right: 10.0)
+    static let standardLevelSelectorSectionInsets = UIEdgeInsets(
+        top: 100.0, left: 10.0,
+        bottom: 100.0, right: 10.0
+    )
     static let standardLevelSelectorItemSpacing: CGFloat = 10
     static let standardLevelSelectorLineSpacing: CGFloat = 10
 
@@ -36,12 +38,12 @@ struct LevelSelectorConstants {
     static let packageLevelSelectorTitleFontSize: CGFloat = 48
     static let packageLevelSelectorTitleFrame = CGRect(x: 0, y: 0, width: 1024, height: 80)
     static let packageLevelSelectorItemSize = CGSize(width: 100, height: 100)
-    static let packageLevelSelectorSectionInsets = UIEdgeInsets(top: 100.0, left: 100.0,
-                                                                bottom: 100.0, right: 100.0)
+    static let packageLevelSelectorSectionInsets = UIEdgeInsets(
+        top: 100.0, left: 100.0,
+        bottom: 100.0, right: 100.0
+    )
     static let packageLevelSelectorItemSpacing: CGFloat = 100
     static let packageLevelSelectorLineSpacing: CGFloat = 50
-
-
 }
 
 class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
@@ -58,10 +60,14 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
         super.viewDidLoad()
 
         let flowLayout = UICollectionViewFlowLayout()
-        let collectionView = UICollectionView(frame: self.view.frame,
-                                              collectionViewLayout: flowLayout)
-        collectionView.registerClass(LevelCell.self,
-                                     forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier)
+        let collectionView = UICollectionView(
+            frame: view.frame,
+            collectionViewLayout: flowLayout
+        )
+        collectionView.registerClass(
+            LevelCell.self,
+            forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier
+        )
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = LevelSelectorConstants.backGroundColor
@@ -74,8 +80,10 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
             title.textAlignment = .Center
             title.text = previousController.selectedPackageTitle
             title.textColor = GlobalConstants.Font.defaultGreen
-            title.font = UIFont(name: "\(GlobalConstants.Font.defaultName)-Bold",
-                                size: LevelSelectorConstants.packageLevelSelectorTitleFontSize)
+            title.font = UIFont(
+                name: GlobalConstants.Font.defaultNameBold,
+                size: LevelSelectorConstants.packageLevelSelectorTitleFontSize
+            )
             collectionView.addSubview(title)
         }
 
@@ -93,9 +101,11 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
         let backButton = UIButton(type: UIButtonType.Custom) as UIButton
         backButton.frame = LevelSelectorConstants.backButtonFrame
         backButton.setImage(backButtonImage, forState: .Normal)
-        backButton.addTarget(self,
-                             action: #selector(LevelSelectorViewController.backButtonAction(_:)),
-                             forControlEvents: .TouchUpInside)
+        backButton.addTarget(
+            self,
+            action: #selector(LevelSelectorViewController.backButtonAction(_:)),
+            forControlEvents: .TouchUpInside
+        )
         collectionView.addSubview(backButton)
     }
 

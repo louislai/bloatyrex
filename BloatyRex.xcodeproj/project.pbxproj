@@ -137,6 +137,8 @@
 		BF17DF0C1CC8B81400192183 /* AgentNodeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0B1CC8B81400192183 /* AgentNodeConstants.swift */; };
 		BF17DF0D1CC8B8C200192183 /* AgentNodeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0B1CC8B81400192183 /* AgentNodeConstants.swift */; };
 		BF17DF0E1CC8BED200192183 /* UINavigationControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF071CC8A9C100192183 /* UINavigationControllerUtils.swift */; };
+		BF17DF101CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0F1CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift */; };
+		BF17DF111CC8C44300192183 /* LevelSelectorPageViewControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0F1CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
@@ -243,6 +245,7 @@
 		BF17DEBA1CC897D000192183 /* InterpreterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterpreterTests.swift; sourceTree = "<group>"; };
 		BF17DF071CC8A9C100192183 /* UINavigationControllerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationControllerUtils.swift; sourceTree = "<group>"; };
 		BF17DF0B1CC8B81400192183 /* AgentNodeConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgentNodeConstants.swift; sourceTree = "<group>"; };
+		BF17DF0F1CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorPageViewControllerConstants.swift; sourceTree = "<group>"; };
 		BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayingMapScene.swift; sourceTree = "<group>"; };
 		BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
 		BF4C52F11C910CD100C56DD2 /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
@@ -386,6 +389,7 @@
 			children = (
 				B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */,
 				B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */,
+				BF17DF0F1CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift */,
 				3DF3A7751CC892980074C287 /* LevelCell.swift */,
 			);
 			name = LevelSelector;
@@ -671,6 +675,7 @@
 				BF17DF0C1CC8B81400192183 /* AgentNodeConstants.swift in Sources */,
 				1D69B6D21CB3B24000C1FA04 /* SeeBlock.swift in Sources */,
 				BF6736251CC7782600C8752B /* ModalPresentationAnimationController.swift in Sources */,
+				BF17DF101CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift in Sources */,
 				B04E40521CC6064400C73E86 /* DesigningMapConstants.swift in Sources */,
 				B01BF8CF1CA12C7400D02FCA /* FilesArchive.swift in Sources */,
 				BF7F3C9F1CBDD702004530F5 /* Scorer.swift in Sources */,
@@ -736,6 +741,7 @@
 				BF17DED91CC899FA00192183 /* Scorer.swift in Sources */,
 				BF17DED61CC899FA00192183 /* AgentProtocol.swift in Sources */,
 				BF17DEED1CC89A5200192183 /* MainBlock.swift in Sources */,
+				BF17DF111CC8C44300192183 /* LevelSelectorPageViewControllerConstants.swift in Sources */,
 				BF17DEDD1CC89A4400192183 /* HighlightableBlockProtocol.swift in Sources */,
 				BF17DED11CC899C100192183 /* WoodenBlockNode.swift in Sources */,
 				BF17DEEC1CC89A5200192183 /* ActionBlock.swift in Sources */,

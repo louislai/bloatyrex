@@ -14,6 +14,7 @@ class GlobalConstants {
     struct SegueIdentifier {
         static let designToPlaying = "DesignToPlayingSegue"
         static let playingToTutorial = "Hello"
+        static let levelSelector = "packageToLevelSelectorSegue"
     }
 
     struct Dimension {
@@ -31,6 +32,8 @@ class GlobalConstants {
     struct Identifier {
         static let playingViewController = "PlayingViewController"
         static let programmingViewController = "ProgrammingViewController"
+        static let levelSelectorPageViewController = "LevelSelectorPageViewController"
+        static let levelSelectorViewController = "LevelSelectorViewController"
     }
 
     struct Notification {
@@ -70,6 +73,7 @@ class GlobalConstants {
         static let goal = "toilet"
         static let skull = "skull"
         static let sleeping = "zzz"
+        static let winning = "Yoshi-win"
     }
     static let explosionEmitterName = "Spark.sks"
 

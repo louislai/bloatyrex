@@ -52,7 +52,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
         if previousViewController is LevelDesigningViewController {
             searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 1024, height: 60))
-            searchBar?.placeholder = "Search for file name..."
+            searchBar?.placeholder = LevelSelectorPageViewControllerConstants.searchingText
             view.addSubview(searchBar!)
             searchBar?.delegate = self
 
@@ -77,8 +77,10 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
 
     private func createPageViewController() {
-        let pageController = self.storyboard!.instantiateViewControllerWithIdentifier(
-            "LevelSelectorPageViewController") as! UIPageViewController
+        let pageController = self.storyboard!
+            .instantiateViewControllerWithIdentifier(
+                GlobalConstants.Identifier.levelSelectorPageViewController
+            ) as! UIPageViewController
         pageController.dataSource = self
         pageController.view.frame = CGRect(x: 0, y: 60, width: 1024, height: 708)
 
@@ -145,7 +147,8 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
         if itemIndex < totalNumberOfPages {
             let pageItemController = self.storyboard!.instantiateViewControllerWithIdentifier(
-                "LevelSelectorViewController") as! LevelSelectorViewController
+                    GlobalConstants.Identifier.levelSelectorViewController
+                ) as! LevelSelectorViewController
             pageItemController.pageIndex = itemIndex
             let remainder = totalNumberOfItems % numberOfItemsPerPage!
             var numberOfFileNamesInPage: Int {
@@ -220,7 +223,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     // - MARK: - Navigation Bar
 
     func resetNavigationBar() {
-        navigationItem.title = "Tap to load level, Press-and-hold for Settings"
+        navigationItem.title = LevelSelectorPageViewControllerConstants.headerText
         navigationItem.leftBarButtonItems = nil
         navigationItem.rightBarButtonItem = nil
 
