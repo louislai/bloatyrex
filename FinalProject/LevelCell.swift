@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+struct LevelCellConstants {
+    static let labelFontSize: CGFloat = 17
+    static let maximumLevelLength = 30
+}
+
 class LevelCell: UICollectionViewCell {
     var textLabel: UILabel!
     private var filesArchive = FilesArchive()
@@ -22,7 +27,8 @@ class LevelCell: UICollectionViewCell {
         textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width, height: labelHeight))
         textLabel.textAlignment = .Center
         textLabel.textColor = UIColor.whiteColor()
-        textLabel.font = UIFont(name: GlobalConstants.Font.defaultNameBold, size: 17)
+        textLabel.font = UIFont(name: GlobalConstants.Font.defaultNameBold,
+                                size: LevelCellConstants.labelFontSize)
         contentView.addSubview(textLabel)
     }
 
@@ -58,8 +64,8 @@ class LevelCell: UICollectionViewCell {
     func deleteFile() {
         let fileName = textLabel.text!
         let deleteAlert = UIAlertController(title: "Delete",
-                                            message: "'\(fileName)' will be deleted. This action cannot be undone.",
-                                            preferredStyle: UIAlertControllerStyle.Alert)
+            message: "'\(fileName)' will be deleted. This action cannot be undone.",
+            preferredStyle: UIAlertControllerStyle.Alert)
         deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
             self.filesArchive.removeFile(fileName)
             let successAlert = UIAlertController(title: "Deleted!",
@@ -92,7 +98,7 @@ class LevelCell: UICollectionViewCell {
         }
         renameAlert.addAction(UIAlertAction(title: "Confirm", style: .Default,
             handler: { (action: UIAlertAction!) in
-                if newName!.text!.characters.count <= 30 {
+                if newName!.text!.characters.count <= LevelCellConstants.maximumLevelLength {
                     renamedSuccessfully = self.filesArchive.renameFile(originalFileName,
                         newFileName: newName!.text!)
                 }
@@ -103,7 +109,8 @@ class LevelCell: UICollectionViewCell {
                     let successAlert = UIAlertController(title: "Renamed!",
                         message: "You have successfully renamed this level!",
                         preferredStyle: UIAlertControllerStyle.Alert)
-                    successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+                    successAlert.addAction(UIAlertAction(title: "OK", style: .Default,
+                        handler: nil))
                     self.levelSelectorPageViewController.presentViewController(successAlert,
                         animated: true, completion: nil)
                 } else {

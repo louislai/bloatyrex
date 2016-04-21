@@ -47,6 +47,7 @@
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
 		3DF230B71C8F0617003420C0 /* FinalProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230B61C8F0617003420C0 /* FinalProjectTests.swift */; };
 		3DF230C21C8F0617003420C0 /* FinalProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */; };
+		3DF3A7761CC892980074C287 /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3A7751CC892980074C287 /* LevelCell.swift */; };
 		3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */; };
 		B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */; };
 		B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */; };
@@ -160,6 +161,7 @@
 		3DF230BD1C8F0617003420C0 /* BloatyRex.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BloatyRex.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF230C11C8F0617003420C0 /* FinalProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalProjectUITests.swift; sourceTree = "<group>"; };
 		3DF230C31C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DF3A7751CC892980074C287 /* LevelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
 		3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorOuterViewController.swift; sourceTree = "<group>"; };
 		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningViewController.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 			children = (
 				B01BF8D31CA1B31100D02FCA /* LevelSelectorViewController.swift */,
 				B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */,
+				3DF3A7751CC892980074C287 /* LevelCell.swift */,
 			);
 			name = LevelSelector;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				BFFB1A3E1CABB78F00C746CD /* MapNode.swift in Sources */,
 				B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */,
 				1D69B6CA1CB2AA9200C1FA04 /* NestingZone.swift in Sources */,
+				3DF3A7761CC892980074C287 /* LevelCell.swift in Sources */,
 				3DF230A41C8F0617003420C0 /* PlayingMapViewController.swift in Sources */,
 				BF8E12AC1C99ADE900B210C3 /* PlayingViewController.swift in Sources */,
 				BF695B8F1CC4C46200532797 /* AgentNode+AgentProtocol.swift in Sources */,
