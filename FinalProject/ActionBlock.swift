@@ -70,12 +70,12 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
         newLayer.alpha = 0.3
         newLayer.zPosition = 3
         self.addChild(newLayer)
+        newLayer.name = "highlightLayer"
         highlightLayer = newLayer
     }
 
     func unhighlight() {
         if let layer = highlightLayer {
-            highlightLayer = nil
             layer.removeFromParent()
         }
     }
