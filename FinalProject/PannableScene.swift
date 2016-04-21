@@ -46,6 +46,11 @@ struct PannableSceneConstants {
     static let zoomRangeFactor: CGFloat = 2.0
     static let doubleTapGestureTapsRequired = 2
     static let panGestureTouchesRequired = 2
+    static let pinchGestureTouchesRequired = 2
+    static let noDisplacement: CGFloat = 0
+    static let minimumBoundary: CGFloat = 0
+    static let doubleTapZoomOutScaleFactor: CGFloat = 0.5
+    static let defaultGestureScale: CGFloat = 1.0
 }
 
 class PannableScene: SKScene {
@@ -174,51 +179,54 @@ class PannableScene: SKScene {
             // calculate the horizontal and vertical amount the viewpoint should move based on
             // the pan movement and the size of the content
             if horizontalPanDisabled {
-                horizontalDisplacement = 0
-            } else if horizontalDisplacement > 0 {
+                horizontalDisplacement = PannableSceneConstants.noDisplacement
+            } else if horizontalDisplacement > PannableSceneConstants.noDisplacement {
                 let leftBoundaryOfContent = contentCenter.x - contentFrame.width / 2
                 let viewpointDistanceToLeftBoundaryOfContent = (viewpoint.position.x -
                     leftBoundaryOfContent) / currentScale
                 let viewpointDistanceToLeftBoundary = viewpoint.position.x
                 var distanceToViewLeftmostContent = viewpointDistanceToLeftBoundaryOfContent -
                     viewpointDistanceToLeftBoundary
-                distanceToViewLeftmostContent = max(distanceToViewLeftmostContent, 0)
+                distanceToViewLeftmostContent = max(distanceToViewLeftmostContent,
+                    PannableSceneConstants.noDisplacement)
 
                 // leftmost position of viewpoint allowed so as to not pan out of visible content
                 var minimumAllowedHorizontalViewpointPosition = originalViewpointPosition.x -
                     distanceToViewLeftmostContent
-                if distanceToViewLeftmostContent > 0 {
+                if distanceToViewLeftmostContent > PannableSceneConstants.noDisplacement {
                     minimumAllowedHorizontalViewpointPosition -= horizontalPanBuffer
                 }
                 let minimumAllowedHorizontalDisplacement =
                     minimumAllowedHorizontalViewpointPosition - viewpoint.position.x
                 horizontalDisplacement = min(-minimumAllowedHorizontalDisplacement,
                     horizontalDisplacement)
-            } else if horizontalDisplacement < 0 {
+            } else if horizontalDisplacement < PannableSceneConstants.noDisplacement {
                 let rightBoundaryOfContent = contentCenter.x + contentFrame.width / 2
                 let viewpointDistanceToRightBoundaryOfContent = (rightBoundaryOfContent -
                     viewpoint.position.x) / currentScale
                 let viewpointDistanceToRightBoundary = self.size.width - viewpoint.position.x
                 var distanceToViewRightmostContent = viewpointDistanceToRightBoundaryOfContent -
                 viewpointDistanceToRightBoundary
-                distanceToViewRightmostContent = max(distanceToViewRightmostContent, 0)
+                distanceToViewRightmostContent = max(distanceToViewRightmostContent,
+                    PannableSceneConstants.noDisplacement)
 
                 // rightmost position of viewpoint allowed so as to not pan out of visible content
                 var maximumAllowedHorizontalViewpointPosition = originalViewpointPosition.x +
                 distanceToViewRightmostContent
-                if distanceToViewRightmostContent > 0 {
+                if distanceToViewRightmostContent > PannableSceneConstants.noDisplacement {
                     maximumAllowedHorizontalViewpointPosition += horizontalPanBuffer
                 }
                 var maximumAllowedHorizontalViewpointDisplacement =
                     maximumAllowedHorizontalViewpointPosition - viewpoint.position.x
                 maximumAllowedHorizontalViewpointDisplacement =
-                    max(maximumAllowedHorizontalViewpointDisplacement, 0)
+                    max(maximumAllowedHorizontalViewpointDisplacement,
+                        PannableSceneConstants.noDisplacement)
                 horizontalDisplacement = max(-maximumAllowedHorizontalViewpointDisplacement,
                                              horizontalDisplacement)
             }
             if verticalPanDisabled {
-                verticalDisplacement = 0
-            } else if verticalDisplacement > 0 {
+                verticalDisplacement = PannableSceneConstants.noDisplacement
+            } else if verticalDisplacement > PannableSceneConstants.noDisplacement {
                 let bottomBoundaryOfContent = contentCenter.y - contentFrame.height / 2
 
                 // bottommost position of viewpoint allowed so as to not pan out of visible content
@@ -229,7 +237,7 @@ class PannableScene: SKScene {
 
                 verticalDisplacement = min(-minimumAllowedVerticalViewpointDisplacement,
                                            verticalDisplacement)
-            } else if verticalDisplacement < 0 {
+            } else if verticalDisplacement < PannableSceneConstants.noDisplacement {
                 let topBoundaryOfContent = contentCenter.y + contentFrame.height / 2
 
                 // topmost position of viewpoint allowed so as to not pan out of visible content
@@ -239,7 +247,8 @@ class PannableScene: SKScene {
                 var maximumAllowedVerticalViewpointDisplacement =
                     maximumAllowedVerticalViewpointPosition - viewpoint.position.y
                 maximumAllowedVerticalViewpointDisplacement =
-                    max(maximumAllowedVerticalViewpointDisplacement, 0)
+                    max(maximumAllowedVerticalViewpointDisplacement,
+                        PannableSceneConstants.noDisplacement)
                 verticalDisplacement = max(-maximumAllowedVerticalViewpointDisplacement,
                                            verticalDisplacement)
             }
@@ -260,7 +269,7 @@ class PannableScene: SKScene {
     func handlePinch(sender: UIPinchGestureRecognizer) {
         resetOtherTouches()
         sender.cancelsTouchesInView = false
-        if sender.numberOfTouches() == 2 {
+        if sender.numberOfTouches() == PannableSceneConstants.pinchGestureTouchesRequired {
             if sender.state == .Changed {
                 // The scale applied to the contents is the inverse of the camera node’s scale
                 var newScale = viewpoint.xScale * (1.0 / sender.scale)
@@ -271,7 +280,7 @@ class PannableScene: SKScene {
                 }
                 currentScale = newScale
                 viewpoint.setScale(newScale)
-                sender.scale = 1.0
+                sender.scale = PannableSceneConstants.defaultGestureScale
             }
         }
     }
@@ -291,12 +300,12 @@ class PannableScene: SKScene {
                 var horizontalZoomLocation = zoomLocation.x
                 var verticalZoomLocation = zoomLocation.y
                 // restrict the tap location to within the scene
-                if horizontalZoomLocation < 0 {
+                if horizontalZoomLocation < PannableSceneConstants.minimumBoundary {
                     horizontalZoomLocation = max(horizontalZoomLocation, -self.size.width / 2)
                 } else {
                     horizontalZoomLocation = min(horizontalZoomLocation, self.size.width / 2)
                 }
-                if verticalZoomLocation < 0 {
+                if verticalZoomLocation < PannableSceneConstants.minimumBoundary {
                     verticalZoomLocation = max(verticalZoomLocation, -self.size.height / 2)
                 } else {
                     verticalZoomLocation = min(verticalZoomLocation, self.size.height / 2)
@@ -304,7 +313,7 @@ class PannableScene: SKScene {
                 let boundedZoomLocation = CGPoint(x: horizontalZoomLocation,
                                                   y: verticalZoomLocation)
                 viewpoint.position = boundedZoomLocation
-                var newScale = viewpoint.xScale * 0.5
+                var newScale = viewpoint.xScale * PannableSceneConstants.doubleTapZoomOutScaleFactor
 
                 // restrict the maximum zoom
                 newScale = max(newScale, minimumScale)
