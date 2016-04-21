@@ -77,6 +77,7 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
 
     func unhighlight() {
         if let layer = highlightLayer {
+            layer.name = "\(NSDate())"
             layer.removeFromParent()
         }
     }
