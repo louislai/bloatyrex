@@ -15,7 +15,7 @@ struct LevelCellConstants {
 }
 
 class LevelCell: UICollectionViewCell {
-    private var textLabel: UILabel!
+    var textLabel: UILabel!
     private var filesArchive = FilesArchive()
     private var levelSelectorViewController: LevelSelectorViewController!
     private var levelSelectorPageViewController: LevelSelectorPageViewController!
@@ -48,7 +48,7 @@ class LevelCell: UICollectionViewCell {
         levelSelectorViewController = controller
     }
 
-    private func setLevelSelectorPageViewController(controller: LevelSelectorPageViewController) {
+    func setLevelSelectorPageViewController(controller: LevelSelectorPageViewController) {
         levelSelectorPageViewController = controller
     }
 
@@ -145,7 +145,7 @@ class LevelCell: UICollectionViewCell {
 
     // Mark: - Search Bar
 
-    private var searchBar: UISearchBar? {
+    var searchBar: UISearchBar? {
         return levelSelectorPageViewController.searchBar
     }
 

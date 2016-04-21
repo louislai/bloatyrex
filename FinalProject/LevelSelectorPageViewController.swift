@@ -33,7 +33,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
     private var pageViewController: UIPageViewController?
     var previousViewController: UIViewController?
-    private var searchBar: UISearchBar?
+    var searchBar: UISearchBar?
     private var searchActive: Bool = false
     private var data: [String] {
         if previousViewController is PackageSelectorViewController {
