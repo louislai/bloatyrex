@@ -128,22 +128,20 @@ class PlayingViewController: UIViewController {
                     if isPlayingPresetMap {
                         let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
                         let toAppearStars = self.stars[0..<rating]
-                        for (index, star) in toAppearStars.enumerate() {
-                            let delay = Int64(index) * Int64(self.animationDelay) * Int64(NSEC_PER_SEC) * 2
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
+                        for star in toAppearStars {
+                            UIView.animateWithDuration(self.animationDelay, animations: { _ in
                                 star.hidden = false
-                                UIView.animateWithDuration(self.animationDelay, animations: { Void in
-                                    star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-                                })
-                                UIView.animateWithDuration(
-                                    self.animationDelay,
-                                    delay: self.animationDelay / 2.0,
-                                    options: UIViewAnimationOptions.CurveEaseIn,
-                                    animations: { Void in
-                                        star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 2))
-                                    },
-                                    completion: nil)
+                                star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
                             })
+                            UIView.animateWithDuration(
+                                self.animationDelay,
+                                delay: self.animationDelay / 2.0,
+                                options: UIViewAnimationOptions.CurveEaseIn,
+                                animations: { Void in
+                                    star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 2))
+                                },
+                                completion: nil
+                            )
                         }
                     }
                 }
