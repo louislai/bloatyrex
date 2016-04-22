@@ -51,12 +51,12 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         setupPageControl()
 
         if previousViewController is LevelDesigningViewController {
-            searchBar = UISearchBar(frame: LevelSelectorPageViewControllerConstants.Position.searching)
+            searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 1024, height: 60))
             searchBar?.placeholder = LevelSelectorPageViewControllerConstants.searchingText
             view.addSubview(searchBar!)
             searchBar?.delegate = self
 
-            navigationBar = UINavigationBar(frame: LevelSelectorPageViewControllerConstants.Position.navigation)
+            navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 60, width: 1024, height: 50))
             navigationBar?.backgroundColor = UIColor.whiteColor()
             resetNavigationBar()
             self.view.addSubview(navigationBar!)
@@ -82,7 +82,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
                 GlobalConstants.Identifier.levelSelectorPageViewController
             ) as! UIPageViewController
         pageController.dataSource = self
-        pageController.view.frame = LevelSelectorPageViewControllerConstants.Position.pageController
+        pageController.view.frame = CGRect(x: 0, y: 60, width: 1024, height: 708)
 
         if totalNumberOfPages > 0 {
             let firstController = getItemController(0)!
