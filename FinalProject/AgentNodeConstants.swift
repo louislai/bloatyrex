@@ -11,6 +11,7 @@ import SpriteKit
 struct AgentNodeConstants {
     static let timePerMoveMovement: NSTimeInterval = 0.6
     static let timePerFrame: NSTimeInterval = 0.1
+    static let defaultNumberOfMoves = 30
     static let walkingUpTextures = [
         SKTexture(
             rect: CGRect(

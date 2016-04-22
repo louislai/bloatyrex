@@ -645,7 +645,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\nswiftlint autocorrect\nswiftlint\nelse\necho 'Download swiftlint'\nfi";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 

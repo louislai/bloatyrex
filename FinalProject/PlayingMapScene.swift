@@ -67,7 +67,6 @@ class PlayingMapScene: StaticMapScene {
             self.isPlayingPresetMap = false
         }
         super.init(size: size, zoomLevel: zoomLevel, map: map, levelName: levelName)
-        self.movesLeft = mapNode.originalMovesLeft
     }
 
     required init?(coder aDecoder: NSCoder) {
