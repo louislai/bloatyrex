@@ -10,7 +10,7 @@ import SpriteKit
 
 /// This class represents objects that can appear on the map and be observed by the agent. As the
 /// properties of these blocks are largely the same save a few fields and images, objects of this
-/// class is only instantiated by static factory methods.
+/// class are only instantiated by static factory methods.
 
 class ObjectBlock: SKNode, MovableBlockProtocol {
     private var containingBlockValue: ContainerBlockProtocol

@@ -17,7 +17,7 @@ enum AgentActionResult {
 class AgentNode: MapUnitNode {
     var orientation = Direction.Up
     var delegate: LanguageDelegate?
-    var numberOfMoves = 0
+    var numberOfMoves = AgentNodeConstants.defaultNumberOfMoves
     var goingToExplode = false
 
     required init(type: MapUnitType = .Agent) {

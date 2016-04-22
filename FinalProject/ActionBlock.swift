@@ -10,7 +10,7 @@ import SpriteKit
 
 /// This class represents actions that can be taken by the agent. As the
 /// properties of these blocks are largely the same save a few fields and images, objects of this
-/// class is only instantiated by static factory methods.
+/// class are only instantiated by static factory methods.
 
 class ActionBlock: CodeBlock, HighlightableBlockProtocol {
     var highlightLayer: SKShapeNode?
@@ -71,13 +71,12 @@ class ActionBlock: CodeBlock, HighlightableBlockProtocol {
         newLayer.alpha = 0.3
         newLayer.zPosition = 3
         self.addChild(newLayer)
-        newLayer.name = "highlightLayer"
         highlightLayer = newLayer
     }
 
     func unhighlight() {
         if let layer = highlightLayer {
-            layer.removeFromParent()
+            layer.hidden = true
         }
     }
 

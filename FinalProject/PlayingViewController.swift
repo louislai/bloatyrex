@@ -6,7 +6,7 @@
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
 /// This is main controller responsible for displaying the main game
-/// The PlayingViewController contain two containers that segue to 2 child view controllers,
+/// The PlayingViewController contains two containers that segue to 2 child view controllers,
 /// PlayingMapViewController to display the game's execution & CodesBlockViewController to
 /// display the user's program blocks
 
@@ -106,6 +106,15 @@ class PlayingViewController: UIViewController {
         )
         winningScreen.hidden = false
         winningScreen.layer.zPosition = GlobalConstants.zPosition.front
+
+        // Check if user is playing preset map
+        hidePresetMapWidgets()
+        let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
+        if isPlayingPresetMap {
+            self.showStarSlots()
+            self.showNextStage()
+        }
+
         UIView.animateWithDuration(0.5, animations: { _ in
             self.winningScreen.frame = CGRect(
                 x: self.view.bounds.width-self.winningScreen.bounds.width,
@@ -116,33 +125,27 @@ class PlayingViewController: UIViewController {
             }, completion: { finished in
                 // Handle rating
                 if finished {
-                    let isPlayingPresetMap = notification.userInfo![GlobalConstants.Notification.gameWonInfoIsPlayingPresetMap] as! Bool
                     if isPlayingPresetMap {
-                        self.showStarSlots()
-                        self.showNextStage()
                         let rating  = notification.userInfo![GlobalConstants.Notification.gameWonInfoRating] as! Int
                         let toAppearStars = self.stars[0..<rating]
-                        for (index, star) in toAppearStars.enumerate() {
-                            let delay = Int64(index) * Int64(self.animationDelay) * Int64(NSEC_PER_SEC) * 2
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay), dispatch_get_main_queue(), { () -> Void in
+                        for star in toAppearStars {
+                            UIView.animateWithDuration(self.animationDelay, animations: { _ in
                                 star.hidden = false
-                                UIView.animateWithDuration(self.animationDelay, animations: { Void in
-                                    star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-                                })
-                                UIView.animateWithDuration(
-                                    self.animationDelay,
-                                    delay: self.animationDelay / 2.0,
-                                    options: UIViewAnimationOptions.CurveEaseIn,
-                                    animations: { Void in
-                                        star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 2))
-                                    },
-                                    completion: nil)
+                                star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
                             })
+                            UIView.animateWithDuration(
+                                self.animationDelay,
+                                delay: self.animationDelay / 2.0,
+                                options: UIViewAnimationOptions.CurveEaseIn,
+                                animations: { Void in
+                                    star.transform = CGAffineTransformMakeRotation(CGFloat(M_PI * 2))
+                                },
+                                completion: nil
+                            )
                         }
                     }
                 }
         })
-        hidePresetMapWidgets()
     }
 
     func resetGameScene() {
@@ -213,11 +216,11 @@ extension PlayingViewController {
             default:
                 break
             }
-            if let _ = tutorialImage {
-                performSegueWithIdentifier(GlobalConstants.SegueIdentifier.playingToTutorial, sender: self)
-            } else {
-                tutorialButton.alpha = 0
-            }
+        }
+        if let _ = tutorialImage {
+            performSegueWithIdentifier(GlobalConstants.SegueIdentifier.playingToTutorial, sender: self)
+        } else {
+            tutorialButton.alpha = 0
         }
     }
 

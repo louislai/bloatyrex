@@ -5,6 +5,8 @@
 //  Created by Melvin Tan Jun Keong on 23/3/16.
 //  Copyright © 2016 nus.cs3217.2016Group6. All rights reserved.
 //
+//  Handles the displaying of the different pages of levels in the level selector.
+//
 
 import UIKit
 import Darwin
@@ -12,18 +14,19 @@ import Darwin
 class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDataSource,
     UIPageViewControllerDelegate, UISearchBarDelegate {
 
-    private let filesArchive = FilesArchive()
     var numberOfItemsPerPage: Int?
-    var totalNumberOfItems: Int {
+    var package: String?
+    private let filesArchive = FilesArchive()
+    private var totalNumberOfItems: Int {
         if searchActive {
             return filtered.count
         } else {
             return data.count
         }
     }
-    var totalNumberOfPages: Int {
-        if totalNumberOfItems == 0 {
-            return 1
+    private var totalNumberOfPages: Int {
+        if totalNumberOfItems == LevelSelectorPageViewControllerConstants.noItems {
+            return LevelSelectorPageViewControllerConstants.singlePage
         } else {
             return Int(ceil(Double(totalNumberOfItems) / Double(numberOfItemsPerPage!)))
         }
@@ -31,8 +34,8 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     private var pageViewController: UIPageViewController?
     var previousViewController: UIViewController?
     var searchBar: UISearchBar?
-    var searchActive: Bool = false
-    var data: [String] {
+    private var searchActive: Bool = false
+    private var data: [String] {
         if previousViewController is PackageSelectorViewController {
             return filesArchive.getFileNamesFromPackage(package!)
         } else {
@@ -40,7 +43,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         }
     }
     var filtered: [String] = []
-    var package: String?
     var navigationBar: UINavigationBar?
 
     // MARK: - View Lifecycle
@@ -51,12 +53,14 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         setupPageControl()
 
         if previousViewController is LevelDesigningViewController {
-            searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 1024, height: 60))
+            searchBar = UISearchBar(frame:
+                LevelSelectorPageViewControllerConstants.levelDesignSelectorSearchBarFrame)
             searchBar?.placeholder = LevelSelectorPageViewControllerConstants.searchingText
             view.addSubview(searchBar!)
             searchBar?.delegate = self
 
-            navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 60, width: 1024, height: 50))
+            navigationBar = UINavigationBar(frame:
+                LevelSelectorPageViewControllerConstants.levelDesignSelectorNavigationBarFrame)
             navigationBar?.backgroundColor = UIColor.whiteColor()
             resetNavigationBar()
             self.view.addSubview(navigationBar!)
@@ -66,7 +70,8 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if previousViewController is LevelDesigningViewController {
-            if filtered.count == 0 && (searchBar?.text?.isEmpty)! {
+            if filtered.count == LevelSelectorPageViewControllerConstants.noItems &&
+                (searchBar?.text?.isEmpty)! {
                 searchActive = false
             } else {
                 searchActive = true
@@ -82,10 +87,11 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
                 GlobalConstants.Identifier.levelSelectorPageViewController
             ) as! UIPageViewController
         pageController.dataSource = self
-        pageController.view.frame = CGRect(x: 0, y: 60, width: 1024, height: 708)
+        pageController.view.frame = LevelSelectorPageViewControllerConstants.pageControllerFrame
 
-        if totalNumberOfPages > 0 {
-            let firstController = getItemController(0)!
+        if totalNumberOfPages > LevelSelectorPageViewControllerConstants.noPages {
+            let firstController =
+                getItemController(LevelSelectorPageViewControllerConstants.firstItem)!
             let startingViewControllers = [firstController]
             pageController.setViewControllers(startingViewControllers,
                 direction: UIPageViewControllerNavigationDirection.Forward,
@@ -100,8 +106,9 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
     }
 
     private func resetViewControllers() {
-        if totalNumberOfPages > 0 {
-            let firstController = getItemController(0)!
+        if totalNumberOfPages > LevelSelectorPageViewControllerConstants.noPages {
+            let firstController =
+                getItemController(LevelSelectorPageViewControllerConstants.firstItem)!
             let startingViewControllers = [firstController]
             pageViewController!.setViewControllers(startingViewControllers,
                 direction: UIPageViewControllerNavigationDirection.Forward,
@@ -124,8 +131,8 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
         let itemController = viewController as! LevelSelectorViewController
 
-        if itemController.pageIndex! > 0 {
-            return getItemController(itemController.pageIndex!-1)
+        if itemController.pageIndex! > LevelSelectorPageViewControllerConstants.firstPage {
+            return getItemController(itemController.pageIndex! - 1)
         }
 
         return nil
@@ -137,7 +144,7 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
         let itemController = viewController as! LevelSelectorViewController
 
         if itemController.pageIndex! + 1 < totalNumberOfPages {
-            return getItemController(itemController.pageIndex!+1)
+            return getItemController(itemController.pageIndex! + 1)
         }
 
         return nil
@@ -152,7 +159,8 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
             pageItemController.pageIndex = itemIndex
             let remainder = totalNumberOfItems % numberOfItemsPerPage!
             var numberOfFileNamesInPage: Int {
-                if itemIndex == totalNumberOfPages - 1 && remainder != 0 {
+                if itemIndex == totalNumberOfPages - 1 && remainder !=
+                    LevelSelectorPageViewControllerConstants.noItems {
                     return remainder
                 } else {
                     return numberOfItemsPerPage!
@@ -190,10 +198,6 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
 
     // MARK: - Search Bar
 
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true
-    }
-
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         searchActive = false
     }
@@ -212,12 +216,17 @@ class LevelSelectorPageViewController: UIViewController, UIPageViewControllerDat
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        if filtered.count == 0 && searchText.isEmpty {
+        if filtered.count == LevelSelectorPageViewControllerConstants.noItems &&
+            searchText.isEmpty {
             searchActive = false
         } else {
             searchActive = true
         }
         viewDidAppear(false)
+    }
+
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true
     }
 
     // - MARK: - Navigation Bar

@@ -45,6 +45,8 @@
 		3DF230A91C8F0617003420C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230A81C8F0617003420C0 /* Assets.xcassets */; };
 		3DF230AC1C8F0617003420C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DF230AA1C8F0617003420C0 /* LaunchScreen.storyboard */; };
 		3DF3A7761CC892980074C287 /* LevelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3A7751CC892980074C287 /* LevelCell.swift */; };
+		3DF3A7781CC9AB760074C287 /* PackageSelectorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3A7771CC9AB760074C287 /* PackageSelectorConstants.swift */; };
+		3DF3A77A1CC9ABBB0074C287 /* LevelSelectorViewControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3A7791CC9ABBB0074C287 /* LevelSelectorViewControllerConstants.swift */; };
 		3DF6D0D41CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */; };
 		B01BF8CB1CA12C6800D02FCA /* LevelDesigningMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */; };
 		B01BF8CD1CA12C6E00D02FCA /* LevelDesigningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */; };
@@ -229,6 +231,8 @@
 		3DF230AB1C8F0617003420C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DF230AD1C8F0617003420C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DF3A7751CC892980074C287 /* LevelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelCell.swift; sourceTree = "<group>"; };
+		3DF3A7771CC9AB760074C287 /* PackageSelectorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorConstants.swift; sourceTree = "<group>"; };
+		3DF3A7791CC9ABBB0074C287 /* LevelSelectorViewControllerConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewControllerConstants.swift; sourceTree = "<group>"; };
 		3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PackageSelectorOuterViewController.swift; sourceTree = "<group>"; };
 		B01BF8CA1CA12C6800D02FCA /* LevelDesigningMapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LevelDesigningMapScene.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B01BF8CC1CA12C6E00D02FCA /* LevelDesigningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelDesigningViewController.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 				3DF6D0D31CC5D3EA00305CDE /* PackageSelectorOuterViewController.swift */,
 				3D15926C1CC32ACB009E8559 /* PackageSelectorViewController.swift */,
 				3D15926E1CC32F72009E8559 /* PackageCell.swift */,
+				3DF3A7771CC9AB760074C287 /* PackageSelectorConstants.swift */,
 			);
 			name = PackageSelector;
 			sourceTree = "<group>";
@@ -391,6 +396,7 @@
 				B01BF8FF1CA2E14900D02FCA /* LevelSelectorPageViewController.swift */,
 				BF17DF0F1CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift */,
 				3DF3A7751CC892980074C287 /* LevelCell.swift */,
+				3DF3A7791CC9ABBB0074C287 /* LevelSelectorViewControllerConstants.swift */,
 			);
 			name = LevelSelector;
 			sourceTree = "<group>";
@@ -639,7 +645,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint > /dev/null; then\nswiftlint autocorrect\nswiftlint\nelse\necho 'Download swiftlint'\nfi";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -648,6 +654,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF3A77A1CC9ABBB0074C287 /* LevelSelectorViewControllerConstants.swift in Sources */,
 				3D1592671CBACA46009E8559 /* ProgramBlocksSupplier.swift in Sources */,
 				BFB045CE1CB4C418009F21EF /* MapUnitNode.swift in Sources */,
 				BF695B8D1CC3809B00532797 /* DoorNode.swift in Sources */,
@@ -667,6 +674,7 @@
 				1D69B6D01CB3AF0600C1FA04 /* BoolOpBlock.swift in Sources */,
 				1DB4B0891C97FC840010F727 /* CodeBlocksViewController.swift in Sources */,
 				1DB4B0931C991FC30010F727 /* CodeBlock.swift in Sources */,
+				3DF3A7781CC9AB760074C287 /* PackageSelectorConstants.swift in Sources */,
 				BF5339C51C941134007F56F0 /* LanguageDelegate.swift in Sources */,
 				BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */,
 				1D69B6C61CB2998B00C1FA04 /* ContainerBlockProtocol.swift in Sources */,

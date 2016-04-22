@@ -5,46 +5,9 @@
 //  Created by Melvin Tan Jun Keong on 23/3/16.
 //  Copyright Â© 2016 nus.cs3217.2016Group6. All rights reserved.
 //
-
+//  Displays the levels on the current page in the level selector.
+//
 import UIKit
-
-struct LevelSelectorConstants {
-    static let cellReuseIdentifier = "packageCell"
-    static let loadLevelSegueIdentifier = "loadLevelToPlay"
-
-    static let pooImage = UIImage(named: "poo")
-    static let toiletPaperImage = UIImage(named: "toilet-paper")
-    static let backImage = UIImage(named: "back")
-
-    static let backGroundColor = UIColor(red: 0, green: 0.9, blue: 0, alpha: 0.2)
-    static let cellBackgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.5)
-
-    static let pooImageViewFrame = CGRect(x: 925, y: 590, width: 70, height: 70)
-    static let toiletPaperImageViewFrame = CGRect(x: 800, y: 540, width: 120, height: 120)
-    static let backButtonFrame = CGRect(x: 20, y: 590, width: 73, height: 73)
-
-    static let cellCornerRadius: CGFloat = 10
-
-    // standard level selector settings
-    static let standardLevelSelectorItemSize = CGSize(width: 325, height: 100)
-    static let standardLevelSelectorSectionInsets = UIEdgeInsets(
-        top: 100.0, left: 10.0,
-        bottom: 100.0, right: 10.0
-    )
-    static let standardLevelSelectorItemSpacing: CGFloat = 10
-    static let standardLevelSelectorLineSpacing: CGFloat = 10
-
-    // package level selector settings
-    static let packageLevelSelectorTitleFontSize: CGFloat = 48
-    static let packageLevelSelectorTitleFrame = CGRect(x: 0, y: 0, width: 1024, height: 80)
-    static let packageLevelSelectorItemSize = CGSize(width: 100, height: 100)
-    static let packageLevelSelectorSectionInsets = UIEdgeInsets(
-        top: 100.0, left: 100.0,
-        bottom: 100.0, right: 100.0
-    )
-    static let packageLevelSelectorItemSpacing: CGFloat = 100
-    static let packageLevelSelectorLineSpacing: CGFloat = 50
-}
 
 class LevelSelectorViewController: UIViewController, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
@@ -66,40 +29,42 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
         )
         collectionView.registerClass(
             LevelCell.self,
-            forCellWithReuseIdentifier: LevelSelectorConstants.cellReuseIdentifier
+            forCellWithReuseIdentifier: LevelSelectorViewControllerConstants.cellReuseIdentifier
         )
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = LevelSelectorConstants.backGroundColor
+        collectionView.backgroundColor = LevelSelectorViewControllerConstants.backGroundColor
         self.view.addSubview(collectionView)
 
         // different configuration when used from the package selector
         if let previousController = previousViewController as? PackageSelectorViewController {
             // add title
-            let title = UILabel(frame: LevelSelectorConstants.packageLevelSelectorTitleFrame)
+            let title =
+                UILabel(frame: LevelSelectorViewControllerConstants.packageLevelSelectorTitleFrame)
             title.textAlignment = .Center
             title.text = previousController.selectedPackageTitle
             title.textColor = GlobalConstants.Font.defaultGreen
             title.font = UIFont(
                 name: GlobalConstants.Font.defaultNameBold,
-                size: LevelSelectorConstants.packageLevelSelectorTitleFontSize
+                size: LevelSelectorViewControllerConstants.packageLevelSelectorTitleFontSize
             )
             collectionView.addSubview(title)
         }
 
-        let pooImageView = UIImageView(frame: LevelSelectorConstants.pooImageViewFrame)
-        pooImageView.image = LevelSelectorConstants.pooImage
+        let pooImageView = UIImageView(
+            frame: LevelSelectorViewControllerConstants.pooImageViewFrame)
+        pooImageView.image = LevelSelectorViewControllerConstants.pooImage
         collectionView.addSubview(pooImageView)
 
         let toiletPaperImageView =
-            UIImageView(frame: LevelSelectorConstants.toiletPaperImageViewFrame)
-        toiletPaperImageView.image = LevelSelectorConstants.toiletPaperImage
+            UIImageView(frame: LevelSelectorViewControllerConstants.toiletPaperImageViewFrame)
+        toiletPaperImageView.image = LevelSelectorViewControllerConstants.toiletPaperImage
         collectionView.addSubview(toiletPaperImageView)
 
         // add back button
-        let backButtonImage = LevelSelectorConstants.backImage as UIImage?
+        let backButtonImage = LevelSelectorViewControllerConstants.backImage as UIImage?
         let backButton = UIButton(type: UIButtonType.Custom) as UIButton
-        backButton.frame = LevelSelectorConstants.backButtonFrame
+        backButton.frame = LevelSelectorViewControllerConstants.backButtonFrame
         backButton.setImage(backButtonImage, forState: .Normal)
         backButton.addTarget(
             self,
@@ -137,14 +102,14 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView,
                         cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(
-            LevelSelectorConstants.cellReuseIdentifier,
+            LevelSelectorViewControllerConstants.cellReuseIdentifier,
             forIndexPath: indexPath) as! LevelCell
         cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = LevelSelectorConstants.cellCornerRadius
+        cell.layer.cornerRadius = LevelSelectorViewControllerConstants.cellCornerRadius
         cell.setLevelSelectorViewController(self)
         cell.setLevelSelectorPageViewController(
             pageViewController as! LevelSelectorPageViewController)
-        cell.backgroundColor = LevelSelectorConstants.cellBackgroundColor
+        cell.backgroundColor = LevelSelectorViewControllerConstants.cellBackgroundColor
         cell.textLabel.text = fileNames![indexPath.item]
         if previousViewController is LevelDesigningViewController {
             cell.addGesturesToContentView()
@@ -186,8 +151,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
                     /// load selected level to play
                     self.loadedMap = loadedMap
                     self.loadedMapFileName = fileName
-                    performSegueWithIdentifier(LevelSelectorConstants.loadLevelSegueIdentifier,
-                                               sender: self)
+                    performSegueWithIdentifier(
+                        LevelSelectorViewControllerConstants.loadLevelSegueIdentifier,
+                        sender: self)
                 }
             }
         }
@@ -197,9 +163,9 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
                         layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
-            return LevelSelectorConstants.packageLevelSelectorItemSize
+            return LevelSelectorViewControllerConstants.packageLevelSelectorItemSize
         } else {
-            return LevelSelectorConstants.standardLevelSelectorItemSize
+            return LevelSelectorViewControllerConstants.standardLevelSelectorItemSize
         }
     }
 
@@ -207,25 +173,29 @@ UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
                         layout collectionViewLayout: UICollectionViewLayout,
                                insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
-            return LevelSelectorConstants.packageLevelSelectorSectionInsets
+            return LevelSelectorViewControllerConstants.packageLevelSelectorSectionInsets
         } else {
-            return LevelSelectorConstants.standardLevelSelectorSectionInsets
+            return LevelSelectorViewControllerConstants.standardLevelSelectorSectionInsets
         }
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
-            return LevelSelectorConstants.packageLevelSelectorItemSpacing
+            return LevelSelectorViewControllerConstants.packageLevelSelectorItemSpacing
         } else {
-            return LevelSelectorConstants.standardLevelSelectorItemSpacing
+            return LevelSelectorViewControllerConstants.standardLevelSelectorItemSpacing
         }
     }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
         if previousViewController!.isKindOfClass(PackageSelectorViewController) {
-            return LevelSelectorConstants.packageLevelSelectorLineSpacing
+            return LevelSelectorViewControllerConstants.packageLevelSelectorLineSpacing
         } else {
-            return LevelSelectorConstants.standardLevelSelectorLineSpacing
+            return LevelSelectorViewControllerConstants.standardLevelSelectorLineSpacing
         }
     }
 }

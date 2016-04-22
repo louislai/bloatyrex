@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  StaticMapScene.swift
 //  FinalProject
 //
 //  Created by louis on 12/3/16.
@@ -60,14 +60,6 @@ class StaticMapScene: PannableScene {
         mapNode.setup()
         addNodeToOverlay(hudLayer)
         setupHud()
-    }
-
-    /// Convert a row, column pair into a CGPoint coordinate
-    func pointFor(row: Int, column: Int) -> CGPoint {
-        return CGPoint(
-            x: CGFloat(column)*GlobalConstants.Dimension.blockWidth,
-            y: CGFloat(row)*GlobalConstants.Dimension.blockHeight
-        )
     }
 
     private func setupHud() {
