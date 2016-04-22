@@ -24,7 +24,8 @@ class LevelCell: UICollectionViewCell {
         super.init(frame: frame)
 
         let labelHeight = frame.size.height / 3
-        textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width, height: labelHeight))
+        textLabel = UILabel(frame: CGRect(x: 0, y: labelHeight, width: frame.size.width,
+            height: labelHeight))
         textLabel.textAlignment = .Center
         textLabel.textColor = UIColor.whiteColor()
         textLabel.font = UIFont(name: GlobalConstants.Font.defaultNameBold,
@@ -65,21 +66,25 @@ class LevelCell: UICollectionViewCell {
     func deleteFile() {
         let fileName = textLabel.text!
         let deleteAlert = UIAlertController(title: "Delete",
-                                            message: "'\(fileName)' will be deleted. This action cannot be undone.",
+            message: "'\(fileName)' will be deleted. " + "This action cannot be undone.",
                                             preferredStyle: UIAlertControllerStyle.Alert)
-        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { (action: UIAlertAction!) in
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: {
+            (action: UIAlertAction!) in
             self.filesArchive.removeFile(fileName)
             let successAlert = UIAlertController(title: "Deleted!",
                 message: "You have successfully deleted \(fileName)!",
                 preferredStyle: UIAlertControllerStyle.Alert)
-            successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (action: UIAlertAction!) in
+            successAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: {
+                (action: UIAlertAction!) in
                 self.levelSelectorPageViewController.resetNavigationBar()
                 self.resetSearchBar()
                 self.reloadPageViewController()
             }))
-            self.levelSelectorPageViewController.presentViewController(successAlert, animated: true, completion: nil)
+            self.levelSelectorPageViewController.presentViewController(successAlert, animated: true,
+                completion: nil)
         }))
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {
+            (action: UIAlertAction!) in
             self.levelSelectorPageViewController.resetNavigationBar()
         }))
         levelSelectorViewController.presentViewController(deleteAlert, animated: true,
