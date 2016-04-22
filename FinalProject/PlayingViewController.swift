@@ -216,11 +216,11 @@ extension PlayingViewController {
             default:
                 break
             }
-            if let _ = tutorialImage {
-                performSegueWithIdentifier(GlobalConstants.SegueIdentifier.playingToTutorial, sender: self)
-            } else {
-                tutorialButton.alpha = 0
-            }
+        }
+        if let _ = tutorialImage {
+            performSegueWithIdentifier(GlobalConstants.SegueIdentifier.playingToTutorial, sender: self)
+        } else {
+            tutorialButton.alpha = 0
         }
     }
 
