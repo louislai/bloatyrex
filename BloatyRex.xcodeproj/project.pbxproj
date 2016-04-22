@@ -140,6 +140,7 @@
 		BF17DF0E1CC8BED200192183 /* UINavigationControllerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF071CC8A9C100192183 /* UINavigationControllerUtils.swift */; };
 		BF17DF101CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0F1CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift */; };
 		BF17DF111CC8C44300192183 /* LevelSelectorPageViewControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF17DF0F1CC8C20B00192183 /* LevelSelectorPageViewControllerConstants.swift */; };
+		BF3124BE1CC9D1CC002AE639 /* LevelSelectorViewControllerConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3A7791CC9ABBB0074C287 /* LevelSelectorViewControllerConstants.swift */; };
 		BF36F2341C93F24B006D88C3 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
 		BF49FA511CA61ACF00546F43 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF49FA501CA61ACF00546F43 /* GlobalConstants.swift */; };
 		BF4C52F21C910CD100C56DD2 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F11C910CD100C56DD2 /* Map.swift */; };
@@ -805,6 +806,7 @@
 				BF17DF021CC89B7E00192183 /* LevelSelectorViewController.swift in Sources */,
 				BF17DF061CC89B8500192183 /* PackageCell.swift in Sources */,
 				BF17DEDB1CC899FA00192183 /* CodeBlocksScaleSupplier.swift in Sources */,
+				BF3124BE1CC9D1CC002AE639 /* LevelSelectorViewControllerConstants.swift in Sources */,
 				BF17DEFD1CC89A9800192183 /* GlobalConstants.swift in Sources */,
 				BF17DF0D1CC8B8C200192183 /* AgentNodeConstants.swift in Sources */,
 				BF17DEF91CC89A9800192183 /* ModalPresentationAnimationController.swift in Sources */,
