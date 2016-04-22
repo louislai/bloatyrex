@@ -13,7 +13,7 @@ import Foundation
 /// This class takes in a program and compiles it to an array of Instructions, which is then
 /// ran stepwise given a Map and an agent, which produces an action to be executed. At the end of
 /// the program, nextAction returns nil
-class Interpreter: NSObject {
+class Interpreter: NSObject, LanguageDelegate {
     var instructions = [Instructions]()
     var programCounter = 0
     var previousAction: Action?

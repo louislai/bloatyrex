@@ -66,7 +66,6 @@
 		BF17DEC01CC899AC00192183 /* MapUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F31C910D5E00C56DD2 /* MapUnitType.swift */; };
 		BF17DEC11CC899AC00192183 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4C52F51C9110A000C56DD2 /* Action.swift */; };
 		BF17DEC31CC899AC00192183 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB4B0821C951D1F0010F727 /* Interpreter.swift */; };
-		BF17DEC41CC899AC00192183 /* Interpreter+LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */; };
 		BF17DEC51CC899B200192183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A11C8F0617003420C0 /* AppDelegate.swift */; };
 		BF17DEC61CC899C100192183 /* PlayingMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF230A31C8F0617003420C0 /* PlayingMapViewController.swift */; };
 		BF17DEC71CC899C100192183 /* PlayingMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF36F2331C93F24B006D88C3 /* PlayingMapScene.swift */; };
@@ -168,7 +167,6 @@
 		BF8FA5B71C948CB500DAE175 /* GoalNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B61C948CB500DAE175 /* GoalNode.swift */; };
 		BF8FA5B91C952E6300DAE175 /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5B81C952E6300DAE175 /* Observation.swift */; };
 		BF8FA5BB1C9544ED00DAE175 /* TextureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */; };
-		BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */; };
 		BFA80FB11C95BFAD00F1BC15 /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */; };
 		BFB045CA1CB43485009F21EF /* HoleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB045C91CB43485009F21EF /* HoleNode.swift */; };
 		BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */; };
@@ -277,7 +275,6 @@
 		BF8FA5B61C948CB500DAE175 /* GoalNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalNode.swift; sourceTree = "<group>"; };
 		BF8FA5B81C952E6300DAE175 /* Observation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
 		BF8FA5BA1C9544ED00DAE175 /* TextureManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextureManager.swift; path = FinalProject/TextureManager.swift; sourceTree = "<group>"; };
-		BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Interpreter+LanguageDelegate.swift"; sourceTree = "<group>"; };
 		BFA80FB01C95BFAD00F1BC15 /* SKButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
 		BFB045C91CB43485009F21EF /* HoleNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoleNode.swift; sourceTree = "<group>"; };
 		BFB045CB1CB4349D009F21EF /* WoodenBlockNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WoodenBlockNode.swift; sourceTree = "<group>"; };
@@ -313,7 +310,6 @@
 				1DB4B0801C9516610010F727 /* Syntax.swift */,
 				BF8FA5B81C952E6300DAE175 /* Observation.swift */,
 				1DB4B0821C951D1F0010F727 /* Interpreter.swift */,
-				BF8FA5C01C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift */,
 				BF4C52F51C9110A000C56DD2 /* Action.swift */,
 			);
 			name = Language;
@@ -668,7 +664,6 @@
 				BF8FA5B31C948C9A00DAE175 /* WallNode.swift in Sources */,
 				3D15926F1CC32F72009E8559 /* PackageCell.swift in Sources */,
 				3D42AABF1CC63EEB00C7FDF2 /* CodeBlocksScaleSupplier.swift in Sources */,
-				BF8FA5C11C9572BD00DAE175 /* Interpreter+LanguageDelegate.swift in Sources */,
 				BFB045CC1CB4349D009F21EF /* WoodenBlockNode.swift in Sources */,
 				B01BF9001CA2E14900D02FCA /* LevelSelectorPageViewController.swift in Sources */,
 				1D69B6D01CB3AF0600C1FA04 /* BoolOpBlock.swift in Sources */,
@@ -819,7 +814,6 @@
 				BF17DEC91CC899C100192183 /* MapNode.swift in Sources */,
 				BF17DEE11CC89A5200192183 /* SeeBlock.swift in Sources */,
 				BF17DEB11CC897AA00192183 /* BloatyRexTests.swift in Sources */,
-				BF17DEC41CC899AC00192183 /* Interpreter+LanguageDelegate.swift in Sources */,
 				BF17DEEB1CC89A5200192183 /* CodeBlock.swift in Sources */,
 				BF17DF011CC89B3400192183 /* PlayingHintController.swift in Sources */,
 				BF17DED51CC899FA00192183 /* LanguageDelegate.swift in Sources */,
