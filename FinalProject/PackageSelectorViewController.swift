@@ -11,16 +11,6 @@
 import Foundation
 import UIKit
 
-struct PackageSelectorConstants {
-    static let cellWidth: CGFloat = 300.0
-    static let cellHeight: CGFloat = 400.0
-    static let cellFontSize: CGFloat = 38
-    static let cellImage = UIImage(named: GlobalConstants.ImageNames.winning)
-    static let cellReuseIdentifier = "packageCell"
-
-    static let levelSelectorItemsPerPage = 12
-}
-
 class PackageSelectorViewController: UICollectionViewController {
     private let sectionInsets = UIEdgeInsets(top: 50,
         left: (GlobalConstants.Dimension.screenWidth - PackageSelectorConstants.cellWidth) / 2,
