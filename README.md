@@ -1,0 +1,1 @@
+Our little Rex is having a bad day. He wants to go to the toilet to relieve himself but there are so many obstacles blocking his way. Guide him to his goal while learning some programming along the way. Go Rex!
